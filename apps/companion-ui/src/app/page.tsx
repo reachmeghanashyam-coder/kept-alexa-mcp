@@ -847,36 +847,20 @@ export default function KeptApp() {
 
       {/* Sleek Refined Utility Footer */}
       <footer className="w-full max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-medium border-t border-white/5 pt-5">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-slate-400">
-            <div className="h-4 w-4 rounded-md bg-white/[0.06] border border-white/10 flex items-center justify-center">
-              <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7.5 5.5v13" stroke="#00F0FF" />
-                <path d="M8 6.5L16.5 12L8 17.5" stroke="#00E599" />
-              </svg>
-            </div>
-            <span className="font-semibold text-slate-300">Kept</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">Alexa+ Commerce Guard</span>
+        <div className="flex items-center gap-2 text-slate-400">
+          <div className="h-4 w-4 rounded-md bg-white/[0.06] border border-white/10 flex items-center justify-center">
+            <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7.5 5.5v13" stroke="#00F0FF" />
+              <path d="M8 6.5L16.5 12L8 17.5" stroke="#00E599" />
+            </svg>
           </div>
-          <span className="hidden sm:inline-block h-3 w-[1px] bg-white/10" />
-          <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-slate-500 font-mono">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald/80 animate-pulse" />
-            MCP Protocol 2025-11-25
-          </span>
+          <span className="font-semibold text-slate-300">Kept</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-slate-400">Alexa+ Commerce Guard</span>
         </div>
 
-        <div className="flex items-center gap-4 text-slate-500 text-[11px]">
+        <div className="text-slate-500 text-[11px]">
           <span>Amazon Developer Hackathon 2026</span>
-          <span className="text-slate-600">•</span>
-          <button
-            onClick={resetDemo}
-            disabled={loading}
-            className="text-slate-400 hover:text-accent-cyan transition-colors flex items-center gap-1 font-medium"
-          >
-            <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
-            Reset State
-          </button>
         </div>
       </footer>
 
