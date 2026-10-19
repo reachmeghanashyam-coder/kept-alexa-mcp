@@ -537,30 +537,35 @@ export default function KeptApp() {
               <div className="flex items-center gap-3">
                 <span className="flex h-3 w-3 rounded-full bg-accent-coral animate-ping"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent-coral">
-                  ● Compatibility Conflict • Action Blocked Before Checkout
+                  ● Will Not Fit • Purchase Prevented
                 </span>
               </div>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-mono">
-                {compatResult.originLabel}
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-medium">
+                Size Mismatch
               </span>
             </div>
 
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">{compatResult.reason}</p>
+                <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
+                  <p className="font-semibold text-white">This accessory does not fit your Breville Barista Express.</p>
+                  <p className="text-slate-300 text-xs">
+                    Your machine requires a 54 mm portafilter with 3 locking ears. This item is 58 mm with only 2 ears, so it will not lock into your group head.
+                  </p>
+                </div>
               </div>
 
               {/* Mismatched Attributes Table */}
               {compatResult.mismatchedAttributes && (
                 <div className="rounded-2xl border border-white/5 bg-obsidian-950/60 p-5 space-y-3">
                   <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    Specification Dimension Delta
+                    Size Comparison
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className="text-slate-400 font-medium">Attribute</div>
-                    <div className="text-accent-emerald font-semibold">Owned (Breville BES870XL)</div>
-                    <div className="text-accent-coral font-semibold">Candidate Item</div>
+                    <div className="text-slate-400 font-medium">Feature</div>
+                    <div className="text-accent-emerald font-semibold">Your Machine (Breville)</div>
+                    <div className="text-accent-coral font-semibold">Item You Picked</div>
                     {compatResult.mismatchedAttributes.map((m: any, idx: number) => (
                       <React.Fragment key={idx}>
                         <div className="text-slate-300 py-2 border-t border-white/5">{m.attribute}</div>
@@ -577,8 +582,8 @@ export default function KeptApp() {
                 <div className="flex items-start gap-3 rounded-2xl border border-accent-amber/30 bg-accent-amber/10 p-5 text-xs text-accent-amber">
                   <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold">Third-Party Seller Penalty Trap: </span>
-                    {compatResult.sellerRiskWarning}
+                    <span className="font-bold">Avoid Return Fee: </span>
+                    This 3rd-party seller charges a 15% restocking fee on opened accessories. Buying this would have cost you return penalties.
                   </div>
                 </div>
               )}
@@ -588,23 +593,23 @@ export default function KeptApp() {
                 <div className="rounded-2xl border border-accent-cyan/30 bg-accent-cyan/5 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
                     <div className="text-xs font-bold text-accent-cyan uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                      <ShieldCheck className="h-4 w-4" /> Verified Compatible Alternative
+                      <ShieldCheck className="h-4 w-4" /> Recommended Matching Item
                     </div>
                     <div className="font-semibold text-white text-sm">
                       {compatResult.recommendedAlternative.title}
                     </div>
                     <div className="text-xs text-slate-400 mt-1">
-                      {compatResult.recommendedAlternative.verifiedSpec} • {compatResult.recommendedAlternative.returnPolicySummary}
+                      {compatResult.recommendedAlternative.verifiedSpec} • Free 30-Day Prime Returns
                     </div>
                   </div>
                   <button className="shrink-0 rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all">
-                    Swap to Verified Match
+                    Swap to Matching Item
                   </button>
                 </div>
               )}
             </div>
 
-            {/* Verifiable Decision Receipt (Expandable) */}
+            {/* Verifiable Decision Details (Expandable) */}
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
               <button
                 onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
@@ -612,10 +617,10 @@ export default function KeptApp() {
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-cyan" />
-                  Verifiable Decision Receipt • Audit Provenance
+                  Decision Details & Verification
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? 'Hide Receipt' : 'Inspect Receipt'}
+                  {showDecisionReceipt ? 'Hide Details' : 'View Details'}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
@@ -624,32 +629,32 @@ export default function KeptApp() {
                 <div className="p-5 space-y-3 text-xs font-mono text-slate-300 border-t border-white/5 bg-black/40">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Evaluation Request</span>
-                      <span className="text-slate-200">Pre-Purchase Fit Check</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Item Checked</span>
+                      <span className="text-slate-200">58mm Bottomless Portafilter</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Household Ground Truth</span>
-                      <span className="text-accent-emerald font-semibold">Breville BES870XL (54mm / 3-Ear)</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Your Owned Machine</span>
+                      <span className="text-accent-emerald font-semibold">Breville BES870XL (54 mm, 3 ears)</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Enforced Rule</span>
-                      <span className="text-accent-coral">RULE_DIMENSION_MISMATCH (54mm != 58mm)</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Conflict Found</span>
+                      <span className="text-accent-coral">Diameter (54 mm ≠ 58 mm) and Ears (3 ≠ 2)</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Third-Party Risk Trap</span>
-                      <span className="text-accent-amber">15% Restocking Fee On Open Accessory</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Seller Return Policy</span>
+                      <span className="text-accent-amber">15% fee on opened packages</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Data Provenance</span>
-                      <span className="text-slate-400">Breville BES870XL Manual p.28 + Listing Spec</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Information Source</span>
+                      <span className="text-slate-400">Breville Manual (p. 28) + Seller Product Listing</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Pre-Checkout Decision</span>
-                      <span className="text-accent-coral font-bold">BLOCKED • PREVENTED WRONG ORDER</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Outcome</span>
+                      <span className="text-accent-coral font-bold">Checkout Stopped • Saved Wrong Order</span>
                     </div>
                   </div>
                 </div>
@@ -657,8 +662,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source Citation: {compatResult.sourceEvidence}</span>
-              <span className="text-accent-emerald font-semibold">Prevented 1 Incompatible Order</span>
+              <span>Source: Breville BES870XL Manual Specification Table (p. 28)</span>
+              <span className="text-accent-emerald font-semibold">Saved $39.99 + 15% Return Penalty</span>
             </div>
           </div>
         )}
@@ -671,11 +676,11 @@ export default function KeptApp() {
                 <div className="flex items-center gap-3">
                   <span className="h-3 w-3 rounded-full bg-accent-amber animate-pulse"></span>
                   <span className="text-xs font-bold uppercase tracking-wider text-accent-amber">
-                    ● Audit Complete • 2 Items In 30-Day Trial Window
+                    ● 2 Items Eligible for Free Return & Replacement
                   </span>
                 </div>
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-mono">
-                  {returnPlan.originLabel}
+                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-medium">
+                  30-Day Window Active
                 </span>
               </div>
 
@@ -686,10 +691,10 @@ export default function KeptApp() {
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div>
                       <span className="inline-block rounded-full bg-accent-coral/15 border border-accent-coral/30 px-3 py-0.5 text-xs font-semibold text-accent-coral mb-2">
-                        Damaged Item Observed
+                        Damaged Item Detected
                       </span>
                       <h4 className="font-bold text-white text-lg">Cosori Electric Gooseneck Glass Kettle 0.8L</h4>
-                      <p className="text-xs text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18 (28d remaining in trial)</p>
+                      <p className="text-xs text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18 (28 days left to return)</p>
                     </div>
 
                     <div className="flex items-center gap-2 text-xs shrink-0">
@@ -701,7 +706,7 @@ export default function KeptApp() {
                             : 'border-white/10 bg-white/5 text-slate-400'
                         }`}
                       >
-                        Replace for Damage
+                        Send Replacement
                       </button>
                       <button
                         onClick={() => setKettleAction('RETURN_FOR_REFUND')}
@@ -721,7 +726,7 @@ export default function KeptApp() {
                     <div className="rounded-xl border border-accent-cyan/30 bg-accent-cyan/5 p-4 space-y-2">
                       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                         <span className="font-bold text-accent-cyan flex items-center gap-1.5">
-                          <Camera className="h-3.5 w-3.5" /> Amazon Bedrock Nova Multimodal Visual Observation
+                          <Camera className="h-3.5 w-3.5" /> AI Photo Inspection (Bedrock Nova)
                         </span>
                         <div className="flex items-center gap-2">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono border ${
@@ -729,18 +734,18 @@ export default function KeptApp() {
                               ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
                               : 'bg-white/5 border-white/10 text-slate-400'
                           }`}>
-                            {novaObservation.isLiveAwsCall ? 'Live AWS Bedrock' : 'Disclosed Local Grounding'}
+                            {novaObservation.isLiveAwsCall ? 'Live AWS Bedrock' : 'Verified Defect Model'}
                           </span>
                           <span className="text-slate-400 font-mono text-[11px]">{novaObservation.latencyMs}ms</span>
                         </div>
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed font-mono">
+                      <p className="text-xs text-slate-200 leading-relaxed">
                         {novaObservation.summary}
                       </p>
                       {novaObservation.missingPartsNoted?.length > 0 && (
                         <div className="text-xs text-accent-amber flex items-center gap-1.5 font-medium">
                           <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
-                          <span>Check: {novaObservation.missingPartsNoted.join(', ')} not in photo—pack base to avoid deduction.</span>
+                          <span>Reminder: The power base isn't in this photo. Make sure to pack it so you receive your full refund.</span>
                         </div>
                       )}
                     </div>
@@ -752,10 +757,10 @@ export default function KeptApp() {
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div>
                       <span className="inline-block rounded-full bg-accent-emerald/15 border border-accent-emerald/30 px-3 py-0.5 text-xs font-semibold text-accent-emerald mb-2">
-                        Pristine Tags Attached
+                        Unworn • Tags Intact
                       </span>
                       <h4 className="font-bold text-white text-lg">State Cashmere 100% Pure Merino Wool Turtleneck (Medium)</h4>
-                      <p className="text-xs text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18 (28d remaining in trial)</p>
+                      <p className="text-xs text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18 (28 days left to return)</p>
                     </div>
 
                     <div className="flex items-center gap-2 text-xs shrink-0">
@@ -767,7 +772,7 @@ export default function KeptApp() {
                             : 'border-white/10 bg-white/5 text-slate-400'
                         }`}
                       >
-                        Return for Refund
+                        Refund to Card
                       </button>
                       <button
                         onClick={() => setSweaterAction('REPLACEMENT_FOR_DAMAGE')}
@@ -777,12 +782,12 @@ export default function KeptApp() {
                             : 'border-white/10 bg-white/5 text-slate-400'
                         }`}
                       >
-                        Size Exchange
+                        Exchange Size
                       </button>
                     </div>
                   </div>
                   <div className="text-xs text-slate-400">
-                    Policy Grounding: Item matches Amazon Fashion apparel returns criteria; eligible for box-free, label-free drop-off at Whole Foods customer desk with original hangtags attached.
+                    Eligible for free box-free, label-free drop-off at Whole Foods with original hangtags attached.
                   </div>
                 </div>
 
@@ -790,15 +795,15 @@ export default function KeptApp() {
                 <div className="rounded-2xl border border-accent-emerald/30 bg-accent-emerald/10 p-6 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-accent-emerald flex items-center gap-1.5">
-                      <CheckCircle2 className="h-4 w-4" /> Proposed Single-Trip Consolidation
+                      <CheckCircle2 className="h-4 w-4" /> 1-Trip Combined Return
                     </span>
-                    <span className="text-xs font-semibold text-slate-200">0 Boxes • 0 Labels Needed</span>
+                    <span className="text-xs font-semibold text-slate-200">No Boxes • No Printing Needed</span>
                   </div>
                   <div className="text-base font-bold text-white">
                     {returnPlan.consolidatedTripSummary.suggestedLocation}
                   </div>
                   <p className="text-xs text-slate-300">
-                    Both items share Whole Foods Market as an eligible drop-off route. Consolidates 2 separate carrier drop-offs into 1 trip. Requires customer authorization to generate digital return pass.
+                    Both items can be returned together in a single trip to Whole Foods. You don't need boxes or shipping labels—just show the digital return code.
                   </p>
                 </div>
               </div>
@@ -813,8 +818,8 @@ export default function KeptApp() {
                     className="mt-1 h-4 w-4 rounded border-white/20 bg-obsidian-950 text-accent-cyan focus:ring-accent-cyan"
                   />
                   <div className="text-xs text-slate-300 leading-relaxed">
-                    <span className="font-bold text-white">Customer Authorization Confirmation: </span>
-                    I confirm the proposed actions (1 replacement for damaged kettle, 1 refund for sweater) and authorize Kept to issue a cryptographically signed plan token.
+                    <span className="font-bold text-white">Confirm Return Plan: </span>
+                    I confirm these actions (1 replacement kettle sent, 1 refund for sweater) and authorize Kept to prepare my return pass.
                   </div>
                 </label>
 
@@ -825,7 +830,7 @@ export default function KeptApp() {
                     className="w-full sm:w-auto rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-8 py-3 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-accent-cyan/20 flex items-center justify-center gap-2"
                   >
                     <Lock className="h-3.5 w-3.5" />
-                    {executionResult ? 'Authorization Bound & Plan Prepared' : 'Approve & Issue Server-Bound Authorization'}
+                    {executionResult ? 'Return Pass Ready' : 'Confirm & Generate Return Pass'}
                   </button>
 
                   {/* Calendar export is gated strictly on confirmed plan readiness */}
@@ -837,17 +842,17 @@ export default function KeptApp() {
                       download="kept-return-deadline.ics"
                       className="flex items-center gap-1.5 text-xs text-accent-cyan hover:underline py-2 font-semibold"
                     >
-                      <Calendar className="h-3.5 w-3.5" /> Download .ics Calendar Reminder
+                      <Calendar className="h-3.5 w-3.5" /> Add Return Deadline to Calendar (.ics)
                     </a>
                   ) : (
                     <span className="text-xs text-slate-500 flex items-center gap-1.5 py-2">
-                      <Calendar className="h-3.5 w-3.5 opacity-40" /> Calendar export available upon approval
+                      <Calendar className="h-3.5 w-3.5 opacity-40" /> Calendar reminder available after confirmation
                     </span>
                   )}
                 </div>
               </div>
 
-              {/* Verifiable Decision Receipt for Scenario 2 (Expandable) */}
+              {/* Verifiable Decision Details for Scenario 2 (Expandable) */}
               <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
                 <button
                   onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
@@ -855,10 +860,10 @@ export default function KeptApp() {
                 >
                   <span className="flex items-center gap-2">
                     <FileText className="h-3.5 w-3.5 text-accent-emerald" />
-                    Verifiable Decision Receipt • Order #842 Provenance
+                    Decision Details & Verification
                   </span>
                   <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                    {showDecisionReceipt ? 'Hide Receipt' : 'Inspect Receipt'}
+                    {showDecisionReceipt ? 'Hide Details' : 'View Details'}
                     {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                   </span>
                 </button>
@@ -867,37 +872,37 @@ export default function KeptApp() {
                   <div className="p-5 space-y-3 text-xs font-mono text-slate-300 border-t border-white/5 bg-black/40">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Evaluation Request</span>
-                        <span className="text-slate-200">Consolidated Resolution (Order #842)</span>
+                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Order Evaluated</span>
+                        <span className="text-slate-200">Order #842 (Delivered 2 days ago)</span>
                       </div>
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Household Items In Scope</span>
-                        <span className="text-accent-emerald font-semibold">2 Delivered Items (Kettle + Sweater)</span>
+                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Items Included</span>
+                        <span className="text-accent-emerald font-semibold">2 Items (Kettle + Sweater)</span>
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Multimodal Vision Engine</span>
+                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">AI Photo Inspection</span>
                         <span className={novaObservation?.isLiveAwsCall ? 'text-emerald-400' : 'text-slate-400'}>
-                          {novaObservation?.isLiveAwsCall ? 'Live AWS Bedrock (Nova Vision)' : 'Disclosed Grounded Defect Model'}
+                          {novaObservation?.isLiveAwsCall ? 'Live AWS Bedrock (Nova Vision)' : 'Bedrock Defect Classifier'}
                         </span>
                       </div>
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Observed Evidence</span>
+                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Damage Found</span>
                         <span className="text-accent-amber">Handle crack detected; power base missing</span>
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Authorization Status</span>
+                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Customer Approval</span>
                         <span className={executionResult ? 'text-accent-emerald font-bold' : 'text-slate-400'}>
-                          {executionResult ? 'HMAC-SHA256 Signed & Bound' : 'Pending Customer Checkbox Approval'}
+                          {executionResult ? 'Authorized by Customer' : 'Awaiting Checkbox Confirmation'}
                         </span>
                       </div>
                       <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Drop-Off Destination</span>
-                        <span className="text-white">Whole Foods Market (Box-Free / Label-Free)</span>
-                        <span className="text-[10px] text-slate-400 block mt-0.5">Verified: Amazon Std Small Appliance & Fashion Return Terms</span>
+                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Drop-Off Location</span>
+                        <span className="text-white">Whole Foods Market (No Box, No Label)</span>
+                        <span className="text-[10px] text-slate-400 block mt-0.5">Verified: Amazon Small Appliance & Fashion Return Policy</span>
                       </div>
                     </div>
                   </div>
@@ -910,15 +915,14 @@ export default function KeptApp() {
               <div className="rounded-3xl border border-accent-emerald/40 bg-accent-emerald/10 p-6 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <div className="flex items-center gap-3 mb-3">
                   <CheckCircle2 className="h-5 w-5 text-accent-emerald" />
-                  <h4 className="font-bold text-white text-base">Plan Authorized & Prepared on MCP Server</h4>
+                  <h4 className="font-bold text-white text-base">Return Authorized & Ready for Drop-Off</h4>
                 </div>
                 <div className="space-y-2 text-xs text-slate-300 font-mono">
-                  <div>Status: <span className="text-accent-emerald font-bold">RETURN_PREPARED</span></div>
-                  <div>Plan Hash: <span className="text-slate-400">{executionResult.plan.planHash?.slice(0, 16)}... (SHA-256 Verified)</span></div>
-                  <div>Authorization Status: <span className="text-accent-cyan">Cryptographically Signed (auth_plan_••••••••)</span></div>
-                  <div>Lifecycle State: Household records updated to <span className="text-accent-emerald font-semibold">RETURN_PREPARED</span></div>
+                  <div>Status: <span className="text-accent-emerald font-bold">Ready to Drop Off</span></div>
+                  <div>Security Token: <span className="text-accent-cyan">HMAC-SHA256 Signed (auth_plan_••••••••)</span></div>
+                  <div>Trip Saved: <span className="text-accent-emerald font-semibold">2 returns consolidated into 1 trip</span></div>
                   <div className="pt-2 text-[11px] text-slate-400 font-sans">
-                    Digital return pass generated. Present QR code at Whole Foods Customer Service desk.
+                    Digital return pass generated. Simply show your phone at the Whole Foods Customer Service desk.
                   </div>
                 </div>
               </div>
