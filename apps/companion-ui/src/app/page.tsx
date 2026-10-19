@@ -583,111 +583,29 @@ export default function KeptApp() {
 
           {/* Expandable Custom Testing Workbench */}
           {showCustomSandbox && (
-            <div className="mt-4 rounded-2xl border border-accent-cyan/30 bg-obsidian-900/90 p-6 backdrop-blur-2xl shadow-2xl space-y-5 animate-in fade-in slide-in-from-top-2 duration-300">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan flex items-center gap-2">
-                  <Code2 className="h-4 w-4" /> Custom Product Pre-Purchase Evaluator
-                </span>
-                <span className="text-[11px] font-mono text-slate-400">
-                  Target Host: Breville Barista Express (BES870XL • 54mm)
-                </span>
+            <div className="mt-4 rounded-2xl border border-white/10 bg-obsidian-900/95 p-6 sm:p-7 backdrop-blur-2xl shadow-2xl space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
+              {/* Header */}
+              <div className="border-b border-white/10 pb-4">
+                <div className="text-xs font-semibold uppercase tracking-wider text-accent-cyan mb-1">
+                  Check before you buy
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white">
+                  Will this accessory fit my coffee machine?
+                </h4>
+                <p className="text-xs text-slate-400 mt-1">
+                  Checking compatibility against your owned <span className="text-slate-200 font-medium">Breville Barista Express (54 mm, 3 ears)</span>.
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                {/* Candidate Title */}
-                <div>
-                  <label className="text-slate-400 block mb-1 font-medium">Candidate Product Title</label>
-                  <input
-                    type="text"
-                    value={customTitle}
-                    onChange={(e) => setCustomTitle(e.target.value)}
-                    placeholder="e.g. Normcore 54mm Bottomless Portafilter"
-                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none"
-                  />
-                </div>
-
-                {/* Category */}
-                <div>
-                  <label className="text-slate-400 block mb-1 font-medium">Product Category</label>
-                  <select
-                    value={customCategory}
-                    onChange={(e) => setCustomCategory(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white focus:border-accent-cyan focus:outline-none"
-                  >
-                    <option value="Kitchen Appliances">Kitchen Appliances (Espresso / Appliances)</option>
-                    <option value="Electronics & Office">Electronics & Office (Cables / Displays)</option>
-                    <option value="Automotive">Automotive (Unrelated Category Test)</option>
-                  </select>
-                </div>
-
-                {/* Diameter */}
-                <div>
-                  <label className="text-slate-400 block mb-1 font-medium">
-                    Stated Diameter (mm) <span className="text-slate-500 font-mono text-[10px]">(leave blank to test Epistemic Safe Stop)</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={customDiameter}
-                    onChange={(e) => setCustomDiameter(e.target.value)}
-                    placeholder="54 (compatible) or 58 (conflict) or blank (refusal)"
-                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none font-mono"
-                  />
-                </div>
-
-                {/* Ear Count */}
-                <div>
-                  <label className="text-slate-400 block mb-1 font-medium">
-                    Locking Ear Count <span className="text-slate-500 font-mono text-[10px]">(Breville uses 3 ears)</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={customEars}
-                    onChange={(e) => setCustomEars(e.target.value)}
-                    placeholder="3 (compatible) or 2 (incompatible)"
-                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none font-mono"
-                  />
-                </div>
-
-                {/* Restocking Fee */}
-                <div>
-                  <label className="text-slate-400 block mb-1 font-medium">Seller Restocking Fee (%)</label>
-                  <input
-                    type="number"
-                    value={customRestockingFee}
-                    onChange={(e) => setCustomRestockingFee(e.target.value)}
-                    placeholder="0"
-                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none font-mono"
-                  />
-                </div>
-
-                {/* Seller Policy Checkboxes */}
-                <div className="flex flex-col justify-end gap-2 pb-1">
-                  <label className="flex items-center gap-2 cursor-pointer text-slate-300">
-                    <input
-                      type="checkbox"
-                      checked={customIsThirdParty}
-                      onChange={(e) => setCustomIsThirdParty(e.target.checked)}
-                      className="rounded border-white/20 bg-obsidian-950 text-accent-cyan focus:ring-accent-cyan"
-                    />
-                    <span>Third-Party Marketplace Seller</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer text-slate-300">
-                    <input
-                      type="checkbox"
-                      checked={customTermsStated}
-                      onChange={(e) => setCustomTermsStated(e.target.checked)}
-                      className="rounded border-white/20 bg-obsidian-950 text-accent-cyan focus:ring-accent-cyan"
-                    />
-                    <span>Return terms explicitly stated by seller</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10">
-                <div className="flex items-center gap-2 text-[11px] text-slate-400">
-                  <span className="text-slate-500">Quick Test Cases:</span>
+              {/* 3 Intuitive Scenario Cards */}
+              <div>
+                <label className="text-xs font-medium text-slate-300 block mb-2.5">
+                  Choose what the seller lists:
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* Option 1: 54mm */}
                   <button
+                    type="button"
                     onClick={() => {
                       setCustomTitle('CAPMESSO 54mm Bottomless Portafilter (3 Ears)');
                       setCustomDiameter('54');
@@ -696,11 +614,19 @@ export default function KeptApp() {
                       setCustomIsThirdParty(false);
                       setCustomTermsStated(true);
                     }}
-                    className="text-accent-emerald hover:underline font-mono"
+                    className={`rounded-xl border p-3.5 text-left transition-all ${
+                      customDiameter === '54' && customEars === '3'
+                        ? 'border-accent-emerald bg-accent-emerald/10 text-white ring-1 ring-accent-emerald'
+                        : 'border-white/10 bg-obsidian-950/60 hover:border-white/20 text-slate-300'
+                    }`}
                   >
-                    [Compatible 54mm]
+                    <div className="text-xs font-bold text-white mb-1">A 54 mm accessory</div>
+                    <div className="text-[11px] text-accent-emerald font-medium">Matches your machine →</div>
                   </button>
+
+                  {/* Option 2: 58mm */}
                   <button
+                    type="button"
                     onClick={() => {
                       setCustomTitle('MATOW 58mm Bottomless Portafilter (2 Ears)');
                       setCustomDiameter('58');
@@ -709,11 +635,19 @@ export default function KeptApp() {
                       setCustomIsThirdParty(true);
                       setCustomTermsStated(true);
                     }}
-                    className="text-accent-coral hover:underline font-mono"
+                    className={`rounded-xl border p-3.5 text-left transition-all ${
+                      customDiameter === '58'
+                        ? 'border-accent-coral bg-accent-coral/10 text-white ring-1 ring-accent-coral'
+                        : 'border-white/10 bg-obsidian-950/60 hover:border-white/20 text-slate-300'
+                    }`}
                   >
-                    [Conflict 58mm + 15%]
+                    <div className="text-xs font-bold text-white mb-1">A 58 mm accessory</div>
+                    <div className="text-[11px] text-accent-coral font-medium">Size conflict (58 ≠ 54) →</div>
                   </button>
+
+                  {/* Option 3: Unstated */}
                   <button
+                    type="button"
                     onClick={() => {
                       setCustomTitle('Universal Custom Espresso Dosing Tool');
                       setCustomDiameter('');
@@ -722,27 +656,47 @@ export default function KeptApp() {
                       setCustomIsThirdParty(true);
                       setCustomTermsStated(false);
                     }}
-                    className="text-accent-amber hover:underline font-mono"
+                    className={`rounded-xl border p-3.5 text-left transition-all ${
+                      customDiameter === ''
+                        ? 'border-accent-amber bg-accent-amber/10 text-white ring-1 ring-accent-amber'
+                        : 'border-white/10 bg-obsidian-950/60 hover:border-white/20 text-slate-300'
+                    }`}
                   >
-                    [Missing Specs Refusal]
+                    <div className="text-xs font-bold text-white mb-1">Seller omitted size</div>
+                    <div className="text-[11px] text-accent-amber font-medium">Safe stop (won't guess) →</div>
                   </button>
                 </div>
+              </div>
 
-                <button
-                  onClick={triggerCustomScenario}
-                  disabled={loading}
-                  className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-6 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-2 disabled:opacity-50 shrink-0"
-                >
-                  {loading ? (
-                    <>
-                      <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Evaluating...
-                    </>
-                  ) : (
-                    <>
-                      <ShieldCheck className="h-3.5 w-3.5" /> Run Live Guardrail Audit
-                    </>
-                  )}
-                </button>
+              {/* Editable Product Name & Check Button */}
+              <div className="pt-2 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="w-full sm:flex-1">
+                  <span className="text-[11px] text-slate-400 block mb-1">Selected product:</span>
+                  <input
+                    type="text"
+                    value={customTitle}
+                    onChange={(e) => setCustomTitle(e.target.value)}
+                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-xs text-white focus:border-accent-cyan focus:outline-none"
+                  />
+                </div>
+
+                <div className="w-full sm:w-auto flex justify-end pt-4 sm:pt-0">
+                  <button
+                    onClick={triggerCustomScenario}
+                    disabled={loading}
+                    className="w-full sm:w-auto rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-6 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {loading ? (
+                      <>
+                        <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Checking Fit...
+                      </>
+                    ) : (
+                      <>
+                        <ShieldCheck className="h-3.5 w-3.5" /> Check Compatibility
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           )}
