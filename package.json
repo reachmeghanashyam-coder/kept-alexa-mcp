@@ -6,7 +6,7 @@
     "apps/*"
   ],
   "scripts": {
-    "test": "npm run test --workspace=@dropguard/policy-guard",
+    "test": "npm run test --workspace=@dropguard/policy-guard && npm run test --workspace=@dropguard/mcp-server",
     "build": "npm run build --workspaces"
   },
   "devDependencies": {
