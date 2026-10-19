@@ -26,7 +26,9 @@ export function evaluatePurchaseCompatibility(
 
   // Check 2: Match against owned items in the household
   const ownedEspresso = householdItems.find(
-    (item) => item.modelNumber === 'BES870XL' && item.lifecycleState === 'OWNED_IN_HOME'
+    (item) => (item.modelNumber === 'BES870XL' || item.category === 'Kitchen Appliances') &&
+              item.verifiedSpecs?.portafilterSizeMm !== undefined &&
+              item.lifecycleState === 'OWNED_IN_HOME'
   );
 
   if (
@@ -34,12 +36,15 @@ export function evaluatePurchaseCompatibility(
     candidate.targetSpecs &&
     'portafilterSizeMm' in candidate.targetSpecs
   ) {
-    const candidateSize = candidate.targetSpecs.portafilterSizeMm;
-    const candidateEars = candidate.targetSpecs.earCount;
-    const ownedSize = ownedEspresso.verifiedSpecs.portafilterSizeMm;
-    const ownedEars = ownedEspresso.verifiedSpecs.earCount;
+    const candidateSize = Number(candidate.targetSpecs.portafilterSizeMm);
+    const candidateEars = candidate.targetSpecs.earCount ? Number(candidate.targetSpecs.earCount) : undefined;
+    const ownedSize = Number(ownedEspresso.verifiedSpecs.portafilterSizeMm);
+    const ownedEars = ownedEspresso.verifiedSpecs.earCount ? Number(ownedEspresso.verifiedSpecs.earCount) : undefined;
 
-    if (candidateSize !== ownedSize || candidateEars !== ownedEars) {
+    const hasEarMismatch = candidateEars !== undefined && ownedEars !== undefined && candidateEars !== ownedEars;
+    const hasSizeMismatch = candidateSize !== ownedSize;
+
+    if (hasSizeMismatch || hasEarMismatch) {
       const mismatches = [];
       if (candidateSize !== ownedSize) {
         mismatches.push({
@@ -48,7 +53,7 @@ export function evaluatePurchaseCompatibility(
           candidateValue: candidateSize,
         });
       }
-      if (candidateEars !== ownedEars) {
+      if (candidateEars !== undefined && ownedEars !== undefined && candidateEars !== ownedEars) {
         mismatches.push({
           attribute: 'Locking Ear Count',
           ownedValue: ownedEars,

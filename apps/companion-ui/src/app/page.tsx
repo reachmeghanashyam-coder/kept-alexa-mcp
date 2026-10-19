@@ -46,6 +46,16 @@ export default function KeptApp() {
   const [executionResult, setExecutionResult] = useState<any>(null);
   const [novaObservation, setNovaObservation] = useState<any>(null);
 
+  // Level B: Custom Scenario Sandbox state
+  const [showCustomSandbox, setShowCustomSandbox] = useState(false);
+  const [customTitle, setCustomTitle] = useState('Normcore 54mm Bottomless Portafilter (3 Ears)');
+  const [customCategory, setCustomCategory] = useState('Kitchen Appliances');
+  const [customDiameter, setCustomDiameter] = useState('54');
+  const [customEars, setCustomEars] = useState('3');
+  const [customRestockingFee, setCustomRestockingFee] = useState('0');
+  const [customTermsStated, setCustomTermsStated] = useState(true);
+  const [customIsThirdParty, setCustomIsThirdParty] = useState(false);
+
   // Load inventory on mount, but DO NOT run any scenario yet!
   useEffect(() => {
     fetchInventory();
@@ -201,6 +211,48 @@ export default function KeptApp() {
         category: 'Kitchen Appliances',
         targetSpecs: {}, // Missing dimensions!
         sellerPolicy: { isThirdParty: true, termsExplicitlyStated: false },
+      };
+
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'check_purchase_compatibility',
+          arguments: { candidate },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
+      setCompatResult(parsed);
+      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Trigger Custom Scenario Sandbox
+  async function triggerCustomScenario() {
+    setActiveScenario('compat');
+    setLoading(true);
+    setExecutionResult(null);
+    try {
+      const targetSpecs: Record<string, any> = {};
+      if (customDiameter.trim()) {
+        targetSpecs.portafilterSizeMm = parseFloat(customDiameter.trim());
+      }
+      if (customEars.trim()) {
+        targetSpecs.earCount = parseInt(customEars.trim(), 10);
+      }
+
+      const candidate = {
+        title: customTitle.trim() || 'Custom Tested Product',
+        category: customCategory,
+        targetSpecs: Object.keys(targetSpecs).length > 0 ? targetSpecs : {},
+        sellerPolicy: {
+          isThirdParty: customIsThirdParty,
+          restockingFeePercent: parseFloat(customRestockingFee) || 0,
+          termsExplicitlyStated: customTermsStated,
+        },
       };
 
       const res = await fetch('/api/mcp', {
@@ -500,6 +552,205 @@ export default function KeptApp() {
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
+        </div>
+
+        {/* Level B: "Try Your Own Scenario" Sleek Bar */}
+        <div className="w-full max-w-4xl mb-10">
+          <button
+            onClick={() => setShowCustomSandbox(!showCustomSandbox)}
+            className="w-full rounded-2xl border border-white/10 bg-obsidian-800/40 hover:bg-obsidian-800/80 hover:border-accent-cyan/40 p-4 transition-all duration-300 backdrop-blur-xl flex items-center justify-between group shadow-lg"
+          >
+            <div className="flex items-center gap-3">
+              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan group-hover:scale-105 transition-transform">
+                <Sparkles className="h-3.5 w-3.5" />
+              </span>
+              <div className="text-left">
+                <div className="text-xs font-bold text-white group-hover:text-accent-cyan transition-colors flex items-center gap-2">
+                  <span>Custom Scenario Sandbox</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">
+                    Judge Playground
+                  </span>
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  Challenge Kept beyond prepared examples: input custom specifications to test deterministic fit or refusal guards.
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-semibold text-accent-cyan shrink-0">
+              <span className="hidden sm:inline">{showCustomSandbox ? 'Close Sandbox' : 'Try Your Own Case'}</span>
+              {showCustomSandbox ? (
+                <ChevronUp className="h-4 w-4 transition-transform" />
+              ) : (
+                <ChevronDown className="h-4 w-4 group-hover:translate-y-0.5 transition-transform" />
+              )}
+            </div>
+          </button>
+
+          {/* Expandable Custom Testing Workbench */}
+          {showCustomSandbox && (
+            <div className="mt-4 rounded-2xl border border-accent-cyan/30 bg-obsidian-900/90 p-6 backdrop-blur-2xl shadow-2xl space-y-5 animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan flex items-center gap-2">
+                  <Code2 className="h-4 w-4" /> Custom Product Pre-Purchase Evaluator
+                </span>
+                <span className="text-[11px] font-mono text-slate-400">
+                  Target Host: Breville Barista Express (BES870XL • 54mm)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                {/* Candidate Title */}
+                <div>
+                  <label className="text-slate-400 block mb-1 font-medium">Candidate Product Title</label>
+                  <input
+                    type="text"
+                    value={customTitle}
+                    onChange={(e) => setCustomTitle(e.target.value)}
+                    placeholder="e.g. Normcore 54mm Bottomless Portafilter"
+                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none"
+                  />
+                </div>
+
+                {/* Category */}
+                <div>
+                  <label className="text-slate-400 block mb-1 font-medium">Product Category</label>
+                  <select
+                    value={customCategory}
+                    onChange={(e) => setCustomCategory(e.target.value)}
+                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white focus:border-accent-cyan focus:outline-none"
+                  >
+                    <option value="Kitchen Appliances">Kitchen Appliances (Espresso / Appliances)</option>
+                    <option value="Electronics & Office">Electronics & Office (Cables / Displays)</option>
+                    <option value="Automotive">Automotive (Unrelated Category Test)</option>
+                  </select>
+                </div>
+
+                {/* Diameter */}
+                <div>
+                  <label className="text-slate-400 block mb-1 font-medium">
+                    Stated Diameter (mm) <span className="text-slate-500 font-mono text-[10px]">(leave blank to test Epistemic Safe Stop)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={customDiameter}
+                    onChange={(e) => setCustomDiameter(e.target.value)}
+                    placeholder="54 (compatible) or 58 (conflict) or blank (refusal)"
+                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none font-mono"
+                  />
+                </div>
+
+                {/* Ear Count */}
+                <div>
+                  <label className="text-slate-400 block mb-1 font-medium">
+                    Locking Ear Count <span className="text-slate-500 font-mono text-[10px]">(Breville uses 3 ears)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={customEars}
+                    onChange={(e) => setCustomEars(e.target.value)}
+                    placeholder="3 (compatible) or 2 (incompatible)"
+                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none font-mono"
+                  />
+                </div>
+
+                {/* Restocking Fee */}
+                <div>
+                  <label className="text-slate-400 block mb-1 font-medium">Seller Restocking Fee (%)</label>
+                  <input
+                    type="number"
+                    value={customRestockingFee}
+                    onChange={(e) => setCustomRestockingFee(e.target.value)}
+                    placeholder="0"
+                    className="w-full rounded-xl border border-white/10 bg-obsidian-950 px-3.5 py-2 text-white placeholder-slate-600 focus:border-accent-cyan focus:outline-none font-mono"
+                  />
+                </div>
+
+                {/* Seller Policy Checkboxes */}
+                <div className="flex flex-col justify-end gap-2 pb-1">
+                  <label className="flex items-center gap-2 cursor-pointer text-slate-300">
+                    <input
+                      type="checkbox"
+                      checked={customIsThirdParty}
+                      onChange={(e) => setCustomIsThirdParty(e.target.checked)}
+                      className="rounded border-white/20 bg-obsidian-950 text-accent-cyan focus:ring-accent-cyan"
+                    />
+                    <span>Third-Party Marketplace Seller</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer text-slate-300">
+                    <input
+                      type="checkbox"
+                      checked={customTermsStated}
+                      onChange={(e) => setCustomTermsStated(e.target.checked)}
+                      className="rounded border-white/20 bg-obsidian-950 text-accent-cyan focus:ring-accent-cyan"
+                    />
+                    <span>Return terms explicitly stated by seller</span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10">
+                <div className="flex items-center gap-2 text-[11px] text-slate-400">
+                  <span className="text-slate-500">Quick Test Cases:</span>
+                  <button
+                    onClick={() => {
+                      setCustomTitle('CAPMESSO 54mm Bottomless Portafilter (3 Ears)');
+                      setCustomDiameter('54');
+                      setCustomEars('3');
+                      setCustomRestockingFee('0');
+                      setCustomIsThirdParty(false);
+                      setCustomTermsStated(true);
+                    }}
+                    className="text-accent-emerald hover:underline font-mono"
+                  >
+                    [Compatible 54mm]
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCustomTitle('MATOW 58mm Bottomless Portafilter (2 Ears)');
+                      setCustomDiameter('58');
+                      setCustomEars('2');
+                      setCustomRestockingFee('15');
+                      setCustomIsThirdParty(true);
+                      setCustomTermsStated(true);
+                    }}
+                    className="text-accent-coral hover:underline font-mono"
+                  >
+                    [Conflict 58mm + 15%]
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCustomTitle('Universal Custom Espresso Dosing Tool');
+                      setCustomDiameter('');
+                      setCustomEars('');
+                      setCustomRestockingFee('0');
+                      setCustomIsThirdParty(true);
+                      setCustomTermsStated(false);
+                    }}
+                    className="text-accent-amber hover:underline font-mono"
+                  >
+                    [Missing Specs Refusal]
+                  </button>
+                </div>
+
+                <button
+                  onClick={triggerCustomScenario}
+                  disabled={loading}
+                  className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-6 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-2 disabled:opacity-50 shrink-0"
+                >
+                  {loading ? (
+                    <>
+                      <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Evaluating...
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="h-3.5 w-3.5" /> Run Live Guardrail Audit
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Audit & Execution Stage Header (Visible when a scenario is active) */}
