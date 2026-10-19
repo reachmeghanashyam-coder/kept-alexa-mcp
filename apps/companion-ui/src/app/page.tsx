@@ -276,7 +276,7 @@ export default function DropGuardApp() {
             </span>
           </h1>
           <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal mt-4">
-            Checks compatibility before you buy. Resolves damaged deliveries after they arrive.
+            Checks compatibility before you buy. Handles returns and replacements after they arrive.
           </p>
         </div>
 
