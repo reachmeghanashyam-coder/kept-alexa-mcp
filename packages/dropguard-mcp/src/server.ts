@@ -161,12 +161,12 @@ export function createMcpHttpServer() {
   return server;
 }
 
-// Only start standalone listener when executed directly as script
+// Only start standalone listener when explicitly instructed or executed directly as the dropguard-mcp script
 const isDirectExecution =
   process.env.AUTORUN_MCP_SERVER === 'true' ||
   (typeof process.argv[1] === 'string' &&
-    (process.argv[1].endsWith('server.ts') ||
-      process.argv[1].endsWith('server.js')));
+    process.argv[1].includes('dropguard-mcp') &&
+    (process.argv[1].endsWith('server.ts') || process.argv[1].endsWith('server.js')));
 
 if (isDirectExecution) {
   const server = createMcpHttpServer();
