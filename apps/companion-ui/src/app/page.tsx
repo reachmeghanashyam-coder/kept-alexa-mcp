@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ShieldCheck,
   AlertTriangle,
@@ -27,6 +27,10 @@ export default function KeptApp() {
   const [showTraceDrawer, setShowTraceDrawer] = useState(false);
   const [customQuery, setCustomQuery] = useState('');
 
+  // DOM Refs for Apple-grade smooth auto-scroll
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const bentoGridRef = useRef<HTMLDivElement>(null);
+
   // Scenario 1 state (Compatibility check)
   const [compatResult, setCompatResult] = useState<any>(null);
 
@@ -42,6 +46,27 @@ export default function KeptApp() {
   useEffect(() => {
     fetchInventory();
   }, []);
+
+  // Apple-grade smooth auto-scroll down to results when active scenario changes
+  useEffect(() => {
+    if (activeScenario && resultsRef.current) {
+      const timer = setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [activeScenario, compatResult, returnPlan]);
+
+  // Clean dismiss and smooth return to the Bento overview
+  function dismissScenario() {
+    setActiveScenario(null);
+    setCompatResult(null);
+    setReturnPlan(null);
+    setExecutionResult(null);
+    setTimeout(() => {
+      bentoGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+  }
 
   async function fetchInventory() {
     try {
@@ -375,19 +400,22 @@ export default function KeptApp() {
         </div>
 
         {/* Benchmark Scenario Bento Grid */}
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] ${
+            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
               activeScenario === 'compat'
-                ? 'border-accent-cyan bg-obsidian-800/90 shadow-lg shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
+                ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.02]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
+                  {activeScenario === 'compat' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
+                  )}
                   SPEC CHECK
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Breville 54mm</span>
@@ -408,15 +436,18 @@ export default function KeptApp() {
           {/* Bento 2: Multi-Item Order #842 Resolution */}
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] ${
+            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
               activeScenario === 'return'
-                ? 'border-accent-emerald bg-obsidian-800/90 shadow-lg shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
+                ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80 scale-[1.02]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
+                  {activeScenario === 'return' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
+                  )}
                   ORDER #842
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Bedrock Nova</span>
@@ -437,15 +468,18 @@ export default function KeptApp() {
           {/* Bento 3: Epistemic Honesty Refusal */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] ${
+            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
               activeScenario === 'unverified'
-                ? 'border-accent-amber bg-obsidian-800/90 shadow-lg shadow-accent-amber/10 ring-1 ring-accent-amber/50'
+                ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.02]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber flex items-center gap-1.5">
+                  {activeScenario === 'unverified' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
+                  )}
                   SAFE STOP
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Missing Specs</span>
@@ -466,19 +500,27 @@ export default function KeptApp() {
 
         {/* Audit & Execution Stage Header (Visible when a scenario is active) */}
         {activeScenario && (
-          <div className="w-full max-w-3xl mb-4 flex items-center justify-between border-b border-white/10 pb-3">
-            <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-accent-cyan animate-pulse"></span>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                Live Audit & Protocol Evidence
-              </span>
+          <div ref={resultsRef} className="w-full max-w-3xl mb-4 scroll-mt-6">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <span className={`flex h-2 w-2 rounded-full animate-pulse ${
+                  activeScenario === 'unverified'
+                    ? 'bg-accent-amber'
+                    : activeScenario === 'compat'
+                    ? 'bg-accent-coral'
+                    : 'bg-accent-emerald'
+                }`}></span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                  Live Audit & Protocol Evidence
+                </span>
+              </div>
+              <button
+                onClick={dismissScenario}
+                className="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10"
+              >
+                Dismiss Result ✕
+              </button>
             </div>
-            <button
-              onClick={() => setActiveScenario(null)}
-              className="text-xs text-slate-400 hover:text-white transition-colors"
-            >
-              Dismiss Result ✕
-            </button>
           </div>
         )}
 
