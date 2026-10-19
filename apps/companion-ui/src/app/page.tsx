@@ -379,27 +379,27 @@ export default function KeptApp() {
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] ${
+            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/90 shadow-lg shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan">
                   SPEC CHECK
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Breville 54mm</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors">
                 58mm-portafilter.fit
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Stops ordering 58mm portafilter for 54mm machine and flags 15% restocking fee.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-6 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Test Incompatible Fit</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -408,27 +408,27 @@ export default function KeptApp() {
           {/* Bento 2: Multi-Item Order #842 Resolution */}
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] ${
+            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] ${
               activeScenario === 'return'
                 ? 'border-accent-emerald bg-obsidian-800/90 shadow-lg shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald">
                   ORDER #842
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Bedrock Nova</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-emerald transition-colors">
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-emerald transition-colors">
                 order-842.resolve
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Inspects kettle crack via Nova Vision and routes 1-trip Whole Foods return.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
+            <div className="mt-6 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
               <span>Resolve Order #842</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -437,27 +437,27 @@ export default function KeptApp() {
           {/* Bento 3: Epistemic Honesty Refusal */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] ${
+            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/90 shadow-lg shadow-accent-amber/10 ring-1 ring-accent-amber/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber">
                   SAFE STOP
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Missing Specs</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors">
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors">
                 unverified-seller.test
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Halts checkout when 3rd-party listing lacks millimeter dimensions.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+            <div className="mt-6 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
               <span>Test Refusal Guard</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
