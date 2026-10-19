@@ -3,9 +3,9 @@
 > *Autonomous Model Context Protocol (MCP) server & companion interface preventing incompatible accessory purchases, eliminating return-fee traps, and consolidating damaged deliveries into a single-trip resolution.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](packages/policy-guard/LICENSE)
-[![MCP Spec](https://img.shields.io/badge/MCP%20Spec-2025--11--25%20Streamable%20HTTP-cyan.svg)](packages/dropguard-mcp)
-[![AWS Bedrock](https://img.shields.io/badge/AWS%20Bedrock-Nova%20Multimodal%20Vision-blue.svg)](packages/dropguard-mcp/src/bedrock.ts)
-[![Tests: Vitest](https://img.shields.io/badge/Tests-16%20Unit%20%2B%2015%20E2E%20Passed%20(100%25)-brightgreen.svg)](packages/policy-guard/tests)
+[![MCP Spec](https://img.shields.io/badge/MCP%20Spec-2025--11--25%20Streamable%20HTTP-cyan.svg)](packages/kept-mcp)
+[![AWS Bedrock](https://img.shields.io/badge/AWS%20Bedrock-Nova%20Multimodal%20Vision-blue.svg)](packages/kept-mcp/src/bedrock.ts)
+[![Tests: Vitest](https://img.shields.io/badge/Tests-19%20Unit%20%2B%2015%20E2E%20Passed%20(100%25)-brightgreen.svg)](packages/policy-guard/tests)
 
 ---
 
@@ -15,7 +15,7 @@
 | :--- | :--- | :--- |
 | **Alexa+ Track (1st Place)** | **$25,000 Cash** + $15k AWS Credits | Self-hosted Model Context Protocol (MCP) server running over Streamable HTTP (`2025-11-25` spec) with 8 registered tools, single-screen Apple-grade companion interface, and cryptographic HMAC-SHA256 authorization boundaries. |
 | **AWS Builder Mini-Challenge** | **$5,000 Cash** | Real integration with **Amazon Bedrock (Nova Lite/Pro)** via `@aws-sdk/client-bedrock-runtime` Converse API for multimodal unboxing damage inspection and missing accessory verification. |
-| **Open Source Mini-Challenge** | **$5,000 Cash** | Standalone, decoupled open-source library (`@dropguard/policy-guard`) published with zero framework dependencies, complete type definitions, and an automated 15-test brutal audit suite. |
+| **Open Source Mini-Challenge** | **$5,000 Cash** | Standalone, decoupled open-source library (`@kept/policy-guard`) published with zero framework dependencies, complete type definitions, and an automated 15-test brutal audit suite. |
 | **Developer Friction Log** | **+10% Score Bonus** | Deep, protocol-level feedback report on MCP Streamable HTTP, Bedrock Nova latency, and approval state boundaries documented in [`docs/FRICTION_LOG.md`](docs/FRICTION_LOG.md). |
 
 ---
@@ -34,7 +34,7 @@ flowchart TD
         SecGuard["Cryptographic Approval Guard\n(HMAC-SHA256 Token Engine)"]
     end
 
-    subgraph CoreEngine["🛡️ Standalone Core (@dropguard/policy-guard)"]
+    subgraph CoreEngine["🛡️ Standalone Core (@kept/policy-guard)"]
         Store["Household Ledger Repository\n(Deterministic Evaluation Sandbox)"]
         Compat["Compatibility & Duplicate Engine\n(Millimeter Group-Head Math)"]
         ResEngine["Drop-Off Pathway Engine\n(Whole Foods vs. UPS Consolidation)"]
@@ -99,8 +99,8 @@ Kept features 3 instant scenario cards in the UI so evaluators can test the comp
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/your-username/dropguard-alexa-mcp.git
-cd dropguard-alexa-mcp
+git clone https://github.com/your-username/kept-alexa-mcp.git
+cd kept-alexa-mcp
 npm install
 ```
 
@@ -116,13 +116,13 @@ npx tsx scripts/run-brutal-audit.ts
 ### 3. Launch the Application
 ```bash
 # Start the Next.js Companion UI (port 3000)
-npm run dev --workspace=@dropguard/companion-ui
+npm run dev --workspace=@kept/companion-ui
 ```
 Open **[http://localhost:3000](http://localhost:3000)** in your browser to interact with the companion screen.
 
 ### 4. (Optional) Run Standalone MCP Server on Port 3001
 ```bash
-AUTORUN_MCP_SERVER=true npm run dev --workspace=@dropguard/mcp-server
+AUTORUN_MCP_SERVER=true npm run dev --workspace=@kept/mcp-server
 ```
 The Streamable HTTP MCP endpoint is accessible at `http://localhost:3001/mcp` for any compliant MCP client or inspection tool.
 
@@ -139,4 +139,4 @@ The Streamable HTTP MCP endpoint is accessible at `http://localhost:3001/mcp` fo
 ---
 
 ## 📄 License
-MIT License. Open-source package `@dropguard/policy-guard` is designed for reuse across the Model Context Protocol ecosystem.
+MIT License. Open-source package `@kept/policy-guard` is designed for reuse across the Model Context Protocol ecosystem.

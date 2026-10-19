@@ -1,5 +1,5 @@
 {
-  "name": "@dropguard/companion-ui",
+  "name": "@kept/companion-ui",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
     "start": "next start -p 3000"
   },
   "dependencies": {
-    "@dropguard/mcp-server": "*",
-    "@dropguard/policy-guard": "*",
+    "@kept/mcp-server": "*",
+    "@kept/policy-guard": "*",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.0",
     "lucide-react": "^0.475.0",

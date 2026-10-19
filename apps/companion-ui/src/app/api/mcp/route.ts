@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
-import { handleMcpToolCall, MCP_TOOL_DEFINITIONS } from '@dropguard/mcp-server';
+import { handleMcpToolCall, MCP_TOOL_DEFINITIONS } from '@kept/mcp-server';
 
 export async function GET() {
   return NextResponse.json({
     status: 'HEALTHY',
     protocolVersion: '2025-11-25',
-    service: 'DropGuard Alexa+ Simulated Companion API',
+    service: 'Kept Alexa+ Simulated Companion API',
     tools: MCP_TOOL_DEFINITIONS,
   });
 }
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
           result: {
             protocolVersion: '2025-11-25',
             capabilities: { tools: { listChanged: false } },
-            serverInfo: { name: 'dropguard-alexa-mcp', version: '1.0.0' },
+            serverInfo: { name: 'kept-alexa-mcp', version: '1.0.0' },
           },
         });
       }

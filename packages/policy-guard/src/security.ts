@@ -1,7 +1,7 @@
 import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { ReturnActionPlan } from './types.js';
 
-const SERVER_SECRET_KEY = process.env.DROPGUARD_SECRET_KEY || 'dropguard_secure_mcp_hmac_secret_2026';
+const SERVER_SECRET_KEY = process.env.KEPT_SECRET_KEY || process.env.DROPGUARD_SECRET_KEY || 'kept_secure_mcp_hmac_secret_2026';
 
 export function generatePlanHash(
   plan: Pick<ReturnActionPlan, 'planId' | 'planVersion' | 'items' | 'calendarDeadline'>

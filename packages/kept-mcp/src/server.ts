@@ -32,7 +32,7 @@ export function createMcpHttpServer() {
           status: 'HEALTHY',
           protocolVersion: '2025-11-25',
           transport: 'Streamable HTTP (JSON-RPC 2.0)',
-          service: 'DropGuard Alexa+ MCP Server',
+          service: 'Kept Alexa+ MCP Server',
           timestamp: new Date().toISOString(),
         })
       );
@@ -82,10 +82,10 @@ export function createMcpHttpServer() {
                     },
                   },
                   serverInfo: {
-                    name: 'dropguard-alexa-mcp',
+                    name: 'kept-alexa-mcp',
                     version: '1.0.0',
                     description:
-                      'DropGuard Alexa+ Commerce & Ownership MCP Server with AWS Bedrock Nova Vision',
+                      'Kept Alexa+ Commerce & Ownership MCP Server with AWS Bedrock Nova Vision',
                   },
                 },
               })
@@ -161,19 +161,19 @@ export function createMcpHttpServer() {
   return server;
 }
 
-// Only start standalone listener when explicitly instructed or executed directly as the dropguard-mcp script
+// Only start standalone listener when explicitly instructed or executed directly as the kept-mcp script
 const isDirectExecution =
   process.env.AUTORUN_MCP_SERVER === 'true' ||
   (typeof process.argv[1] === 'string' &&
-    process.argv[1].includes('dropguard-mcp') &&
+    process.argv[1].includes('kept-mcp') &&
     (process.argv[1].endsWith('server.ts') || process.argv[1].endsWith('server.js')));
 
 if (isDirectExecution) {
   const server = createMcpHttpServer();
   server.listen(PORT, () => {
-    console.log(`[DropGuard MCP Server] Running on http://localhost:${PORT}`);
-    console.log(`[DropGuard MCP Server] Streamable HTTP endpoint: http://localhost:${PORT}/mcp`);
-    console.log(`[DropGuard MCP Server] Protocol Specification: 2025-11-25`);
+    console.log(`[Kept MCP Server] Running on http://localhost:${PORT}`);
+    console.log(`[Kept MCP Server] Streamable HTTP endpoint: http://localhost:${PORT}/mcp`);
+    console.log(`[Kept MCP Server] Protocol Specification: 2025-11-25`);
   });
 }
 

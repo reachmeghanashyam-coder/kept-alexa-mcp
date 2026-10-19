@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import http from 'http';
 import { createMcpHttpServer } from '../src/server.js';
-import { BENCHMARK_CANDIDATES } from '@dropguard/policy-guard';
+import { BENCHMARK_CANDIDATES } from '@kept/policy-guard';
 
 describe('Milestone 2 Acceptance: MCP Streamable HTTP Protocol & Tools', () => {
   let server: http.Server;
@@ -42,7 +42,7 @@ describe('Milestone 2 Acceptance: MCP Streamable HTTP Protocol & Tools', () => {
   it('Protocol Test: /mcp initialize returns protocolVersion 2025-11-25 and tool capabilities', async () => {
     const response = await postJsonRpc('initialize');
     expect(response.result.protocolVersion).toBe('2025-11-25');
-    expect(response.result.serverInfo.name).toBe('dropguard-alexa-mcp');
+    expect(response.result.serverInfo.name).toBe('kept-alexa-mcp');
     expect(response.result.capabilities.tools).toBeDefined();
   });
 

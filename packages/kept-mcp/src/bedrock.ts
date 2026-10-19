@@ -58,7 +58,7 @@ export class BedrockNovaInspector {
             ? 'webp'
             : 'jpeg';
 
-        const prompt = `You are the DropGuard Visual Evidence Inspector for household product returns.
+        const prompt = `You are the Kept Visual Evidence Inspector for household product returns.
 The user is unboxing a delivered product: "${itemContext}".
 Analyze this image objectively:
 1. Identify any visible physical damage, cracks, dents, or defects.

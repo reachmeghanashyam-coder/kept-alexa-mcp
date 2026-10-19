@@ -150,7 +150,7 @@ export function buildConsolidatedReturnPlan(
   const calendarDeadline = deadlines[0] ?? new Date(Date.now() + 30 * 86400000).toISOString();
 
   const draftPlanPayload = {
-    planId: `plan_dropguard_${Date.now()}`,
+    planId: `plan_kept_${Date.now()}`,
     planVersion: 1,
     createdAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 15 * 60 * 1000).toISOString(), // 15 min approval TTL

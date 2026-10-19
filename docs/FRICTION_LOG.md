@@ -1,14 +1,14 @@
-# DropGuard • Developer Friction Log & Architecture Report
+# Kept • Developer Friction Log & Architecture Report
 *Submitted for the "Build, Ship, Shape: Amazon Developer Hackathon 2026" (+10% Bonus Category)*
-*Product: DropGuard — Alexa+ Commerce & Ownership Bridge*
-*Author: DropGuard Engineering Team*
+*Product: Kept — Alexa+ Commerce & Ownership Guard*
+*Author: Kept Engineering Team*
 *Date: October 2026*
 
 ---
 
 ## 1. Executive Summary
 
-This Friction Log documents the real-world developer experience of building **DropGuard**—an in-home commerce and post-purchase protection agent—using the **Model Context Protocol (MCP) specification `2025-11-25` over Streamable HTTP transport**, integrated with **Amazon Bedrock Nova Multimodal Vision (Converse API)** and an Alexa+ simulated companion host.
+This Friction Log documents the real-world developer experience of building **Kept**—an in-home commerce and post-purchase protection agent—using the **Model Context Protocol (MCP) specification `2025-11-25` over Streamable HTTP transport**, integrated with **Amazon Bedrock Nova Multimodal Vision (Converse API)** and an Alexa+ simulated companion host.
 
 Rather than decorative praise, this report provides concrete, protocol-level feedback, measured latency profiles, edge-case failures, and architectural recommendations intended directly for Amazon engineering teams building Alexa+ and Bedrock toolchains.
 
@@ -17,7 +17,7 @@ Rather than decorative praise, this report provides concrete, protocol-level fee
 ## 2. Friction Point A: Streamable HTTP Transport vs. MCP Stateful Sessions
 
 ### What We Built:
-DropGuard exposes 8 JSON-RPC tools over a standard Streamable HTTP endpoint (`POST /mcp` and `GET /health`) adhering to the MCP `2025-11-25` protocol version.
+Kept exposes 8 JSON-RPC tools over a standard Streamable HTTP endpoint (`POST /mcp` and `GET /health`) adhering to the MCP `2025-11-25` protocol version.
 
 ### The Friction & Edge Cases Encountered:
 1. **Stateless HTTP vs. Session-Bound Approvals:**
@@ -28,7 +28,7 @@ DropGuard exposes 8 JSON-RPC tools over a standard Streamable HTTP endpoint (`PO
 
 2. **Schema Type Coercion in Nested Objects:**
    * *Problem:* When passing structured candidate items with nested objects (`candidate.targetSpecs.portafilterSizeMm`), certain MCP client runtimes serialize all leaf values as strings (`"54"` instead of `54`).
-   * *Our Workaround:* We implemented defensive type coercion in `@dropguard/policy-guard` to normalize numeric dimensions before equality checks.
+   * *Our Workaround:* We implemented defensive type coercion in `@kept/policy-guard` to normalize numeric dimensions before equality checks.
 
 ---
 
@@ -58,14 +58,14 @@ A Relayeo-grade Apple-minimalist companion dashboard providing 1-click benchmark
 ### The Friction Encountered:
 1. **Host Surface Sandbox Constraints:**
    * The emerging **MCP Apps specification** (which renders UI cards inline inside the host conversation view) is still evolving and lacks uniform cross-client support across standalone Alexa simulators, Claude Desktop, and web runtimes.
-   * *Architectural Choice:* To ensure 100% demo reliability during hackathon evaluation, we built DropGuard as a **dual-surface architecture**:
+   * *Architectural Choice:* To ensure 100% demo reliability during hackathon evaluation, we built Kept as a **dual-surface architecture**:
      * A standalone Next.js 15 companion interface (`apps/companion-ui`) that simulates the Alexa+ screen experience.
-     * A standard Streamable HTTP JSON-RPC endpoint (`packages/dropguard-mcp`) accessible by any compliant MCP client or inspection tool.
+     * A standard Streamable HTTP JSON-RPC endpoint (`packages/kept-mcp`) accessible by any compliant MCP client or inspection tool.
 
 ---
 
 ## 5. Architectural Recommendations for the Alexa+ Platform
 
 1. **Native "Household Ledger" Tool Group:** Amazon should expose an official, read-only household order and device specification graph over MCP. This would allow third-party builders to verify accessory compatibility without requiring users to manually input model numbers.
-2. **Deterministic Pre-Action Verification Gates:** Agents that can spend money or book carrier pickups must have protocol-level verification boundaries. Our open-source `@dropguard/policy-guard` library demonstrates how this can be implemented cleanly with cryptographic tokens and explicit uncertainty reporting.
+2. **Deterministic Pre-Action Verification Gates:** Agents that can spend money or book carrier pickups must have protocol-level verification boundaries. Our open-source `@kept/policy-guard` library demonstrates how this can be implemented cleanly with cryptographic tokens and explicit uncertainty reporting.
 3. **Transparent Data Origin Tagging:** Every data point returned by an assistant should declare its origin (`PUBLISHED_DOCUMENT_SOURCE` vs. `LIVE_USER_OBSERVATION` vs. `SEEDED_FIXTURE`). This builds user trust and makes AI hallucinations immediately auditable.

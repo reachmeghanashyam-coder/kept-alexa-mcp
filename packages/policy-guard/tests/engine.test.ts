@@ -8,7 +8,7 @@ import {
   BENCHMARK_CANDIDATES,
 } from '../src/index.js';
 
-describe('Milestone 1 Acceptance Criteria: DropGuard Policy & Security Engine', () => {
+describe('Milestone 1 Acceptance Criteria: Kept Policy & Security Engine', () => {
   beforeEach(() => {
     globalHouseholdStore.resetDemoState();
   });

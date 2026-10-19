@@ -2,9 +2,9 @@ import { globalHouseholdStore } from '../packages/policy-guard/src/store.js';
 import { evaluatePurchaseCompatibility } from '../packages/policy-guard/src/compatibility.js';
 import { buildConsolidatedReturnPlan } from '../packages/policy-guard/src/resolution.js';
 import { issuePlanApproval, validateExecutionAuthorization } from '../packages/policy-guard/src/security.js';
-import { defaultNovaInspector } from '../packages/dropguard-mcp/src/bedrock.js';
-import { createMcpHttpServer } from '../packages/dropguard-mcp/src/server.js';
-import { MCP_TOOL_DEFINITIONS } from '../packages/dropguard-mcp/src/mcp-tools.js';
+import { defaultNovaInspector } from '../packages/kept-mcp/src/bedrock.js';
+import { createMcpHttpServer } from '../packages/kept-mcp/src/server.js';
+import { MCP_TOOL_DEFINITIONS } from '../packages/kept-mcp/src/mcp-tools.js';
 
 interface AuditResult {
   gate: string;
@@ -18,7 +18,7 @@ const auditLog: AuditResult[] = [];
 
 async function runAudit() {
   console.log('=================================================================');
-  console.log(' DROPGUARD COMPREHENSIVE END-TO-END BRUTAL AUDIT SUITE');
+  console.log(' KEPT • COMPREHENSIVE END-TO-END BRUTAL AUDIT SUITE');
   console.log(' Evaluated against Amazon Developer Hackathon 2026 Standards');
   console.log('=================================================================\n');
 
@@ -379,7 +379,7 @@ async function runAudit() {
       testId: 'E2E-15',
       name: 'Monorepo build verification across all workspaces',
       status: 'PASS',
-      evidence: `@dropguard/policy-guard, @dropguard/mcp-server, and @dropguard/companion-ui build with 0 TypeScript errors.`,
+      evidence: `@kept/policy-guard, @kept/mcp-server, and @kept/companion-ui build with 0 TypeScript errors.`,
     });
   } catch (err: any) {
     auditLog.push({ gate: 'Gate 1', testId: 'E2E-15', name: 'Build verification', status: 'FAIL', evidence: err.message });

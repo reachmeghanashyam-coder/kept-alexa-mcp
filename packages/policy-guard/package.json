@@ -1,5 +1,5 @@
 {
-  "name": "@dropguard/policy-guard",
+  "name": "@kept/policy-guard",
   "version": "1.0.0",
   "description": "Deterministic policy verification, compatibility reasoning, and cryptographically-bound approval gating for MCP agents.",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "commerce-agent",
     "epistemic-honesty"
   ],
-  "author": "DropGuard Team",
+  "author": "Kept Team",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.6.5",

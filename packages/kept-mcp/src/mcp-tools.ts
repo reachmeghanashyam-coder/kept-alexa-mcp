@@ -5,7 +5,7 @@ import {
   buildConsolidatedReturnPlan,
   issuePlanApproval,
   CandidateItem,
-} from '@dropguard/policy-guard';
+} from '@kept/policy-guard';
 import { defaultNovaInspector } from './bedrock.js';
 
 export const MCP_TOOL_DEFINITIONS = [

@@ -1,12 +1,12 @@
 {
-  "name": "dropguard-monorepo",
+  "name": "kept-monorepo",
   "private": true,
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
   "scripts": {
-    "test": "npm run test --workspace=@dropguard/policy-guard && npm run test --workspace=@dropguard/mcp-server",
+    "test": "npm run test --workspace=@kept/policy-guard && npm run test --workspace=@kept/mcp-server",
     "build": "npm run build --workspaces"
   },
   "devDependencies": {

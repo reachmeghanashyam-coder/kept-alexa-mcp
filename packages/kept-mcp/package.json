@@ -1,7 +1,7 @@
 {
-  "name": "@dropguard/mcp-server",
+  "name": "@kept/mcp-server",
   "version": "1.0.0",
-  "description": "DropGuard MCP Server supporting Streamable HTTP protocol and AWS Bedrock Nova multimodal vision.",
+  "description": "Kept MCP Server supporting Streamable HTTP protocol and AWS Bedrock Nova multimodal vision.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,7 +11,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@dropguard/policy-guard": "*",
+    "@kept/policy-guard": "*",
     "@modelcontextprotocol/sdk": "^1.6.1",
     "@aws-sdk/client-bedrock-runtime": "^3.750.0",
     "dotenv": "^16.4.7"

@@ -4,7 +4,7 @@
  * or validates the transparent, grounded fallback contract.
  */
 import 'dotenv/config';
-import { defaultNovaInspector } from '../packages/dropguard-mcp/src/bedrock.js';
+import { defaultNovaInspector } from '../packages/kept-mcp/src/bedrock.js';
 
 async function verifyBedrock() {
   console.log('====================================================');
