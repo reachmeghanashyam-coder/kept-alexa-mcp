@@ -1,4 +1,4 @@
-import { createHash, createHmac } from 'crypto';
+import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { ReturnActionPlan } from './types.js';
 
 const SERVER_SECRET_KEY = process.env.DROPGUARD_SECRET_KEY || 'dropguard_secure_mcp_hmac_secret_2026';
@@ -87,7 +87,13 @@ export function validateExecutionAuthorization(
 
   const expectedToken = `auth_${plan.planId}_v${plan.planVersion}_${expectedSignature.substring(0, 16)}`;
 
-  if (providedToken !== expectedToken) {
+  const providedBuf = Buffer.from(providedToken);
+  const expectedBuf = Buffer.from(expectedToken);
+
+  if (
+    providedBuf.length !== expectedBuf.length ||
+    !timingSafeEqual(providedBuf, expectedBuf)
+  ) {
     return {
       valid: false,
       reason: 'INVALID_AUTHORIZATION_TOKEN: Token signature mismatch or unauthorized actor.',

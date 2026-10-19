@@ -597,11 +597,20 @@ export default function DropGuardApp() {
                   {/* Bedrock Nova Visual Observation Card */}
                   {novaObservation && (
                     <div className="rounded-xl border border-accent-cyan/30 bg-accent-cyan/5 p-4 space-y-2">
-                      <div className="flex items-center justify-between text-xs">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                         <span className="font-bold text-accent-cyan flex items-center gap-1.5">
                           <Camera className="h-3.5 w-3.5" /> Amazon Bedrock Nova Multimodal Visual Observation
                         </span>
-                        <span className="text-slate-400 font-mono">Latency: {novaObservation.latencyMs}ms</span>
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono border ${
+                            novaObservation.isLiveAwsCall
+                              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                              : 'bg-white/5 border-white/10 text-slate-400'
+                          }`}>
+                            {novaObservation.isLiveAwsCall ? 'Live AWS Bedrock' : 'Disclosed Local Grounding'}
+                          </span>
+                          <span className="text-slate-400 font-mono text-[11px]">{novaObservation.latencyMs}ms</span>
+                        </div>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed font-mono">
                         {novaObservation.summary}
