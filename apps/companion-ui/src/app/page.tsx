@@ -233,10 +233,10 @@ export default function DropGuardApp() {
   }
 
   return (
-    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-24">
-      {/* Seamless Unified Top Navigation Bar (No border line, unified canvas) */}
+    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-8">
+      {/* Seamless Unified Top Navigation Bar */}
       <header className="w-full bg-transparent">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-8 pb-4">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-4 pb-2">
           {/* Left: Brand Mark */}
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-emerald text-obsidian-950 font-black text-xs">
@@ -249,7 +249,7 @@ export default function DropGuardApp() {
           <div className="flex items-center">
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
-              className="rounded-full bg-accent-emerald px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-emerald/25 flex items-center gap-1.5"
+              className="rounded-full bg-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-emerald/25 flex items-center gap-1.5"
             >
               <Code2 className="h-3.5 w-3.5" />
               {showTraceDrawer ? 'Hide Trace' : 'Inspect MCP'}
@@ -258,169 +258,163 @@ export default function DropGuardApp() {
         </div>
       </header>
 
-      {/* Hero Section Seamlessly Flowing from Top */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-14 sm:pt-18 pb-32 flex flex-col items-center">
-        {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-10">
+      {/* Main Container Fitted Within Single Viewport */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-2 sm:pt-4 flex flex-col items-center justify-center">
+        {/* Category Micro-Pill */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-[11px] font-semibold text-accent-cyan tracking-wide mb-3">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
           Alexa+ Commerce & Ownership Bridge • Powered by Model Context Protocol
         </div>
 
-        {/* Hero Title: Commanding Display Scale, Pre + Post Order */}
-        <div className="text-center max-w-4xl mb-16 sm:mb-20">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 text-white">
-            Zero-Regret Orders.
-            <br />
+        {/* Hero Title: Punchy, High-Impact, Compact */}
+        <div className="text-center max-w-3xl mb-4 sm:mb-5">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] mb-2 text-white">
+            Zero-Regret Orders.{' '}
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Zero-Friction Returns.
             </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed font-normal">
             Checks compatibility before you buy. Resolves damaged deliveries after they arrive.
           </p>
         </div>
 
-        {/* Interactive Main Action Input Bar (Spacious Stage) */}
-        <div className="w-full max-w-xl mb-16 sm:mb-20">
-          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-2xl backdrop-blur-xl hover:border-white/20 transition-all">
-            <div className="flex items-center gap-3 pl-4 flex-1">
-              <span className="h-2.5 w-2.5 rounded-full bg-accent-emerald animate-pulse"></span>
-              <div className="flex flex-col">
+        {/* Interactive Main Action Input Bar (Compact Pill) */}
+        <div className="w-full max-w-md mb-5 sm:mb-6">
+          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-1.5 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
+            <div className="flex items-center gap-2.5 pl-3 flex-1">
+              <span className="h-2 w-2 rounded-full bg-accent-emerald animate-pulse"></span>
+              <div className="flex items-center gap-2">
                 <span className="text-xs font-semibold text-slate-200">
-                  household-842.amazon.com
+                  household-842
                 </span>
-                <span className="text-[10px] text-slate-400">
-                  Memory Synced (4 Active Items)
+                <span className="text-[10px] text-slate-400 font-mono">
+                  • 4 items synced
                 </span>
               </div>
             </div>
             <button
               onClick={triggerScenario2}
               disabled={loading}
-              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-6 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-2 shrink-0 disabled:opacity-50"
+              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-1.5 shrink-0 disabled:opacity-50"
             >
               {loading ? (
                 <>
-                  <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Running Audit...
+                  <RefreshCw className="h-3 w-3 animate-spin" /> Auditing...
                 </>
               ) : (
-                <>Check My Orders ⟳</>
+                <>Check Orders ⟳</>
               )}
             </button>
           </div>
         </div>
 
-        {/* Benchmark Scenario Section Header */}
-        <div className="w-full max-w-4xl mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/5 pb-4">
-          <div>
-            <div className="text-[11px] font-bold uppercase tracking-widest text-accent-cyan">
-              Live Evaluation Testbench
-            </div>
-            <h2 className="text-xl font-bold text-white tracking-tight mt-1">
-              Benchmark Demo Scenarios
-            </h2>
-          </div>
-          <span className="text-xs text-slate-400 font-mono">
-            Click to trigger MCP tools & inspect trace
+        {/* Benchmark Scenario Section Micro-Label */}
+        <div className="w-full max-w-4xl mb-2 flex items-center justify-between px-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            Benchmark Demo Scenarios
+          </span>
+          <span className="text-[10px] font-mono text-slate-500">
+            Click to test live MCP guardrails
           </span>
         </div>
 
-        {/* Benchmark Scenario Bento Grid */}
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 sm:mb-24">
+        {/* Benchmark Scenario Bento Grid (Single Screen Fit) */}
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-6">
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-3xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[220px] ${
+            className={`group cursor-pointer rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
               activeScenario === 'compat'
-                ? 'border-accent-cyan bg-obsidian-800/90 shadow-xl shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
+                ? 'border-accent-cyan bg-obsidian-800/90 shadow-lg shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-cyan">
+              <div className="flex items-center justify-between gap-2 mb-2.5">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2 py-0.5 text-[10px] font-semibold text-accent-cyan">
                   SPEC CHECK
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-500">Breville 54mm</span>
+                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-500">Breville 54mm</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors">
+              <h3 className="font-bold text-white text-sm mb-1.5 group-hover:text-accent-cyan transition-colors">
                 58mm-portafilter.fit
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-[11px] text-slate-400 leading-relaxed">
                 Stops ordering 58mm portafilter for 54mm machine and flags 15% restocking fee.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] font-semibold text-accent-cyan">
               <span>Test Incompatible Fit</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Bento 2: Multi-Item Order #842 Resolution */}
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-3xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[220px] ${
+            className={`group cursor-pointer rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
               activeScenario === 'return'
-                ? 'border-accent-emerald bg-obsidian-800/90 shadow-xl shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
+                ? 'border-accent-emerald bg-obsidian-800/90 shadow-lg shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-emerald">
+              <div className="flex items-center justify-between gap-2 mb-2.5">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2 py-0.5 text-[10px] font-semibold text-accent-emerald">
                   ORDER #842
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-500">Bedrock Nova</span>
+                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-500">Bedrock Nova</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-emerald transition-colors">
+              <h3 className="font-bold text-white text-sm mb-1.5 group-hover:text-accent-emerald transition-colors">
                 order-842.resolve
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-[11px] text-slate-400 leading-relaxed">
                 Inspects kettle crack via Nova Vision and routes 1-trip Whole Foods return.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
+            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] font-semibold text-accent-emerald">
               <span>Resolve Order #842</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Bento 3: Epistemic Honesty Refusal */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-3xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[220px] ${
+            className={`group cursor-pointer rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
               activeScenario === 'unverified'
-                ? 'border-accent-amber bg-obsidian-800/90 shadow-xl shadow-accent-amber/10 ring-1 ring-accent-amber/50'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
+                ? 'border-accent-amber bg-obsidian-800/90 shadow-lg shadow-accent-amber/10 ring-1 ring-accent-amber/50'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-amber">
+              <div className="flex items-center justify-between gap-2 mb-2.5">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2 py-0.5 text-[10px] font-semibold text-accent-amber">
                   SAFE STOP
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-500">Missing Specs</span>
+                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-500">Missing Specs</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors">
+              <h3 className="font-bold text-white text-sm mb-1.5 group-hover:text-accent-amber transition-colors">
                 unverified-seller.test
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-[11px] text-slate-400 leading-relaxed">
                 Halts checkout when 3rd-party listing lacks millimeter dimensions.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] font-semibold text-accent-amber">
               <span>Test Refusal Guard</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
 
         {/* Audit & Execution Stage Header (Visible when a scenario is active) */}
         {activeScenario && (
-          <div className="w-full max-w-3xl mb-6 flex items-center justify-between border-b border-white/10 pb-4">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-accent-cyan animate-pulse"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
+          <div className="w-full max-w-3xl mb-4 flex items-center justify-between border-b border-white/10 pb-3">
+            <div className="flex items-center gap-2">
+              <span className="flex h-2 w-2 rounded-full bg-accent-cyan animate-pulse"></span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
                 Live Audit & Protocol Evidence
               </span>
             </div>
