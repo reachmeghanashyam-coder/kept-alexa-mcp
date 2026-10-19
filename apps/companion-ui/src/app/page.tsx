@@ -234,9 +234,9 @@ export default function DropGuardApp() {
 
   return (
     <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-24">
-      {/* Authentic Full-Width Top Navigation Bar */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-obsidian-950/80 backdrop-blur-xl">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
+      {/* Seamless Unified Top Navigation Bar (No border line, unified canvas) */}
+      <header className="w-full bg-transparent">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-8 pb-4">
           {/* Left: Brand Mark */}
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-emerald text-obsidian-950 font-black text-xs">
@@ -258,8 +258,8 @@ export default function DropGuardApp() {
         </div>
       </header>
 
-      {/* Hero Section with Generous Breathing Room & Display Scale Typography */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-20 sm:pt-28 pb-32 flex flex-col items-center">
+      {/* Hero Section Seamlessly Flowing from Top */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-14 sm:pt-18 pb-32 flex flex-col items-center">
         {/* Category Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-10">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
