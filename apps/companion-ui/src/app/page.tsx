@@ -927,34 +927,38 @@ export default function KeptApp() {
         )}
 
         {/* Scenario 3: Epistemic Honesty / Missing Specs Refusal */}
+        {/* Scenario 3: Missing Specs Safe Stop */}
         {activeScenario === 'unverified' && compatResult && (
           <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-obsidian-800/80 p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6">
             <div className="flex items-center justify-between pb-6 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <span className="h-3 w-3 rounded-full bg-accent-amber animate-pulse"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent-amber">
-                  ● Epistemic Honesty Guardrail • Refusal to Hallucinate Missing Specs
+                  ● Size Not Listed • Checkout Paused
                 </span>
               </div>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-mono">
-                {compatResult.originLabel}
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-medium">
+                Unverified Listing
               </span>
             </div>
 
             <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
-                <p className="text-sm text-slate-300 leading-relaxed font-mono bg-obsidian-950/60 p-5 rounded-2xl border border-white/5">
-                  {compatResult.reason}
-                </p>
+                <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
+                  <p className="font-semibold text-white">We paused this order because the seller hasn't provided dimensions.</p>
+                  <p className="text-slate-300 text-xs">
+                    Your Breville machine requires an exact 54 mm accessory with 3 locking ears. This seller didn't list any measurements, so Kept won't guess or risk ordering something that won't fit.
+                  </p>
+                </div>
               </div>
 
               {compatResult.sellerRiskWarning && (
                 <div className="flex items-start gap-3 rounded-2xl border border-accent-coral/30 bg-accent-coral/10 p-5 text-xs text-accent-coral">
                   <XCircle className="h-4 w-4 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold">Unverified Seller Terms: </span>
-                    {compatResult.sellerRiskWarning}
+                    <span className="font-bold">Third-Party Seller Alert: </span>
+                    This seller has no published return policy. If this accessory doesn't fit, you may not be able to return it.
                   </div>
                 </div>
               )}
@@ -968,10 +972,10 @@ export default function KeptApp() {
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-amber" />
-                  Verifiable Decision Receipt • Epistemic Guardrail Provenance
+                  Decision Details & Verification
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? 'Hide Receipt' : 'Inspect Receipt'}
+                  {showDecisionReceipt ? 'Hide Details' : 'View Details'}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
@@ -980,32 +984,32 @@ export default function KeptApp() {
                 <div className="p-5 space-y-3 text-xs font-mono text-slate-300 border-t border-white/5 bg-black/40">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Evaluation Request</span>
-                      <span className="text-slate-200">Pre-Purchase Fit Check</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Item Checked</span>
+                      <span className="text-slate-200">Espresso Dosing Ring & Needle Collar</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Candidate Item</span>
-                      <span className="text-white">Universal Dosing Ring & Needle Collar</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Your Owned Machine</span>
+                      <span className="text-white">Breville Barista Express (54 mm, 3 ears)</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Target Listing Data</span>
-                      <span className="text-accent-amber">Omits Millimeter Collar Diameter</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Seller Listing Info</span>
+                      <span className="text-accent-amber">Missing millimeter diameter</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Guardrail Enforced</span>
-                      <span className="text-accent-coral font-semibold">REFUSAL_TO_HALLUCINATE</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Kept Rule Applied</span>
+                      <span className="text-accent-coral font-semibold">Do Not Guess Missing Dimensions</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Data Provenance</span>
-                      <span className="text-slate-400">Merchant Page Inspection (Unverified 3rd-Party)</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Information Source</span>
+                      <span className="text-slate-400">Seller Product Listing Page</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Decision Outcome</span>
-                      <span className="text-accent-amber font-bold">SAFE STOP • ZERO-ASSUMPTION BOUNDARY</span>
+                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Recommended Action</span>
+                      <span className="text-accent-amber font-bold">Ask seller for size before buying</span>
                     </div>
                   </div>
                 </div>
@@ -1013,8 +1017,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: {compatResult.sourceEvidence}</span>
-              <span className="text-accent-amber font-semibold">Safe Stop Enforced</span>
+              <span>Source: Seller listing page lacks published millimeter dimensions</span>
+              <span className="text-accent-amber font-semibold">Order Paused For Safety</span>
             </div>
           </div>
         )}
