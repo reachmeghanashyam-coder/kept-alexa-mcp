@@ -204,4 +204,30 @@ describe('Adversarial Security & Business Logic Audit Suite', () => {
       expect(fail.reason).toContain('INVALID_STATE');
     }
   });
+
+  // Strict Secret Key Hygiene & Production Guards
+  it('Security: Rejects weak secrets (<32 chars) and enforces mandatory key in production', async () => {
+    const { getHmacSigningKey } = await import('../src/security.js');
+    const originalEnv = process.env.NODE_ENV;
+    const originalSecret = process.env.KEPT_SECRET_KEY;
+
+    try {
+      // 1. Weak key (< 32 chars) must throw INSECURE_CONFIGURATION
+      process.env.KEPT_SECRET_KEY = 'short_insecure_secret_123';
+      expect(() => getHmacSigningKey()).toThrowError(/INSECURE_CONFIGURATION/);
+
+      // 2. Missing key in production must throw MISSING_SECRET_KEY
+      delete process.env.KEPT_SECRET_KEY;
+      delete process.env.DROPGUARD_SECRET_KEY;
+      (process.env as any).NODE_ENV = 'production';
+      expect(() => getHmacSigningKey()).toThrowError(/MISSING_SECRET_KEY/);
+
+      // 3. Strong 256-bit key (>= 32 chars) must be accepted
+      process.env.KEPT_SECRET_KEY = 'a'.repeat(32);
+      expect(getHmacSigningKey()).toBe('a'.repeat(32));
+    } finally {
+      process.env.NODE_ENV = originalEnv;
+      process.env.KEPT_SECRET_KEY = originalSecret;
+    }
+  });
 });

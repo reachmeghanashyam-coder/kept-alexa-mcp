@@ -1,7 +1,31 @@
-import { createHash, createHmac, timingSafeEqual } from 'crypto';
+import { createHash, createHmac, timingSafeEqual, randomBytes } from 'crypto';
 import { ReturnActionPlan } from './types.js';
 
-const SERVER_SECRET_KEY = process.env.KEPT_SECRET_KEY || process.env.DROPGUARD_SECRET_KEY || 'kept_secure_mcp_hmac_secret_2026';
+// Cryptographically secure ephemeral test key generated per-process when running in development/test
+const EPHEMERAL_DEV_KEY = randomBytes(32).toString('hex');
+
+export function getHmacSigningKey(): string {
+  const configuredKey = process.env.KEPT_SECRET_KEY || process.env.DROPGUARD_SECRET_KEY;
+
+  if (configuredKey) {
+    if (configuredKey.length < 32) {
+      throw new Error(
+        'INSECURE_CONFIGURATION: KEPT_SECRET_KEY must be at least 32 characters (256-bit entropy) for production HMAC-SHA256 signing.'
+      );
+    }
+    return configuredKey;
+  }
+
+  // Strictly disallow fallback in production
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'MISSING_SECRET_KEY: KEPT_SECRET_KEY environment variable is mandatory in production. Ephemeral or hardcoded fallbacks are prohibited.'
+    );
+  }
+
+  // In test / local development without a configured .env key, return per-process unguessable key
+  return EPHEMERAL_DEV_KEY;
+}
 
 export function generatePlanHash(
   plan: Pick<ReturnActionPlan, 'planId' | 'planVersion' | 'items' | 'calendarDeadline'>
@@ -38,7 +62,8 @@ export function issuePlanApproval(
   }
 
   // Generate cryptographically signed authorization token bound to hash and version
-  const tokenSignature = createHmac('sha256', SERVER_SECRET_KEY)
+  const signingKey = getHmacSigningKey();
+  const tokenSignature = createHmac('sha256', signingKey)
     .update(`${plan.planId}:v${plan.planVersion}:${plan.planHash}`)
     .digest('hex');
 
@@ -81,7 +106,8 @@ export function validateExecutionAuthorization(
   }
 
   // 4. Verify token signature
-  const expectedSignature = createHmac('sha256', SERVER_SECRET_KEY)
+  const signingKey = getHmacSigningKey();
+  const expectedSignature = createHmac('sha256', signingKey)
     .update(`${plan.planId}:v${plan.planVersion}:${recalculatedHash}`)
     .digest('hex');
 
