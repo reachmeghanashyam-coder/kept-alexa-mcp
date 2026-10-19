@@ -258,38 +258,38 @@ export default function DropGuardApp() {
         </div>
       </header>
 
-      {/* Main Container Fitted Within Single Viewport */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-2 sm:pt-4 flex flex-col items-center justify-center">
-        {/* Category Micro-Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-[11px] font-semibold text-accent-cyan tracking-wide mb-3">
+      {/* Main Container Naturally Filling Viewport */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-8 sm:pt-12 pb-16 flex flex-col items-center">
+        {/* Category Pill */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-6">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
           Alexa+ Commerce Guard
         </div>
 
-        {/* Hero Title: 2-Line Punchy Display Scale */}
-        <div className="text-center max-w-3xl mb-4 sm:mb-5">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.12] mb-2.5 text-white">
+        {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
+        <div className="text-center max-w-4xl mb-6 sm:mb-8">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] mb-4 text-white">
             Zero-Regret Orders.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Zero-Friction Returns.
             </span>
           </h1>
-          <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed font-normal">
+          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal mt-4">
             Checks compatibility before you buy. Resolves damaged deliveries after they arrive.
           </p>
         </div>
 
-        {/* Interactive Main Action Input Bar (Compact Pill) */}
-        <div className="w-full max-w-md mb-5 sm:mb-6">
-          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-1.5 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
-            <div className="flex items-center gap-2.5 pl-3 flex-1">
-              <span className="h-2 w-2 rounded-full bg-accent-emerald animate-pulse"></span>
+        {/* Interactive Main Action Input Bar */}
+        <div className="w-full max-w-lg mb-8 sm:mb-10">
+          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
+            <div className="flex items-center gap-2.5 pl-4 flex-1">
+              <span className="h-2.5 w-2.5 rounded-full bg-accent-emerald animate-pulse"></span>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-slate-200">
+                <span className="text-sm font-semibold text-slate-200">
                   household-842
                 </span>
-                <span className="text-[10px] text-slate-400 font-mono">
+                <span className="text-xs text-slate-400 font-mono">
                   • 4 items synced
                 </span>
               </div>
@@ -297,11 +297,11 @@ export default function DropGuardApp() {
             <button
               onClick={triggerScenario2}
               disabled={loading}
-              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-1.5 shrink-0 disabled:opacity-50"
+              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-1.5 shrink-0 disabled:opacity-50"
             >
               {loading ? (
                 <>
-                  <RefreshCw className="h-3 w-3 animate-spin" /> Auditing...
+                  <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Auditing...
                 </>
               ) : (
                 <>Check Orders ⟳</>
@@ -310,102 +310,102 @@ export default function DropGuardApp() {
           </div>
         </div>
 
-        {/* Benchmark Scenario Section Micro-Label */}
-        <div className="w-full max-w-4xl mb-2 flex items-center justify-between px-1">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+        {/* Benchmark Scenario Section Label */}
+        <div className="w-full max-w-4xl mb-3 flex items-center justify-between px-1">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Benchmark Demo Scenarios
           </span>
-          <span className="text-[10px] font-mono text-slate-500">
+          <span className="text-xs font-mono text-slate-500">
             Click to test live MCP guardrails
           </span>
         </div>
 
-        {/* Benchmark Scenario Bento Grid (Single Screen Fit) */}
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-6">
+        {/* Benchmark Scenario Bento Grid */}
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/90 shadow-lg shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2.5">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2 py-0.5 text-[10px] font-semibold text-accent-cyan">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan">
                   SPEC CHECK
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-500">Breville 54mm</span>
+                <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Breville 54mm</span>
               </div>
-              <h3 className="font-bold text-white text-sm mb-1.5 group-hover:text-accent-cyan transition-colors">
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
                 58mm-portafilter.fit
               </h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Stops ordering 58mm portafilter for 54mm machine and flags 15% restocking fee.
               </p>
             </div>
-            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] font-semibold text-accent-cyan">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Test Incompatible Fit</span>
-              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Bento 2: Multi-Item Order #842 Resolution */}
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] ${
               activeScenario === 'return'
                 ? 'border-accent-emerald bg-obsidian-800/90 shadow-lg shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2.5">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2 py-0.5 text-[10px] font-semibold text-accent-emerald">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald">
                   ORDER #842
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-500">Bedrock Nova</span>
+                <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Bedrock Nova</span>
               </div>
-              <h3 className="font-bold text-white text-sm mb-1.5 group-hover:text-accent-emerald transition-colors">
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-emerald transition-colors">
                 order-842.resolve
               </h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Inspects kettle crack via Nova Vision and routes 1-trip Whole Foods return.
               </p>
             </div>
-            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] font-semibold text-accent-emerald">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
               <span>Resolve Order #842</span>
-              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Bento 3: Epistemic Honesty Refusal */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-4 sm:p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/90 shadow-lg shadow-accent-amber/10 ring-1 ring-accent-amber/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2.5">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2 py-0.5 text-[10px] font-semibold text-accent-amber">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber">
                   SAFE STOP
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-500">Missing Specs</span>
+                <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Missing Specs</span>
               </div>
-              <h3 className="font-bold text-white text-sm mb-1.5 group-hover:text-accent-amber transition-colors">
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors">
                 unverified-seller.test
               </h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Halts checkout when 3rd-party listing lacks millimeter dimensions.
               </p>
             </div>
-            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-[11px] font-semibold text-accent-amber">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
               <span>Test Refusal Guard</span>
-              <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
