@@ -317,21 +317,21 @@ export default function DropGuardApp() {
             }`}
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-cyan">
-                  PRE-PURCHASE FIT
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-cyan">
+                  SPEC CHECK
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">Breville 54mm</span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-500">Breville 54mm</span>
               </div>
               <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors">
                 58mm-portafilter.fit
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Prevents ordering a 58mm portafilter for an owned 54mm machine and flags a 15% restocking fee.
+                Stops ordering 58mm portafilter for 54mm machine and flags 15% restocking fee.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
-              <span>Test Incompatible Buy</span>
+              <span>Test Incompatible Fit</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
@@ -346,21 +346,21 @@ export default function DropGuardApp() {
             }`}
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-emerald">
-                  ORDER #842 • 2 ITEMS
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-emerald">
+                  ORDER #842
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">Bedrock Nova</span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-500">Bedrock Nova</span>
               </div>
               <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-emerald transition-colors">
                 order-842.resolve
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Inspects unboxed kettle crack via Nova Vision, validates sweater size, and routes a 1-trip Whole Foods return.
+                Inspects kettle crack via Nova Vision and routes 1-trip Whole Foods return.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
-              <span>Resolve Multi-Item Order</span>
+              <span>Resolve Order #842</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
@@ -375,21 +375,21 @@ export default function DropGuardApp() {
             }`}
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-amber">
-                  MISSING SPECS GUARD
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-amber">
+                  SAFE STOP
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">Refusal Safe Stop</span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-500">Missing Specs</span>
               </div>
               <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors">
                 unverified-seller.test
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Tests unverified 3rd-party listing lacking millimeter dimensions. Refuses to guess fit and halts checkout.
+                Halts checkout when 3rd-party listing lacks millimeter dimensions.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
-              <span>Test Refusal Guardrail</span>
+              <span>Test Refusal Guard</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
