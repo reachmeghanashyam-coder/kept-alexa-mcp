@@ -237,28 +237,16 @@ export default function DropGuardApp() {
       {/* Clean Top Navbar Matching Relayeo Reference */}
       <header className="sticky top-6 z-40 mx-auto w-full max-w-4xl px-4 mb-16">
         <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 px-6 py-2.5 backdrop-blur-xl shadow-2xl">
-          {/* Left: Brand + Minimal ENGINE pill */}
+          {/* Left: Brand Mark Only */}
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-emerald text-obsidian-950 font-black text-xs">
               DG
             </div>
             <span className="font-bold tracking-tight text-white text-base">DropGuard</span>
-            <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2 py-0.5 text-[10px] font-bold text-accent-cyan tracking-wider">
-              ENGINE
-            </span>
           </div>
 
-          {/* Right: Clean Text Action + Vibrant Solid Emerald CTA */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={resetDemo}
-              disabled={loading}
-              className="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 px-3 py-1.5 disabled:opacity-50"
-            >
-              <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
-              Reset Demo
-            </button>
-
+          {/* Right: Solid Emerald CTA Only */}
+          <div className="flex items-center">
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
               className="rounded-full bg-accent-emerald px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-emerald/25 flex items-center gap-1.5"
@@ -727,12 +715,22 @@ export default function DropGuardApp() {
               <Code2 className="h-4 w-4 text-accent-cyan" />
               <span className="font-bold text-white text-sm">Live MCP Protocol Trace & Sources</span>
             </div>
-            <button
-              onClick={() => setShowTraceDrawer(false)}
-              className="text-xs text-slate-400 hover:text-white"
-            >
-              Close
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={resetDemo}
+                disabled={loading}
+                className="text-xs text-accent-cyan hover:underline flex items-center gap-1 disabled:opacity-50"
+              >
+                <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
+                Reset State
+              </button>
+              <button
+                onClick={() => setShowTraceDrawer(false)}
+                className="text-xs text-slate-400 hover:text-white"
+              >
+                Close
+              </button>
+            </div>
           </div>
 
           <div className="space-y-4 text-xs font-mono text-slate-300 flex-1">
