@@ -320,39 +320,94 @@ export default function DropGuardApp() {
           </div>
         </div>
 
-        {/* Benchmark Scenario Pills with Generous Spacing */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs text-slate-400 mb-16">
-          <span>Or benchmark demo scenarios:</span>
-          <button
+        {/* Benchmark Scenario Bento Grid */}
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+          {/* Bento 1: Pre-Purchase Compatibility */}
+          <div
             onClick={triggerScenario1}
-            className={`rounded-full px-4 py-1.5 font-medium transition-all border ${
+            className={`group cursor-pointer rounded-3xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
               activeScenario === 'compat'
-                ? 'border-accent-cyan bg-accent-cyan/15 text-accent-cyan shadow-md shadow-accent-cyan/20'
-                : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white'
+                ? 'border-accent-cyan bg-obsidian-800/90 shadow-xl shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
             }`}
           >
-            58mm-portafilter.fit →
-          </button>
-          <button
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-cyan">
+                  PRE-PURCHASE FIT
+                </span>
+                <span className="text-[11px] font-mono text-slate-500">Breville 54mm</span>
+              </div>
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors">
+                58mm-portafilter.fit
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Prevents ordering a 58mm portafilter for an owned 54mm machine and flags a 15% restocking fee.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+              <span>Test Incompatible Buy</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Bento 2: Multi-Item Order #842 Resolution */}
+          <div
             onClick={triggerScenario2}
-            className={`rounded-full px-4 py-1.5 font-medium transition-all border ${
+            className={`group cursor-pointer rounded-3xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
               activeScenario === 'return'
-                ? 'border-accent-cyan bg-accent-cyan/15 text-accent-cyan shadow-md shadow-accent-cyan/20'
-                : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white'
+                ? 'border-accent-emerald bg-obsidian-800/90 shadow-xl shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
             }`}
           >
-            order-842.resolve →
-          </button>
-          <button
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-emerald">
+                  ORDER #842 • 2 ITEMS
+                </span>
+                <span className="text-[11px] font-mono text-slate-500">Bedrock Nova</span>
+              </div>
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-emerald transition-colors">
+                order-842.resolve
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Inspects unboxed kettle crack via Nova Vision, validates sweater size, and routes a 1-trip Whole Foods return.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
+              <span>Resolve Multi-Item Order</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Bento 3: Epistemic Honesty Refusal */}
+          <div
             onClick={triggerScenario3}
-            className={`rounded-full px-4 py-1.5 font-medium transition-all border ${
+            className={`group cursor-pointer rounded-3xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
               activeScenario === 'unverified'
-                ? 'border-accent-amber bg-accent-amber/15 text-accent-amber shadow-md shadow-accent-amber/20'
-                : 'border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white'
+                ? 'border-accent-amber bg-obsidian-800/90 shadow-xl shadow-accent-amber/10 ring-1 ring-accent-amber/50'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
             }`}
           >
-            unverified-seller.test →
-          </button>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent-amber">
+                  MISSING SPECS GUARD
+                </span>
+                <span className="text-[11px] font-mono text-slate-500">Refusal Safe Stop</span>
+              </div>
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors">
+                unverified-seller.test
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Tests unverified 3rd-party listing lacking millimeter dimensions. Refuses to guess fit and halts checkout.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+              <span>Test Refusal Guardrail</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
         </div>
 
 
