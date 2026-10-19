@@ -233,7 +233,7 @@ export default function DropGuardApp() {
   }
 
   return (
-    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-8">
+    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-8 pt-[150px]">
       {/* Seamless Unified Top Navigation Bar */}
       <header className="w-full bg-transparent">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-4 pb-2">
