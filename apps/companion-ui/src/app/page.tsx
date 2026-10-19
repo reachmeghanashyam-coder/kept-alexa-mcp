@@ -556,27 +556,51 @@ export default function KeptApp() {
 
         {/* Level B: "Try Your Own Scenario" Sleek Bar */}
         <div className="w-full max-w-4xl mb-8">
-          <button
+          <div
             onClick={() => setShowCustomSandbox(!showCustomSandbox)}
-            className="w-full rounded-2xl border border-white/10 bg-obsidian-800/40 hover:bg-obsidian-800/80 hover:border-accent-cyan/40 px-5 py-3.5 transition-all duration-300 backdrop-blur-xl flex items-center justify-between group shadow-sm"
+            className={`group cursor-pointer rounded-2xl border transition-all duration-300 backdrop-blur-xl p-4 sm:p-4.5 flex items-center justify-between relative overflow-hidden ${
+              showCustomSandbox
+                ? 'border-accent-cyan/60 bg-obsidian-800/90 shadow-[0_0_30px_rgba(0,212,255,0.15)] ring-1 ring-accent-cyan/50'
+                : 'border-white/10 bg-gradient-to-r from-obsidian-800/60 via-obsidian-800/40 to-obsidian-800/60 hover:border-accent-cyan/40 hover:bg-obsidian-800/80 hover:shadow-[0_4px_25px_rgba(0,0,0,0.4)]'
+            }`}
           >
-            <div className="flex items-center gap-3">
-              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan group-hover:scale-105 transition-transform">
-                <Sparkles className="h-3.5 w-3.5" />
-              </span>
-              <span className="text-xs sm:text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
-                Test your own product specification
+            {/* Subtle Accent Glow on Left Edge */}
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-cyan via-accent-mint to-accent-emerald opacity-60 group-hover:opacity-100 transition-opacity" />
+
+            <div className="flex items-center gap-3.5 pl-1.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent-cyan/20 to-accent-emerald/10 border border-accent-cyan/30 text-accent-cyan group-hover:scale-105 group-hover:shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all">
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-white tracking-tight group-hover:text-accent-cyan transition-colors">
+                    Test your own product specification
+                  </span>
+                  <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan font-medium">
+                    Sandbox
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  Input custom millimeter dimensions and seller fees to evaluate live MCP guardrails.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <span className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm ${
+                showCustomSandbox
+                  ? 'bg-white/10 text-slate-200 border border-white/20 hover:bg-white/15'
+                  : 'bg-gradient-to-r from-accent-cyan to-accent-emerald text-obsidian-950 hover:brightness-110 shadow-accent-cyan/20'
+              }`}>
+                <span>{showCustomSandbox ? 'Close Sandbox' : 'Try →'}</span>
+                {showCustomSandbox ? (
+                  <ChevronUp className="h-3.5 w-3.5 transition-transform" />
+                ) : (
+                  <ChevronDown className="h-3.5 w-3.5 group-hover:translate-y-0.5 transition-transform" />
+                )}
               </span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-accent-cyan shrink-0">
-              <span>{showCustomSandbox ? 'Close Sandbox' : 'Try →'}</span>
-              {showCustomSandbox ? (
-                <ChevronUp className="h-4 w-4 transition-transform" />
-              ) : (
-                <ChevronDown className="h-4 w-4 group-hover:translate-y-0.5 transition-transform" />
-              )}
-            </div>
-          </button>
+          </div>
 
           {/* Expandable Custom Testing Workbench */}
           {showCustomSandbox && (
