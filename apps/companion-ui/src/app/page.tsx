@@ -258,36 +258,41 @@ export default function DropGuardApp() {
         </div>
       </header>
 
-      {/* Hero Section with Generous Breathing Room */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-16 flex flex-col items-center">
+      {/* Hero Section with Generous Breathing Room & Display Scale Typography */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-20 sm:pt-28 pb-32 flex flex-col items-center">
         {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-8">
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-10">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
           Alexa+ Commerce & Ownership Bridge • Powered by Model Context Protocol
         </div>
 
-        {/* Hero Title: Punchy, Compact, Pre + Post Order */}
-        <div className="text-center max-w-3xl mb-10">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.12] mb-4 text-white">
+        {/* Hero Title: Commanding Display Scale, Pre + Post Order */}
+        <div className="text-center max-w-4xl mb-16 sm:mb-20">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 text-white">
             Zero-Regret Orders.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Zero-Friction Returns.
             </span>
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal">
             Checks compatibility before you buy. Resolves damaged deliveries after they arrive.
           </p>
         </div>
 
-        {/* Interactive Main Action Input Bar (Just like Relayeo's search bar) */}
-        <div className="w-full max-w-2xl mb-6">
-          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/90 p-2 shadow-2xl backdrop-blur-xl">
+        {/* Interactive Main Action Input Bar (Spacious Stage) */}
+        <div className="w-full max-w-xl mb-16 sm:mb-20">
+          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-2xl backdrop-blur-xl hover:border-white/20 transition-all">
             <div className="flex items-center gap-3 pl-4 flex-1">
-              <span className="h-2.5 w-2.5 rounded-full bg-accent-emerald"></span>
-              <span className="text-sm font-medium text-slate-200">
-                Connected: household-842.amazon.com
-              </span>
+              <span className="h-2.5 w-2.5 rounded-full bg-accent-emerald animate-pulse"></span>
+              <div className="flex flex-col">
+                <span className="text-xs font-semibold text-slate-200">
+                  household-842.amazon.com
+                </span>
+                <span className="text-[10px] text-slate-400">
+                  Memory Synced (4 Active Items)
+                </span>
+              </div>
             </div>
             <button
               onClick={triggerScenario2}
@@ -305,12 +310,27 @@ export default function DropGuardApp() {
           </div>
         </div>
 
+        {/* Benchmark Scenario Section Header */}
+        <div className="w-full max-w-4xl mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/5 pb-4">
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-widest text-accent-cyan">
+              Live Evaluation Testbench
+            </div>
+            <h2 className="text-xl font-bold text-white tracking-tight mt-1">
+              Benchmark Demo Scenarios
+            </h2>
+          </div>
+          <span className="text-xs text-slate-400 font-mono">
+            Click to trigger MCP tools & inspect trace
+          </span>
+        </div>
+
         {/* Benchmark Scenario Bento Grid */}
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 sm:mb-24">
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-3xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-3xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[220px] ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/90 shadow-xl shadow-accent-cyan/10 ring-1 ring-accent-cyan/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
@@ -339,7 +359,7 @@ export default function DropGuardApp() {
           {/* Bento 2: Multi-Item Order #842 Resolution */}
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-3xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-3xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[220px] ${
               activeScenario === 'return'
                 ? 'border-accent-emerald bg-obsidian-800/90 shadow-xl shadow-accent-emerald/10 ring-1 ring-accent-emerald/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
@@ -368,7 +388,7 @@ export default function DropGuardApp() {
           {/* Bento 3: Epistemic Honesty Refusal */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-3xl border p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-3xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[220px] ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/90 shadow-xl shadow-accent-amber/10 ring-1 ring-accent-amber/50'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-2px]'
@@ -394,6 +414,24 @@ export default function DropGuardApp() {
             </div>
           </div>
         </div>
+
+        {/* Audit & Execution Stage Header (Visible when a scenario is active) */}
+        {activeScenario && (
+          <div className="w-full max-w-3xl mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-accent-cyan animate-pulse"></span>
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
+                Live Audit & Protocol Evidence
+              </span>
+            </div>
+            <button
+              onClick={() => setActiveScenario(null)}
+              className="text-xs text-slate-400 hover:text-white transition-colors"
+            >
+              Dismiss Result ✕
+            </button>
+          </div>
+        )}
 
 
 
