@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'DropGuard • Alexa+ Commerce & Ownership Bridge',
+  title: 'Kept • Alexa+ Commerce Guard',
   description:
-    'Check before you buy. Resolve after it arrives. Unified household memory preventing incompatible purchases and automating single-trip returns.',
+    'Zero-Regret Orders. Zero-Friction Returns. Unified household memory preventing incompatible purchases and automating single-trip returns.',
 };
 
 export default function RootLayout({

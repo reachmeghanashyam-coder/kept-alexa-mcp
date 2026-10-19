@@ -18,7 +18,7 @@ import {
   Search,
 } from 'lucide-react';
 
-export default function DropGuardApp() {
+export default function KeptApp() {
   // Start with null so initial landing is clean, spacious, and idle (like Relayeo)
   const [activeScenario, setActiveScenario] = useState<'compat' | 'return' | 'unverified' | null>(null);
   const [inventory, setInventory] = useState<any[]>([]);
@@ -237,12 +237,36 @@ export default function DropGuardApp() {
       {/* Seamless Unified Top Navigation Bar */}
       <header className="w-full bg-transparent">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-4 pb-2">
-          {/* Left: Brand Mark */}
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-emerald text-obsidian-950 font-black text-xs">
-              DG
+          {/* Left: Apple-grade Kept Brand Mark */}
+          <div className="flex items-center gap-2.5 group cursor-default">
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-b from-white/[0.14] to-white/[0.04] p-[1px] shadow-[0_2px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105">
+              <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-obsidian-950/90 backdrop-blur-md">
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <defs>
+                    <linearGradient id="kept-spine-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#00F0FF" />
+                      <stop offset="100%" stopColor="#00A3FF" />
+                    </linearGradient>
+                    <linearGradient id="kept-arm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#00F0FF" />
+                      <stop offset="100%" stopColor="#00E599" />
+                    </linearGradient>
+                  </defs>
+                  {/* Anchor Pillar */}
+                  <path d="M7.5 5.5v13" stroke="url(#kept-spine-grad)" />
+                  {/* Dynamic Return & Verification Chevron */}
+                  <path d="M16.5 6L8.5 12l8 6.5" stroke="url(#kept-arm-grad)" />
+                </svg>
+              </div>
             </div>
-            <span className="font-bold tracking-tight text-white text-base">DropGuard</span>
+            <span className="font-semibold tracking-tight text-white text-base">Kept</span>
           </div>
 
           {/* Right: Solid Emerald CTA */}
@@ -692,7 +716,7 @@ export default function DropGuardApp() {
                   />
                   <div className="text-xs text-slate-300 leading-relaxed">
                     <span className="font-bold text-white">User Authorization Confirmation: </span>
-                    I confirm the requested actions (1 replacement for damaged kettle, 1 refund for sweater) and authorize DropGuard to issue a cryptographically signed plan token.
+                    I confirm the requested actions (1 replacement for damaged kettle, 1 refund for sweater) and authorize Kept to issue a cryptographically signed plan token.
                   </div>
                 </label>
 
@@ -710,7 +734,7 @@ export default function DropGuardApp() {
                     href={`/api/calendar?deadline=${returnPlan.calendarDeadline}&location=${encodeURIComponent(
                       returnPlan.consolidatedTripSummary.suggestedLocation
                     )}`}
-                    download="dropguard-return-deadline.ics"
+                    download="kept-return-deadline.ics"
                     className="flex items-center gap-1.5 text-xs text-accent-cyan hover:underline py-2"
                   >
                     <Calendar className="h-3.5 w-3.5" /> Download .ics Calendar Reminder
@@ -781,7 +805,7 @@ export default function DropGuardApp() {
 
       {/* Ultra-Minimal Whisper Footer */}
       <footer className="w-full max-w-5xl mx-auto px-6 py-4 flex items-center justify-between text-xs text-slate-500 font-medium">
-        <span>DropGuard</span>
+        <span>Kept</span>
         <span className="text-slate-600">Built for Alexa+</span>
       </footer>
 
