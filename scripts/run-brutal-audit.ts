@@ -295,20 +295,47 @@ async function runAudit() {
     auditLog.push({ gate: 'Gate 5', testId: 'E2E-11', name: 'Demo reset', status: 'FAIL', evidence: err.message });
   }
 
-  // E2E-12: MCP Protocol 2025-11-25 Streamable HTTP Endpoint Verification
+  // E2E-12: MCP Protocol 2025-11-25 Streamable HTTP Endpoint & Official SDK Verification
   try {
     const server = createMcpHttpServer();
-    if (server && MCP_TOOL_DEFINITIONS.length === 8) {
+    await new Promise<void>((resolve) => server.listen(0, resolve));
+    const port = (server.address() as any).port;
+
+    const { Client } = await import('@modelcontextprotocol/sdk/client/index.js');
+    const { StreamableHTTPClientTransport } = await import('@modelcontextprotocol/sdk/client/streamableHttp.js');
+
+    const transport = new StreamableHTTPClientTransport(new URL(`http://localhost:${port}/mcp`));
+    const client = new Client({ name: 'brutal-audit-client', version: '1.0.0' }, { capabilities: {} });
+
+    await client.connect(transport);
+    const tools = await client.listTools();
+    const toolCallRes = (await client.callTool({
+      name: 'check_purchase_compatibility',
+      arguments: {
+        candidate: {
+          title: 'MATOW 58mm Bottomless Portafilter (2 Ears)',
+          category: 'Kitchen Appliances',
+          targetSpecs: { portafilterSizeMm: 58, earCount: 2 },
+        },
+      },
+    })) as any;
+
+    await client.close();
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+
+    if (tools.tools.length === 8 && toolCallRes.content?.[0]?.text?.includes('INCOMPATIBLE')) {
       auditLog.push({
         gate: 'Gate 3 — Business Logic & MCP',
         testId: 'E2E-12',
-        name: 'MCP streamable JSON-RPC 2.0 server initialization',
+        name: 'Official @modelcontextprotocol/sdk Client verification over Streamable HTTP',
         status: 'PASS',
-        evidence: `HTTP server created with 8 registered MCP tools: ${MCP_TOOL_DEFINITIONS.map(t => t.name).join(', ')}`,
+        evidence: `Official SDK Client discovered ${tools.tools.length} tools and executed check_purchase_compatibility successfully over Streamable HTTP.`,
       });
+    } else {
+      throw new Error(`Official SDK Client verification failed.`);
     }
   } catch (err: any) {
-    auditLog.push({ gate: 'Gate 3', testId: 'E2E-12', name: 'MCP server init', status: 'FAIL', evidence: err.message });
+    auditLog.push({ gate: 'Gate 3', testId: 'E2E-12', name: 'MCP official SDK client', status: 'FAIL', evidence: err.message });
   }
 
   // E2E-13: Calendar ICS Export RFC 5545 Compliance

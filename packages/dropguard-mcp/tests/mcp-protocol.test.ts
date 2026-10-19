@@ -138,4 +138,50 @@ describe('Milestone 2 Acceptance: MCP Streamable HTTP Protocol & Tools', () => {
     expect(execResult.status).toBe('EXECUTED_SUCCESSFULLY');
     expect(execResult.plan.approvalStatus).toBe('EXECUTED');
   });
+
+  // 6. Independent Official MCP Client SDK Integration Test
+  it('Official SDK Integration: @modelcontextprotocol/sdk Client initializes, discovers all 8 tools, and executes tool call over StreamableHTTP', async () => {
+    const { Client } = await import('@modelcontextprotocol/sdk/client/index.js');
+    const { StreamableHTTPClientTransport } = await import('@modelcontextprotocol/sdk/client/streamableHttp.js');
+
+    const transport = new StreamableHTTPClientTransport(new URL(`${serverUrl}/mcp`));
+    const client = new Client(
+      { name: 'official-sdk-verifier', version: '1.0.0' },
+      { capabilities: {} }
+    );
+
+    try {
+      await client.connect(transport);
+
+      // Verify tool discovery through official SDK
+      const toolsResult = await client.listTools();
+      expect(toolsResult.tools.length).toBe(8);
+
+      const toolNames = toolsResult.tools.map((t) => t.name);
+      expect(toolNames).toContain('get_household_inventory');
+      expect(toolNames).toContain('check_purchase_compatibility');
+      expect(toolNames).toContain('analyze_item_condition');
+      expect(toolNames).toContain('evaluate_return_pathways');
+      expect(toolNames).toContain('build_return_plan');
+      expect(toolNames).toContain('approve_return_plan');
+      expect(toolNames).toContain('execute_return_plan');
+      expect(toolNames).toContain('reset_demo_state');
+
+      // Verify tool execution through official SDK
+      const callResult = (await client.callTool({
+        name: 'check_purchase_compatibility',
+        arguments: {
+          candidate: BENCHMARK_CANDIDATES.incompatiblePortafilter,
+        },
+      })) as any;
+
+      expect(callResult.content).toBeDefined();
+      expect(callResult.content[0].type).toBe('text');
+      const parsed = JSON.parse(callResult.content[0].text);
+      expect(parsed.status).toBe('INCOMPATIBLE');
+      expect(parsed.mismatchedAttributes.length).toBe(2);
+    } finally {
+      await client.close();
+    }
+  });
 });

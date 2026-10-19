@@ -130,4 +130,78 @@ describe('Adversarial Security & Business Logic Audit Suite', () => {
     expect(result.status).toBe('UNVERIFIED_MISSING_SPECS');
     expect(result.reason).toContain('No related household equipment found');
   });
+
+  // Stale Plan Version & Tampered Contents Post-Approval
+  it('Security: Rejects execution if plan items or version are tampered with post-approval', () => {
+    const orderItems = globalHouseholdStore.getItemsByOrderId('ORDER-842-OCT2026');
+    const draftPlan = buildConsolidatedReturnPlan(orderItems, {
+      [orderItems[0].id]: 'REPLACEMENT_FOR_DAMAGE',
+    });
+    globalHouseholdStore.savePlan(draftPlan);
+
+    const approvedPlan = issuePlanApproval(draftPlan, true);
+    globalHouseholdStore.savePlan(approvedPlan);
+    const token = approvedPlan.authorizationToken!;
+
+    // Case A: Plan version bumped (stale version attack)
+    const stalePlan = { ...approvedPlan, planVersion: approvedPlan.planVersion + 1 };
+    globalHouseholdStore.savePlan(stalePlan);
+    const staleRes = globalHouseholdStore.executePlan(stalePlan.planId, token);
+    expect(staleRes.success).toBe(false);
+    expect(staleRes.reason).toContain('TAMPERED_PLAN');
+
+    // Restore valid plan
+    globalHouseholdStore.savePlan(approvedPlan);
+
+    // Case B: Tampering with items in the plan after approval
+    const tamperedPlan = {
+      ...approvedPlan,
+      items: [
+        ...approvedPlan.items,
+        {
+          itemId: 'item_fraudulent_999',
+          title: 'Unauthorized Luxury Watch',
+          requestedAction: 'RETURN_FOR_REFUND' as any,
+          selectedPathway: approvedPlan.items[0].selectedPathway,
+          status: 'PENDING' as any,
+        },
+      ],
+    };
+    globalHouseholdStore.savePlan(tamperedPlan);
+    const tamperRes = globalHouseholdStore.executePlan(tamperedPlan.planId, token);
+    expect(tamperRes.success).toBe(false);
+    expect(tamperRes.reason).toContain('TAMPERED_PLAN');
+  });
+
+  // Concurrent Execution Race Condition Hardening
+  it('Concurrency: Rejects parallel concurrent execution race conditions safely', async () => {
+    const orderItems = globalHouseholdStore.getItemsByOrderId('ORDER-842-OCT2026');
+    const draftPlan = buildConsolidatedReturnPlan(orderItems, {
+      [orderItems[0].id]: 'REPLACEMENT_FOR_DAMAGE',
+    });
+    globalHouseholdStore.savePlan(draftPlan);
+
+    const approvedPlan = issuePlanApproval(draftPlan, true);
+    globalHouseholdStore.savePlan(approvedPlan);
+    const token = approvedPlan.authorizationToken!;
+
+    // Trigger 5 parallel execution attempts simultaneously
+    const attempts = await Promise.all([
+      Promise.resolve(globalHouseholdStore.executePlan(approvedPlan.planId, token)),
+      Promise.resolve(globalHouseholdStore.executePlan(approvedPlan.planId, token)),
+      Promise.resolve(globalHouseholdStore.executePlan(approvedPlan.planId, token)),
+      Promise.resolve(globalHouseholdStore.executePlan(approvedPlan.planId, token)),
+      Promise.resolve(globalHouseholdStore.executePlan(approvedPlan.planId, token)),
+    ]);
+
+    const successes = attempts.filter((a) => a.success);
+    const failures = attempts.filter((a) => !a.success);
+
+    // Exactly ONE execution must succeed, the rest rejected as INVALID_STATE (already executed)
+    expect(successes.length).toBe(1);
+    expect(failures.length).toBe(4);
+    for (const fail of failures) {
+      expect(fail.reason).toContain('INVALID_STATE');
+    }
+  });
 });
