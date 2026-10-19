@@ -1,0 +1,26 @@
+{
+  "name": "@dropguard/policy-guard",
+  "version": "1.0.0",
+  "description": "Deterministic policy verification, compatibility reasoning, and cryptographically-bound approval gating for MCP agents.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "alexa",
+    "policy-guard",
+    "commerce-agent",
+    "epistemic-honesty"
+  ],
+  "author": "DropGuard Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
