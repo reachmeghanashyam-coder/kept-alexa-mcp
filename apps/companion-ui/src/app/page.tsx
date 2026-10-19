@@ -266,17 +266,17 @@ export default function DropGuardApp() {
           Alexa+ Commerce & Ownership Bridge • Powered by Model Context Protocol
         </div>
 
-        {/* Hero Title Matching Relayeo Reference */}
-        <div className="text-center max-w-4xl mb-12">
-          <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 text-white">
-            Let's Check Your Orders
+        {/* Hero Title: Punchy, Compact, Pre + Post Order */}
+        <div className="text-center max-w-3xl mb-10">
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.12] mb-4 text-white">
+            Zero-Regret Orders.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
-              Before AI Systems Ship Them
+              Zero-Friction Returns.
             </span>
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            One living household record that stops incompatible purchases before checkout and turns damaged unboxings into a verified, 1-trip return plan.
+          <p className="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+            Checks compatibility before you buy. Resolves damaged deliveries after they arrive.
           </p>
         </div>
 
