@@ -280,31 +280,61 @@ export default function DropGuardApp() {
           </p>
         </div>
 
-        {/* Interactive Main Action Input Bar */}
+        {/* Interactive Main Action Input Bar: Dynamically Synced with Active Scenario */}
         <div className="w-full max-w-lg mb-8 sm:mb-10">
           <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
-            <div className="flex items-center gap-2.5 pl-4 flex-1">
-              <span className="h-2.5 w-2.5 rounded-full bg-accent-emerald animate-pulse"></span>
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-slate-200">
-                  household-842
+            <div className="flex items-center gap-2.5 pl-4 flex-1 min-w-0">
+              <span className={`h-2.5 w-2.5 rounded-full shrink-0 ${
+                activeScenario === 'unverified'
+                  ? 'bg-accent-amber animate-pulse'
+                  : activeScenario === 'compat'
+                  ? 'bg-accent-coral animate-pulse'
+                  : 'bg-accent-emerald animate-pulse'
+              }`}></span>
+              <div className="flex items-center gap-2 truncate">
+                <span className="text-sm font-semibold text-slate-200 shrink-0">
+                  {activeScenario === 'unverified'
+                    ? 'unverified-seller.test'
+                    : activeScenario === 'compat'
+                    ? '58mm-portafilter.fit'
+                    : 'household-842'}
                 </span>
-                <span className="text-xs text-slate-400 font-mono">
-                  • 4 items synced
+                <span className="text-xs text-slate-400 font-mono truncate">
+                  {activeScenario === 'unverified'
+                    ? '• Universal Espresso Tool (Missing Specs)'
+                    : activeScenario === 'compat'
+                    ? '• Breville 54mm Spec Conflict'
+                    : '• 4 items synced'}
                 </span>
               </div>
             </div>
             <button
-              onClick={triggerScenario2}
+              onClick={() => {
+                if (activeScenario === 'unverified') triggerScenario3();
+                else if (activeScenario === 'compat') triggerScenario1();
+                else triggerScenario2();
+              }}
               disabled={loading}
-              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-cyan/20 flex items-center gap-1.5 shrink-0 disabled:opacity-50"
+              className={`rounded-full px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md flex items-center gap-1.5 shrink-0 disabled:opacity-50 ${
+                activeScenario === 'unverified'
+                  ? 'bg-gradient-to-r from-accent-amber to-amber-500 shadow-accent-amber/20'
+                  : activeScenario === 'compat'
+                  ? 'bg-gradient-to-r from-accent-cyan to-accent-coral shadow-accent-coral/20'
+                  : 'bg-gradient-to-r from-accent-cyan to-accent-emerald shadow-accent-cyan/20'
+              }`}
             >
               {loading ? (
                 <>
                   <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Auditing...
                 </>
               ) : (
-                <>Check Orders ⟳</>
+                <>
+                  {activeScenario === 'unverified'
+                    ? 'Test Refusal ⟳'
+                    : activeScenario === 'compat'
+                    ? 'Check Fit ⟳'
+                    : 'Check Orders ⟳'}
+                </>
               )}
             </button>
           </div>
