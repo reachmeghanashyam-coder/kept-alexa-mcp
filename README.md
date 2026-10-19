@@ -131,8 +131,10 @@ The Streamable HTTP MCP endpoint is accessible at `http://localhost:3001/mcp` fo
 ## 🔒 Security & Approval Guardrails
 * **HMAC-SHA256 Token Binding:** Return plans are hashed using SHA-256 over their normalized items and pathways. Authorization tokens are cryptographically bound to the plan hash.
 * **Tampering Defense:** If an item or pathway is altered after approval, execution is rejected with `TAMPERED_PLAN`.
-* **Single-Use Replay Protection:** Executed tokens transition to `EXECUTED` state and cannot be reused (`INVALID_STATE`).
-* **Timing Attack Hardening:** Token signatures are verified using `crypto.timingSafeEqual` with byte-length validation.
+* **Single-Use Replay Protection:** Executed tokens transition to `EXECUTED` state and cannot be reused (`INVALID_STATE: Plan approval status is 'EXECUTED'`).
+* **Timing Discrepancy Hardening:** Token signatures are verified using `crypto.timingSafeEqual` with strict length guards to protect signature evaluation against timing discrepancy side-channels.
+* **History-Aware Secret Hygiene:** Automated scans across the tree and full Git commit history verified 0 matches for AWS access keys (`AKIA`), private keys (`BEGIN PRIVATE KEY`), or hardcoded secrets. Environment configuration is strictly loaded via `.env` (gitignored; see `.env.example`).
+* **MCP Protocol Transport:** Implements the JSON-RPC 2.0 Streamable HTTP transport profile specified in the Model Context Protocol (`2025-11-25`), supporting `initialize`, `tools/list` (8 typed schemas), and `tools/call`.
 
 ---
 
