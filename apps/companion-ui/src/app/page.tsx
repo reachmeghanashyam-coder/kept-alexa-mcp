@@ -846,14 +846,14 @@ export default function KeptApp() {
       </main>
 
       {/* Sleek Refined Utility Footer */}
-      <footer className="w-full max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-medium border-t border-white/5 pt-5">
-        <div className="flex items-center gap-2 text-slate-400">
-          <span className="font-semibold text-slate-300">Kept</span>
-          <span className="text-slate-600">•</span>
-          <span className="text-slate-400">Alexa+ Commerce Guard</span>
+      <footer className="w-full max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500/80 font-normal border-t border-white/5 pt-5">
+        <div className="flex items-center gap-2">
+          <span className="font-medium text-slate-400/90">Kept</span>
+          <span className="text-slate-600/60">•</span>
+          <span>Alexa+ Commerce Guard</span>
         </div>
 
-        <div className="text-slate-500 text-[11px]">
+        <div>
           <span>Amazon Developer Hackathon 2026</span>
         </div>
       </footer>
