@@ -261,8 +261,8 @@ export default function KeptApp() {
                   </defs>
                   {/* Anchor Pillar */}
                   <path d="M7.5 5.5v13" stroke="url(#kept-spine-grad)" />
-                  {/* Dynamic Return & Verification Chevron */}
-                  <path d="M16.5 6L8.5 12l8 6.5" stroke="url(#kept-arm-grad)" />
+                  {/* Right-Facing Forward Progress Arrow */}
+                  <path d="M8 6.5L16.5 12L8 17.5" stroke="url(#kept-arm-grad)" />
                 </svg>
               </div>
             </div>
