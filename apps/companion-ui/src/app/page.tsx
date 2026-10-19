@@ -364,31 +364,31 @@ export default function KeptApp() {
       </header>
 
       {/* Main Container Naturally Filling Viewport */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 sm:pt-9 pb-10 flex flex-col items-center">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-4 sm:pt-6 pb-6 flex flex-col items-center">
         {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-7">
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3.5 py-1 text-xs font-semibold text-accent-cyan tracking-wide mb-4">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
           Alexa+ Commerce Guard
         </div>
 
         {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
-        <div className="text-center max-w-4xl mb-8 sm:mb-10">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] mb-4 text-white">
+        <div className="text-center max-w-4xl mb-5 sm:mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-2 text-white">
             Zero-Regret Orders.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Zero-Friction Returns.
             </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal mt-5">
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal mt-2.5">
             Checks compatibility before you buy. Handles returns and replacements after they arrive.
           </p>
         </div>
 
         {/* Interactive Main Action Input Bar: Dynamically Synced with Active Scenario */}
-        <div className="w-full max-w-lg mb-10 sm:mb-12">
-          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
-            <div className="flex items-center gap-2.5 pl-4 flex-1 min-w-0">
+        <div className="w-full max-w-lg mb-6 sm:mb-8">
+          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-1.5 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
+            <div className="flex items-center gap-2.5 pl-3.5 flex-1 min-w-0">
               <span className={`h-2.5 w-2.5 rounded-full shrink-0 ${
                 activeScenario === 'unverified'
                   ? 'bg-accent-amber animate-pulse'
@@ -420,7 +420,7 @@ export default function KeptApp() {
                 else triggerScenario2();
               }}
               disabled={loading}
-              className={`rounded-full px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md flex items-center gap-1.5 shrink-0 disabled:opacity-50 ${
+              className={`rounded-full px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md flex items-center gap-1.5 shrink-0 disabled:opacity-50 ${
                 activeScenario === 'unverified'
                   ? 'bg-gradient-to-r from-accent-amber to-amber-500 shadow-accent-amber/20'
                   : activeScenario === 'compat'
@@ -446,7 +446,7 @@ export default function KeptApp() {
         </div>
 
         {/* Benchmark Scenario Section Label */}
-        <div className="w-full max-w-4xl mb-4 flex items-center justify-between px-1">
+        <div className="w-full max-w-4xl mb-3 flex items-center justify-between px-1">
           <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Benchmark Demo Scenarios
           </span>
@@ -456,18 +456,18 @@ export default function KeptApp() {
         </div>
 
         {/* Benchmark Scenario Bento Grid */}
-        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] relative ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.02]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
                   {activeScenario === 'compat' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
@@ -476,14 +476,14 @@ export default function KeptApp() {
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Breville 54mm</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors">
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
                 58mm-portafilter.fit
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Stops ordering 58mm portafilter for 54mm machine and flags 15% restocking fee.
               </p>
             </div>
-            <div className="mt-6 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Test Incompatible Fit</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -492,14 +492,14 @@ export default function KeptApp() {
           {/* Bento 2: Multi-Item Order #842 Resolution */}
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] relative ${
               activeScenario === 'return'
                 ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80 scale-[1.02]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
                   {activeScenario === 'return' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
@@ -508,14 +508,14 @@ export default function KeptApp() {
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Bedrock Nova</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-emerald transition-colors">
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-emerald transition-colors">
                 order-842.resolve
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Inspects kettle crack via Nova Vision and routes 1-trip Whole Foods return.
               </p>
             </div>
-            <div className="mt-6 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
+            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
               <span>Resolve Order #842</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -524,14 +524,14 @@ export default function KeptApp() {
           {/* Bento 3: Epistemic Honesty Refusal */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[175px] relative ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.02]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="flex items-center justify-between gap-2 mb-3">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber flex items-center gap-1.5">
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
@@ -540,14 +540,14 @@ export default function KeptApp() {
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Missing Specs</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors">
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors">
                 unverified-seller.test
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Halts checkout when 3rd-party listing lacks millimeter dimensions.
               </p>
             </div>
-            <div className="mt-6 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+            <div className="mt-4 pt-2.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
               <span>Test Refusal Guard</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -555,33 +555,25 @@ export default function KeptApp() {
         </div>
 
         {/* Level B: "Try Your Own Scenario" Sleek Bar */}
-        <div className="w-full max-w-4xl mb-10">
+        <div className="w-full max-w-4xl mb-6">
           <button
             onClick={() => setShowCustomSandbox(!showCustomSandbox)}
-            className="w-full rounded-2xl border border-white/10 bg-obsidian-800/40 hover:bg-obsidian-800/80 hover:border-accent-cyan/40 p-4 transition-all duration-300 backdrop-blur-xl flex items-center justify-between group shadow-lg"
+            className="w-full rounded-xl border border-white/10 bg-obsidian-800/40 hover:bg-obsidian-800/80 hover:border-accent-cyan/40 px-4 py-2.5 transition-all duration-300 backdrop-blur-xl flex items-center justify-between group shadow-sm"
           >
-            <div className="flex items-center gap-3">
-              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan group-hover:scale-105 transition-transform">
-                <Sparkles className="h-3.5 w-3.5" />
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-5 w-5 items-center justify-center rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan group-hover:scale-105 transition-transform">
+                <Sparkles className="h-3 w-3" />
               </span>
-              <div className="text-left">
-                <div className="text-xs font-bold text-white group-hover:text-accent-cyan transition-colors flex items-center gap-2">
-                  <span>Custom Scenario Sandbox</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">
-                    Judge Playground
-                  </span>
-                </div>
-                <div className="text-[11px] text-slate-400">
-                  Challenge Kept beyond prepared examples: input custom specifications to test deterministic fit or refusal guards.
-                </div>
-              </div>
+              <span className="text-xs font-medium text-slate-300 group-hover:text-white transition-colors">
+                Test your own product specification
+              </span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-accent-cyan shrink-0">
-              <span className="hidden sm:inline">{showCustomSandbox ? 'Close Sandbox' : 'Try Your Own Case'}</span>
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-accent-cyan shrink-0">
+              <span>{showCustomSandbox ? 'Close' : 'Try →'}</span>
               {showCustomSandbox ? (
-                <ChevronUp className="h-4 w-4 transition-transform" />
+                <ChevronUp className="h-3.5 w-3.5 transition-transform" />
               ) : (
-                <ChevronDown className="h-4 w-4 group-hover:translate-y-0.5 transition-transform" />
+                <ChevronDown className="h-3.5 w-3.5 group-hover:translate-y-0.5 transition-transform" />
               )}
             </div>
           </button>
