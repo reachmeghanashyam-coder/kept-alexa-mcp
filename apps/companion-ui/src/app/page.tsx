@@ -848,12 +848,6 @@ export default function KeptApp() {
       {/* Sleek Refined Utility Footer */}
       <footer className="w-full max-w-5xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-medium border-t border-white/5 pt-5">
         <div className="flex items-center gap-2 text-slate-400">
-          <div className="h-4 w-4 rounded-md bg-white/[0.06] border border-white/10 flex items-center justify-center">
-            <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7.5 5.5v13" stroke="#00F0FF" />
-              <path d="M8 6.5L16.5 12L8 17.5" stroke="#00E599" />
-            </svg>
-          </div>
           <span className="font-semibold text-slate-300">Kept</span>
           <span className="text-slate-600">•</span>
           <span className="text-slate-400">Alexa+ Commerce Guard</span>
