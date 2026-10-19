@@ -897,6 +897,7 @@ export default function KeptApp() {
                       <div>
                         <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Drop-Off Destination</span>
                         <span className="text-white">Whole Foods Market (Box-Free / Label-Free)</span>
+                        <span className="text-[10px] text-slate-400 block mt-0.5">Verified: Amazon Std Small Appliance & Fashion Return Terms</span>
                       </div>
                     </div>
                   </div>
