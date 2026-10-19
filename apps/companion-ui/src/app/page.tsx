@@ -308,15 +308,15 @@ export default function KeptApp() {
       </header>
 
       {/* Main Container Naturally Filling Viewport */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-8 sm:pt-12 pb-16 flex flex-col items-center">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 sm:pt-9 pb-10 flex flex-col items-center">
         {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-6">
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-7">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
           Alexa+ Commerce Guard
         </div>
 
         {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
-        <div className="text-center max-w-4xl mb-6 sm:mb-8">
+        <div className="text-center max-w-4xl mb-8 sm:mb-10">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] mb-4 text-white">
             Zero-Regret Orders.
             <br />
@@ -324,13 +324,13 @@ export default function KeptApp() {
               Zero-Friction Returns.
             </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal mt-4">
+          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-normal mt-5">
             Checks compatibility before you buy. Handles returns and replacements after they arrive.
           </p>
         </div>
 
         {/* Interactive Main Action Input Bar: Dynamically Synced with Active Scenario */}
-        <div className="w-full max-w-lg mb-8 sm:mb-10">
+        <div className="w-full max-w-lg mb-10 sm:mb-12">
           <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
             <div className="flex items-center gap-2.5 pl-4 flex-1 min-w-0">
               <span className={`h-2.5 w-2.5 rounded-full shrink-0 ${
@@ -390,7 +390,7 @@ export default function KeptApp() {
         </div>
 
         {/* Benchmark Scenario Section Label */}
-        <div className="w-full max-w-4xl mb-3 flex items-center justify-between px-1">
+        <div className="w-full max-w-4xl mb-4 flex items-center justify-between px-1">
           <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Benchmark Demo Scenarios
           </span>
@@ -400,7 +400,7 @@ export default function KeptApp() {
         </div>
 
         {/* Benchmark Scenario Bento Grid */}
-        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {/* Bento 1: Pre-Purchase Compatibility */}
           <div
             onClick={triggerScenario1}
