@@ -355,24 +355,7 @@ export default function DropGuardApp() {
           </button>
         </div>
 
-        {/* Initial Empty State (When no scenario has been selected yet) */}
-        {!activeScenario && !loading && (
-          <div className="w-full max-w-3xl rounded-3xl border border-white/5 bg-obsidian-800/30 p-12 text-center backdrop-blur-sm">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 text-slate-400 mb-4 border border-white/10">
-              <Package className="h-6 w-6 text-accent-cyan" />
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2">Household #842 Memory Synced</h3>
-            <p className="text-sm text-slate-400 max-w-md mx-auto mb-6">
-              Click <strong className="text-slate-200">"Check My Orders ⟳"</strong> above or select one of the three benchmark scenarios to inspect compatibility, unboxing damage, or return pathways.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-500">
-              <span className="rounded-full bg-white/5 px-3 py-1 border border-white/5">Breville BES870XL (Owned)</span>
-              <span className="rounded-full bg-white/5 px-3 py-1 border border-white/5">LG 27UP850-W (Owned)</span>
-              <span className="rounded-full bg-white/5 px-3 py-1 border border-white/5">Cosori Kettle (Trial Window)</span>
-              <span className="rounded-full bg-white/5 px-3 py-1 border border-white/5">Merino Sweater (Trial Window)</span>
-            </div>
-          </div>
-        )}
+
 
         {/* Scenario 1: Compatibility Incompatible Block */}
         {activeScenario === 'compat' && compatResult && (
