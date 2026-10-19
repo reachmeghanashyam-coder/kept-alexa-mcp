@@ -266,10 +266,11 @@ export default function DropGuardApp() {
           Alexa+ Commerce Guard
         </div>
 
-        {/* Hero Title: Punchy, High-Impact, Compact */}
+        {/* Hero Title: 2-Line Punchy Display Scale */}
         <div className="text-center max-w-3xl mb-4 sm:mb-5">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1] mb-2 text-white">
-            Zero-Regret Orders.{' '}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.12] mb-2.5 text-white">
+            Zero-Regret Orders.
+            <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Zero-Friction Returns.
             </span>
