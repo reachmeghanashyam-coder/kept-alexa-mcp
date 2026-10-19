@@ -234,10 +234,10 @@ export default function DropGuardApp() {
 
   return (
     <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-24">
-      {/* Clean Top Navbar Matching Relayeo Reference */}
-      <header className="sticky top-6 z-40 mx-auto w-full max-w-4xl px-4 mb-16">
-        <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 px-6 py-2.5 backdrop-blur-xl shadow-2xl">
-          {/* Left: Brand Mark Only */}
+      {/* Authentic Full-Width Top Navigation Bar */}
+      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-obsidian-950/80 backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
+          {/* Left: Brand Mark */}
           <div className="flex items-center gap-2.5">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-emerald text-obsidian-950 font-black text-xs">
               DG
@@ -245,7 +245,7 @@ export default function DropGuardApp() {
             <span className="font-bold tracking-tight text-white text-base">DropGuard</span>
           </div>
 
-          {/* Right: Solid Emerald CTA Only */}
+          {/* Right: Solid Emerald CTA */}
           <div className="flex items-center">
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
@@ -258,8 +258,8 @@ export default function DropGuardApp() {
         </div>
       </header>
 
-      {/* Hero Section with Generous Breathing Room & Large Typography */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 flex flex-col items-center">
+      {/* Hero Section with Generous Breathing Room */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-16 flex flex-col items-center">
         {/* Category Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-8">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
