@@ -740,6 +740,12 @@ export default function DropGuardApp() {
         )}
       </main>
 
+      {/* Ultra-Minimal Whisper Footer */}
+      <footer className="w-full max-w-5xl mx-auto px-6 py-4 flex items-center justify-between text-xs text-slate-500 font-medium">
+        <span>DropGuard</span>
+        <span className="text-slate-600">Built for Alexa+</span>
+      </footer>
+
       {/* Slide-out MCP Trace & Sources Drawer */}
       {showTraceDrawer && (
         <aside className="fixed inset-y-0 right-0 z-50 w-full sm:w-[480px] border-l border-white/10 bg-obsidian-950/95 p-6 backdrop-blur-2xl overflow-y-auto shadow-2xl flex flex-col">
