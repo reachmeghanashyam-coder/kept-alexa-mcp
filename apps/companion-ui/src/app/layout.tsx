@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: 'Kept • Alexa+ Commerce Guard',
   description:
     'Zero-Regret Orders. Zero-Friction Returns. Unified household memory preventing incompatible purchases and automating single-trip returns.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({

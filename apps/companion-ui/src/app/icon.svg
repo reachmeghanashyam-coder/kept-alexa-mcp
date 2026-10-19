@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="tile-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#181E29"/>
+      <stop offset="100%" stop-color="#0B0F17"/>
+    </linearGradient>
+    <linearGradient id="kept-spine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#00A3FF"/>
+    </linearGradient>
+    <linearGradient id="kept-arm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#00E599"/>
+    </linearGradient>
+  </defs>
+  <!-- Apple-grade squircle backdrop -->
+  <rect width="32" height="32" rx="7" fill="url(#tile-bg)"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" stroke="rgba(255,255,255,0.18)"/>
+  
+  <!-- Kept Forward-Arrow Emblem -->
+  <!-- Left anchor spine -->
+  <path d="M10 7.5v17" stroke="url(#kept-spine)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Right-facing forward progress arrow -->
+  <path d="M11 9L21.5 16L11 23" stroke="url(#kept-arm)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
