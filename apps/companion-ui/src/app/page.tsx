@@ -263,7 +263,7 @@ export default function DropGuardApp() {
         {/* Category Micro-Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-[11px] font-semibold text-accent-cyan tracking-wide mb-3">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-          Alexa+ Commerce & Ownership Bridge • Powered by Model Context Protocol
+          Alexa+ Commerce Guard
         </div>
 
         {/* Hero Title: Punchy, High-Impact, Compact */}
