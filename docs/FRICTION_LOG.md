@@ -1,6 +1,6 @@
 # Kept • Developer Friction Log & Architecture Report
 *Submitted for the "Build, Ship, Shape: Amazon Developer Hackathon 2026" (+10% Bonus Category)*
-*Product: Kept — Alexa+ Commerce & Ownership Guard*
+*Product: Kept — Alexa+ Commerce & Returns Guardian*
 *Author: Kept Engineering Team*
 *Date: October 2026*
 

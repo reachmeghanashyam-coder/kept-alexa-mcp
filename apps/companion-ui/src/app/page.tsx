@@ -1033,7 +1033,7 @@ export default function KeptApp() {
         <div className="flex items-center gap-2">
           <span className="font-medium text-slate-400/90">Kept</span>
           <span className="text-slate-600/60">•</span>
-          <span>Alexa+ Commerce Guard</span>
+          <span>Alexa+ Commerce & Returns Guardian</span>
         </div>
 
         <div>

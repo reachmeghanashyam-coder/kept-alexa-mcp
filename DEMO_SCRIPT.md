@@ -1,4 +1,4 @@
-# Kept • 2-Minute Demo Video Recording Script
+# Kept — Alexa+ Commerce & Returns Guardian • 2-Minute Demo Video Recording Script
 *Target Duration: 120 Seconds (2:00)*
 *Screen Setup: Fullscreen browser at http://localhost:3000 (1080p, Dark Mode)*
 
@@ -9,7 +9,7 @@
 * **What you say:**
   > *"Every year, Amazon households receive millions of packages. But there has always been a massive gap between Alexa in your living room and Amazon retail. Alexa tells you when a box hits the porch, but once it crosses your front door, she has no memory of what you own, what arrived damaged, or what fits.*
   > 
-  > *Meet Kept: the Alexa+ Commerce & Ownership Guard. One unified household record that prevents incompatible purchases before checkout and turns damaged unboxings into a verified, single-trip return plan."*
+  > *Meet Kept: the Alexa+ Commerce & Returns Guardian. One unified household record that prevents incompatible purchases before checkout and turns damaged unboxings into a verified, single-trip return plan."*
 
 ---
 
