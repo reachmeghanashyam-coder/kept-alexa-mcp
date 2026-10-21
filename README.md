@@ -1,6 +1,6 @@
 # Kept — Alexa+ Commerce & Returns Guardian
 > **Zero-Regret Orders. Zero-Friction Returns.**  
-> *Autonomous Model Context Protocol (MCP) server & companion interface preventing incompatible accessory purchases, eliminating return-fee traps, and consolidating damaged deliveries into a single-trip resolution.*
+> *Autonomous Model Context Protocol (MCP) server & companion interface preventing incompatible accessory purchases, eliminating return-fee traps, and consolidating any return—damaged, ill-fitting, or unwanted—into a single-trip Whole Foods resolution.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](packages/policy-guard/LICENSE)
 [![MCP Spec](https://img.shields.io/badge/MCP%20Spec-2025--11--25%20Streamable%20HTTP-cyan.svg)](packages/kept-mcp)
