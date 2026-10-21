@@ -1,4 +1,4 @@
-# Kept • Alexa+ Commerce & Ownership Guard
+# Kept — Alexa+ Commerce & Returns Guardian
 > **Zero-Regret Orders. Zero-Friction Returns.**  
 > *Autonomous Model Context Protocol (MCP) server & companion interface preventing incompatible accessory purchases, eliminating return-fee traps, and consolidating damaged deliveries into a single-trip resolution.*
 

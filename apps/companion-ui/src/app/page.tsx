@@ -316,7 +316,7 @@ export default function KeptApp() {
         {/* Category Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-6">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-          Alexa+ Commerce Guard
+          Alexa+ Commerce & Returns Guardian
         </div>
 
         {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}

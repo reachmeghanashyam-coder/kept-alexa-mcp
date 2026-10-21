@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Kept • Alexa+ Commerce Guard',
+  title: 'Kept — Alexa+ Commerce & Returns Guardian',
   description:
     'Zero-Regret Orders. Zero-Friction Returns. Unified household memory preventing incompatible purchases and automating single-trip returns.',
   icons: {
