@@ -499,7 +499,7 @@ export default function KeptApp() {
               className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Layers className="h-3.5 w-3.5 text-cyan-400" />
-              <span>Household Ledger ({inventory.length || 4})</span>
+              <span>Household Ledger (2)</span>
             </button>
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
