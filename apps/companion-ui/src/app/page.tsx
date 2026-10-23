@@ -1512,265 +1512,257 @@ export default function KeptApp() {
         </aside>
       )}
 
-      {/* Slide-out Household Ledger Drawer */}
+      {/* Centered Modal: Household Ledger */}
       {showHouseholdDrawer && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm transition-opacity">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-all">
           <div
             className="fixed inset-0 cursor-pointer"
             onClick={() => setShowHouseholdDrawer(false)}
           />
-          <aside className="relative z-10 w-full sm:w-[540px] h-full border-l border-white/10 bg-obsidian-950/95 p-6 backdrop-blur-2xl overflow-y-auto shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
-            {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan">
-                  <Layers className="h-4 w-4" />
+          <div className="relative z-10 w-full max-w-2xl max-h-[88vh] rounded-3xl border border-white/10 bg-[#0A0F1D] p-6 sm:p-7 shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-start justify-between pb-4 border-b border-white/[0.08] mb-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400">
+                  <Layers className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white text-base leading-tight">Household Ledger</h3>
-                  <p className="text-[11px] text-slate-400 font-mono">Household ID: HOUSEHOLD-842 • 4 Verified Items</p>
+                  <h3 className="font-bold text-white text-lg">Household Equipment Ledger</h3>
+                  <p className="text-xs text-slate-400">
+                    Grounded equipment and active warranties synced with Alexa+ MCP tools
+                  </p>
                 </div>
               </div>
               <button
                 onClick={() => setShowHouseholdDrawer(false)}
-                className="rounded-full p-1.5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="rounded-full p-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label="Close"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-                        {/* Action Bar: Add Item & Notifications */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between gap-2">
-                <button
-                  onClick={() => setShowAddForm(!showAddForm)}
-                  className="rounded-full bg-accent-cyan/15 border border-accent-cyan/40 hover:bg-accent-cyan/25 text-accent-cyan text-xs font-semibold px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
-                >
-                  <span>{showAddForm ? '✕ Cancel' : '+ Add Equipment to Home'}</span>
-                </button>
-                {addSuccessMsg && (
-                  <span className="text-xs text-accent-emerald font-semibold animate-in fade-in">
-                    {addSuccessMsg}
-                  </span>
-                )}
+            {/* Filter Pills */}
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2 text-xs">
+                {(['ALL', 'Kitchen', 'Office', 'Wardrobe'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setHouseholdFilter(tab)}
+                    className={`rounded-full px-3.5 py-1.5 font-medium transition-all border ${
+                      householdFilter === tab
+                        ? 'border-cyan-400 bg-cyan-950/80 text-cyan-300 shadow-sm'
+                        : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {tab === 'ALL' ? `All Items (${inventory.length || 4})` : tab}
+                  </button>
+                ))}
               </div>
 
-              {/* Inline Add Item Form */}
-              {showAddForm && (
-                <form
-                  onSubmit={handleAddCustomItem}
-                  className="mt-3 p-4 rounded-2xl border border-white/10 bg-obsidian-900/95 space-y-3 animate-in fade-in slide-in-from-top-2"
-                >
-                  <div className="text-xs font-bold text-white uppercase tracking-wider">
-                    Register New Equipment
+              <button
+                onClick={() => setShowAddForm(!showAddForm)}
+                className="rounded-full border border-cyan-500/30 bg-cyan-950/40 hover:bg-cyan-950/70 text-cyan-400 text-xs font-semibold px-3.5 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+              >
+                <span>{showAddForm ? '✕ Close Form' : '+ Add Equipment'}</span>
+              </button>
+            </div>
+
+            {/* Inline Add Item Form */}
+            {showAddForm && (
+              <form
+                onSubmit={handleAddCustomItem}
+                className="mb-4 p-4 rounded-2xl border border-white/10 bg-[#06090F] space-y-3 animate-in fade-in slide-from-top-2"
+              >
+                <div className="text-xs font-bold text-white uppercase tracking-wider">
+                  Register New Household Equipment
+                </div>
+                <div>
+                  <label className="text-[11px] text-slate-400 block mb-1">Equipment Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Dyson V11 Cordless Vacuum"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    required
+                    className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="text-[11px] text-slate-400 block mb-1">Room / Category</label>
+                    <select
+                      value={newCategory}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                      className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white focus:outline-none focus:border-cyan-400"
+                    >
+                      <option value="Kitchen Appliances">Kitchen</option>
+                      <option value="Electronics & Office">Office</option>
+                      <option value="Living Room">Living Room</option>
+                      <option value="Wardrobe & Apparel">Wardrobe</option>
+                    </select>
                   </div>
                   <div>
-                    <label className="text-[11px] text-slate-400 block mb-1">Product Title</label>
+                    <label className="text-[11px] text-slate-400 block mb-1">Key Spec / Fitting</label>
                     <input
                       type="text"
-                      placeholder="e.g. Dyson V11 Cordless Vacuum"
-                      value={newTitle}
-                      onChange={(e) => setNewTitle(e.target.value)}
-                      required
-                      className="w-full text-xs rounded-xl border border-white/10 bg-obsidian-950 px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-accent-cyan"
+                      placeholder="e.g. Quick-Release Wand"
+                      value={newSpec}
+                      onChange={(e) => setNewSpec(e.target.value)}
+                      className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="text-[11px] text-slate-400 block mb-1">Room / Category</label>
-                      <select
-                        value={newCategory}
-                        onChange={(e) => setNewCategory(e.target.value)}
-                        className="w-full text-xs rounded-xl border border-white/10 bg-obsidian-950 px-3 py-2 text-white focus:outline-none focus:border-accent-cyan"
-                      >
-                        <option value="Kitchen Appliances">Kitchen</option>
-                        <option value="Electronics & Office">Office</option>
-                        <option value="Living Room">Living Room</option>
-                        <option value="Wardrobe & Apparel">Wardrobe</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-[11px] text-slate-400 block mb-1">Key Spec / Fitting</label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Quick-Release Wand"
-                        value={newSpec}
-                        onChange={(e) => setNewSpec(e.target.value)}
-                        className="w-full text-xs rounded-xl border border-white/10 bg-obsidian-950 px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-accent-cyan"
-                      />
-                    </div>
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={loading || !newTitle.trim()}
-                    className="w-full rounded-xl bg-accent-cyan py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
-                  >
-                    {loading ? 'Saving...' : 'Save to Household Ledger'}
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* Filter Tabs */}
-            <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1 text-xs">
-              {(["ALL", "Kitchen", "Office", "Wardrobe"] as const).map((tab) => (
+                </div>
                 <button
-                  key={tab}
-                  onClick={() => setHouseholdFilter(tab)}
-                  className={`rounded-full px-3 py-1 font-semibold transition-all border ${
-                    householdFilter === tab
-                      ? "border-accent-cyan bg-accent-cyan/20 text-accent-cyan"
-                      : "border-white/10 bg-white/5 text-slate-400 hover:text-white"
-                  }`}
+                  type="submit"
+                  disabled={loading || !newTitle.trim()}
+                  className="w-full rounded-xl bg-cyan-400 py-2 text-xs font-bold text-slate-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
                 >
-                  {tab === "ALL" ? `All (4)` : tab}
+                  {loading ? 'Saving...' : 'Save to Household Ledger'}
                 </button>
-              ))}
-            </div>
+              </form>
+            )}
 
-            {/* Ledger Item Cards */}
-            <div className="space-y-3.5 flex-1">
+            {/* Scrollable Ledger Items Grid */}
+            <div className="space-y-3 overflow-y-auto pr-1 flex-1">
               {/* Item 1: Breville Espresso */}
-              {(householdFilter === "ALL" || householdFilter === "Kitchen") && (
-                <div className="rounded-2xl border border-accent-cyan/20 bg-obsidian-900/90 p-4 space-y-2.5">
-                  <div className="flex items-start justify-between gap-2">
+              {(householdFilter === 'ALL' || householdFilter === 'Kitchen') && (
+                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-cyan-500/30 transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-accent-cyan/15 text-accent-cyan px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                        <span className="rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
                           Kitchen
                         </span>
-                        <span className="text-[10px] font-mono text-accent-emerald font-semibold">
+                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">
                           OWNED IN HOME
                         </span>
                       </div>
                       <h4 className="font-bold text-white text-sm">Breville Barista Express Espresso Machine</h4>
                       <p className="text-[11px] text-slate-400">Model: BES870XL • Delivered Nov 2024</p>
                     </div>
+                    <button
+                      onClick={() => { setShowHouseholdDrawer(false); triggerScenario1(); }}
+                      className="rounded-full bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                    >
+                      <span>Simulate Fit</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </button>
                   </div>
-                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">54 mm Group Head</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">3 Locking Ears</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">2.0L Tank</span>
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">54 mm Group Head</span>
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">3 Locking Ears</span>
+                    <span className="text-[10px] text-slate-500 font-mono ml-auto">Breville Manual p. 28</span>
                   </div>
-                  <div className="text-[10px] text-slate-500 font-mono pt-1 border-t border-white/5">
-                    Source: Breville BES870XL User Manual Specification Table p. 28
-                  </div>
-                  <button
-                    onClick={() => { setShowHouseholdDrawer(false); triggerScenario1(); }}
-                    className="w-full mt-1 rounded-xl bg-accent-cyan/10 hover:bg-accent-cyan/20 border border-accent-cyan/30 text-accent-cyan text-xs font-semibold py-1.5 text-center transition-all flex items-center justify-center gap-1 cursor-pointer"
-                  >
-                    <span>Test 58 mm Accessory Compatibility</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </button>
                 </div>
               )}
 
               {/* Item 2: LG 27" Monitor */}
-              {(householdFilter === "ALL" || householdFilter === "Office") && (
-                <div className="rounded-2xl border border-white/10 bg-obsidian-900/90 p-4 space-y-2.5">
-                  <div className="flex items-start justify-between gap-2">
+              {(householdFilter === 'ALL' || householdFilter === 'Office') && (
+                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-blue-500/15 text-blue-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                        <span className="rounded bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
                           Office
                         </span>
-                        <span className="text-[10px] font-mono text-accent-emerald font-semibold">
+                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">
                           OWNED IN HOME
                         </span>
                       </div>
-                      <h4 className="font-bold text-white text-sm">LG 27UP850-W 27&quot; 4K UHD IPS Monitor</h4>
+                      <h4 className="font-bold text-white text-sm">LG 27UP850-W 27" 4K UHD IPS Monitor</h4>
                       <p className="text-[11px] text-slate-400">Model: 27UP850-W • Delivered Feb 2025</p>
                     </div>
+                    <button
+                      onClick={() => { setShowHouseholdDrawer(false); triggerScenarioDuplicate(); }}
+                      className="rounded-full bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                    >
+                      <span>Check Dupes</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </button>
                   </div>
-                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">27-inch 4K UHD</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">VESA 100x100</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">USB-C 90W PD</span>
-                  </div>
-                  <div className="text-[10px] text-slate-500 font-mono pt-1 border-t border-white/5">
-                    Source: LG Official Product Datasheet §Packaging Contents (Includes 90W cable)
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">USB-C 90W PD</span>
+                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Includes 90W+ Video Cable</span>
+                    <span className="text-[10px] text-slate-500 font-mono ml-auto">LG Datasheet §Packaging</span>
                   </div>
                 </div>
               )}
 
-              {/* Item 3: Cosori Kettle (Trial Active) */}
-              {(householdFilter === "ALL" || householdFilter === "Kitchen") && (
-                <div className="rounded-2xl border border-accent-amber/20 bg-obsidian-900/90 p-4 space-y-2.5">
-                  <div className="flex items-start justify-between gap-2">
+              {/* Item 3: Cosori Kettle */}
+              {(householdFilter === 'ALL' || householdFilter === 'Kitchen') && (
+                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-amber-500/30 transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-accent-cyan/15 text-accent-cyan px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                        <span className="rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
                           Kitchen
                         </span>
-                        <span className="text-[10px] font-mono text-accent-amber font-semibold">
-                          TRIAL ACTIVE • 28D LEFT
+                        <span className="text-[10px] font-mono text-amber-400 font-semibold">
+                          RETURN WINDOW ACTIVE • 28D LEFT
                         </span>
                       </div>
                       <h4 className="font-bold text-white text-sm">Cosori Electric Gooseneck Glass Kettle</h4>
                       <p className="text-[11px] text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18</p>
                     </div>
+                    <button
+                      onClick={() => { setShowHouseholdDrawer(false); triggerScenario2(); }}
+                      className="rounded-full bg-amber-950/80 hover:bg-amber-900 border border-amber-500/40 text-amber-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                    >
+                      <span>Prepare Return</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </button>
                   </div>
-                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">0.8L Rapid Boil</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">120V Electric</span>
-                    <span className="rounded-md bg-accent-coral/15 border border-accent-coral/20 px-2 py-0.5 text-accent-coral">Handle Fracture Verified</span>
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-rose-950/50 text-rose-300 border border-rose-500/30 px-2 py-0.5 font-mono">Handle Defect Detected</span>
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Whole Foods Box-Free Eligible</span>
                   </div>
-                  <div className="text-[10px] text-slate-500 font-mono pt-1 border-t border-white/5">
-                    Source: Amazon Standard Return Policy (Free Whole Foods drop-off, no box/label)
-                  </div>
-                  <button
-                    onClick={() => { setShowHouseholdDrawer(false); triggerScenario2(); }}
-                    className="w-full mt-1 rounded-xl bg-accent-emerald/10 hover:bg-accent-emerald/20 border border-accent-emerald/30 text-accent-emerald text-xs font-semibold py-1.5 text-center transition-all flex items-center justify-center gap-1 cursor-pointer"
-                  >
-                    <span>Inspect Photo & Prepare Return</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </button>
                 </div>
               )}
 
-              {/* Item 4: State Cashmere Sweater */}
-              {(householdFilter === "ALL" || householdFilter === "Wardrobe") && (
-                <div className="rounded-2xl border border-purple-500/20 bg-obsidian-900/90 p-4 space-y-2.5">
-                  <div className="flex items-start justify-between gap-2">
+              {/* Item 4: Merino Wool Sweater */}
+              {(householdFilter === 'ALL' || householdFilter === 'Wardrobe') && (
+                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-purple-500/30 transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-purple-500/15 text-purple-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                        <span className="rounded bg-purple-950/80 border border-purple-500/30 text-purple-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
                           Wardrobe
                         </span>
-                        <span className="text-[10px] font-mono text-accent-amber font-semibold">
+                        <span className="text-[10px] font-mono text-amber-400 font-semibold">
                           TRIAL ACTIVE • 28D LEFT
                         </span>
                       </div>
                       <h4 className="font-bold text-white text-sm">State Cashmere 100% Pure Merino Wool Turtleneck</h4>
                       <p className="text-[11px] text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18</p>
                     </div>
+                    <button
+                      onClick={() => { setShowHouseholdDrawer(false); triggerScenario2(); }}
+                      className="rounded-full bg-purple-950/80 hover:bg-purple-900 border border-purple-500/40 text-purple-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                    >
+                      <span>Combine Return</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </button>
                   </div>
-                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">Size Medium</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">100% Merino Wool</span>
-                    <span className="rounded-md bg-white/[0.04] border border-white/5 px-2 py-0.5 text-slate-300">Original Tags Attached</span>
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Size Medium</span>
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Original Tags Attached</span>
+                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Eligible for 1-Trip Return</span>
                   </div>
-                  <div className="text-[10px] text-slate-500 font-mono pt-1 border-t border-white/5">
-                    Source: Amazon Fashion Free Return Policy (Eligible for Whole Foods box-free drop-off)
-                  </div>
-                  <button
-                    onClick={() => { setShowHouseholdDrawer(false); triggerScenario2(); }}
-                    className="w-full mt-1 rounded-xl bg-accent-emerald/10 hover:bg-accent-emerald/20 border border-accent-emerald/30 text-accent-emerald text-xs font-semibold py-1.5 text-center transition-all flex items-center justify-center gap-1 cursor-pointer"
-                  >
-                    <span>Combine into 1-Trip Return</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </button>
                 </div>
               )}
             </div>
 
-            {/* Drawer Footer */}
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-500 font-mono">
-              <span>Sync Engine: MCP SQLite Fixture</span>
-              <span className="text-accent-cyan">Household #842 Grounded</span>
+            {/* Modal Footer */}
+            <div className="pt-4 border-t border-white/[0.08] mt-4 flex items-center justify-between text-xs text-slate-500">
+              <span className="font-mono">Sync Source: Alexa+ Household MCP Enclave</span>
+              <span className="text-cyan-400 font-mono font-medium">Household #842 Grounded</span>
             </div>
-          </aside>
+          </div>
         </div>
       )}
     </div>
