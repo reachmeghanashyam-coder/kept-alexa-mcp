@@ -454,9 +454,6 @@ export default function KeptApp() {
           <p className="text-slate-200 text-base sm:text-lg max-w-2xl mx-auto font-medium mt-3">
             AI shopping that actually knows your home.
           </p>
-          <p className="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-normal mt-1.5">
-            Kept checks proposed purchases against your household context — catching physical mismatches, stopping duplicate accessories, and refusing to guess on missing specs.
-          </p>
         </div>
 
         <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
@@ -557,39 +554,7 @@ export default function KeptApp() {
           </div>
         </div>
 
-        {/* Post-Delivery Resolution Section Banner */}
-        <div className="w-full max-w-4xl mb-6">
-          <div
-            onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative ${
-              activeScenario === 'return'
-                ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/70 hover:translate-y-[-1px]'
-            }`}
-          >
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
-                  {activeScenario === 'return' && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
-                  )}
-                  AFTER DELIVERY • ORDER #842 RESOLUTION
-                </span>
-                <span className="text-[11px] font-mono text-slate-400">28d Return Window Active</span>
-              </div>
-              <h3 className="font-bold text-white text-base group-hover:text-accent-emerald transition-colors">
-                Damaged Kettle &amp; Tight Merino Sweater
-              </h3>
-              <p className="text-xs text-slate-400 leading-relaxed max-w-2xl">
-                Uses Bedrock Nova vision to inspect kettle handle damage, verifies sweater tags, and consolidates both items into a single, box-free Whole Foods return pass.
-              </p>
-            </div>
-            <div className="shrink-0 flex items-center gap-1.5 text-xs font-semibold text-accent-emerald bg-accent-emerald/10 border border-accent-emerald/20 px-4 py-2 rounded-full">
-              <span>Prepare 1-Trip Return</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
-        </div>
+
 
         {/* Audit & Execution Stage Header (Visible when a scenario is active) */}
         {activeScenario && (
