@@ -535,6 +535,19 @@ export default function KeptApp() {
           </p>
         </div>
 
+        {/* Section Eyebrow: Grounded in Household #842 */}
+        <div className="w-full max-w-5xl mb-4 px-1 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#00F0FF]"></span>
+            <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
+              RUN SHOPPING SIMULATION · HOUSEHOLD #842
+            </span>
+          </div>
+          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline-block">
+            Click any scenario to test live verification
+          </span>
+        </div>
+
         {/* 3 Bento Boxes Matching Reference Design */}
         <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Card 1 */}
