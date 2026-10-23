@@ -33,13 +33,13 @@ In one tap—safe crispy chicken tenders, tailored for our Ninja Air Fryer."
 
 ---
 
-### [0:38 - 0:52] Scenario 02: Automatic Supply & Filter Match
-*(Nidhi taps **Card 02: Levoit Core 300 Care**)*
+### [0:38 - 0:52] Scenario 02: Age-Grounded Curiosity & Reading Shield
+*(Nidhi taps **Card 02: Age-Grounded Curiosity & Reading Shield**)*
 
 **NIDHI (0:38 - 0:52):**  
-"When our nursery air purifier needed a new filter, no one crawled under the crib to guess model numbers.  
-Kept already knew our Levoit Core 300, and auto-matched the exact True HEPA filter in seconds."  
-*(Card lights up green: **Exact OEM Fit • Zero Guesswork**)*
+"And when I asked Alexa *'Why do stars explode?'*, generic AI tried reading college physics about degenerate gas!  
+Kept stepped in: *'Nidhi is in 3rd grade.'* It gave me a fun balloon analogy, and recommended a space book not already on my shelf."  
+*(Card lights up green: **3rd Grade Grounded • 650L Lexile Analogy**)*
 
 ---
 

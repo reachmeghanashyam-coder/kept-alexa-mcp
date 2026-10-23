@@ -35,7 +35,7 @@ export default function KeptApp() {
   const [mcpTrace, setMcpTrace] = useState<any>(null);
   const [showTraceDrawer, setShowTraceDrawer] = useState(false);
   const [showHouseholdDrawer, setShowHouseholdDrawer] = useState(false);
-  const [householdFilter, setHouseholdFilter] = useState<'ALL' | 'Kitchen' | 'Office' | 'Wardrobe'>('ALL');
+  const [householdFilter, setHouseholdFilter] = useState<'ALL' | 'Family' | 'Kitchen' | 'Living Room'>('ALL');
   const [showSigVerification, setShowSigVerification] = useState(false);
   const [customQuery, setCustomQuery] = useState('58mm Bottomless Portafilter');
   const [showDecisionReceipt, setShowDecisionReceipt] = useState(false);
@@ -128,74 +128,77 @@ export default function KeptApp() {
 
   // Trigger Scenario 1: Family Meal & Allergy Shield
   async function triggerScenario1() {
-    setCustomQuery('20-Minute Quick Dinner Recipe');
+    setCustomQuery('20-Minute Quick Dinner Recipe for 5-Year-Old');
     setActiveScenario('compat');
     setLoading(true);
     setExecutionResult(null);
     try {
-      const candidate = {
-        title: 'Trending Creamy Walnut Pesto Pasta with Sautéed Pine Nuts',
-        brand: 'Web Recipe Recommendation',
-        category: 'Kitchen Appliances',
-        targetSpecs: { allergens: ['Walnuts', 'Pine Nuts', 'Dairy'], method: 'Stovetop Boiling' },
-        sellerPolicy: { isThirdParty: false, termsExplicitlyStated: true },
-      };
-
-      const parsed = {
-        candidateTitle: 'Trending Creamy Walnut Pesto Pasta (Contains Tree Nuts)',
-        status: 'INCOMPATIBLE',
-        matchedOwnedItemId: 'item_allergy_guard_01',
-        matchedOwnedProductTitle: 'Family Allergy Profile & Ninja DualZone Air Fryer',
-        reason: 'Leo (Age 5) has a documented severe tree nut allergy. This web recommendation contains walnuts and pine nuts. Kept halted the recipe recommendation before Alexa spoke.',
-        mismatchedAttributes: [
-          { attribute: 'Allergen Conflict', ownedValue: '100% Tree-Nut & Peanut Free', candidateValue: 'Contains Walnuts & Pine Nuts' },
-          { attribute: 'Cooking Method', ownedValue: 'Ninja DualZone 8-Qt Air Fryer', candidateValue: 'Stovetop Boiling' },
-        ],
-        sourceEvidence: 'Household Memory Enclave: Leo Health Profile §Allergens & Kitchen Device Registry',
-        recommendedAlternative: {
-          title: 'Crispy Parmesan Chicken Tenders & Green Beans (Nut-Free)',
-          asin: 'RECIPE-NUT-FREE-01',
-          verifiedSpec: '15-Min Ninja DualZone Air Fryer Program • 100% Nut-Free & Kid-Safe',
-          returnPolicySummary: 'Healthy Family Approved • Uses Ingredients in Pantry',
-        },
-        originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
-      };
-
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'verify_household_care',
+          arguments: {
+            query: 'quick dinner recipe for 5-year-old',
+            intent: 'MEAL_RECIPE',
+            targetMember: 'Leo',
+          },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
       setCompatResult(parsed);
       setMcpTrace({
-        tool: 'verify_household_care',
-        input: { intent: 'family_dinner_query', query: 'quick dinner recipe', childAge: 5 },
-        output: parsed,
+        endpoint: 'POST /api/mcp',
+        jsonrpc: '2.0',
+        method: 'tools/call',
+        params: {
+          name: 'verify_household_care',
+          arguments: { query: 'quick dinner recipe for 5-year-old', intent: 'MEAL_RECIPE', targetMember: 'Leo' },
+        },
+        result: parsed,
       });
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }
   }
 
-  // Trigger Scenario 2: Automatic Supply Care (Levoit Nursery Air Purifier Filter)
+  // Trigger Scenario 2: Age-Grounded Curiosity & Reading Level Shield (Nidhi - Age 8)
   async function triggerScenarioDuplicate() {
-    setCustomQuery('Nursery Air Purifier Replacement Filter');
+    setCustomQuery('Why do stars explode? (Ages 7-9)');
     setActiveScenario('duplicate');
     setLoading(true);
     setExecutionResult(null);
     try {
-      const parsed = {
-        candidateTitle: 'Official Levoit Core 300 True HEPA Replacement Filter (White)',
-        status: 'DUPLICATE_OWNED',
-        matchedOwnedItemId: 'item_nursery_purifier_02',
-        matchedOwnedProductTitle: 'Levoit Core 300 Air Purifier (Nursery)',
-        reason: 'Kept matched the exact True HEPA H13 filter for the Levoit Core 300 in Nidhi & Leo’s room. Filter life tracked at 12% (due in 5 days). Zero model guesswork required.',
-        mismatchedAttributes: [],
-        sourceEvidence: 'Household Memory Enclave: Nursery Equipment Specs §Packaging & Filter Standard H13',
-        originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
-      };
-
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'verify_household_care',
+          arguments: {
+            query: 'why do stars explode',
+            intent: 'LEARNING_EXPLANATION',
+            targetMember: 'Nidhi',
+          },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
       setCompatResult(parsed);
       setMcpTrace({
-        tool: 'match_household_supply',
-        input: { device: 'Nursery Air Purifier', filterStandard: 'True HEPA H13' },
-        output: parsed,
+        endpoint: 'POST /api/mcp',
+        jsonrpc: '2.0',
+        method: 'tools/call',
+        params: {
+          name: 'verify_household_care',
+          arguments: { query: 'why do stars explode', intent: 'LEARNING_EXPLANATION', targetMember: 'Nidhi' },
+        },
+        result: parsed,
       });
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -208,28 +211,33 @@ export default function KeptApp() {
     setLoading(true);
     setExecutionResult(null);
     try {
-      const candidate = {
-        title: 'Ultra High-Speed 4K HDMI Switch Box with 6ft Braided Cable Bundle ($34.99)',
-        category: 'Electronics & Office',
-        targetSpecs: {},
-        sellerPolicy: { isThirdParty: false, termsExplicitlyStated: true },
-      };
-
-      const parsed = {
-        candidateTitle: '4K HDMI Switch Box with 6ft Cable ($34.99 Redundant Purchase)',
-        status: 'UNVERIFIED_MISSING_SPECS',
-        reason: 'Living room Samsung 55" OLED TV already has 2 open HDMI 2.1 ports on the side. Household storage also contains an unopened 6ft 4K cable from Order #ORDER-234. Kept paused checkout to prevent $34.99 wasted spend.',
-        sourceEvidence: 'Household Memory Enclave: Samsung 55" OLED TV Spec Sheet §Ports (4x HDMI 2.1) & Living Room Storage Inventory',
-        sellerRiskWarning: 'Household already owns required ports and cables. No new hardware purchase needed.',
-        originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
-      };
-
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'verify_household_care',
+          arguments: {
+            query: '4k hdmi switch box and 6ft cable',
+            intent: 'HARDWARE_COMPATIBILITY',
+            targetMember: 'Dad',
+          },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
       setCompatResult(parsed);
       setMcpTrace({
-        tool: 'check_duplicate_hardware',
-        input: { candidate, hostDevice: 'Samsung 55" OLED TV' },
-        output: parsed,
+        endpoint: 'POST /api/mcp',
+        jsonrpc: '2.0',
+        method: 'tools/call',
+        params: {
+          name: 'verify_household_care',
+          arguments: { query: '4k hdmi switch box and 6ft cable', intent: 'HARDWARE_COMPATIBILITY', targetMember: 'Dad' },
+        },
+        result: parsed,
       });
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -553,20 +561,20 @@ export default function KeptApp() {
                   02
                 </span>
                 <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-0.5 rounded-md border border-white/5">
-                  Nursery & Bedroom
+                  Nidhi • Age 8 (3rd Grade)
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
-                Automatic Supply & Filter Match
+                Age-Grounded Curiosity &amp; Reading Shield
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Matches the exact True HEPA filter for your bedroom air purifier without asking you to memorize cryptic model codes.
+                When Nidhi asks "Why do stars explode?", Kept intercepts college-level physics jargon and grounds explanations to her 3rd-grade reading level.
               </p>
             </div>
 
             <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-emerald-400">
-              <span>Test Nursery Filter Care</span>
+              <span>Test Nidhi's Learning Search</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
@@ -837,33 +845,53 @@ export default function KeptApp() {
           </div>
         )}
 
-                {/* Scenario 2: Automatic Supply Care (Nursery Purifier) */}
+                {/* Scenario 2: Age-Grounded Curiosity & Reading Level Shield (Nidhi) */}
         {activeScenario === 'duplicate' && compatResult && (
           <div className="w-full max-w-3xl rounded-3xl border border-accent-emerald/40 bg-obsidian-800/90 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-accent-emerald animate-pulse"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent-emerald">
-                  Exact Filter Matched • Zero Model Guesswork
+                  3rd Grade Grounded • 650L Lexile Analogy
                 </span>
               </div>
               <span className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-3 py-1 text-xs text-accent-emerald font-medium">
-                True HEPA H13
+                Nidhi • Age 8
               </span>
             </div>
 
             <div className="space-y-4">
               <div>
-                <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
+                <h3 className="text-xl font-bold text-white mb-2 leading-snug">
+                  College Physics Jargon Intercepted • Kid-Safe Analogy Formatted
+                </h3>
                 <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
                   <p className="text-sm text-slate-200">
-                    Nidhi's nursery has a <span className="text-white font-semibold">Levoit Core 300</span> air purifier. Kept auto-matched the official H13 True HEPA filter, saving you from searching through 15 confusing 3rd-party knockoffs.
+                    Nidhi asked <span className="text-white font-semibold">"Why do stars explode?"</span>. Generic AI prepared a college-level Wikipedia answer (<span className="text-amber-300 font-mono text-xs">"thermonuclear runaway in degenerate electron gas"</span>). Kept intercepted it and translated the explanation into an expanding balloon analogy, then suggested a book not yet on her bookshelf.
                   </p>
-                  <p className="text-xs text-slate-400">
-                    Filter Life Remaining: 12% • Due for change in 5 days
+                  <p className="text-xs text-accent-emerald font-medium">
+                    Alexa Voice: "Stars are like giant balloons held tight by gravity until they pop into bright cosmic glitter!"
                   </p>
                 </div>
               </div>
+
+              {/* Recommended Book Alternative */}
+              {compatResult.recommendedAlternative && (
+                <div className="rounded-2xl border border-accent-emerald/30 bg-accent-emerald/5 p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-accent-emerald">
+                      Recommended Next Book (Checked: Not On Bookshelf)
+                    </span>
+                    <span className="text-xs font-mono text-slate-400">Lexile: 640L (Ages 7-9)</span>
+                  </div>
+                  <h4 className="font-bold text-white text-base">
+                    {compatResult.recommendedAlternative.title}
+                  </h4>
+                  <p className="text-xs text-slate-300">
+                    {compatResult.recommendedAlternative.verifiedSpec}
+                  </p>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -872,14 +900,14 @@ export default function KeptApp() {
                   className="rounded-full bg-accent-emerald px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
                 >
                   <CheckCircle2 className="h-3.5 w-3.5" />
-                  Order Certified Filter ($21.99)
+                  Add Book to Family Wishlist
                 </button>
                 <button
                   onClick={() => setShowHouseholdDrawer(true)}
                   className="rounded-full border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <Layers className="h-3.5 w-3.5" />
-                  View Nursery Profile
+                  View Nidhi's Learning Profile
                 </button>
               </div>
             </div>
@@ -908,12 +936,12 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Nursery Equipment: </span>
-                        <span className="text-accent-emerald font-semibold">Levoit Core 300 Air Purifier</span>
+                        <span className="text-slate-400">Child Profile: </span>
+                        <span className="text-accent-emerald font-semibold">Nidhi (Age 8, 3rd Grade)</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Candidate Supply: </span>
-                        <span className="text-slate-200">Levoit Core 300-RF True HEPA</span>
+                        <span className="text-slate-400">Reading Level: </span>
+                        <span className="text-slate-200">650L Lexile • Visual Learning Style</span>
                       </div>
                     </div>
                   </div>
@@ -924,22 +952,22 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Specification Match: </span>
-                        <span className="text-accent-emerald font-medium">100% Genuine OEM Fit • H13 Medical Grade</span>
+                        <span className="text-slate-400">Jargon Blocked: </span>
+                        <span className="text-accent-coral font-medium">College Astrophysics Terminology (1400L)</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Care Benefit: </span>
-                        <span className="text-accent-emerald font-medium">Filtered air for Nidhi &amp; Leo’s room</span>
+                        <span className="text-slate-400">Bookshelf Check: </span>
+                        <span className="text-accent-emerald font-medium">Owns Magic Treehouse #1-28 • Book Not Owned</span>
                       </div>
                     </div>
                   </div>
 
                   <div>
                     <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
-                      3. Recommended Next Step
+                      3. Grounded Explanation Delivered
                     </span>
                     <div className="text-xs text-slate-200 font-medium">
-                      One-tap reorder certified filter to arrive tomorrow via Prime.
+                      Analogous balloon model + recommendation of age-appropriate DK Secret Explorers book.
                     </div>
                   </div>
                 </div>
@@ -947,8 +975,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: Household Memory Enclave §Levoit Product Manual</span>
-              <span className="text-accent-emerald font-semibold">✓ Exact Match Verified</span>
+              <span>Source: Household Memory Enclave §Nidhi Education &amp; Reading Profile</span>
+              <span className="text-accent-emerald font-semibold">✓ Grounded for 3rd Grade</span>
             </div>
           </div>
         )}
@@ -1503,7 +1531,7 @@ export default function KeptApp() {
 
             {/* Category Filter Pills */}
             <div className="flex items-center gap-2 text-xs mb-4">
-              {(['ALL', 'Kitchen', 'Office'] as const).map((tab) => (
+              {(['ALL', 'Family', 'Kitchen', 'Living Room'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setHouseholdFilter(tab)}
@@ -1513,14 +1541,64 @@ export default function KeptApp() {
                       : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'
                   }`}
                 >
-                  {tab === 'ALL' ? 'All Memories (2)' : tab}
+                  {tab === 'ALL' ? 'All Memories (4)' : tab}
                 </button>
               ))}
             </div>
 
             {/* Ledger Items List */}
             <div className="space-y-3">
-              {/* Item 1: Breville Espresso */}
+              {/* Member 1: Leo */}
+              {(householdFilter === 'ALL' || householdFilter === 'Family') && (
+                <div className="rounded-2xl border border-rose-500/20 bg-[#06090F] p-4 flex flex-col justify-between hover:border-rose-500/40 transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="rounded bg-rose-950/80 border border-rose-500/30 text-rose-300 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                          Family Member • Leo (Age 5)
+                        </span>
+                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">
+                          VERIFIED HEALTH ENCLAVE
+                        </span>
+                      </div>
+                      <h4 className="font-bold text-white text-sm">Severe Tree Nut &amp; Peanut Allergy Guard</h4>
+                      <p className="text-[11px] text-slate-400">Strict Nut-Free Diet • Ninja DualZone Air Fryer 15-Min Safe Recipes</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-rose-950/40 text-rose-300 border border-rose-500/20 px-2 py-0.5 font-mono">Walnuts &amp; Peanuts Blocked</span>
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Air Fryer Preferred</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Member 2: Nidhi */}
+              {(householdFilter === 'ALL' || householdFilter === 'Family') && (
+                <div className="rounded-2xl border border-cyan-500/20 bg-[#06090F] p-4 flex flex-col justify-between hover:border-cyan-500/40 transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                          Family Member • Nidhi (Age 8)
+                        </span>
+                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">
+                          VERIFIED LEARNING ENCLAVE
+                        </span>
+                      </div>
+                      <h4 className="font-bold text-white text-sm">3rd Grade Reading Level (650L) &amp; Astronomy</h4>
+                      <p className="text-[11px] text-slate-400">Visual Learning Style • Owns Magic Treehouse #1-28 • College Jargon Blocked</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-cyan-950/40 text-cyan-300 border border-cyan-500/20 px-2 py-0.5 font-mono">Lexile 650L Grounding</span>
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Bookshelf Checked</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Item 3: Kitchen Appliances */}
               {(householdFilter === 'ALL' || householdFilter === 'Kitchen') && (
                 <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-cyan-500/30 transition-all">
                   <div className="flex items-start justify-between gap-3 mb-2">
@@ -1533,39 +1611,39 @@ export default function KeptApp() {
                           VERIFIED IN HOME
                         </span>
                       </div>
-                      <h4 className="font-bold text-white text-sm">Ninja DualZone Air Fryer & Breville Espresso</h4>
-                      <p className="text-[11px] text-slate-400">Kitchen Counter • 54mm Portafilter & Dual Baskets</p>
+                      <h4 className="font-bold text-white text-sm">Ninja DualZone 8-Qt Air Fryer &amp; Breville Espresso</h4>
+                      <p className="text-[11px] text-slate-400">Kitchen Counter • 54mm Portafilter &amp; Dual Baskets</p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Nut-Allergy Guard Active</span>
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Nut-Allergy Recipe Enclave</span>
                     <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">54 mm Group Head</span>
                   </div>
                 </div>
               )}
 
-              {/* Item 2: LG 27" Monitor */}
-              {(householdFilter === 'ALL' || householdFilter === 'Office') && (
-                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all">
+              {/* Item 4: Living Room & Cables */}
+              {(householdFilter === 'ALL' || householdFilter === 'Living Room') && (
+                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-purple-500/30 transition-all">
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                          Living Room & Office
+                        <span className="rounded bg-purple-950/80 border border-purple-500/30 text-purple-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                          Family Living Room
                         </span>
                         <span className="text-[10px] font-mono text-emerald-400 font-semibold">
                           VERIFIED IN HOME
                         </span>
                       </div>
-                      <h4 className="font-bold text-white text-sm">LG 4K Display & Samsung OLED Living Room Hub</h4>
-                      <p className="text-[11px] text-slate-400">Family Desk & Entertainment Center</p>
+                      <h4 className="font-bold text-white text-sm">Samsung 65" 4K OLED TV &amp; Credenza Storage</h4>
+                      <p className="text-[11px] text-slate-400">Living Room Entertainment Center</p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">USB-C 90W PD</span>
-                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Spare 100W Cable in Drawer</span>
+                    <span className="rounded-md bg-purple-950/50 text-purple-300 border border-purple-500/30 px-2 py-0.5 font-mono">2 Open HDMI 2.1 Ports</span>
+                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Spare 4K Cable in Drawer ($34.99 Saved)</span>
                   </div>
                 </div>
               )}

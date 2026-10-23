@@ -139,7 +139,37 @@ describe('Milestone 2 Acceptance: MCP Streamable HTTP Protocol & Tools', () => {
     expect(execResult.plan.approvalStatus).toBe('EXECUTED');
   });
 
-  // 6. Independent Official MCP Client SDK Integration Test
+  // 6. get_household_profile and verify_household_care tool calls
+  it('Tool Call Test: get_household_profile returns Leo (Nut Allergy) and Nidhi (3rd Grade 650L)', async () => {
+    const response = await postJsonRpc('tools/call', {
+      name: 'get_household_profile',
+      arguments: {},
+    });
+    const parsed = JSON.parse(response.result.content[0].text);
+    expect(parsed.householdId).toBe('HOUSEHOLD-842');
+    expect(parsed.members.length).toBe(3);
+    const leo = parsed.members.find((m: any) => m.name === 'Leo');
+    const nidhi = parsed.members.find((m: any) => m.name === 'Nidhi');
+    expect(leo.healthConstraints.severeAllergies).toContain('Tree Nuts');
+    expect(nidhi.educationProfile.readingLevel).toContain('650L');
+  });
+
+  it('Tool Call Test: verify_household_care shields Nidhi against college astrophysics jargon', async () => {
+    const response = await postJsonRpc('tools/call', {
+      name: 'verify_household_care',
+      arguments: {
+        query: 'why do stars explode',
+        intent: 'LEARNING_EXPLANATION',
+        targetMember: 'Nidhi',
+      },
+    });
+    const parsed = JSON.parse(response.result.content[0].text);
+    expect(parsed.matchedOwnedItemId).toBe('member_nidhi_02');
+    expect(parsed.reason).toContain('astrophysics jargon');
+    expect(parsed.recommendedAlternative.title).toContain('Secret Explorers');
+  });
+
+  // 7. Independent Official MCP Client SDK Integration Test
   it('Official SDK Integration: @modelcontextprotocol/sdk Client initializes, discovers all 8 tools, and executes tool call over StreamableHTTP', async () => {
     const { Client } = await import('@modelcontextprotocol/sdk/client/index.js');
     const { StreamableHTTPClientTransport } = await import('@modelcontextprotocol/sdk/client/streamableHttp.js');
