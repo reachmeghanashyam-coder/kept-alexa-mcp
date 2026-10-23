@@ -719,9 +719,9 @@ export default function KeptApp() {
                           status: 'COMPATIBLE',
                           matchedOwnedItemId: 'item_allergy_guard_01',
                           matchedOwnedProductTitle: 'Ninja DualZone Air Fryer',
-                          reason: '100% nut-free recipe verified safe for Leo. Matched to Ninja Air Fryer basket #1 and basket #2.',
+                          reason: '100% nut-free recipe verified safe. Matched to Ninja Air Fryer.',
                           mismatchedAttributes: [],
-                          sourceEvidence: 'Household Memory Enclave: Leo Health Profile §Allergens',
+                          sourceEvidence: 'Household Memory',
                           originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
                         });
                       }}
@@ -837,9 +837,9 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: {compatResult.sourceEvidence || "Breville BES870XL Manual Specification Table (p. 28)"}</span>
+              <span>Source: Household Memory</span>
               <span className="text-accent-emerald font-semibold">
-                {compatResult.status === "COMPATIBLE" ? "✓ Earned a Yes • Ready for Checkout" : "Saved $39.99 + 15% Return Penalty"}
+                {compatResult.status === "COMPATIBLE" ? "✓ 100% Nut-Free & Safe" : "Allergen Conflict Blocked"}
               </span>
             </div>
           </div>

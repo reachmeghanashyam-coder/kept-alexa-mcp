@@ -307,7 +307,7 @@ export async function handleMcpToolCall(
               { attribute: 'Allergen Conflict', ownedValue: '100% Tree-Nut & Peanut Free', candidateValue: 'Contains Walnuts & Pine Nuts' },
               { attribute: 'Cooking Method', ownedValue: 'Ninja DualZone 8-Qt Air Fryer', candidateValue: 'Stovetop Boiling' },
             ],
-            sourceEvidence: 'Household Memory Enclave: Leo Health Profile §Allergens & Ninja DualZone Registry',
+            sourceEvidence: 'Household Memory',
             recommendedAlternative: {
               title: 'Crispy Parmesan Chicken Tenders & Green Beans (Nut-Free)',
               asin: 'RECIPE-NUT-FREE-01',
