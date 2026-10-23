@@ -608,52 +608,65 @@ export default function KeptApp() {
               )}
             </div>
 
-            {/* Verifiable Decision Details (Expandable) */}
+            {/* Kept Decision Record (Consistent Across All Scenarios) */}
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
               <button
                 onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5"
+                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-cyan" />
-                  Decision Details & Verification
+                  Kept Decision Record
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? 'Hide Details' : 'View Details'}
+                  {showDecisionReceipt ? 'Hide Record' : 'View Decision Record'}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
 
               {showDecisionReceipt && (
-                <div className="p-5 space-y-3 text-xs font-mono text-slate-300 border-t border-white/5 bg-black/40">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Item Checked</span>
-                      <span className="text-slate-200">58mm Bottomless Portafilter</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Your Owned Machine</span>
-                      <span className="text-accent-emerald font-semibold">Breville BES870XL (54 mm, 3 ears)</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Conflict Found</span>
-                      <span className="text-accent-coral">Diameter (54 mm ≠ 58 mm) and Ears (3 ≠ 2)</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Seller Return Policy</span>
-                      <span className="text-accent-amber">15% fee on opened packages</span>
+                <div className="p-5 space-y-3.5 text-xs text-slate-300 border-t border-white/5 bg-black/40">
+                  {/* 1. What Kept Checked */}
+                  <div className="pb-3 border-b border-white/5">
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      1. What Kept Checked
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-slate-400">Owned Equipment: </span>
+                        <span className="text-accent-emerald font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Listing Checked: </span>
+                        <span className="text-slate-200">58mm Bottomless Portafilter</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Information Source</span>
-                      <span className="text-slate-400">Breville Manual (p. 28) + Seller Product Listing</span>
+
+                  {/* 2. What Kept Concluded */}
+                  <div className="pb-3 border-b border-white/5">
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      2. What Kept Concluded
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-slate-400">Size Conflict: </span>
+                        <span className="text-accent-coral font-medium">58 mm does not fit a 54 mm group head (3 ears ≠ 2 ears)</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Seller Policy: </span>
+                        <span className="text-accent-amber font-medium">15% restocking fee on opened returns</span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Outcome</span>
-                      <span className="text-accent-coral font-bold">Checkout Stopped • Saved Wrong Order</span>
+                  </div>
+
+                  {/* 3. Recommended Next Step */}
+                  <div>
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      3. Recommended Next Step
+                    </span>
+                    <div className="text-xs text-slate-200 font-medium">
+                      Verify a compatible 54 mm accessory before purchasing to avoid return fees and delivery waste.
                     </div>
                   </div>
                 </div>
@@ -851,57 +864,67 @@ export default function KeptApp() {
                 </div>
               </div>
 
-              {/* Verifiable Decision Details for Scenario 2 (Expandable) */}
+              {/* Kept Decision Record (Consistent Across All Scenarios) */}
               <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
                 <button
                   onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                  className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5"
+                  className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
                 >
                   <span className="flex items-center gap-2">
                     <FileText className="h-3.5 w-3.5 text-accent-emerald" />
-                    Decision Details & Verification
+                    Kept Decision Record
                   </span>
                   <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                    {showDecisionReceipt ? 'Hide Details' : 'View Details'}
+                    {showDecisionReceipt ? 'Hide Record' : 'View Decision Record'}
                     {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                   </span>
                 </button>
 
                 {showDecisionReceipt && (
-                  <div className="p-5 space-y-3 text-xs font-mono text-slate-300 border-t border-white/5 bg-black/40">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
-                      <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Order Evaluated</span>
-                        <span className="text-slate-200">Order #842 (Delivered 2 days ago)</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Items Included</span>
-                        <span className="text-accent-emerald font-semibold">2 Items (Kettle + Sweater)</span>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
-                      <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">AI Photo Inspection</span>
-                        <span className={novaObservation?.isLiveAwsCall ? 'text-emerald-400' : 'text-slate-400'}>
-                          {novaObservation?.isLiveAwsCall ? 'Live AWS Bedrock (Nova Vision)' : 'Bedrock Defect Classifier'}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Damage Found</span>
-                        <span className="text-accent-amber">Handle crack detected; power base missing</span>
+                  <div className="p-5 space-y-3.5 text-xs text-slate-300 border-t border-white/5 bg-black/40">
+                    {/* 1. What Kept Checked */}
+                    <div className="pb-3 border-b border-white/5">
+                      <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                        1. What Kept Checked
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="text-slate-400">Order Evaluated: </span>
+                          <span className="text-white font-semibold">Order #842 (Delivered Oct 18 · 28d left)</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Items & Evidence: </span>
+                          <span className="text-slate-200">Kettle photo (Nova Vision) + Sweater (tags intact)</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Customer Approval</span>
-                        <span className={executionResult ? 'text-accent-emerald font-bold' : 'text-slate-400'}>
-                          {executionResult ? 'Authorized by Customer' : 'Awaiting Checkbox Confirmation'}
-                        </span>
+
+                    {/* 2. What Kept Concluded */}
+                    <div className="pb-3 border-b border-white/5">
+                      <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                        2. What Kept Concluded
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div>
+                          <span className="text-slate-400">Inspection Result: </span>
+                          <span className="text-accent-coral font-medium">Handle crack verified; power base missing in photo</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Routing Opportunity: </span>
+                          <span className="text-accent-emerald font-medium">Both items eligible for 1 combined Whole Foods drop-off</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Drop-Off Location</span>
-                        <span className="text-white">Whole Foods Market (No Box, No Label)</span>
-                        <span className="text-[10px] text-slate-400 block mt-0.5">Verified: Amazon Small Appliance & Fashion Return Policy</span>
+                    </div>
+
+                    {/* 3. Recommended Next Step */}
+                    <div>
+                      <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                        3. Recommended Next Step
+                      </span>
+                      <div className="text-xs text-slate-200 font-medium">
+                        {executionResult
+                          ? 'Plan authorized and return pass generated. Present barcode at Whole Foods Customer Service desk.'
+                          : 'Pack kettle power base, confirm proposed plan, and authorize Kept to generate your return pass.'}
                       </div>
                     </div>
                   </div>
@@ -967,52 +990,65 @@ export default function KeptApp() {
               )}
             </div>
 
-            {/* Verifiable Decision Receipt for Scenario 3 (Expandable) */}
+            {/* Kept Decision Record (Consistent Across All Scenarios) */}
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
               <button
                 onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5"
+                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-amber" />
-                  Decision Details & Verification
+                  Kept Decision Record
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? 'Hide Details' : 'View Details'}
+                  {showDecisionReceipt ? 'Hide Record' : 'View Decision Record'}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
 
               {showDecisionReceipt && (
-                <div className="p-5 space-y-3 text-xs font-mono text-slate-300 border-t border-white/5 bg-black/40">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Item Checked</span>
-                      <span className="text-slate-200">Espresso Dosing Ring & Needle Collar</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Your Owned Machine</span>
-                      <span className="text-white">Breville Barista Express (54 mm, 3 ears)</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-white/5">
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Seller Listing Info</span>
-                      <span className="text-accent-amber">Missing millimeter diameter</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Kept Rule Applied</span>
-                      <span className="text-accent-coral font-semibold">Do Not Guess Missing Dimensions</span>
+                <div className="p-5 space-y-3.5 text-xs text-slate-300 border-t border-white/5 bg-black/40">
+                  {/* 1. What Kept Checked */}
+                  <div className="pb-3 border-b border-white/5">
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      1. What Kept Checked
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-slate-400">Owned Equipment: </span>
+                        <span className="text-white font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Listing Checked: </span>
+                        <span className="text-slate-200">Espresso Dosing Ring & Needle Collar</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Information Source</span>
-                      <span className="text-slate-400">Seller Product Listing Page</span>
+
+                  {/* 2. What Kept Concluded */}
+                  <div className="pb-3 border-b border-white/5">
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      2. What Kept Concluded
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-slate-400">Missing Information: </span>
+                        <span className="text-accent-amber font-medium">Seller omitted millimeter collar & diameter dimensions</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Kept Guardrail: </span>
+                        <span className="text-accent-coral font-medium">Refuse to guess or hallucinate compatibility without verified specs</span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-slate-500 block text-[10px] uppercase tracking-wider">Recommended Action</span>
-                      <span className="text-accent-amber font-bold">Ask seller for size before buying</span>
+                  </div>
+
+                  {/* 3. Recommended Next Step */}
+                  <div>
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      3. Recommended Next Step
+                    </span>
+                    <div className="text-xs text-slate-200 font-medium">
+                      Order paused. Ask the seller for confirmed millimeter specifications before purchasing.
                     </div>
                   </div>
                 </div>
