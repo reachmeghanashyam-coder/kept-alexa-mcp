@@ -231,6 +231,7 @@ export default function KeptApp() {
 
   // Real MCP resolution: evaluate verified 54 mm candidate
   async function resolveToCompatibleAlternative() {
+    setActiveScenario('compat');
     setLoading(true);
     try {
       const candidate = {
@@ -574,18 +575,32 @@ export default function KeptApp() {
 
 
 
-        {/* Scenario 1: Compatibility Incompatible Block */}
-        {activeScenario === 'compat' && compatResult && (
-          <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-obsidian-800/80 p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6">
+        {/* Scenario 1: Compatibility Verification (Dynamic Incompatible Block OR Verified Compatible Match) */}
+        {activeScenario === "compat" && compatResult && (
+          <div className={`w-full max-w-3xl rounded-3xl border p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6 ${
+            compatResult.status === "COMPATIBLE"
+              ? "border-accent-emerald/40 bg-obsidian-800/90 shadow-[0_0_40px_rgba(0,229,153,0.15)]"
+              : "border-white/10 bg-obsidian-800/80"
+          }`}>
             <div className="flex items-center justify-between pb-6 border-b border-white/10">
               <div className="flex items-center gap-3">
-                <span className="flex h-3 w-3 rounded-full bg-accent-coral animate-ping"></span>
-                <span className="text-xs font-bold uppercase tracking-wider text-accent-coral">
-                  ● Will Not Fit • Purchase Prevented
+                <span className={`flex h-3 w-3 rounded-full ${
+                  compatResult.status === "COMPATIBLE" ? "bg-accent-emerald animate-pulse" : "bg-accent-coral animate-ping"
+                }`}></span>
+                <span className={`text-xs font-bold uppercase tracking-wider ${
+                  compatResult.status === "COMPATIBLE" ? "text-accent-emerald" : "text-accent-coral"
+                }`}>
+                  {compatResult.status === "COMPATIBLE"
+                    ? "● COMPATIBLE • Exact Specification Match (54 mm 3-Ear)"
+                    : "● Will Not Fit • Purchase Prevented"}
                 </span>
               </div>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-medium">
-                Size Mismatch
+              <span className={`rounded-full border px-3 py-1 text-xs font-medium ${
+                compatResult.status === "COMPATIBLE"
+                  ? "border-accent-emerald/30 bg-accent-emerald/10 text-accent-emerald"
+                  : "border-white/10 bg-white/5 text-slate-400"
+              }`}>
+                {compatResult.status === "COMPATIBLE" ? "Verified Safe to Buy" : "Size Mismatch"}
               </span>
             </div>
 
@@ -593,15 +608,19 @@ export default function KeptApp() {
               <div>
                 <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
                 <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
-                  <p className="font-semibold text-white">This accessory does not fit your Breville Barista Express.</p>
+                  <p className="font-semibold text-white">
+                    {compatResult.status === "COMPATIBLE"
+                      ? "Verified fit for your Breville Barista Express (BES870XL)."
+                      : "This accessory does not fit your Breville Barista Express."}
+                  </p>
                   <p className="text-slate-300 text-xs">
-                    Your machine requires a 54 mm portafilter with 3 locking ears. This item is 58 mm with only 2 ears, so it will not lock into your group head.
+                    {compatResult.reason}
                   </p>
                 </div>
               </div>
 
-              {/* Mismatched Attributes Table */}
-              {compatResult.mismatchedAttributes && (
+              {/* Mismatched Attributes Table (When Incompatible) */}
+              {compatResult.mismatchedAttributes && compatResult.mismatchedAttributes.length > 0 && (
                 <div className="rounded-2xl border border-white/5 bg-obsidian-950/60 p-5 space-y-3">
                   <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
                     Size Comparison
@@ -617,6 +636,29 @@ export default function KeptApp() {
                         <div className="text-accent-coral py-2 border-t border-white/5 font-mono">{m.candidateValue}</div>
                       </React.Fragment>
                     ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Verified Match Table (When Compatible) */}
+              {compatResult.status === "COMPATIBLE" && (
+                <div className="rounded-2xl border border-accent-emerald/25 bg-accent-emerald/5 p-5 space-y-3">
+                  <div className="text-xs font-semibold text-accent-emerald uppercase tracking-wider flex items-center gap-1.5">
+                    <CheckCircle2 className="h-4 w-4" /> Verified Specification Alignment
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div className="text-slate-400 font-medium">Attribute</div>
+                    <div className="text-slate-300 font-semibold">Your Breville BES870XL</div>
+                    <div className="text-accent-emerald font-semibold">Verified Candidate</div>
+                    <div className="text-slate-300 py-2 border-t border-white/5">Portafilter Diameter</div>
+                    <div className="text-slate-200 py-2 border-t border-white/5 font-mono">54 mm</div>
+                    <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">54 mm ✓</div>
+                    <div className="text-slate-300 py-2 border-t border-white/5">Locking Ear Count</div>
+                    <div className="text-slate-200 py-2 border-t border-white/5 font-mono">3 Ears</div>
+                    <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">3 Ears ✓</div>
+                    <div className="text-slate-300 py-2 border-t border-white/5">Return Policy</div>
+                    <div className="text-slate-200 py-2 border-t border-white/5 font-mono">Standard 30-Day</div>
+                    <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">0% Restocking Fee ✓</div>
                   </div>
                 </div>
               )}
@@ -646,7 +688,7 @@ export default function KeptApp() {
                       {compatResult.recommendedAlternative.verifiedSpec} • Free 30-Day Prime Returns
                     </div>
                   </div>
-                  <button onClick={resolveToCompatibleAlternative} disabled={loading} className="shrink-0 rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50">
+                  <button onClick={resolveToCompatibleAlternative} disabled={loading} className="shrink-0 rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer">
                     {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
                     Verify & Switch to 54 mm Item
                   </button>
@@ -665,7 +707,7 @@ export default function KeptApp() {
                   Kept Decision Record
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? 'Hide Record' : 'View Decision Record'}
+                  {showDecisionReceipt ? "Hide Record" : "View Decision Record"}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
@@ -684,7 +726,7 @@ export default function KeptApp() {
                       </div>
                       <div>
                         <span className="text-slate-400">Listing Checked: </span>
-                        <span className="text-slate-200">58mm Bottomless Portafilter</span>
+                        <span className="text-slate-200">{compatResult.candidateTitle}</span>
                       </div>
                     </div>
                   </div>
@@ -696,12 +738,20 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Size Conflict: </span>
-                        <span className="text-accent-coral font-medium">58 mm does not fit a 54 mm group head (3 ears ≠ 2 ears)</span>
+                        <span className="text-slate-400">{compatResult.status === "COMPATIBLE" ? "Fit Verification: " : "Size Conflict: "}</span>
+                        <span className={compatResult.status === "COMPATIBLE" ? "text-accent-emerald font-medium" : "text-accent-coral font-medium"}>
+                          {compatResult.status === "COMPATIBLE"
+                            ? "Exact 54 mm 3-ear match verified against manual"
+                            : "58 mm does not fit a 54 mm group head (3 ears ≠ 2 ears)"}
+                        </span>
                       </div>
                       <div>
                         <span className="text-slate-400">Seller Policy: </span>
-                        <span className="text-accent-amber font-medium">15% restocking fee on opened returns</span>
+                        <span className={compatResult.status === "COMPATIBLE" ? "text-accent-emerald font-medium" : "text-accent-amber font-medium"}>
+                          {compatResult.status === "COMPATIBLE"
+                            ? "Amazon Fulfilled • 0% restocking fee (30-day free return)"
+                            : "15% restocking fee on opened returns"}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -712,7 +762,9 @@ export default function KeptApp() {
                       3. Recommended Next Step
                     </span>
                     <div className="text-xs text-slate-200 font-medium">
-                      Verify a compatible 54 mm accessory before purchasing to avoid return fees and delivery waste.
+                      {compatResult.status === "COMPATIBLE"
+                        ? "Purchase earned a yes — verified compatible with your household equipment and eligible for free returns."
+                        : "Verify a compatible 54 mm accessory before purchasing to avoid return fees and delivery waste."}
                     </div>
                   </div>
                 </div>
@@ -720,8 +772,10 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: Breville BES870XL Manual Specification Table (p. 28)</span>
-              <span className="text-accent-emerald font-semibold">Saved $39.99 + 15% Return Penalty</span>
+              <span>Source: {compatResult.sourceEvidence || "Breville BES870XL Manual Specification Table (p. 28)"}</span>
+              <span className="text-accent-emerald font-semibold">
+                {compatResult.status === "COMPATIBLE" ? "✓ Earned a Yes • Ready for Checkout" : "Saved $39.99 + 15% Return Penalty"}
+              </span>
             </div>
           </div>
         )}
