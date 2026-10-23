@@ -3,7 +3,7 @@
 > *The personal layer that connects you and your family to Alexa. Protects family allergies, matches reading levels, and prevents wasted spend before checkout.*
 
 **Live demo:** https://kept-alexa-mcp.vercel.app  
-**Demo video:** https://www.loom.com/share/7e933e9ad5fa4970bd28d728f738a466  
+**Demo video:** https://youtu.be/ebmDP3IqMIo  
 *The companion UI simulates the Alexa+ voice agent; it is grounded by the real, self-hosted MCP server (Streamable HTTP, `2025-11-25` spec) exposed at `/api/mcp`.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
