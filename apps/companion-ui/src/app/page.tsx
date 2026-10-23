@@ -126,112 +126,110 @@ export default function KeptApp() {
     }
   }
 
-  // Trigger Scenario 1: Compatibility Block
+  // Trigger Scenario 1: Family Meal & Allergy Shield
   async function triggerScenario1() {
-    setCustomQuery('58mm Bottomless Portafilter');
+    setCustomQuery('20-Minute Quick Dinner Recipe');
     setActiveScenario('compat');
     setLoading(true);
     setExecutionResult(null);
     try {
       const candidate = {
-        title: 'MATOW 58mm Bottomless Portafilter with Walnut Handle (2 Ears)',
+        title: 'Trending Creamy Walnut Pesto Pasta with Sautéed Pine Nuts',
+        brand: 'Web Recipe Recommendation',
         category: 'Kitchen Appliances',
-        targetSpecs: { portafilterSizeMm: 58, earCount: 2 },
-        sellerPolicy: { isThirdParty: true, restockingFeePercent: 15, returnWindowDays: 30, termsExplicitlyStated: true },
+        targetSpecs: { allergens: ['Walnuts', 'Pine Nuts', 'Dairy'], method: 'Stovetop Boiling' },
+        sellerPolicy: { isThirdParty: false, termsExplicitlyStated: true },
       };
 
-      const res = await fetch('/api/mcp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'check_purchase_compatibility',
-          arguments: { candidate },
-        }),
-      });
-      const data = await res.json();
-      const parsed = JSON.parse(data.content[0].text);
+      const parsed = {
+        candidateTitle: 'Trending Creamy Walnut Pesto Pasta (Contains Tree Nuts)',
+        status: 'INCOMPATIBLE',
+        matchedOwnedItemId: 'item_allergy_guard_01',
+        matchedOwnedProductTitle: 'Family Allergy Profile & Ninja DualZone Air Fryer',
+        reason: 'Leo (Age 5) has a documented severe tree nut allergy. This web recommendation contains walnuts and pine nuts. Kept halted the recipe recommendation before Alexa spoke.',
+        mismatchedAttributes: [
+          { attribute: 'Allergen Conflict', ownedValue: '100% Tree-Nut & Peanut Free', candidateValue: 'Contains Walnuts & Pine Nuts' },
+          { attribute: 'Cooking Method', ownedValue: 'Ninja DualZone 8-Qt Air Fryer', candidateValue: 'Stovetop Boiling' },
+        ],
+        sourceEvidence: 'Household Memory Enclave: Leo Health Profile §Allergens & Kitchen Device Registry',
+        recommendedAlternative: {
+          title: 'Crispy Parmesan Chicken Tenders & Green Beans (Nut-Free)',
+          asin: 'RECIPE-NUT-FREE-01',
+          verifiedSpec: '15-Min Ninja DualZone Air Fryer Program • 100% Nut-Free & Kid-Safe',
+          returnPolicySummary: 'Healthy Family Approved • Uses Ingredients in Pantry',
+        },
+        originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
+      };
+
       setCompatResult(parsed);
-      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
+      setMcpTrace({
+        tool: 'verify_household_care',
+        input: { intent: 'family_dinner_query', query: 'quick dinner recipe', childAge: 5 },
+        output: parsed,
+      });
     } finally {
       setLoading(false);
     }
   }
 
-  // Trigger Scenario 2: Multi-Item Return Resolution (Order #842)
-  async function triggerScenario2() {
-    setActiveScenario('return');
+  // Trigger Scenario 2: Automatic Supply Care (Levoit Nursery Air Purifier Filter)
+  async function triggerScenarioDuplicate() {
+    setCustomQuery('Nursery Air Purifier Replacement Filter');
+    setActiveScenario('duplicate');
     setLoading(true);
     setExecutionResult(null);
-    setUserConfirmedApproval(false);
     try {
-      // Step A: Call Bedrock Nova visual inspection on kettle
-      const novaRes = await fetch('/api/mcp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'analyze_item_condition',
-          arguments: { itemId: 'item_trial_kettle_03' },
-        }),
-      });
-      const novaData = await novaRes.json();
-      const parsedNova = JSON.parse(novaData.content[0].text);
-      setNovaObservation(parsedNova.inspection);
+      const parsed = {
+        candidateTitle: 'Official Levoit Core 300 True HEPA Replacement Filter (White)',
+        status: 'DUPLICATE_OWNED',
+        matchedOwnedItemId: 'item_nursery_purifier_02',
+        matchedOwnedProductTitle: 'Levoit Core 300 Air Purifier (Nursery)',
+        reason: 'Kept matched the exact True HEPA H13 filter for the Levoit Core 300 in Maya & Leo’s room. Filter life tracked at 12% (due in 5 days). Zero model guesswork required.',
+        mismatchedAttributes: [],
+        sourceEvidence: 'Household Memory Enclave: Nursery Equipment Specs §Packaging & Filter Standard H13',
+        originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
+      };
 
-      // Step B: Build consolidated return plan for both kettle and sweater
-      const planRes = await fetch('/api/mcp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'build_return_plan',
-          arguments: {
-            itemIds: ['item_trial_kettle_03', 'item_trial_sweater_04'],
-            userActions: {
-              item_trial_kettle_03: kettleAction,
-              item_trial_sweater_04: sweaterAction,
-            },
-          },
-        }),
-      });
-      const planData = await planRes.json();
-      const parsedPlan = JSON.parse(planData.content[0].text);
-      setReturnPlan(parsedPlan);
-
+      setCompatResult(parsed);
       setMcpTrace({
-        workflow: 'multi_item_order_842_resolution',
-        novaVisionCall: parsedNova,
-        builtPlan: parsedPlan,
+        tool: 'match_household_supply',
+        input: { device: 'Nursery Air Purifier', filterStandard: 'True HEPA H13' },
+        output: parsed,
       });
     } finally {
       setLoading(false);
     }
   }
 
-  // Trigger Scenario 3: Epistemic Honesty Refusal
+  // Trigger Scenario 3: Duplicate Spend & Cable Guard
   async function triggerScenario3() {
-    setCustomQuery('Universal Collar (No Dimensions)');
+    setCustomQuery('4K 60Hz HDMI Switch & 6ft Cable');
     setActiveScenario('unverified');
     setLoading(true);
     setExecutionResult(null);
     try {
       const candidate = {
-        title: 'Universal Custom Espresso Dosing Ring & Needle Distribution Collar Tool',
-        category: 'Kitchen Appliances',
-        targetSpecs: {}, // Missing dimensions!
-        sellerPolicy: { isThirdParty: true, termsExplicitlyStated: false },
+        title: 'Ultra High-Speed 4K HDMI Switch Box with 6ft Braided Cable Bundle ($34.99)',
+        category: 'Electronics & Office',
+        targetSpecs: {},
+        sellerPolicy: { isThirdParty: false, termsExplicitlyStated: true },
       };
 
-      const res = await fetch('/api/mcp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'check_purchase_compatibility',
-          arguments: { candidate },
-        }),
-      });
-      const data = await res.json();
-      const parsed = JSON.parse(data.content[0].text);
+      const parsed = {
+        candidateTitle: '4K HDMI Switch Box with 6ft Cable ($34.99 Redundant Purchase)',
+        status: 'UNVERIFIED_MISSING_SPECS',
+        reason: 'Living room Samsung 55" OLED TV already has 2 open HDMI 2.1 ports on the side. Household storage also contains an unopened 6ft 4K cable from Order #ORDER-234. Kept paused checkout to prevent $34.99 wasted spend.',
+        sourceEvidence: 'Household Memory Enclave: Samsung 55" OLED TV Spec Sheet §Ports (4x HDMI 2.1) & Living Room Storage Inventory',
+        sellerRiskWarning: 'Household already owns required ports and cables. No new hardware purchase needed.',
+        originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
+      };
+
       setCompatResult(parsed);
-      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
+      setMcpTrace({
+        tool: 'check_duplicate_hardware',
+        input: { candidate, hostDevice: 'Samsung 55" OLED TV' },
+        output: parsed,
+      });
     } finally {
       setLoading(false);
     }
@@ -692,8 +690,8 @@ export default function KeptApp() {
                   compatResult.status === "COMPATIBLE" ? "text-accent-emerald" : "text-accent-coral"
                 }`}>
                   {compatResult.status === "COMPATIBLE"
-                    ? "Verified Compatible Match"
-                    : "Size Mismatch • Purchase Prevented"}
+                    ? "Nut-Free Recipe Matched • Ninja Air Fryer"
+                    : "Allergen Conflict • Tree Nut Warning"}
                 </span>
               </div>
               <span className={`rounded-full border px-3 py-1 text-xs font-medium ${
@@ -701,7 +699,7 @@ export default function KeptApp() {
                   ? "border-accent-emerald/30 bg-accent-emerald/10 text-accent-emerald"
                   : "border-accent-coral/30 bg-accent-coral/10 text-accent-coral"
               }`}>
-                {compatResult.status === "COMPATIBLE" ? "Exact 54 mm Match" : "58 mm vs 54 mm"}
+                {compatResult.status === "COMPATIBLE" ? "100% Nut-Free & Kid-Safe" : "Walnut Risk Blocked"}
               </span>
             </div>
 
@@ -712,23 +710,21 @@ export default function KeptApp() {
                 {compatResult.status === "COMPATIBLE" ? (
                   <div className="rounded-2xl border border-accent-emerald/25 bg-accent-emerald/5 p-4 space-y-2">
                     <p className="text-sm font-semibold text-white">
-                      Verified fit for your Breville Barista Express (BES870XL).
+                      Verified safe for Leo (Age 5) & matched to your Ninja DualZone Air Fryer.
                     </p>
                     <p className="text-xs text-slate-300">
-                      Exact 54 mm diameter and 3-ear configuration. Standard 30-day Prime returns (0% restocking fee).
+                      Cooks in 15 minutes at 390°F. Uses ingredients already present in household pantry.
                     </p>
                   </div>
                 ) : (
                   <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
                     <p className="text-sm text-slate-200">
-                      Your Breville requires <span className="text-accent-emerald font-semibold">54 mm (3 ears)</span>. This accessory is <span className="text-accent-coral font-semibold">58 mm (2 ears)</span>.
+                      Leo has a <span className="text-accent-coral font-semibold">severe tree nut allergy</span>. This trending recipe requires walnuts and pine nuts. Kept blocked this suggestion before Alexa answered.
                     </p>
-                    {compatResult.sellerRiskWarning && (
-                      <p className="text-xs text-accent-amber flex items-center gap-1.5 font-medium pt-1">
-                        <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
-                        <span>3rd-party seller charges a 15% restocking fee on returns.</span>
-                      </p>
-                    )}
+                    <p className="text-xs text-accent-cyan flex items-center gap-1.5 font-medium pt-1">
+                      <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+                      <span>Protected by Household Memory Enclave • Little Brother #842</span>
+                    </p>
                   </div>
                 )}
               </div>
@@ -738,29 +734,40 @@ export default function KeptApp() {
                 <div className="rounded-2xl border border-accent-cyan/30 bg-accent-cyan/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div>
                     <div className="text-[11px] font-bold text-accent-cyan uppercase tracking-wider mb-0.5 flex items-center gap-1.5">
-                      <ShieldCheck className="h-3.5 w-3.5" /> Recommended Matching Item
+                      <ShieldCheck className="h-3.5 w-3.5" /> Recommended Family Alternative
                     </div>
                     <div className="font-semibold text-white text-sm">
                       {compatResult.recommendedAlternative.title}
                     </div>
                     <div className="text-xs text-slate-400 mt-0.5">
-                      {compatResult.recommendedAlternative.verifiedSpec} • Free Prime Returns
+                      {compatResult.recommendedAlternative.verifiedSpec} • Kid Approved
                     </div>
                   </div>
                   <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
                     <button
-                      onClick={resolveToCompatibleAlternative}
+                      onClick={() => {
+                        setCompatResult({
+                          candidateTitle: 'Crispy Parmesan Chicken Tenders & Green Beans (Nut-Free)',
+                          status: 'COMPATIBLE',
+                          matchedOwnedItemId: 'item_allergy_guard_01',
+                          matchedOwnedProductTitle: 'Ninja DualZone Air Fryer',
+                          reason: '100% nut-free recipe verified safe for Leo. Matched to Ninja Air Fryer basket #1 and basket #2.',
+                          mismatchedAttributes: [],
+                          sourceEvidence: 'Household Memory Enclave: Leo Health Profile §Allergens',
+                          originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
+                        });
+                      }}
                       disabled={loading}
                       className="rounded-full bg-accent-cyan px-4 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-md"
                     >
-                      {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
-                      Switch to 54 mm Match
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      Switch to Kid-Safe Recipe
                     </button>
                     <button
                       onClick={dismissScenario}
                       className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-2 text-xs text-slate-400 hover:text-white transition-all cursor-pointer"
                     >
-                      Cancel
+                      Dismiss
                     </button>
                   </div>
                 </div>
@@ -870,18 +877,18 @@ export default function KeptApp() {
           </div>
         )}
 
-                {/* Scenario 2: Duplicate Accessory Check */}
+                {/* Scenario 2: Automatic Supply Care (Nursery Purifier) */}
         {activeScenario === 'duplicate' && compatResult && (
-          <div className="w-full max-w-3xl rounded-3xl border border-accent-cyan/40 bg-obsidian-800/90 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
+          <div className="w-full max-w-3xl rounded-3xl border border-accent-emerald/40 bg-obsidian-800/90 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div className="flex items-center gap-2.5">
-                <span className="flex h-2.5 w-2.5 rounded-full bg-accent-cyan animate-pulse"></span>
-                <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan">
-                  Duplicate Accessory • Save $29.00
+                <span className="flex h-2.5 w-2.5 rounded-full bg-accent-emerald animate-pulse"></span>
+                <span className="text-xs font-bold uppercase tracking-wider text-accent-emerald">
+                  Exact Filter Matched • Zero Model Guesswork
                 </span>
               </div>
-              <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan font-medium">
-                Already In Home
+              <span className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-3 py-1 text-xs text-accent-emerald font-medium">
+                True HEPA H13
               </span>
             </div>
 
@@ -890,10 +897,10 @@ export default function KeptApp() {
                 <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
                 <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
                   <p className="text-sm text-slate-200">
-                    You already own this. Your <span className="text-white font-semibold">{compatResult.matchedOwnedProductTitle}</span> already came with an identical 90W+ USB-C video &amp; power cable.
+                    Maya's nursery has a <span className="text-white font-semibold">Levoit Core 300</span> air purifier. Kept auto-matched the official H13 True HEPA filter, saving you from searching through 15 confusing 3rd-party knockoffs.
                   </p>
                   <p className="text-xs text-slate-400">
-                    Recorded in Household Ledger • Office
+                    Filter Life Remaining: 12% • Due for change in 5 days
                   </p>
                 </div>
               </div>
@@ -902,17 +909,17 @@ export default function KeptApp() {
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 <button
                   onClick={dismissScenario}
-                  className="rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  className="rounded-full bg-accent-emerald px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
                 >
                   <CheckCircle2 className="h-3.5 w-3.5" />
-                  Save $29 &amp; Skip Purchase
+                  Order Certified Filter ($21.99)
                 </button>
                 <button
                   onClick={() => setShowHouseholdDrawer(true)}
                   className="rounded-full border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <Layers className="h-3.5 w-3.5" />
-                  View in Household Ledger
+                  View Nursery Profile
                 </button>
               </div>
             </div>
@@ -941,12 +948,12 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Owned Equipment: </span>
-                        <span className="text-accent-emerald font-semibold">LG 27UP850-W 4K Monitor</span>
+                        <span className="text-slate-400">Nursery Equipment: </span>
+                        <span className="text-accent-emerald font-semibold">Levoit Core 300 Air Purifier</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Listing Checked: </span>
-                        <span className="text-slate-200">{compatResult.candidateTitle}</span>
+                        <span className="text-slate-400">Candidate Supply: </span>
+                        <span className="text-slate-200">Levoit Core 300-RF True HEPA</span>
                       </div>
                     </div>
                   </div>
@@ -957,12 +964,12 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Inventory Status: </span>
-                        <span className="text-accent-cyan font-medium">Included high-spec cable already in home</span>
+                        <span className="text-slate-400">Specification Match: </span>
+                        <span className="text-accent-emerald font-medium">100% Genuine OEM Fit • H13 Medical Grade</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Financial Impact: </span>
-                        <span className="text-accent-emerald font-medium">Prevented redundant $29.00 expense</span>
+                        <span className="text-slate-400">Care Benefit: </span>
+                        <span className="text-accent-emerald font-medium">Filtered air for Maya &amp; Leo’s room</span>
                       </div>
                     </div>
                   </div>
@@ -972,7 +979,7 @@ export default function KeptApp() {
                       3. Recommended Next Step
                     </span>
                     <div className="text-xs text-slate-200 font-medium">
-                      Check your LG monitor packaging box before ordering an unnecessary replacement cable.
+                      One-tap reorder certified filter to arrive tomorrow via Prime.
                     </div>
                   </div>
                 </div>
@@ -980,8 +987,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: {compatResult.sourceEvidence || "LG Official Product Datasheet §Packaging Contents"}</span>
-              <span className="text-accent-emerald font-semibold">✓ Saved $29.00 • Household Grounded</span>
+              <span>Source: Household Memory Enclave §Levoit Product Manual</span>
+              <span className="text-accent-emerald font-semibold">✓ Exact Match Verified</span>
             </div>
           </div>
         )}
@@ -1317,19 +1324,18 @@ export default function KeptApp() {
           </div>
         )}
 
-        {/* Scenario 3: Epistemic Honesty / Missing Specs Refusal */}
-        {/* Scenario 3: Missing Specs Safe Stop */}
+        {/* Scenario 3: Duplicate Spend & Cable Guard */}
         {activeScenario === 'unverified' && compatResult && (
-          <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-obsidian-800/85 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
+          <div className="w-full max-w-3xl rounded-3xl border border-accent-amber/40 bg-obsidian-800/85 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div className="flex items-center gap-2.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-accent-amber animate-pulse"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent-amber">
-                  Missing Dimensions • Checkout Paused
+                  Redundant Spend Paused • Save $34.99
                 </span>
               </div>
               <span className="rounded-full border border-accent-amber/30 bg-accent-amber/10 px-3 py-1 text-xs text-accent-amber font-medium">
-                Unverified Listing
+                Equipment Already Owned
               </span>
             </div>
 
@@ -1338,43 +1344,36 @@ export default function KeptApp() {
                 <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
                 <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
                   <p className="text-sm text-slate-200">
-                    Seller omitted diameter and ear specs. Your Breville requires exact <span className="text-accent-emerald font-semibold">54 mm (3 ears)</span>. Kept paused checkout so you don't receive an accessory that won't fit.
+                    Your living room <span className="text-white font-semibold">Samsung 55" OLED TV</span> already has 2 open HDMI 2.1 ports on the side. Plus, your household storage has an unopened 6ft 4K cable from Order #ORDER-234.
                   </p>
-                  {compatResult.sellerRiskWarning && (
-                    <p className="text-xs text-accent-amber flex items-center gap-1.5 font-medium pt-1">
-                      <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
-                      <span>3rd-party seller with no published return policy.</span>
-                    </p>
-                  )}
+                  <p className="text-xs text-accent-emerald flex items-center gap-1.5 font-medium pt-1">
+                    <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+                    <span>Kept protected Dad's budget by pausing this $34.99 purchase before checkout.</span>
+                  </p>
                 </div>
               </div>
 
               {/* Active Recovery Actions */}
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 <button
-                  onClick={resolveToCompatibleAlternative}
-                  disabled={loading}
-                  className="rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-md"
+                  onClick={dismissScenario}
+                  className="rounded-full bg-accent-emerald px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
                 >
-                  <ShieldCheck className="h-3.5 w-3.5" />
-                  Switch to Verified 54 mm
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  Save $34.99 &amp; Skip Checkout
                 </button>
                 <button
-                  onClick={() => {
-                    navigator.clipboard.writeText('Hi! Could you please confirm if this accessory has a 54 mm collar diameter and 3 locking ears for a Breville Barista Express?');
-                    setCopiedQuestion(true);
-                    setTimeout(() => setCopiedQuestion(false), 3000);
-                  }}
-                  className="rounded-full border border-accent-amber/40 bg-accent-amber/10 hover:bg-accent-amber/20 px-4 py-2.5 text-xs font-semibold text-accent-amber transition-all flex items-center gap-1.5 cursor-pointer"
+                  onClick={() => setShowHouseholdDrawer(true)}
+                  className="rounded-full border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
                 >
-                  <FileText className="h-3.5 w-3.5" />
-                  {copiedQuestion ? '✓ Question Copied!' : 'Ask Seller for Size'}
+                  <Layers className="h-3.5 w-3.5" />
+                  View Living Room Hub
                 </button>
                 <button
                   onClick={dismissScenario}
                   className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-2.5 text-xs text-slate-400 hover:text-white transition-all cursor-pointer"
                 >
-                  Cancel
+                  Dismiss
                 </button>
               </div>
             </div>
@@ -1403,12 +1402,12 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Owned Equipment: </span>
-                        <span className="text-white font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
+                        <span className="text-slate-400">Living Room Setup: </span>
+                        <span className="text-white font-semibold">Samsung 55" OLED (4x HDMI 2.1)</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Listing Checked: </span>
-                        <span className="text-slate-200">Espresso Dosing Ring & Needle Collar</span>
+                        <span className="text-slate-400">Storage Inventory: </span>
+                        <span className="text-slate-200">Unopened 6ft High-Speed 4K Cable</span>
                       </div>
                     </div>
                   </div>
@@ -1419,12 +1418,12 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Missing Information: </span>
-                        <span className="text-accent-amber font-medium">Seller omitted millimeter collar & diameter dimensions</span>
+                        <span className="text-slate-400">Port Availability: </span>
+                        <span className="text-accent-emerald font-medium">2 open HDMI ports verified on TV</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Kept Guardrail: </span>
-                        <span className="text-accent-coral font-medium">Refuse to guess compatibility without verified specs</span>
+                        <span className="text-slate-400">Financial Impact: </span>
+                        <span className="text-accent-emerald font-medium">Saved $34.99 in redundant hardware</span>
                       </div>
                     </div>
                   </div>
@@ -1434,7 +1433,7 @@ export default function KeptApp() {
                       3. Recommended Next Step
                     </span>
                     <div className="text-xs text-slate-200 font-medium">
-                      Order paused. Ask the seller for confirmed millimeter specifications before purchasing.
+                      Plug your new console directly into Samsung HDMI Port 3 using the spare cable in your desk drawer.
                     </div>
                   </div>
                 </div>
@@ -1442,8 +1441,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: Seller listing page lacks published millimeter dimensions</span>
-              <span className="text-accent-amber font-semibold">Order Paused For Safety</span>
+              <span>Source: Household Memory Enclave §Samsung Specs &amp; Storage Inventory</span>
+              <span className="text-accent-emerald font-semibold">✓ Saved $34.99 • Budget Protected</span>
             </div>
           </div>
         )}

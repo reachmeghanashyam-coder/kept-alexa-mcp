@@ -1,66 +1,66 @@
-# Kept — Alexa+ Commerce & Returns Guardian
-## Father & Daughter Demo Video Script (Loom: Screen + Cam)
-*Target Duration: 90 to 105 seconds (Max 1:45)*  
-*Setup: Loom recording with front camera bubble (Father & Daughter) + Screen sharing `http://localhost:3000` (Fullscreen 1080p, Dark Mode)*  
-*Format: Father navigates and clicks; Daughter narrates with natural, calm, conversational warmth.*
+# 90-Second Winning Pitch Video Script (Paced for 8-Year-Old Maya & Dad)
+> **Target Video Runtime**: 1 Minute 25 Seconds to 1 Minute 30 Seconds Maximum  
+> **Characters**: Maya (8 years old, lead presenter), Dad (supporting)  
+> **Setting**: Living room or kitchen counter next to an Amazon Echo device.
 
 ---
 
-### Segment 1: The Core Direction (0:00 – 0:18)
-* **What Father does on screen:**  
-  You and your daughter are smiling in the camera bubble. Screen is centered on the clean Kept home page:  
-  **`Buy what belongs. Keep what you buy.`**  
-  *Subtext: Before an AI agent recommends a purchase, Kept checks whether the evidence supports it for your household—and tells it when not to guess.*
-* **What Daughter says:**  
-  > *"Hi everyone! As AI agents like Alexa+ start helping families shop, they need more than just product search—they need to know what is already inside your home.  
-  > 
-  > This is **Kept**: a household-aware verification and resolution layer designed around one promise—**buy what belongs, keep what you buy**."*
+### [0:00 - 0:20] The Hook: Alexa is a Stranger
+*(Camera opens on Maya standing next to the Echo device. She looks directly at the camera with a warm smile).*
+
+**MAYA (0:00 - 0:10):**  
+"Hi! I’m Maya, I’m 8 years old. That black cylinder is our Alexa. She has lived in our home for three years. But whenever we asked her for help, she treated us like strangers."
+
+*(Dad steps in beside Maya, looking at the camera).*
+
+**DAD (0:10 - 0:20):**  
+"Last month, I asked Alexa for a quick dinner recipe for the kids. Alexa recommended a trending walnut pasta. But our 5-year-old son has a life-threatening tree nut allergy. Alexa didn't mean to—she was just searching the web blind."
 
 ---
 
-### Segment 2: Verify Before Buying & Household Ledger (0:18 – 0:45)
-* **What Father does on screen:**  
-  1. Click **`View Ledger →`** on the Household bar (`Your Household #842 • 4 synced items`) to briefly show the 4 household items across **Kitchen, Office, and Wardrobe**, then click **`Test 58 mm Accessory Compatibility`** (or click Card 1).  
-  2. Show the red incompatibility card (`● Will Not Fit • Purchase Prevented`) and the Decision Record (`58 mm vs 54 mm` conflict + seller's 15% restocking fee policy).  
-  3. Click the cyan button: **`Verify & Switch to 54 mm Item`**.  
-  4. The card dynamically turns emerald green: `● COMPATIBLE • Exact Specification Match (54 mm 3-Ear)`.
-* **What Daughter says:**  
-  > *"First, Kept checks purchases against our household ledger. Dad wants a bottomless portafilter for our Breville espresso machine, which requires an exact 54 millimeter, 3-ear fit.  
-  > 
-  > When we check a 58 millimeter listing, Kept catches the specification conflict, surfaces the seller's restocking fee policy from the fixture, and lets us verify and switch to a matching 54 millimeter alternative."*
+### [0:20 - 0:50] The Solution: Kept In Action
+*(Maya points to the laptop screen showing the Kept interface on `localhost:3000`).*
+
+**MAYA (0:20 - 0:30):**  
+"That’s why we built **Kept**. Kept is Alexa’s memory and family shield. Watch what happens now!"
+
+*(Maya taps **Card 01: Family Meal & Allergy Shield** on screen).*
+
+**MAYA (Voice to Alexa) (0:30 - 0:40):**  
+*"Alexa, what can we make for dinner in 20 minutes?"*
+
+**ALEXA AUDIO / ON-SCREEN RESULT (0:40 - 0:50):**  
+*"I blocked the walnut recipe because of Leo's nut allergy. Instead, I found crispy parmesan chicken tenders made for your Ninja Air Fryer — 100% nut-free and kid-safe."*
 
 ---
 
-### Segment 3: Refuse Unsupported Decisions (0:45 – 1:05)
-* **What Father does on screen:**  
-  1. Click Card 2: **`2. Refuse Unsupported: Seller Omitted the Size`**.  
-  2. Amber card appears: `● Size Not Listed • Checkout Paused`.  
-  3. Click **`Copy Seller Verification Question`** (shows `✓ Question Copied to Clipboard!`).
-* **What Daughter says:**  
-  > *"Second, what if a third-party listing says 'Universal' but leaves out millimeter dimensions? A shopping agent could miss that uncertainty—but Kept flags it.  
-  > 
-  > Instead of guessing, Kept pauses the decision and prepares the exact verification question to ask the seller."*
+### [0:50 - 1:15] Bedroom Care & Saving Money
+*(Maya smiles and taps **Card 02**, then gestures to **Card 03**).*
+
+**MAYA (0:50 - 1:02):**  
+"When my bedroom air purifier gets dusty, Alexa doesn't make me guess weird model numbers. Kept already knows it's a Levoit Core 300, and orders the exact True HEPA filter to keep my air clean."
+
+**DAD (1:02 - 1:15):**  
+"And for me? Last week I almost bought a \$35 HDMI switch. Kept stopped checkout and reminded me: *'Your Samsung TV already has two open ports, and you have a spare cable in your drawer.'* It protects our family budget, too."
 
 ---
 
-### Segment 4: Extending to Post-Purchase Resolution (1:05 – 1:30)
-* **What Father does on screen:**  
-  1. Click Card 3: **`3. Resolve What Goes Wrong: Damaged or Wrong-Size Order`**.  
-  2. Show the Bedrock Nova photo inspection on the cracked kettle + reminder to include the power base.  
-  3. Check `[✔] Confirm Return Plan` and click **`Confirm & Generate Return Pass`**.  
-  4. Click **`Verify Cryptographic Signature`** to show the HMAC-SHA256 integrity proof.
-* **What Daughter says:**  
-  > *"Finally, we show how the same principles extend after delivery. When an order arrives with a cracked kettle and a tight sweater, Kept analyzes the damage photo, reminds us to pack the power base, and prepares a consolidated return plan.  
-  > 
-  > The agent prepares the work, but the customer retains authority—issuing an HMAC-signed authorization artifact only after we explicitly approve."*
+### [1:15 - 1:30] The Grand Prize Close
+*(Maya and Dad look together at the camera).*
+
+**MAYA (1:15 - 1:25):**  
+"Every day we spend at home, Kept quietly learns, remembers, and keeps our family safe.  
+**AI finds it. Kept personalizes it.**"
+
+**DAD & MAYA TOGETHER (1:25 - 1:30):**  
+"Thank you, Amazon!"  
+*(Maya waves warmly at the camera. Fade out on Kept logo).*
 
 ---
 
-### Segment 5: The Closing (1:30 – 1:40)
-* **What Father does on screen:**  
-  Click `Dismiss Result ✕` to return smoothly to the main overview.
-* **What Daughter says:**  
-  > *"Verify before buying, refuse unsupported decisions, and keep the customer in control.  
-  > 
-  > **Kept: Buy what belongs. Keep what you buy.** Thank you so much!"*
-* **Both:** Smile and wave at the camera!
+### Stopwatch Timing Check:
+- Hook & Problem: **20 seconds**
+- Live Demo (Scenario 1): **30 seconds**
+- Scenarios 2 & 3 (Care & Savings): **25 seconds**
+- Winning Close: **15 seconds**
+- **Total: Exactly 90 Seconds.**
