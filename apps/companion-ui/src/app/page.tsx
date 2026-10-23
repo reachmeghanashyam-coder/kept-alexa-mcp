@@ -184,7 +184,7 @@ export default function KeptApp() {
         status: 'DUPLICATE_OWNED',
         matchedOwnedItemId: 'item_nursery_purifier_02',
         matchedOwnedProductTitle: 'Levoit Core 300 Air Purifier (Nursery)',
-        reason: 'Kept matched the exact True HEPA H13 filter for the Levoit Core 300 in Maya & Leo’s room. Filter life tracked at 12% (due in 5 days). Zero model guesswork required.',
+        reason: 'Kept matched the exact True HEPA H13 filter for the Levoit Core 300 in Nidhi & Leo’s room. Filter life tracked at 12% (due in 5 days). Zero model guesswork required.',
         mismatchedAttributes: [],
         sourceEvidence: 'Household Memory Enclave: Nursery Equipment Specs §Packaging & Filter Standard H13',
         originLabel: 'HOUSEHOLD_MEMORY_SOURCE',
@@ -857,7 +857,7 @@ export default function KeptApp() {
                 <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
                 <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
                   <p className="text-sm text-slate-200">
-                    Maya's nursery has a <span className="text-white font-semibold">Levoit Core 300</span> air purifier. Kept auto-matched the official H13 True HEPA filter, saving you from searching through 15 confusing 3rd-party knockoffs.
+                    Nidhi's nursery has a <span className="text-white font-semibold">Levoit Core 300</span> air purifier. Kept auto-matched the official H13 True HEPA filter, saving you from searching through 15 confusing 3rd-party knockoffs.
                   </p>
                   <p className="text-xs text-slate-400">
                     Filter Life Remaining: 12% • Due for change in 5 days
@@ -929,7 +929,7 @@ export default function KeptApp() {
                       </div>
                       <div>
                         <span className="text-slate-400">Care Benefit: </span>
-                        <span className="text-accent-emerald font-medium">Filtered air for Maya &amp; Leo’s room</span>
+                        <span className="text-accent-emerald font-medium">Filtered air for Nidhi &amp; Leo’s room</span>
                       </div>
                     </div>
                   </div>
