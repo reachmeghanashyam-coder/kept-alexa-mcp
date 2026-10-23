@@ -1523,16 +1523,26 @@ export default function KeptApp() {
             {/* Header: Title or Back Button */}
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400">
-                  <Layers className="h-5 w-5" />
-                </div>
+                {showAddForm ? (
+                  <button
+                    onClick={() => setShowAddForm(false)}
+                    className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-slate-300 hover:text-white transition-all cursor-pointer"
+                    title="Back to Ledger"
+                  >
+                    <ArrowRight className="h-5 w-5 rotate-180" />
+                  </button>
+                ) : (
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400">
+                    <Layers className="h-5 w-5" />
+                  </div>
+                )}
                 <div>
                   <h3 className="font-bold text-white text-lg">
                     {showAddForm ? 'Register Equipment' : 'Household Ledger'}
                   </h3>
                   <p className="text-xs text-slate-400">
                     {showAddForm
-                      ? 'Add appliances or hardware specs to verify against future orders'
+                      ? 'Add physical specs to verify against future orders'
                       : 'Verified appliances and hardware specs owned in your home'}
                   </p>
                 </div>
