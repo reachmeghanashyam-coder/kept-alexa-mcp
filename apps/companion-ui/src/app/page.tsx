@@ -29,7 +29,8 @@ export default function KeptApp() {
   const [mcpTrace, setMcpTrace] = useState<any>(null);
   const [showTraceDrawer, setShowTraceDrawer] = useState(false);
   const [customQuery, setCustomQuery] = useState('');
-  const [showDecisionReceipt, setShowDecisionReceipt] = useState(false);
+  const [showDecisionReceipt, setShowDecisionReceipt] = useState(true);
+  const [copiedQuestion, setCopiedQuestion] = useState(false);
 
   // DOM Refs for Apple-grade smooth auto-scroll
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -220,6 +221,35 @@ export default function KeptApp() {
     }
   }
 
+
+  // Real MCP resolution: evaluate verified 54 mm candidate
+  async function resolveToCompatibleAlternative() {
+    setLoading(true);
+    try {
+      const candidate = {
+        title: 'CAPMESSO 54mm Bottomless Portafilter for Breville Barista Series (3-Ear Stainless Steel)',
+        category: 'Kitchen Appliances',
+        targetSpecs: { portafilterSizeMm: 54, earCount: 3 },
+        sellerPolicy: { isThirdParty: false, restockingFeePercent: 0, returnWindowDays: 30, termsExplicitlyStated: true },
+      };
+
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'check_purchase_compatibility',
+          arguments: { candidate },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
+      setCompatResult(parsed);
+      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Approve & Execute Plan
   async function executeApprovedPlan() {
     if (!returnPlan || !userConfirmedApproval) return;
@@ -329,7 +359,7 @@ export default function KeptApp() {
             </span>
           </h1>
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal mt-3">
-            Kept connects what you own with what you&apos;re considering buying and what needs attention after delivery.
+            Kept gives shopping agents household context, checks compatibility against available specifications, and pauses when critical details are missing.
           </p>
         </div>
 
@@ -601,8 +631,9 @@ export default function KeptApp() {
                       {compatResult.recommendedAlternative.verifiedSpec} • Free 30-Day Prime Returns
                     </div>
                   </div>
-                  <button className="shrink-0 rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all">
-                    Swap to Matching Item
+                  <button onClick={resolveToCompatibleAlternative} disabled={loading} className="shrink-0 rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50">
+                    {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
+                    Verify & Switch to 54 mm Item
                   </button>
                 </div>
               )}
@@ -989,6 +1020,30 @@ export default function KeptApp() {
                 </div>
               )}
             </div>
+
+
+              {/* Active Recovery Actions: Ask Seller or Check Alternative */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText('Hi! Could you please confirm if this accessory has a 54 mm collar diameter and 3 locking ears for a Breville Barista Express?');
+                    setCopiedQuestion(true);
+                    setTimeout(() => setCopiedQuestion(false), 3000);
+                  }}
+                  className="rounded-full border border-accent-amber/40 bg-accent-amber/10 px-4 py-2 text-xs font-semibold text-accent-amber hover:bg-accent-amber/20 transition-all flex items-center gap-1.5"
+                >
+                  <FileText className="h-3.5 w-3.5" />
+                  {copiedQuestion ? '✓ Question Copied to Clipboard!' : 'Copy Seller Verification Question'}
+                </button>
+                <button
+                  onClick={resolveToCompatibleAlternative}
+                  disabled={loading}
+                  className="rounded-full bg-accent-cyan px-4 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50"
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  Check Verified 54 mm Alternative Instead
+                </button>
+              </div>
 
             {/* Kept Decision Record (Consistent Across All Scenarios) */}
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
