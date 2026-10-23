@@ -1618,7 +1618,6 @@ export default function KeptApp() {
               <span className="text-cyan-400 font-mono font-medium">Synced with Alexa+ MCP</span>
             </div>
           </div>
-          </div>
         </div>
       )}
     </div>
