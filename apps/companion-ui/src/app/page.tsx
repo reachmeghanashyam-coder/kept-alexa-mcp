@@ -1529,7 +1529,7 @@ export default function KeptApp() {
                 <div>
                   <h3 className="font-bold text-white text-lg">Household Equipment Ledger</h3>
                   <p className="text-xs text-slate-400">
-                    Grounded equipment and active warranties synced with Alexa+ MCP tools
+                    Registered appliances and hardware specs used to verify future purchases
                   </p>
                 </div>
               </div>
@@ -1545,7 +1545,7 @@ export default function KeptApp() {
             {/* Filter Pills */}
             <div className="flex items-center justify-between gap-3 mb-4">
               <div className="flex items-center gap-2 text-xs">
-                {(['ALL', 'Kitchen', 'Office', 'Wardrobe'] as const).map((tab) => (
+                {(['ALL', 'Kitchen', 'Office'] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setHouseholdFilter(tab)}
@@ -1555,7 +1555,7 @@ export default function KeptApp() {
                         : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'
                     }`}
                   >
-                    {tab === 'ALL' ? `All Items (${inventory.length || 4})` : tab}
+                    {tab === 'ALL' ? 'All Items (2)' : tab}
                   </button>
                 ))}
               </div>
@@ -1599,14 +1599,13 @@ export default function KeptApp() {
                       <option value="Kitchen Appliances">Kitchen</option>
                       <option value="Electronics & Office">Office</option>
                       <option value="Living Room">Living Room</option>
-                      <option value="Wardrobe & Apparel">Wardrobe</option>
                     </select>
                   </div>
                   <div>
                     <label className="text-[11px] text-slate-400 block mb-1">Key Spec / Fitting</label>
                     <input
                       type="text"
-                      placeholder="e.g. Quick-Release Wand"
+                      placeholder="e.g. Quick-Release Wand (32mm)"
                       value={newSpec}
                       onChange={(e) => setNewSpec(e.target.value)}
                       className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
@@ -1635,25 +1634,18 @@ export default function KeptApp() {
                           Kitchen
                         </span>
                         <span className="text-[10px] font-mono text-emerald-400 font-semibold">
-                          OWNED IN HOME
+                          VERIFIED IN HOME
                         </span>
                       </div>
                       <h4 className="font-bold text-white text-sm">Breville Barista Express Espresso Machine</h4>
-                      <p className="text-[11px] text-slate-400">Model: BES870XL • Delivered Nov 2024</p>
+                      <p className="text-[11px] text-slate-400">Model: BES870XL</p>
                     </div>
-                    <button
-                      onClick={() => { setShowHouseholdDrawer(false); triggerScenario1(); }}
-                      className="rounded-full bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
-                    >
-                      <span>Simulate Fit</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </button>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
                     <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">54 mm Group Head</span>
                     <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">3 Locking Ears</span>
-                    <span className="text-[10px] text-slate-500 font-mono ml-auto">Breville Manual p. 28</span>
+                    <span className="text-[10px] text-slate-500 font-mono ml-auto">Grounded Specs</span>
                   </div>
                 </div>
               )}
@@ -1668,99 +1660,27 @@ export default function KeptApp() {
                           Office
                         </span>
                         <span className="text-[10px] font-mono text-emerald-400 font-semibold">
-                          OWNED IN HOME
+                          VERIFIED IN HOME
                         </span>
                       </div>
                       <h4 className="font-bold text-white text-sm">LG 27UP850-W 27" 4K UHD IPS Monitor</h4>
-                      <p className="text-[11px] text-slate-400">Model: 27UP850-W • Delivered Feb 2025</p>
+                      <p className="text-[11px] text-slate-400">Model: 27UP850-W</p>
                     </div>
-                    <button
-                      onClick={() => { setShowHouseholdDrawer(false); triggerScenarioDuplicate(); }}
-                      className="rounded-full bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
-                    >
-                      <span>Check Dupes</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </button>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
                     <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">USB-C 90W PD</span>
-                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Includes 90W+ Video Cable</span>
-                    <span className="text-[10px] text-slate-500 font-mono ml-auto">LG Datasheet §Packaging</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Item 3: Cosori Kettle */}
-              {(householdFilter === 'ALL' || householdFilter === 'Kitchen') && (
-                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-amber-500/30 transition-all">
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                          Kitchen
-                        </span>
-                        <span className="text-[10px] font-mono text-amber-400 font-semibold">
-                          RETURN WINDOW ACTIVE • 28D LEFT
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-white text-sm">Cosori Electric Gooseneck Glass Kettle</h4>
-                      <p className="text-[11px] text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18</p>
-                    </div>
-                    <button
-                      onClick={() => { setShowHouseholdDrawer(false); triggerScenario2(); }}
-                      className="rounded-full bg-amber-950/80 hover:bg-amber-900 border border-amber-500/40 text-amber-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
-                    >
-                      <span>Prepare Return</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </button>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
-                    <span className="rounded-md bg-rose-950/50 text-rose-300 border border-rose-500/30 px-2 py-0.5 font-mono">Handle Defect Detected</span>
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Whole Foods Box-Free Eligible</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Item 4: Merino Wool Sweater */}
-              {(householdFilter === 'ALL' || householdFilter === 'Wardrobe') && (
-                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-purple-500/30 transition-all">
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-purple-950/80 border border-purple-500/30 text-purple-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                          Wardrobe
-                        </span>
-                        <span className="text-[10px] font-mono text-amber-400 font-semibold">
-                          TRIAL ACTIVE • 28D LEFT
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-white text-sm">State Cashmere 100% Pure Merino Wool Turtleneck</h4>
-                      <p className="text-[11px] text-slate-400">Order #ORDER-842-OCT2026 • Delivered Oct 18</p>
-                    </div>
-                    <button
-                      onClick={() => { setShowHouseholdDrawer(false); triggerScenario2(); }}
-                      className="rounded-full bg-purple-950/80 hover:bg-purple-900 border border-purple-500/40 text-purple-300 text-xs font-medium px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
-                    >
-                      <span>Combine Return</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </button>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Size Medium</span>
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Original Tags Attached</span>
-                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Eligible for 1-Trip Return</span>
+                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Includes 100W USB-C Video Cable</span>
+                    <span className="text-[10px] text-slate-500 font-mono ml-auto">Grounded Accessories</span>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Modal Footer */}
-            <div className="pt-4 border-t border-white/[0.08] mt-4 flex items-center justify-between text-xs text-slate-500">
-              <span className="font-mono">Sync Source: Alexa+ Household MCP Enclave</span>
-              <span className="text-cyan-400 font-mono font-medium">Household #842 Grounded</span>
+            <div className="pt-3 border-t border-white/[0.08] mt-3 flex items-center justify-between text-xs text-slate-500">
+              <span className="font-mono">Household ID: #842</span>
+              <span className="text-cyan-400 font-mono font-medium">Synced with Alexa+ MCP</span>
             </div>
           </div>
         </div>
