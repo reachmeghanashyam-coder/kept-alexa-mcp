@@ -1,0 +1,5 @@
+{
+  "framework": "nextjs",
+  "installCommand": "cd ../.. && npm install",
+  "buildCommand": "cd ../.. && npm run build --workspace=@kept/policy-guard && npm run build --workspace=@kept/mcp-server && cd apps/companion-ui && npx next build"
+}
