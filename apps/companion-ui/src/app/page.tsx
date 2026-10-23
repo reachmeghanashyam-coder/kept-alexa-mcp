@@ -23,6 +23,8 @@ import {
   X,
   Key,
   Check,
+  Coffee,
+  Monitor,
 } from 'lucide-react';
 
 export default function KeptApp() {
@@ -530,8 +532,8 @@ export default function KeptApp() {
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg font-medium max-w-xl mx-auto">
-            AI shopping that actually knows your home.
+          <p className="text-slate-200 text-lg sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed">
+            Verifies proposed purchases against what you already own — stopping size mismatches, duplicate accessories, and wasted returns before checkout.
           </p>
         </div>
 
@@ -571,9 +573,12 @@ export default function KeptApp() {
                   Breville 54 mm
                 </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors leading-snug">
-                58 mm Portafilter
-              </h3>
+              <div className="flex items-center gap-2 mb-1.5">
+                <Coffee className="h-4 w-4 text-accent-cyan shrink-0" />
+                <h3 className="font-bold text-white text-base group-hover:text-accent-cyan transition-colors leading-snug">
+                  58 mm Portafilter
+                </h3>
+              </div>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Catches 58 mm size conflict against your 54 mm Breville and flags 15% return fee.
               </p>
@@ -605,9 +610,12 @@ export default function KeptApp() {
                   LG 4K Monitor
                 </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors leading-snug">
-                100W USB-C Cable ($29)
-              </h3>
+              <div className="flex items-center gap-2 mb-1.5">
+                <Monitor className="h-4 w-4 text-accent-cyan shrink-0" />
+                <h3 className="font-bold text-white text-base group-hover:text-accent-cyan transition-colors leading-snug">
+                  100W USB-C Cable ($29)
+                </h3>
+              </div>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Flags duplicate: your LG monitor box already includes an identical 90W+ cable.
               </p>
@@ -639,9 +647,12 @@ export default function KeptApp() {
                   Breville 54 mm
                 </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors leading-snug">
-                Universal Dosing Collar
-              </h3>
+              <div className="flex items-center gap-2 mb-1.5">
+                <AlertTriangle className="h-4 w-4 text-accent-amber shrink-0" />
+                <h3 className="font-bold text-white text-base group-hover:text-accent-amber transition-colors leading-snug">
+                  Universal Dosing Collar
+                </h3>
+              </div>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Pauses checkout when a third-party seller omits required millimeter dimensions.
               </p>
@@ -649,6 +660,58 @@ export default function KeptApp() {
             <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
               <span>See Safe Stop</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
+            </div>
+          </div>
+        </div>
+
+        {/* Active Household Ground Truth Context Banner (Fills Void & Grounding) */}
+        <div className="w-full max-w-5xl rounded-2xl border border-white/10 bg-obsidian-950/60 p-5 sm:p-6 backdrop-blur-xl mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/5 mb-4">
+            <div className="flex items-center gap-2.5">
+              <div className="p-1.5 rounded-lg bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan">
+                <Layers className="h-4 w-4" />
+              </div>
+              <div>
+                <h4 className="font-bold text-white text-sm">Active Household Ledger (Household #842)</h4>
+                <p className="text-[11px] text-slate-400">Ground truth equipment synced with Alexa+ MCP tools</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowHouseholdDrawer(true)}
+              className="text-xs text-accent-cyan hover:underline flex items-center gap-1 self-start sm:self-auto font-medium"
+            >
+              <span>View Full Ledger ({inventory.length || 4} items)</span>
+              <ArrowRight className="h-3 w-3" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+            {/* Item 1 */}
+            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
+              <div className="text-[10px] font-mono text-accent-cyan uppercase tracking-wider mb-1">Kitchen · Machine</div>
+              <div className="text-xs font-bold text-white truncate">Breville Barista Express</div>
+              <div className="text-[11px] text-slate-400 mt-1 font-mono">54 mm · 3 locking ears</div>
+            </div>
+
+            {/* Item 2 */}
+            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
+              <div className="text-[10px] font-mono text-accent-cyan uppercase tracking-wider mb-1">Office · Display</div>
+              <div className="text-xs font-bold text-white truncate">LG 27UP850-W 4K</div>
+              <div className="text-[11px] text-slate-400 mt-1 font-mono">90W USB-C cable included</div>
+            </div>
+
+            {/* Item 3 */}
+            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
+              <div className="text-[10px] font-mono text-accent-amber uppercase tracking-wider mb-1">Delivered · Order #842</div>
+              <div className="text-xs font-bold text-white truncate">Cosori Gooseneck Kettle</div>
+              <div className="text-[11px] text-slate-400 mt-1 font-mono">28d return window active</div>
+            </div>
+
+            {/* Item 4 */}
+            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
+              <div className="text-[10px] font-mono text-accent-emerald uppercase tracking-wider mb-1">Delivered · Order #842</div>
+              <div className="text-xs font-bold text-white truncate">Merino Wool Sweater</div>
+              <div className="text-[11px] text-slate-400 mt-1 font-mono">Tags intact · 1-trip return</div>
             </div>
           </div>
         </div>
