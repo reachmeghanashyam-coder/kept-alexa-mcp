@@ -1,6 +1,6 @@
-# Kept — The Personal Household Care Layer for Alexa+
+# Kept — Family Memory for Alexa+
 > **AI finds it. Kept personalizes it.**  
-> *The gentle layer of household memory for Alexa+ that protects family allergies, knows your real appliances, and prevents wasted spend before checkout.*
+> *The personal layer that connects you and your family to Alexa. Protects family allergies, matches reading levels, and prevents wasted spend before checkout.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](packages/policy-guard/LICENSE)
 [![MCP Spec](https://img.shields.io/badge/MCP%20Spec-2025--11--25%20Streamable%20HTTP-cyan.svg)](packages/kept-mcp)
@@ -21,6 +21,6 @@
 
 ## The Three Everyday Capabilities
 
-1. **Family Meal & Allergy Shield:** When you ask for dinner ideas, Kept blocks tree-nut allergens and matches cooking steps to your actual Ninja air fryer before Alexa speaks.
-2. **Automatic Supply & Filter Match:** Matches the exact True HEPA filter for your bedroom air purifier without asking you to memorize cryptic model codes or guess CADR ratings.
-3. **Duplicate Spend & Cable Guard:** Checks your TV ports and spare cables already in drawers so you never waste money on redundant HDMI switches or power cords.
+1. **Family Meal & Allergy Shield:** When you ask for dinner ideas, Kept blocks tree-nut allergens for Leo and matches cooking steps to your actual Ninja air fryer before Alexa speaks.
+2. **Age-Grounded Curiosity Shield:** When Nidhi asks "Why do stars explode?", Kept intercepts college-level astrophysics jargon and grounds explanations to her 3rd-grade reading level.
+3. **Duplicate Spend & Cable Guard:** Checks your TV ports and spare cables already in drawers so you never waste money on redundant HDMI cables or adapters.
