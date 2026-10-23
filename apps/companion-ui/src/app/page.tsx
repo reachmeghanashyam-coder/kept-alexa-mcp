@@ -537,16 +537,11 @@ export default function KeptApp() {
           </p>
         </div>
 
-        {/* Section Header: Clarifies Sample Simulations Grounded in Household */}
-        <div className="w-full max-w-5xl mb-4 px-1 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-accent-cyan/80"></span>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
-              SAMPLE SCENARIO SIMULATIONS · HOUSEHOLD #842
-            </span>
-          </div>
-          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline-block">
-            Click any card to simulate verification
+        {/* Section Eyebrow: Grounded in Household #842 */}
+        <div className="w-full max-w-5xl mb-4 px-1 flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-accent-cyan/80"></span>
+          <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
+            HOUSEHOLD #842 · VERIFICATION SCENARIOS
           </span>
         </div>
 
