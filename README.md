@@ -1,6 +1,6 @@
 # Kept — Alexa+ Commerce & Returns Guardian
 > **Buy what belongs. Keep what you buy.**  
-> *Kept gives AI shopping agents a household-aware verification and resolution layer—so they can check whether a purchase fits what you own, stop when the evidence is insufficient, and help resolve problems when reality doesn't match expectations.*
+> *Before an AI agent recommends a purchase, Kept checks whether the evidence supports it for your household—and tells it when not to guess.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](packages/policy-guard/LICENSE)
 [![MCP Spec](https://img.shields.io/badge/MCP%20Spec-2025--11--25%20Streamable%20HTTP-cyan.svg)](packages/kept-mcp)

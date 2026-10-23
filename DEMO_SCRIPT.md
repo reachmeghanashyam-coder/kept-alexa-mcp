@@ -10,7 +10,7 @@
 * **What Father does on screen:**  
   You and your daughter are smiling in the camera bubble. Screen is centered on the clean Kept home page:  
   **`Buy what belongs. Keep what you buy.`**  
-  *Subtext: Kept gives AI shopping agents a household-aware verification and resolution layer—so they can check whether a purchase fits what you own, stop when the evidence is insufficient, and help resolve problems when reality doesn't match expectations.*
+  *Subtext: Before an AI agent recommends a purchase, Kept checks whether the evidence supports it for your household—and tells it when not to guess.*
 * **What Daughter says:**  
   > *"Hi everyone! As AI agents like Alexa+ start helping families shop, they need more than just product search—they need to know what is already inside your home.  
   > 
