@@ -1520,21 +1520,28 @@ export default function KeptApp() {
             onClick={() => setShowHouseholdDrawer(false)}
           />
           <div className="relative z-10 w-full max-w-2xl h-[78vh] rounded-3xl border border-white/10 bg-[#0A0F1D] p-6 sm:p-7 shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
-            {/* Modal Header */}
-            <div className="flex items-start justify-between pb-4 border-b border-white/[0.08] mb-4">
+            {/* Header: Title or Back Button */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400">
                   <Layers className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white text-lg">Household Equipment Ledger</h3>
+                  <h3 className="font-bold text-white text-lg">
+                    {showAddForm ? 'Register Equipment' : 'Household Ledger'}
+                  </h3>
                   <p className="text-xs text-slate-400">
-                    Registered appliances and hardware specs used to verify future purchases
+                    {showAddForm
+                      ? 'Add appliances or hardware specs to verify against future orders'
+                      : 'Verified appliances and hardware specs owned in your home'}
                   </p>
                 </div>
               </div>
               <button
-                onClick={() => setShowHouseholdDrawer(false)}
+                onClick={() => {
+                  setShowAddForm(false);
+                  setShowHouseholdDrawer(false);
+                }}
                 className="rounded-full p-2 text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label="Close"
               >
@@ -1542,146 +1549,159 @@ export default function KeptApp() {
               </button>
             </div>
 
-            {/* Filter Pills */}
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-2 text-xs">
-                {(['ALL', 'Kitchen', 'Office'] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setHouseholdFilter(tab)}
-                    className={`rounded-full px-3.5 py-1.5 font-medium transition-all border ${
-                      householdFilter === tab
-                        ? 'border-cyan-400 bg-cyan-950/80 text-cyan-300 shadow-sm'
-                        : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {tab === 'ALL' ? 'All Items (2)' : tab}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                onClick={() => setShowAddForm(!showAddForm)}
-                className="rounded-full border border-cyan-500/30 bg-cyan-950/40 hover:bg-cyan-950/70 text-cyan-400 text-xs font-semibold px-3.5 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
-              >
-                <span>{showAddForm ? '✕ Close Form' : '+ Add Equipment'}</span>
-              </button>
-            </div>
-
-            {/* Inline Add Item Form */}
-            {showAddForm && (
-              <form
-                onSubmit={handleAddCustomItem}
-                className="mb-4 p-4 rounded-2xl border border-white/10 bg-[#06090F] space-y-3 animate-in fade-in slide-from-top-2"
-              >
-                <div className="text-xs font-bold text-white uppercase tracking-wider">
-                  Register New Household Equipment
-                </div>
-                <div>
-                  <label className="text-[11px] text-slate-400 block mb-1">Equipment Name</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Dyson V11 Cordless Vacuum"
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                    required
-                    className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
+            {/* Mode 1: Register New Equipment Form (Takes over modal cleanly) */}
+            {showAddForm ? (
+              <div className="flex-1 flex flex-col justify-between">
+                <form
+                  onSubmit={handleAddCustomItem}
+                  className="p-5 rounded-2xl border border-white/10 bg-[#06090F] space-y-4"
+                >
                   <div>
-                    <label className="text-[11px] text-slate-400 block mb-1">Room / Category</label>
-                    <select
-                      value={newCategory}
-                      onChange={(e) => setNewCategory(e.target.value)}
-                      className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white focus:outline-none focus:border-cyan-400"
-                    >
-                      <option value="Kitchen Appliances">Kitchen</option>
-                      <option value="Electronics & Office">Office</option>
-                      <option value="Living Room">Living Room</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-[11px] text-slate-400 block mb-1">Key Spec / Fitting</label>
+                    <label className="text-xs font-semibold text-slate-300 block mb-1.5">
+                      Equipment / Appliance Name
+                    </label>
                     <input
                       type="text"
-                      placeholder="e.g. Quick-Release Wand (32mm)"
-                      value={newSpec}
-                      onChange={(e) => setNewSpec(e.target.value)}
-                      className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                      placeholder="e.g. Dyson V11 Cordless Vacuum"
+                      value={newTitle}
+                      onChange={(e) => setNewTitle(e.target.value)}
+                      required
+                      className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                     />
                   </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-semibold text-slate-300 block mb-1.5">Category</label>
+                      <select
+                        value={newCategory}
+                        onChange={(e) => setNewCategory(e.target.value)}
+                        className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
+                      >
+                        <option value="Kitchen Appliances">Kitchen</option>
+                        <option value="Electronics & Office">Office</option>
+                        <option value="Living Room">Living Room</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-slate-300 block mb-1.5">
+                        Key Spec / Fitting
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Quick-Release Wand (32mm)"
+                        value={newSpec}
+                        onChange={(e) => setNewSpec(e.target.value)}
+                        className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowAddForm(false)}
+                      className="w-1/3 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] py-2.5 text-xs font-medium text-slate-300 transition-all cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={loading || !newTitle.trim()}
+                      className="w-2/3 rounded-xl bg-cyan-400 py-2.5 text-xs font-bold text-slate-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
+                    >
+                      {loading ? 'Saving...' : 'Save to Ledger'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              /* Mode 2: Clean Ledger View */
+              <>
+                {/* Category Pills + Add Button */}
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <div className="flex items-center gap-2 text-xs">
+                    {(['ALL', 'Kitchen', 'Office'] as const).map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setHouseholdFilter(tab)}
+                        className={`rounded-full px-3.5 py-1.5 font-medium transition-all border ${
+                          householdFilter === tab
+                            ? 'border-cyan-400 bg-cyan-950/80 text-cyan-300 shadow-sm'
+                            : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        {tab === 'ALL' ? 'All Items (2)' : tab}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => setShowAddForm(true)}
+                    className="rounded-full border border-cyan-500/30 bg-cyan-950/40 hover:bg-cyan-950/70 text-cyan-400 text-xs font-semibold px-3.5 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                  >
+                    <span>+ Add Equipment</span>
+                  </button>
                 </div>
-                <button
-                  type="submit"
-                  disabled={loading || !newTitle.trim()}
-                  className="w-full rounded-xl bg-cyan-400 py-2 text-xs font-bold text-slate-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
-                >
-                  {loading ? 'Saving...' : 'Save to Household Ledger'}
-                </button>
-              </form>
+
+                {/* Ledger Items List */}
+                <div className="space-y-3 overflow-y-auto pr-1 flex-1">
+                  {/* Item 1: Breville Espresso */}
+                  {(householdFilter === 'ALL' || householdFilter === 'Kitchen') && (
+                    <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-cyan-500/30 transition-all">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                              Kitchen
+                            </span>
+                            <span className="text-[10px] font-mono text-emerald-400 font-semibold">
+                              VERIFIED IN HOME
+                            </span>
+                          </div>
+                          <h4 className="font-bold text-white text-sm">Breville Barista Express Espresso Machine</h4>
+                          <p className="text-[11px] text-slate-400">Model: BES870XL</p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                        <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">54 mm Group Head</span>
+                        <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">3 Locking Ears</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Item 2: LG 27" Monitor */}
+                  {(householdFilter === 'ALL' || householdFilter === 'Office') && (
+                    <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="rounded bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                              Office
+                            </span>
+                            <span className="text-[10px] font-mono text-emerald-400 font-semibold">
+                              VERIFIED IN HOME
+                            </span>
+                          </div>
+                          <h4 className="font-bold text-white text-sm">LG 27UP850-W 27" 4K UHD IPS Monitor</h4>
+                          <p className="text-[11px] text-slate-400">Model: 27UP850-W</p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                        <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">USB-C 90W PD</span>
+                        <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Includes 100W USB-C Video Cable</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Modal Footer */}
+                <div className="pt-3 border-t border-white/[0.08] mt-3 flex items-center justify-between text-xs text-slate-500">
+                  <span className="font-mono">Household ID: #842</span>
+                  <span className="text-cyan-400 font-mono font-medium">Synced with Alexa+ MCP</span>
+                </div>
+              </>
             )}
-
-            {/* Scrollable Ledger Items Grid */}
-            <div className="space-y-3 overflow-y-auto pr-1 flex-1">
-              {/* Item 1: Breville Espresso */}
-              {(householdFilter === 'ALL' || householdFilter === 'Kitchen') && (
-                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-cyan-500/30 transition-all">
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                          Kitchen
-                        </span>
-                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">
-                          VERIFIED IN HOME
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-white text-sm">Breville Barista Express Espresso Machine</h4>
-                      <p className="text-[11px] text-slate-400">Model: BES870XL</p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">54 mm Group Head</span>
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">3 Locking Ears</span>
-                    <span className="text-[10px] text-slate-500 font-mono ml-auto">Grounded Specs</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Item 2: LG 27" Monitor */}
-              {(householdFilter === 'ALL' || householdFilter === 'Office') && (
-                <div className="rounded-2xl border border-white/[0.08] bg-[#06090F] p-4 flex flex-col justify-between hover:border-emerald-500/30 transition-all">
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="rounded bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                          Office
-                        </span>
-                        <span className="text-[10px] font-mono text-emerald-400 font-semibold">
-                          VERIFIED IN HOME
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-white text-sm">LG 27UP850-W 27" 4K UHD IPS Monitor</h4>
-                      <p className="text-[11px] text-slate-400">Model: 27UP850-W</p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">USB-C 90W PD</span>
-                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Includes 100W USB-C Video Cable</span>
-                    <span className="text-[10px] text-slate-500 font-mono ml-auto">Grounded Accessories</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="pt-3 border-t border-white/[0.08] mt-3 flex items-center justify-between text-xs text-slate-500">
-              <span className="font-mono">Household ID: #842</span>
-              <span className="text-cyan-400 font-mono font-medium">Synced with Alexa+ MCP</span>
-            </div>
           </div>
         </div>
       )}
