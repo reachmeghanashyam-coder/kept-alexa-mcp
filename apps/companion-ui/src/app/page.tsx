@@ -588,6 +588,19 @@ export default function KeptApp() {
           </div>
         </div>
 
+        {/* Section Header: Clarifies Sample Simulations Grounded in Household */}
+        <div className="w-full max-w-5xl mb-3.5 px-1 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan/80"></span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
+              SAMPLE SCENARIO SIMULATIONS · HOUSEHOLD #842
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-slate-500 hidden sm:inline-block">
+            Click card to run simulation
+          </span>
+        </div>
+
         {/* 3 Core Bento Cards Showcase */}
         <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-8">
           {/* Card 1: Before Buying (Check compatibility against what you own) */}
