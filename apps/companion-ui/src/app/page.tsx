@@ -314,189 +314,188 @@ export default function KeptApp() {
       {/* Main Container Naturally Filling Viewport */}
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-4 sm:pt-6 pb-4 flex flex-col justify-center items-center">
         {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-6">
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-5">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-          Alexa+ Commerce & Returns Guardian
+          KEPT — FOR ALEXA+
         </div>
 
         {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
-        <div className="text-center max-w-4xl mb-8 sm:mb-9">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] mb-4 text-white">
-            Zero-Regret Orders.
+        <div className="text-center max-w-4xl mb-7 sm:mb-8">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-3.5 text-white">
+            Your home, remembered.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
-              Zero-Friction Returns.
+              Your purchases, better informed.
             </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-normal mt-4">
-            Checks compatibility before you buy. Handles returns and replacements after they arrive.
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal mt-3">
+            Kept connects what you own with what you&apos;re considering buying and what needs attention after delivery.
           </p>
         </div>
 
-        {/* Interactive Main Action Input Bar: Dynamically Synced with Active Scenario */}
-        <div className="w-full max-w-xl mb-9 sm:mb-10">
-          <div className="flex items-center justify-between rounded-full border border-white/10 bg-obsidian-800/80 p-2 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all">
-            <div className="flex items-center gap-2.5 pl-4 flex-1 min-w-0">
-              <span className={`h-2.5 w-2.5 rounded-full shrink-0 ${
-                activeScenario === 'unverified'
-                  ? 'bg-accent-amber animate-pulse'
-                  : activeScenario === 'compat'
-                  ? 'bg-accent-coral animate-pulse'
-                  : 'bg-accent-emerald animate-pulse'
-              }`}></span>
-              <div className="flex items-center gap-2 truncate">
-                <span className="text-sm font-semibold text-slate-200 shrink-0">
-                  {activeScenario === 'unverified'
-                    ? 'unverified-seller.test'
-                    : activeScenario === 'compat'
-                    ? '58mm-portafilter.fit'
-                    : 'household-842'}
-                </span>
-                <span className="text-xs text-slate-400 font-mono truncate">
-                  {activeScenario === 'unverified'
-                    ? '• Universal Espresso Tool (Missing Specs)'
-                    : activeScenario === 'compat'
-                    ? '• Breville 54mm Spec Conflict'
-                    : '• 4 items synced'}
-                </span>
+        {/* Persistent Household Context Indicator Bar (Non-decorative status indicators) */}
+        <div className="w-full max-w-4xl mb-7 sm:mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl border border-white/10 bg-obsidian-800/75 px-4 py-2.5 shadow-xl backdrop-blur-xl">
+            <div className="flex items-center gap-2.5 shrink-0">
+              <span className="h-2 w-2 rounded-full bg-accent-cyan"></span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                Your Household (#842)
+              </span>
+              <span className="text-[11px] text-slate-500 font-mono hidden md:inline">
+                • {inventory.length || 4} synced items
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2">
+              {/* Indicator 1: Owned Equipment Context */}
+              <div
+                className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs transition-all duration-300 cursor-default ${
+                  activeScenario === 'compat'
+                    ? 'border-accent-cyan/70 bg-accent-cyan/15 text-white shadow-[0_0_20px_rgba(0,212,255,0.2)]'
+                    : activeScenario === 'unverified'
+                    ? 'border-accent-amber/70 bg-accent-amber/15 text-white shadow-[0_0_20px_rgba(245,158,11,0.2)]'
+                    : 'border-white/10 bg-white/[0.03] text-slate-300'
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    activeScenario === 'compat'
+                      ? 'bg-accent-cyan animate-ping'
+                      : activeScenario === 'unverified'
+                      ? 'bg-accent-amber animate-ping'
+                      : 'bg-slate-400'
+                  }`}
+                />
+                <span className="font-semibold text-white">Breville Barista Express</span>
+                <span className="text-[11px] text-slate-400 font-mono">Owned · 54 mm fit</span>
+              </div>
+
+              {/* Indicator 2: Recent Order Context */}
+              <div
+                className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs transition-all duration-300 cursor-default ${
+                  activeScenario === 'return'
+                    ? 'border-accent-emerald/70 bg-accent-emerald/15 text-white shadow-[0_0_20px_rgba(0,229,153,0.2)]'
+                    : 'border-white/10 bg-white/[0.03] text-slate-300'
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    activeScenario === 'return'
+                      ? 'bg-accent-emerald animate-ping'
+                      : 'bg-slate-400'
+                  }`}
+                />
+                <span className="font-semibold text-white">Order #842 (Kettle &amp; Sweater)</span>
+                <span className="text-[11px] text-slate-400 font-mono">Delivered · 28d return window</span>
               </div>
             </div>
-            <button
-              onClick={() => {
-                if (activeScenario === 'unverified') triggerScenario3();
-                else if (activeScenario === 'compat') triggerScenario1();
-                else triggerScenario2();
-              }}
-              disabled={loading}
-              className={`rounded-full px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md flex items-center gap-1.5 shrink-0 disabled:opacity-50 ${
-                activeScenario === 'unverified'
-                  ? 'bg-gradient-to-r from-accent-amber to-amber-500 shadow-accent-amber/20'
-                  : activeScenario === 'compat'
-                  ? 'bg-gradient-to-r from-accent-cyan to-accent-coral shadow-accent-coral/20'
-                  : 'bg-gradient-to-r from-accent-cyan to-accent-emerald shadow-accent-cyan/20'
-              }`}
-            >
-              {loading ? (
-                <>
-                  <RefreshCw className="h-3.5 w-3.5 animate-spin" /> Auditing...
-                </>
-              ) : (
-                <>
-                  {activeScenario === 'unverified'
-                    ? 'Test Refusal ⟳'
-                    : activeScenario === 'compat'
-                    ? 'Check Fit ⟳'
-                    : 'Check Orders ⟳'}
-                </>
-              )}
-            </button>
           </div>
         </div>
 
-        {/* Benchmark Scenario Section Label */}
-        <div className="w-full max-w-4xl mb-4 flex items-center justify-between px-1">
+        {/* Coherent Household Progression Section Label */}
+        <div className="w-full max-w-4xl mb-3.5 flex items-center justify-between px-1">
           <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
-            Benchmark Demo Scenarios
+            How Your Household Context Helps
           </span>
-          <span className="text-xs font-mono text-slate-500">
-            Click to test live MCP guardrails
+          <span className="text-xs text-slate-500">
+            Select a scenario to see Kept in action
           </span>
         </div>
 
-        {/* Benchmark Scenario Bento Grid */}
-        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {/* Bento 1: Pre-Purchase Compatibility */}
+        {/* Coherent 3-Step Bento Grid: 1. Before Buying -> 2. Missing Info -> 3. After Delivery */}
+        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+          {/* Card 1: Before Buying (Check compatibility against what you own) */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[200px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
               activeScenario === 'compat'
-                ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.02]'
+                ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="flex items-center justify-between gap-2 mb-3.5">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
                   {activeScenario === 'compat' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
-                  SPEC CHECK
+                  1. BEFORE BUYING
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Breville 54mm</span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors">
-                58mm-portafilter.fit
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
+                Buying a 58 mm Accessory
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Stops ordering 58mm portafilter for 54mm machine and flags 15% restocking fee.
+                Checks the listing against your 54 mm Breville and warns you about a 15% restocking fee before checkout.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
-              <span>Test Incompatible Fit</span>
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+              <span>Check Compatibility</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
-          {/* Bento 2: Multi-Item Order #842 Resolution */}
-          <div
-            onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[200px] relative ${
-              activeScenario === 'return'
-                ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80 scale-[1.02]'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
-            }`}
-          >
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
-                  {activeScenario === 'return' && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
-                  )}
-                  ORDER #842
-                </span>
-                <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Bedrock Nova</span>
-              </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-emerald transition-colors">
-                order-842.resolve
-              </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Inspects kettle crack via Nova Vision and routes 1-trip Whole Foods return.
-              </p>
-            </div>
-            <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
-              <span>Resolve Order #842</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
-
-          {/* Bento 3: Epistemic Honesty Refusal */}
+          {/* Card 2: Missing Information (Know when not to guess) */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[200px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
               activeScenario === 'unverified'
-                ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.02]'
+                ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.01]'
                 : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="flex items-center justify-between gap-2 mb-3.5">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber flex items-center gap-1.5">
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
                   )}
-                  SAFE STOP
+                  2. MISSING INFO
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-xs font-mono text-slate-500">Missing Specs</span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors">
-                unverified-seller.test
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors">
+                Seller Omitted the Size
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Halts checkout when 3rd-party listing lacks millimeter dimensions.
+                When a seller leaves out required millimeter dimensions, Kept refuses to guess and pauses the order.
               </p>
             </div>
-            <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
-              <span>Test Refusal Guard</span>
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+              <span>See Safe Stop</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card 3: After Delivery (Use evidence and order context to prepare a resolution) */}
+          <div
+            onClick={triggerScenario2}
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
+              activeScenario === 'return'
+                ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80 scale-[1.01]'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
+            }`}
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3.5">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
+                  {activeScenario === 'return' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
+                  )}
+                  3. AFTER DELIVERY
+                </span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Order #842</span>
+              </div>
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-emerald transition-colors">
+                Damaged or Wrong-Size Order
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Uses photo evidence on a cracked kettle and sweater order context to prepare a combined return plan.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
+              <span>Prepare Return Plan</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
@@ -515,7 +514,7 @@ export default function KeptApp() {
                     : 'bg-accent-emerald'
                 }`}></span>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
-                  Live Audit & Protocol Evidence
+                  Household Recommendation &amp; Verification
                 </span>
               </div>
               <button
