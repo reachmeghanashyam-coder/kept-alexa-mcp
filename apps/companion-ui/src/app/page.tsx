@@ -456,14 +456,17 @@ export default function KeptApp() {
   }
 
   return (
-    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-2">
-      {/* Seamless Unified Top Navigation Bar */}
-      <header className="w-full bg-transparent">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-4 pb-2">
+    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-2 relative overflow-x-hidden">
+      {/* Linear-grade ambient grid overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-grid-ambient opacity-60 z-0"></div>
+
+      {/* Seamless Floating Top Navigation Bar */}
+      <header className="sticky top-0 z-30 w-full backdrop-blur-xl bg-obsidian-950/70 border-b border-white/[0.06] transition-all">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-3.5">
           {/* Left: Apple-grade Kept Brand Mark */}
-          <div className="flex items-center gap-2.5 group cursor-default">
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-b from-white/[0.14] to-white/[0.04] p-[1px] shadow-[0_2px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105">
-              <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-obsidian-950/90 backdrop-blur-md">
+          <div className="flex items-center gap-3 group cursor-default">
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-b from-white/[0.18] to-white/[0.04] p-[1px] shadow-[0_2px_12px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.3)] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105">
+              <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-obsidian-950/95 backdrop-blur-md">
                 <svg
                   className="h-4 w-4"
                   viewBox="0 0 24 24"
@@ -489,21 +492,24 @@ export default function KeptApp() {
                 </svg>
               </div>
             </div>
-            <span className="font-semibold tracking-tight text-white text-base">Kept</span>
+            <div className="flex items-center gap-2">
+              <span className="font-bold tracking-tight text-white text-base">Kept</span>
+              <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] border border-white/5 px-1.5 py-0.5 rounded">v1.0 MCP</span>
+            </div>
           </div>
 
           {/* Right: Actions */}
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setShowHouseholdDrawer(true)}
-              className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+              className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm backdrop-blur-md"
             >
               <Layers className="h-3.5 w-3.5 text-accent-cyan" />
               <span>Household Ledger ({inventory.length || 4})</span>
             </button>
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
-              className="rounded-full bg-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-emerald/25 flex items-center gap-1.5"
+              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-[0_0_20px_rgba(0,229,153,0.3)] flex items-center gap-1.5"
             >
               <Code2 className="h-3.5 w-3.5" />
               {showTraceDrawer ? 'Hide Trace' : 'Inspect MCP'}
@@ -513,26 +519,26 @@ export default function KeptApp() {
       </header>
 
       {/* Main Container Naturally Filling Viewport with Confident Stature */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-8 sm:pt-14 pb-16 flex flex-col items-center">
+      <main className="relative z-10 mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-10 sm:pt-14 pb-16 flex flex-col items-center">
         {/* Hero Section */}
-        <div className="text-center max-w-3xl mb-10 sm:mb-14 flex flex-col items-center">
+        <div className="text-center max-w-3xl mb-12 sm:mb-14 flex flex-col items-center">
           {/* Crisp Compact Category Pill */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-slate-300 tracking-wide mb-7 shadow-sm backdrop-blur-md">
-            <span className="h-2 w-2 rounded-full bg-accent-cyan shadow-[0_0_8px_#00F0FF]"></span>
-            <span className="text-xs font-semibold text-slate-200">Purchase Verification</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-slate-200 tracking-wide mb-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-xl">
+            <span className="h-2 w-2 rounded-full bg-accent-cyan shadow-[0_0_8px_#00F0FF] animate-pulse"></span>
+            <span className="text-xs font-semibold text-slate-200">Purchase Verification Layer</span>
             <span className="text-slate-500">•</span>
-            <span className="text-[11px] font-mono font-semibold text-accent-cyan bg-accent-cyan/10 px-2 py-0.5 rounded">MCP</span>
+            <span className="text-[11px] font-mono font-semibold text-accent-cyan bg-accent-cyan/15 px-2 py-0.5 rounded border border-accent-cyan/20">Alexa+ MCP</span>
           </div>
 
           {/* Hero Title */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] mb-5 text-white">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-[-0.03em] leading-[1.05] mb-5 text-white">
             Buy what fits.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-200 text-lg sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed">
             Verifies proposed purchases against what you already own — stopping size mismatches, duplicate accessories, and wasted returns before checkout.
           </p>
         </div>
@@ -550,13 +556,14 @@ export default function KeptApp() {
           {/* Card 1: Before Buying (Check compatibility against what you own) */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 min-h-[300px] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
+            className={`group cursor-pointer rounded-3xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-2xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'compat'
-                ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/25 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
+                ? 'border-accent-cyan bg-gradient-to-b from-accent-cyan/[0.08] via-obsidian-900/95 to-obsidian-950 shadow-[0_0_40px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.015]'
+                : 'border-white/[0.08] bg-gradient-to-b from-white/[0.04] via-obsidian-900/60 to-obsidian-950/90 hover:border-accent-cyan/40 hover:shadow-[0_12px_40px_rgba(0,212,255,0.1)] hover:scale-[1.015]'
             }`}
           >
             <div>
+              {/* Card Header Eyebrow */}
               <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-accent-cyan shrink-0">
                   {activeScenario === 'compat' && (
@@ -564,28 +571,48 @@ export default function KeptApp() {
                   )}
                   1. FIT CHECK
                 </span>
-                <span className="text-[11px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded border border-white/5 truncate max-w-[130px]">
+                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/5 truncate max-w-[130px]">
                   Breville 54 mm
                 </span>
               </div>
-              <div className="flex items-center gap-3 mb-2.5">
-                <div className="p-2 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan shrink-0">
+
+              {/* Title & Icon */}
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2.5 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan shrink-0 group-hover:scale-105 transition-transform">
                   <Coffee className="h-5 w-5" />
                 </div>
-                <h3 className="font-bold text-white text-lg group-hover:text-accent-cyan transition-colors leading-snug">
-                  58 mm Portafilter
-                </h3>
+                <div>
+                  <h3 className="font-bold text-white text-lg group-hover:text-accent-cyan transition-colors leading-snug">
+                    58 mm Portafilter
+                  </h3>
+                  <span className="text-[11px] font-mono text-slate-400">Coffee Equipment Mismatch</span>
+                </div>
               </div>
-              <p className="text-sm text-slate-300 leading-relaxed mb-3.5">
-                Catches 58 mm size conflict against your 54 mm Breville and flags 15% return fee.
+
+              {/* Hardware Spec Diagnostic Widget */}
+              <div className="my-4 rounded-2xl border border-white/[0.07] bg-obsidian-950/80 p-3.5 shadow-inner">
+                <div className="flex items-center justify-between text-xs font-mono mb-2">
+                  <span className="text-slate-400">Cart Candidate:</span>
+                  <span className="text-rose-400 font-semibold bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded">58 mm (2 Ears)</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/5">
+                  <span className="text-slate-400">Household Unit:</span>
+                  <span className="text-accent-cyan font-semibold bg-accent-cyan/10 border border-accent-cyan/20 px-2 py-0.5 rounded">54 mm (3 Ears)</span>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-[11px]">
+                  <span className="text-slate-400">Merchant Penalty</span>
+                  <span className="text-rose-400 font-semibold">15% Restocking Fee</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Catches mechanical group-head conflict before checkout and prevents a non-refundable open box return fee.
               </p>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px] font-medium">
-                <XCircle className="h-3.5 w-3.5 shrink-0 text-rose-400" />
-                <span>54mm vs 58mm · 15% Restock Fee</span>
-              </div>
             </div>
-            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-cyan/15 border border-white/10 group-hover:border-accent-cyan/40 text-xs font-semibold text-slate-200 group-hover:text-accent-cyan flex items-center justify-between transition-all">
-              <span>Check Compatibility</span>
+
+            {/* Tactile Action Button */}
+            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-cyan/15 border border-white/10 group-hover:border-accent-cyan/50 text-xs font-semibold text-slate-200 group-hover:text-accent-cyan flex items-center justify-between transition-all shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+              <span>Run Fit Check Simulation</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
@@ -593,13 +620,14 @@ export default function KeptApp() {
           {/* Card 2: Duplicate Prevention (Household Memory) */}
           <div
             onClick={triggerScenarioDuplicate}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 min-h-[300px] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
+            className={`group cursor-pointer rounded-3xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-2xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'duplicate'
-                ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/25 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
+                ? 'border-accent-cyan bg-gradient-to-b from-accent-cyan/[0.08] via-obsidian-900/95 to-obsidian-950 shadow-[0_0_40px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.015]'
+                : 'border-white/[0.08] bg-gradient-to-b from-white/[0.04] via-obsidian-900/60 to-obsidian-950/90 hover:border-accent-cyan/40 hover:shadow-[0_12px_40px_rgba(0,212,255,0.1)] hover:scale-[1.015]'
             }`}
           >
             <div>
+              {/* Card Header Eyebrow */}
               <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-accent-cyan shrink-0">
                   {activeScenario === 'duplicate' && (
@@ -607,27 +635,47 @@ export default function KeptApp() {
                   )}
                   2. DUPLICATE CHECK
                 </span>
-                <span className="text-[11px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded border border-white/5 truncate max-w-[130px]">
+                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/5 truncate max-w-[130px]">
                   LG 4K Monitor
                 </span>
               </div>
-              <div className="flex items-center gap-3 mb-2.5">
-                <div className="p-2 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan shrink-0">
+
+              {/* Title & Icon */}
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2.5 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan shrink-0 group-hover:scale-105 transition-transform">
                   <Monitor className="h-5 w-5" />
                 </div>
-                <h3 className="font-bold text-white text-lg group-hover:text-accent-cyan transition-colors leading-snug">
-                  100W USB-C Cable ($29)
-                </h3>
+                <div>
+                  <h3 className="font-bold text-white text-lg group-hover:text-accent-cyan transition-colors leading-snug">
+                    100W USB-C Cable ($29)
+                  </h3>
+                  <span className="text-[11px] font-mono text-slate-400">Redundant Accessory Spend</span>
+                </div>
               </div>
-              <p className="text-sm text-slate-300 leading-relaxed mb-3.5">
-                Flags duplicate: your LG monitor box already includes an identical 90W+ cable.
+
+              {/* Hardware Spec Diagnostic Widget */}
+              <div className="my-4 rounded-2xl border border-white/[0.07] bg-obsidian-950/80 p-3.5 shadow-inner">
+                <div className="flex items-center justify-between text-xs font-mono mb-2">
+                  <span className="text-slate-400">Cart Candidate:</span>
+                  <span className="text-slate-200 font-semibold">$29.00 (100W Cable)</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/5">
+                  <span className="text-slate-400">Already in Box:</span>
+                  <span className="text-accent-emerald font-semibold bg-accent-emerald/10 border border-accent-emerald/20 px-2 py-0.5 rounded">Included (90W+ PD)</span>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-[11px]">
+                  <span className="text-slate-400">Financial Impact</span>
+                  <span className="text-accent-emerald font-bold">+$29.00 Saved</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Flags duplicate: your registered LG monitor packaging already includes an identical high-speed 90W+ cable.
               </p>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[11px] font-medium">
-                <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                <span>Duplicate Owned · Saves $29</span>
-              </div>
             </div>
-            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-cyan/15 border border-white/10 group-hover:border-accent-cyan/40 text-xs font-semibold text-slate-200 group-hover:text-accent-cyan flex items-center justify-between transition-all">
+
+            {/* Tactile Action Button */}
+            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-cyan/15 border border-white/10 group-hover:border-accent-cyan/50 text-xs font-semibold text-slate-200 group-hover:text-accent-cyan flex items-center justify-between transition-all shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
               <span>Save $29 &amp; Skip</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -636,13 +684,14 @@ export default function KeptApp() {
           {/* Card 3: Missing Information (Know when not to guess) */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 min-h-[300px] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
+            className={`group cursor-pointer rounded-3xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-2xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'unverified'
-                ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/25 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
+                ? 'border-accent-amber bg-gradient-to-b from-accent-amber/[0.08] via-obsidian-900/95 to-obsidian-950 shadow-[0_0_40px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.015]'
+                : 'border-white/[0.08] bg-gradient-to-b from-white/[0.04] via-obsidian-900/60 to-obsidian-950/90 hover:border-accent-amber/40 hover:shadow-[0_12px_40px_rgba(245,158,11,0.1)] hover:scale-[1.015]'
             }`}
           >
             <div>
+              {/* Card Header Eyebrow */}
               <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-1 text-[11px] font-semibold text-accent-amber shrink-0">
                   {activeScenario === 'unverified' && (
@@ -650,28 +699,48 @@ export default function KeptApp() {
                   )}
                   3. MISSING SPECS
                 </span>
-                <span className="text-[11px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded border border-white/5 truncate max-w-[130px]">
+                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/5 truncate max-w-[130px]">
                   Breville 54 mm
                 </span>
               </div>
-              <div className="flex items-center gap-3 mb-2.5">
-                <div className="p-2 rounded-xl bg-accent-amber/10 border border-accent-amber/20 text-accent-amber shrink-0">
+
+              {/* Title & Icon */}
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2.5 rounded-2xl bg-accent-amber/10 border border-accent-amber/20 text-accent-amber shrink-0 group-hover:scale-105 transition-transform">
                   <AlertTriangle className="h-5 w-5" />
                 </div>
-                <h3 className="font-bold text-white text-lg group-hover:text-accent-amber transition-colors leading-snug">
-                  Universal Dosing Collar
-                </h3>
+                <div>
+                  <h3 className="font-bold text-white text-lg group-hover:text-accent-amber transition-colors leading-snug">
+                    Universal Dosing Collar
+                  </h3>
+                  <span className="text-[11px] font-mono text-slate-400">Epistemic Safe Stop</span>
+                </div>
               </div>
-              <p className="text-sm text-slate-300 leading-relaxed mb-3.5">
-                Pauses checkout when a third-party seller omits required millimeter dimensions.
+
+              {/* Hardware Spec Diagnostic Widget */}
+              <div className="my-4 rounded-2xl border border-white/[0.07] bg-obsidian-950/80 p-3.5 shadow-inner">
+                <div className="flex items-center justify-between text-xs font-mono mb-2">
+                  <span className="text-slate-400">Seller Claim:</span>
+                  <span className="text-amber-300 font-semibold bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">"Universal Fit"</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/5">
+                  <span className="text-slate-400">Exact Millimeter:</span>
+                  <span className="text-rose-400 font-semibold bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded">Missing / Omitted</span>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-[11px]">
+                  <span className="text-slate-400">Kept Guardrail</span>
+                  <span className="text-accent-amber font-semibold">Safe Stop Triggered</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Halts checkout when a third-party seller omits required millimeter dimensions rather than hallucinating compatibility.
               </p>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[11px] font-medium">
-                <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-400" />
-                <span>Unverified Specs · Safe Pause</span>
-              </div>
             </div>
-            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-amber/15 border border-white/10 group-hover:border-accent-amber/40 text-xs font-semibold text-slate-200 group-hover:text-amber-300 flex items-center justify-between transition-all">
-              <span>See Safe Stop</span>
+
+            {/* Tactile Action Button */}
+            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-amber/15 border border-white/10 group-hover:border-accent-amber/50 text-xs font-semibold text-slate-200 group-hover:text-amber-300 flex items-center justify-between transition-all shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+              <span>See Safe Stop In Action</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
