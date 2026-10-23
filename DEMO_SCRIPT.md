@@ -15,7 +15,7 @@
 "She doesn't know our kitchen. She doesn't know our kids. And she doesn't know what makes them sick."
 
 **NIDHI (0:12 - 0:18):**  
-"Big AI knows the world. Kept knows our home."
+"AI knows the world. Kept knows our home."
 
 ---
 
@@ -72,7 +72,7 @@ Saved our family \$35 with zero waste."
 **NIDHI & DAD (1:20 - 1:30):**  
 "Kept turns a generic assistant into a household guardian.  
 Thank you, Amazon!"  
-*(Fade out on Kept logo: `Big AI knows the world. Kept knows your home.`)*
+*(Fade out on Kept logo: `AI knows the world. Kept knows your home.`)*
 
 ---
 

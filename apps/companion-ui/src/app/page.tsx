@@ -485,7 +485,7 @@ export default function KeptApp() {
           {/* Category Pill */}
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-medium text-cyan-300 tracking-wide mb-5 shadow-sm backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
-            <span>FAMILY MEMORY &amp; CARE LAYER FOR ALEXA+</span>
+            <span>Family Memory for Alexa+</span>
           </div>
 
           {/* Hero Title */}
