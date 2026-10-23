@@ -1441,12 +1441,12 @@ export default function KeptApp() {
         )}
       </main>
 
-      {/* Sleek Refined Utility Footer */}
-      <footer className="w-full max-w-5xl mx-auto px-6 py-3 mb-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500/80 font-normal border-t border-white/5 pt-4">
+      {/* Sleek Refined Utility Footer with Generous Breathing Space */}
+      <footer className="w-full max-w-5xl mx-auto px-6 pt-8 pb-10 mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500 font-normal border-t border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <span className="font-medium text-slate-400/90">Kept</span>
-          <span className="text-slate-600/60">•</span>
-          <span>Alexa+ Commerce & Returns Guardian</span>
+          <span className="font-semibold text-slate-400">Kept</span>
+          <span className="text-slate-600">•</span>
+          <span>Alexa+ Commerce &amp; Returns Guardian</span>
         </div>
 
         <div>
