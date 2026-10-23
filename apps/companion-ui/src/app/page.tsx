@@ -512,20 +512,20 @@ export default function KeptApp() {
         </div>
       </header>
 
-      {/* Main Container Naturally Filling Viewport with Perfect Vertical Centering */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 py-6 sm:py-10 flex flex-col justify-center items-center min-h-[calc(100vh-130px)]">
+      {/* Main Container Naturally Filling Viewport with Confident Stature */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-8 sm:pt-14 pb-16 flex flex-col items-center">
         {/* Hero Section */}
-        <div className="text-center max-w-3xl mb-8 sm:mb-9 flex flex-col items-center">
+        <div className="text-center max-w-3xl mb-10 sm:mb-14 flex flex-col items-center">
           {/* Crisp Compact Category Pill */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300 tracking-wide mb-6 shadow-sm backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-            <span className="text-[11px] font-semibold text-slate-200">Purchase Verification</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-slate-300 tracking-wide mb-7 shadow-sm backdrop-blur-md">
+            <span className="h-2 w-2 rounded-full bg-accent-cyan shadow-[0_0_8px_#00F0FF]"></span>
+            <span className="text-xs font-semibold text-slate-200">Purchase Verification</span>
             <span className="text-slate-500">•</span>
-            <span className="text-[10px] font-mono font-semibold text-accent-cyan bg-accent-cyan/10 px-1.5 py-0.5 rounded">MCP</span>
+            <span className="text-[11px] font-mono font-semibold text-accent-cyan bg-accent-cyan/10 px-2 py-0.5 rounded">MCP</span>
           </div>
 
           {/* Hero Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-4 text-white">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] mb-5 text-white">
             Buy what fits.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
@@ -540,13 +540,13 @@ export default function KeptApp() {
         {/* Section Header: Clarifies Sample Simulations Grounded in Household */}
         <div className="w-full max-w-5xl mb-4 px-1 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan/80"></span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
+            <span className="h-2 w-2 rounded-full bg-accent-cyan/80"></span>
+            <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
               SAMPLE SCENARIO SIMULATIONS · HOUSEHOLD #842
             </span>
           </div>
-          <span className="text-[10px] font-mono text-slate-500 hidden sm:inline-block">
-            Click card to run simulation
+          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline-block">
+            Click any card to simulate verification
           </span>
         </div>
 
@@ -555,111 +555,129 @@ export default function KeptApp() {
           {/* Card 1: Before Buying (Check compatibility against what you own) */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
+            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 min-h-[300px] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/25 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan shrink-0">
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-accent-cyan shrink-0">
                   {activeScenario === 'compat' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
                   1. FIT CHECK
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/5 truncate max-w-[120px]">
+                <span className="text-[11px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded border border-white/5 truncate max-w-[130px]">
                   Breville 54 mm
                 </span>
               </div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <Coffee className="h-4 w-4 text-accent-cyan shrink-0" />
-                <h3 className="font-bold text-white text-base group-hover:text-accent-cyan transition-colors leading-snug">
+              <div className="flex items-center gap-3 mb-2.5">
+                <div className="p-2 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan shrink-0">
+                  <Coffee className="h-5 w-5" />
+                </div>
+                <h3 className="font-bold text-white text-lg group-hover:text-accent-cyan transition-colors leading-snug">
                   58 mm Portafilter
                 </h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed mb-3.5">
                 Catches 58 mm size conflict against your 54 mm Breville and flags 15% return fee.
               </p>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px] font-medium">
+                <XCircle className="h-3.5 w-3.5 shrink-0 text-rose-400" />
+                <span>54mm vs 58mm · 15% Restock Fee</span>
+              </div>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-cyan/15 border border-white/10 group-hover:border-accent-cyan/40 text-xs font-semibold text-slate-200 group-hover:text-accent-cyan flex items-center justify-between transition-all">
               <span>Check Compatibility</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Card 2: Duplicate Prevention (Household Memory) */}
           <div
             onClick={triggerScenarioDuplicate}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
+            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 min-h-[300px] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'duplicate'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/25 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan shrink-0">
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-1 text-[11px] font-semibold text-accent-cyan shrink-0">
                   {activeScenario === 'duplicate' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
                   2. DUPLICATE CHECK
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/5 truncate max-w-[120px]">
+                <span className="text-[11px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded border border-white/5 truncate max-w-[130px]">
                   LG 4K Monitor
                 </span>
               </div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <Monitor className="h-4 w-4 text-accent-cyan shrink-0" />
-                <h3 className="font-bold text-white text-base group-hover:text-accent-cyan transition-colors leading-snug">
+              <div className="flex items-center gap-3 mb-2.5">
+                <div className="p-2 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan shrink-0">
+                  <Monitor className="h-5 w-5" />
+                </div>
+                <h3 className="font-bold text-white text-lg group-hover:text-accent-cyan transition-colors leading-snug">
                   100W USB-C Cable ($29)
                 </h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed mb-3.5">
                 Flags duplicate: your LG monitor box already includes an identical 90W+ cable.
               </p>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[11px] font-medium">
+                <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                <span>Duplicate Owned · Saves $29</span>
+              </div>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-cyan/15 border border-white/10 group-hover:border-accent-cyan/40 text-xs font-semibold text-slate-200 group-hover:text-accent-cyan flex items-center justify-between transition-all">
               <span>Save $29 &amp; Skip</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Card 3: Missing Information (Know when not to guess) */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
+            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 min-h-[300px] transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/25 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber shrink-0">
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-1 text-[11px] font-semibold text-accent-amber shrink-0">
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
                   )}
                   3. MISSING SPECS
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/5 truncate max-w-[120px]">
+                <span className="text-[11px] font-mono text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded border border-white/5 truncate max-w-[130px]">
                   Breville 54 mm
                 </span>
               </div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <AlertTriangle className="h-4 w-4 text-accent-amber shrink-0" />
-                <h3 className="font-bold text-white text-base group-hover:text-accent-amber transition-colors leading-snug">
+              <div className="flex items-center gap-3 mb-2.5">
+                <div className="p-2 rounded-xl bg-accent-amber/10 border border-accent-amber/20 text-accent-amber shrink-0">
+                  <AlertTriangle className="h-5 w-5" />
+                </div>
+                <h3 className="font-bold text-white text-lg group-hover:text-accent-amber transition-colors leading-snug">
                   Universal Dosing Collar
                 </h3>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed mb-3.5">
                 Pauses checkout when a third-party seller omits required millimeter dimensions.
               </p>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[11px] font-medium">
+                <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-400" />
+                <span>Unverified Specs · Safe Pause</span>
+              </div>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+            <div className="mt-5 w-full py-2.5 px-4 rounded-xl bg-white/[0.03] group-hover:bg-accent-amber/15 border border-white/10 group-hover:border-accent-amber/40 text-xs font-semibold text-slate-200 group-hover:text-amber-300 flex items-center justify-between transition-all">
               <span>See Safe Stop</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
