@@ -6,7 +6,7 @@
 **Demo video:** https://www.loom.com/share/7e933e9ad5fa4970bd28d728f738a466  
 *The companion UI simulates the Alexa+ voice agent; it is grounded by the real, self-hosted MCP server (Streamable HTTP, `2025-11-25` spec) exposed at `/api/mcp`.*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](packages/policy-guard/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![MCP Spec](https://img.shields.io/badge/MCP%20Spec-2025--11--25%20Streamable%20HTTP-cyan.svg)](packages/kept-mcp)
 [![AWS Bedrock](https://img.shields.io/badge/AWS%20Bedrock-Nova%20Multimodal%20Vision-blue.svg)](packages/kept-mcp/src/bedrock.ts)
 [![Tests: Vitest](https://img.shields.io/badge/Tests-20%20Unit%20%2B%2015%20E2E%20Passed%20(100%25)-brightgreen.svg)](packages/policy-guard/tests)
