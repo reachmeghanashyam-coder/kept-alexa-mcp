@@ -234,6 +234,81 @@ export default function KeptApp() {
   }
 
 
+
+  // Interactive Verification Engine: handles free-text query or quick test chip
+  async function handleCustomQuerySubmit(query: string) {
+    if (!query.trim()) return;
+    const q = query.toLowerCase();
+    setLoading(true);
+    setExecutionResult(null);
+
+    let candidate: any;
+    if (q.includes('58') || (q.includes('portafilter') && !q.includes('54'))) {
+      setActiveScenario('compat');
+      candidate = {
+        title: query,
+        brand: 'MATOW',
+        category: 'Kitchen Appliances',
+        targetSpecs: { portafilterSizeMm: 58, earCount: 2 },
+        sellerPolicy: { isThirdParty: true, restockingFeePercent: 15, returnWindowDays: 30, termsExplicitlyStated: true },
+      };
+    } else if (q.includes('cable') || q.includes('usb') || q.includes('anker')) {
+      setActiveScenario('duplicate');
+      candidate = {
+        title: query,
+        brand: 'Anker',
+        category: 'Electronics & Office',
+        targetSpecs: { cableType: 'USB-C to USB-C', powerDeliveryWatts: 100, lengthMeters: 1.0 },
+        sellerPolicy: { isThirdParty: false, restockingFeePercent: 0, returnWindowDays: 30, termsExplicitlyStated: true },
+      };
+    } else if (q.includes('universal') || q.includes('collar') || q.includes('dimension') || q.includes('unverified')) {
+      setActiveScenario('unverified');
+      candidate = {
+        title: query,
+        category: 'Kitchen Appliances',
+        targetSpecs: {},
+        sellerPolicy: { isThirdParty: true, termsExplicitlyStated: false },
+      };
+    } else if (q.includes('54') || q.includes('capmesso')) {
+      setActiveScenario('compat');
+      candidate = {
+        title: query,
+        category: 'Kitchen Appliances',
+        targetSpecs: { portafilterSizeMm: 54, earCount: 3 },
+        sellerPolicy: { isThirdParty: false, restockingFeePercent: 0, returnWindowDays: 30, termsExplicitlyStated: true },
+      };
+    } else {
+      const mmMatch = q.match(/(\d+)\s*mm/);
+      const sizeMm = mmMatch ? parseInt(mmMatch[1], 10) : undefined;
+      const isKitchen = q.includes('coffee') || q.includes('espresso') || q.includes('basket') || q.includes('tamper');
+      
+      setActiveScenario('compat');
+      candidate = {
+        title: query,
+        category: isKitchen ? 'Kitchen Appliances' : 'General Merchandise',
+        targetSpecs: sizeMm ? { portafilterSizeMm: sizeMm, earCount: 3 } : {},
+        sellerPolicy: { isThirdParty: false, restockingFeePercent: 0, returnWindowDays: 30, termsExplicitlyStated: true },
+      };
+    }
+
+    try {
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'check_purchase_compatibility',
+          arguments: { candidate },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
+      setCompatResult(parsed);
+      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Trigger Scenario: Duplicate Accessory Owned (LG Monitor USB-C Cable)
   async function triggerScenarioDuplicate() {
     setActiveScenario('duplicate');
@@ -454,6 +529,67 @@ export default function KeptApp() {
           <p className="text-slate-200 text-base sm:text-lg max-w-2xl mx-auto font-medium mt-3">
             AI shopping that actually knows your home.
           </p>
+
+          {/* Interactive AI Verification Command Bar */}
+          <div className="w-full max-w-2xl mx-auto mt-6">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (customQuery.trim()) handleCustomQuerySubmit(customQuery);
+              }}
+              className="relative flex items-center rounded-2xl border border-white/15 bg-obsidian-950/85 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 focus-within:border-accent-cyan/80 focus-within:ring-2 focus-within:ring-accent-cyan/40 transition-all"
+            >
+              <Search className="h-5 w-5 text-slate-400 ml-3 shrink-0" />
+              <input
+                type="text"
+                value={customQuery}
+                onChange={(e) => setCustomQuery(e.target.value)}
+                placeholder="Ask Kept to verify any purchase (e.g. 58mm portafilter, 100W cable...)"
+                className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={loading || !customQuery.trim()}
+                className="rounded-xl bg-accent-cyan px-4 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 flex items-center gap-1.5 cursor-pointer shadow-md"
+              >
+                {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+                <span>Verify</span>
+              </button>
+            </form>
+
+            {/* Quick Clickable Query Chips */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
+              <span className="text-[11px] text-slate-500 font-mono">Test queries:</span>
+              <button
+                type="button"
+                onClick={() => { setCustomQuery('58mm Bottomless Portafilter'); handleCustomQuerySubmit('58mm Bottomless Portafilter'); }}
+                className="rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
+              >
+                ⚡ 58mm Portafilter
+              </button>
+              <button
+                type="button"
+                onClick={() => { setCustomQuery('100W USB-C Monitor Cable'); handleCustomQuerySubmit('100W USB-C Monitor Cable'); }}
+                className="rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
+              >
+                ⚡ 100W USB-C Cable
+              </button>
+              <button
+                type="button"
+                onClick={() => { setCustomQuery('Universal Collar (No Dimensions)'); handleCustomQuerySubmit('Universal Collar (No Dimensions)'); }}
+                className="rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
+              >
+                ⚡ Universal Collar
+              </button>
+              <button
+                type="button"
+                onClick={() => { setCustomQuery('54mm Capmesso Matching Item'); handleCustomQuerySubmit('54mm Capmesso Matching Item'); }}
+                className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 hover:bg-accent-emerald/20 px-3 py-1 text-[11px] font-mono text-accent-emerald transition-all cursor-pointer"
+              >
+                ✓ 54mm Compatible
+              </button>
+            </div>
+          </div>
         </div>
 
         <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
