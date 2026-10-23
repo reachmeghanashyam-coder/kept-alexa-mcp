@@ -1429,8 +1429,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: Household Memory Enclave §Samsung Specs &amp; Storage Inventory</span>
-              <span className="text-accent-emerald font-semibold">✓ Saved $34.99 • Budget Protected</span>
+              <span>Source: Household Memory</span>
+              <span className="text-accent-emerald font-semibold">✓ Saved $34.99</span>
             </div>
           </div>
         )}
