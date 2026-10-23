@@ -4,7 +4,6 @@ KEPT — FAMILY MEMORY FOR ALEXA+
 Setup: Loom screen recording http://localhost:3000 with front camera bubble showing Nidhi & Dad.
 Total Time: 1 Minute 30 Seconds.
 
---------------------------------------------------
 [0:00 - 0:06]
 NIDHI:
 "Alexa lives in over 100 million homes. But the second you ask her for help... she acts like a complete stranger."
@@ -12,7 +11,7 @@ NIDHI:
 
 [0:06 - 0:12]
 DAD:
-"She doesn't know our kitchen. She doesn't know our kids. And she doesn't know what makes them sick."
+"She answers questions and recommends products, completely blind to our family and our home."
 --> SCREEN: Mouse cursor rests on screen.
 
 [0:12 - 0:18]
@@ -45,13 +44,13 @@ NIDHI:
 
 [0:52 - 1:06]
 DAD:
-"And when I went to buy an HDMI switch, Kept paused checkout: 'Your TV already has open ports, and you have an unopened 4K cable in your drawer.' Saved our family $35."
+"And when I went to buy an HDMI switch, Kept paused checkout: 'Your TV already has open ports, and you have an unopened 4K cable in your drawer.'"
 --> CLICK 4: Click Card 03 (Duplicate Spend Guard).
 --> SCREEN: Lights up AMBER: Redundant Spend Paused • Save $34.99.
 
 [1:06 - 1:13]
 DAD:
-"Cloud AI has all the world's knowledge, but zero home context. Kept is the personal layer that connects you and your family to Alexa."
+"AI has all the world's knowledge, but zero home context. Kept is the personal layer that connects you and your family to Alexa."
 --> CLICK 5: Click "Household Ledger (4)" in header.
 --> SCREEN: Modal opens showing Leo, Nidhi, TV & Kitchen.
 
