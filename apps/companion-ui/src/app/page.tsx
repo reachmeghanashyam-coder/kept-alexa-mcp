@@ -465,7 +465,7 @@ export default function KeptApp() {
               className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] px-4 py-2 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Layers className="h-3.5 w-3.5 text-cyan-400" />
-              <span>Household Ledger (2)</span>
+              <span>Household Ledger (4)</span>
             </button>
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
@@ -485,7 +485,7 @@ export default function KeptApp() {
           {/* Category Pill */}
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-medium text-cyan-300 tracking-wide mb-5 shadow-sm backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
-            <span>Personal Household Care Layer</span>
+            <span>FAMILY MEMORY &amp; CARE LAYER FOR ALEXA+</span>
           </div>
 
           {/* Hero Title */}
@@ -496,8 +496,8 @@ export default function KeptApp() {
               Kept personalizes it.
             </span>
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mt-[15px]">
-            The gentle layer of household memory for Alexa+ that protects family allergies, knows your real appliances, and prevents wasted spend before checkout.
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mt-[15px]">
+            Because the AI living on your kitchen counter shouldn’t act like a complete stranger. Kept trains Alexa+ on what matters most—your children’s safety, their curious minds, and the home you love.
           </p>
         </div>
 

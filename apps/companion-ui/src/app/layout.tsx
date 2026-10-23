@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Kept — Alexa+ Commerce & Returns Guardian',
+  title: 'Kept — The Personal Household Care Layer for Alexa+',
   description:
-    'Zero-Regret Orders. Zero-Friction Returns. Unified household memory preventing incompatible purchases and automating single-trip returns.',
+    'Big AI knows the world. Kept knows your home. The private memory brain for Alexa+ that protects children’s allergies, nurtures their learning, and guards family spend.',
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.svg',
