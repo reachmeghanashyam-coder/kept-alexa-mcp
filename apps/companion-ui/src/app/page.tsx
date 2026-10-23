@@ -581,13 +581,6 @@ export default function KeptApp() {
               >
                 ⚡ Universal Collar
               </button>
-              <button
-                type="button"
-                onClick={() => { setCustomQuery('54mm Capmesso Matching Item'); handleCustomQuerySubmit('54mm Capmesso Matching Item'); }}
-                className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 hover:bg-accent-emerald/20 px-3 py-1 text-[11px] font-mono text-accent-emerald transition-all cursor-pointer"
-              >
-                ✓ 54mm Compatible
-              </button>
             </div>
           </div>
         </div>
