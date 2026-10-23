@@ -535,61 +535,8 @@ export default function KeptApp() {
           </p>
         </div>
 
-        {/* Cute Compact Command Bar */}
-        <div className="w-full max-w-md mx-auto mb-8 sm:mb-10">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (customQuery.trim()) handleCustomQuerySubmit(customQuery);
-            }}
-            className="relative flex items-center rounded-full border border-white/15 bg-obsidian-950/90 py-1.5 pl-3.5 pr-1.5 shadow-xl backdrop-blur-2xl ring-1 ring-white/10 focus-within:border-accent-cyan/70 focus-within:ring-2 focus-within:ring-accent-cyan/30 transition-all"
-          >
-            <Search className="h-4 w-4 text-slate-400 mr-2 shrink-0" />
-            <input
-              type="text"
-              value={customQuery}
-              onChange={(e) => setCustomQuery(e.target.value)}
-              placeholder="Select a test query below..."
-              className="w-full bg-transparent text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none"
-            />
-            <button
-              type="submit"
-              disabled={loading || !customQuery.trim()}
-              className="rounded-full bg-accent-cyan px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 flex items-center gap-1.5 cursor-pointer shadow-md"
-            >
-              {loading ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
-              <span>Verify</span>
-            </button>
-          </form>
-
-          {/* Quick Clickable Query Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
-            <button
-              type="button"
-              onClick={() => { setCustomQuery('58mm Bottomless Portafilter'); handleCustomQuerySubmit('58mm Bottomless Portafilter'); }}
-              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
-            >
-              ⚡ 58mm Portafilter
-            </button>
-            <button
-              type="button"
-              onClick={() => { setCustomQuery('100W USB-C Monitor Cable'); handleCustomQuerySubmit('100W USB-C Monitor Cable'); }}
-              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
-            >
-              ⚡ 100W Cable
-            </button>
-            <button
-              type="button"
-              onClick={() => { setCustomQuery('Universal Collar (No Dimensions)'); handleCustomQuerySubmit('Universal Collar (No Dimensions)'); }}
-              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-amber/40"
-            >
-              ⚡ Universal Collar
-            </button>
-          </div>
-        </div>
-
         {/* Section Header: Clarifies Sample Simulations Grounded in Household */}
-        <div className="w-full max-w-5xl mb-3.5 px-1 flex items-center justify-between">
+        <div className="w-full max-w-5xl mb-4 px-1 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan/80"></span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
