@@ -456,10 +456,10 @@ export default function KeptApp() {
   }
 
   return (
-    <div className="min-h-screen bg-[#06090F] text-slate-100 flex flex-col font-sans pb-10">
+    <div className="min-h-screen bg-[#06090F] text-slate-100 flex flex-col font-sans">
       {/* Top Navigation Bar with subtle border and crisp contrast */}
       <header className="w-full border-b border-white/[0.08] bg-[#06090F]/80 backdrop-blur-md">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-3">
           {/* Left: Original Clean Apple-grade Brand Mark */}
           <div className="flex items-center gap-2.5 group cursor-default">
             <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-b from-white/[0.14] to-white/[0.04] p-[1px] shadow-[0_2px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105">
@@ -513,30 +513,30 @@ export default function KeptApp() {
       </header>
 
       {/* Main Container */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-12 sm:pt-16 pb-12 flex flex-col items-center">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-6 sm:pt-8 pb-3 flex flex-col justify-center items-center">
         {/* Hero Section */}
-        <div className="text-center max-w-3xl mb-12 flex flex-col items-center">
+        <div className="text-center max-w-3xl mb-6 sm:mb-7 flex flex-col items-center">
           {/* Category Pill matching Agentic style */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-medium text-cyan-300 tracking-wide mb-6 shadow-sm backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-medium text-cyan-300 tracking-wide mb-3 shadow-sm backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
             <span>Purchase Verification Protocol</span>
           </div>
 
           {/* Hero Title */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-5 text-white">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-3 text-white">
             Buy what fits.
             <br />
             <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Verifies proposed purchases against what you already own — stopping size mismatches, duplicate accessories, and wasted returns before checkout.
           </p>
         </div>
 
         {/* Section Eyebrow */}
-        <div className="w-full max-w-5xl mb-4 px-1 flex items-center gap-2">
+        <div className="w-full max-w-5xl mb-3 px-1 flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#00F0FF]"></span>
           <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
             RUN SHOPPING SIMULATION
@@ -544,11 +544,11 @@ export default function KeptApp() {
         </div>
 
         {/* 3 Bento Boxes Matching Reference Design */}
-        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
           {/* Card 1 */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-200 flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
               activeScenario === 'compat'
                 ? 'border-cyan-400 bg-[#0B1220] ring-1 ring-cyan-400/50 shadow-lg shadow-cyan-500/10'
                 : 'border-white/[0.08] bg-[#0A0F1D]/80 hover:border-white/20 hover:bg-[#0E1528]'
@@ -556,8 +556,8 @@ export default function KeptApp() {
           >
             <div>
               {/* Circular numbered badge */}
-              <div className="flex items-center justify-between mb-6">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-400">
+              <div className="flex items-center justify-between mb-4">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-400">
                   01
                 </span>
                 <span className="text-[11px] font-mono text-slate-500">
@@ -565,7 +565,7 @@ export default function KeptApp() {
                 </span>
               </div>
 
-              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-base font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
                 Real-Time Fit Check
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -573,16 +573,16 @@ export default function KeptApp() {
               </p>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-cyan-400">
+            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-cyan-400">
               <span>Test 58mm Portafilter</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Card 2 */}
           <div
             onClick={triggerScenarioDuplicate}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-200 flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
               activeScenario === 'duplicate'
                 ? 'border-emerald-400 bg-[#0B1220] ring-1 ring-emerald-400/50 shadow-lg shadow-emerald-500/10'
                 : 'border-white/[0.08] bg-[#0A0F1D]/80 hover:border-white/20 hover:bg-[#0E1528]'
@@ -590,8 +590,8 @@ export default function KeptApp() {
           >
             <div>
               {/* Circular numbered badge */}
-              <div className="flex items-center justify-between mb-6">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-950/80 border border-emerald-500/30 text-xs font-mono font-bold text-emerald-400">
+              <div className="flex items-center justify-between mb-4">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-950/80 border border-emerald-500/30 text-xs font-mono font-bold text-emerald-400">
                   02
                 </span>
                 <span className="text-[11px] font-mono text-slate-500">
@@ -599,7 +599,7 @@ export default function KeptApp() {
                 </span>
               </div>
 
-              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
+              <h3 className="text-base font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
                 Duplicate Accessory Guard
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -607,16 +607,16 @@ export default function KeptApp() {
               </p>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-emerald-400">
+            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-emerald-400">
               <span>Test 100W USB-C Cable</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           {/* Card 3 */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-7 transition-all duration-200 flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
               activeScenario === 'unverified'
                 ? 'border-purple-400 bg-[#0B1220] ring-1 ring-purple-400/50 shadow-lg shadow-purple-500/10'
                 : 'border-white/[0.08] bg-[#0A0F1D]/80 hover:border-white/20 hover:bg-[#0E1528]'
@@ -624,8 +624,8 @@ export default function KeptApp() {
           >
             <div>
               {/* Circular numbered badge */}
-              <div className="flex items-center justify-between mb-6">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-950/80 border border-purple-500/30 text-xs font-mono font-bold text-purple-400">
+              <div className="flex items-center justify-between mb-4">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-purple-950/80 border border-purple-500/30 text-xs font-mono font-bold text-purple-400">
                   03
                 </span>
                 <span className="text-[11px] font-mono text-slate-500">
@@ -633,7 +633,7 @@ export default function KeptApp() {
                 </span>
               </div>
 
-              <h3 className="text-lg font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+              <h3 className="text-base font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
                 Missing Spec Pause
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
@@ -641,9 +641,9 @@ export default function KeptApp() {
               </p>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-purple-400">
+            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-purple-400">
               <span>Test Universal Collar</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
@@ -1449,8 +1449,8 @@ export default function KeptApp() {
         )}
       </main>
 
-      {/* Sleek Refined Utility Footer with Generous Breathing Space */}
-      <footer className="w-full max-w-5xl mx-auto px-6 pt-8 pb-10 mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500 font-normal border-t border-white/[0.06]">
+      {/* Sleek Refined Utility Footer — Anchored Gracefully on Page 1 */}
+      <footer className="w-full max-w-5xl mx-auto px-6 py-3 mt-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 font-normal border-t border-white/[0.06]">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-slate-400">Kept</span>
           <span className="text-slate-600">•</span>
