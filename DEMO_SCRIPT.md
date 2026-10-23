@@ -2,48 +2,65 @@
 ## Father & Daughter Demo Video Script (Loom: Screen + Cam)
 *Target Duration: 90 to 105 seconds (Max 1:45)*  
 *Setup: Loom recording with front camera bubble (Father & Daughter) + Screen sharing `http://localhost:3000` (Fullscreen 1080p, Dark Mode)*  
-*Format: Father navigates and clicks; Daughter narrates with natural, clear warmth.*
+*Format: Father navigates and clicks; Daughter narrates with natural, calm, conversational warmth.*
 
 ---
 
-### Segment 1: The Problem & The Introduction (0:00 – 0:20)
+### Segment 1: The Core Problem & Positioning (0:00 – 0:18)
 * **What Father does on screen:**  
-  Sitting together with your daughter in the camera bubble. Screen is on the clean Kept home page with the title *"Zero-Regret Orders. Zero-Friction Returns."*
+  You and your daughter are smiling in the camera bubble. Screen is centered on the clean Kept home page:  
+  **`Alexa+ can shop for you. Kept makes sure it buys the right thing.`**
 * **What Daughter says:**  
-  > *"Hi everyone! Like millions of families, boxes arrive at our doorstep from Amazon almost every week. But the moment something doesn't fit, or arrives damaged, dealing with returns, boxes, and fees turns into a real chore.  
+  > *"Hi everyone! AI agents like Alexa+ are about to start shopping for our homes automatically. But when an agent buys things without knowing what you already own, it's easy to waste money on the wrong size or get stuck with return fees.  
   > 
-  > This is **Kept** — an Alexa+ companion we built that stops the wrong orders before you buy, and makes returns effortless after they arrive."*
+  > This is **Kept** — a prototype exploring how shopping agents can use household context, verified specifications, and human approval gates to make safer commerce decisions."*
 
 ---
 
-### Segment 2: Checking Before You Buy (0:20 – 0:45)
+### Segment 2: Checking Fit & Resolving Alternatives (0:18 – 0:42)
 * **What Father does on screen:**  
-  Click the second scenario option: **`A 58 mm accessory (Size conflict)`**.  
-  The red card appears: **`● Will Not Fit • Purchase Prevented`**. Show the 54 mm vs 58 mm table and the 15% restocking fee alert.
+  1. Point cursor to the Household bar: `Breville Barista Express (54 mm fit)`.  
+  2. Click Card 1: **`1. Before Buying: Buying a 58 mm Accessory`**.  
+  3. Show the red card and open Decision Record: 58 mm mismatch + 15% restocking fee warning.  
+  4. Click the cyan button: **`Verify & Switch to 54 mm Item`**.  
+  5. The card instantly turns green: `● COMPATIBLE • Exact specification match (54 mm 3-Ear)`.
 * **What Daughter says:**  
-  > *"Here's a real example: Dad was looking for a replacement portafilter for our Breville espresso machine. Normal assistants will just place the order.  
+  > *"Here's a real example: Dad wants a new portafilter for our Breville espresso machine. Other shopping agents might just buy a popular 58 millimeter size.  
   > 
-  > But Kept remembers our exact machine uses a 54 millimeter size. It catches the conflict immediately, stops checkout, and warns us that this seller charges a 15% restocking fee. It saves money before a single dollar is spent."*
+  > But Kept checks our saved machine, catches the size mismatch, and warns us of the seller's 15% restocking fee. Even better — when we click switch, it verifies a 54 millimeter alternative against our machine's exact specs so we can buy safely."*
 
 ---
 
-### Segment 3: Handling Returns in One Single Trip (0:45 – 1:15)
+### Segment 3: Refusing to Guess Under Uncertainty (0:42 – 1:02)
 * **What Father does on screen:**  
-  Click the top scenario button: **`2 delivered items in trial window (Order #842)`**.  
-  Show the green card: **`● 2 Items Eligible for Free Return & Replacement`**.  
-  Check the box: `[✔] Confirm Return Plan` and click **`Confirm & Generate Return Pass`**.
+  1. Click Card 2: **`2. Missing Info: Seller Omitted the Size`**.  
+  2. Amber card appears: `● Size Not Listed • Checkout Paused`.  
+  3. Click **`Copy Seller Verification Question`** (shows green checkmark `✓ Question Copied to Clipboard!`).
 * **What Daughter says:**  
-  > *"And after packages arrive, Kept stays useful. Here in our recent order, our kettle arrived with a cracked handle, and this sweater didn't fit.  
+  > *"And when a third-party seller omits dimensions completely, Kept doesn't hallucinate or guess blind.  
   > 
-  > Kept uses Bedrock photo inspection to verify the damage on the kettle, confirms the sweater still has its tags, and combines both different returns into one single trip to our local Whole Foods. No boxes, no printing labels."*
+  > It enforces a safe stop, pauses checkout, and automatically drafts the exact question we need to ask the seller before buying."*
 
 ---
 
-### Segment 4: Security & Closing (1:15 – 1:35)
+### Segment 4: Evidence-Based Returns with Human Approval (1:02 – 1:28)
 * **What Father does on screen:**  
-  Quickly click **`Decision Details & Verification`** (showing the clean receipt and HMAC token), then return to the clean dashboard.
+  1. Click Card 3: **`3. After Delivery: Damaged or Wrong-Size Order`**.  
+  2. Show Bedrock Nova photo inspection on the cracked kettle + reminder to pack the power base.  
+  3. Check the confirmation box: `[✔] Confirm Return Plan` and click **`Confirm & Generate Return Pass`**.  
+  4. Show the green return pass and the calendar download button.
 * **What Daughter says:**  
-  > *"And best of all, the AI can't make returns without our explicit sign-off — everything is cryptographically approved and secured over the official Model Context Protocol.  
+  > *"Finally, when something goes wrong after delivery, Kept uses Amazon Bedrock vision to inspect damage photos and combines multiple items into one single trip to Whole Foods.  
   > 
-  > That's Kept: smarter shopping before you buy, and zero headaches after. Thank you!"*
-* **Both:** Wave and smile at the camera!
+  > Most importantly, the agent cannot execute returns without our explicit sign-off — everything requires customer approval and a cryptographically signed plan token."*
+
+---
+
+### Segment 5: The Honest Closing (1:28 – 1:40)
+* **What Father does on screen:**  
+  Scroll slightly back up to show the clean dashboard.
+* **What Daughter says:**  
+  > *"Kept gives shopping agents the context they need to buy what actually fits, the restraint to pause when details are missing, and the safety to keep families in control.  
+  > 
+  > Thank you so much!"*
+* **Both:** Smile and wave at the camera!
