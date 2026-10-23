@@ -512,8 +512,8 @@ export default function KeptApp() {
         </div>
       </header>
 
-      {/* Main Container Naturally Filling Viewport with Generous Breathing Space */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-12 sm:pt-16 pb-12 flex flex-col items-center">
+      {/* Main Container Naturally Filling Viewport with Perfect Vertical Centering */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 py-6 sm:py-10 flex flex-col justify-center items-center min-h-[calc(100vh-130px)]">
         {/* Hero Section */}
         <div className="text-center max-w-3xl mb-8 sm:mb-9 flex flex-col items-center">
           {/* Crisp Compact Category Pill */}
@@ -663,60 +663,6 @@ export default function KeptApp() {
             </div>
           </div>
         </div>
-
-        {/* Active Household Ground Truth Context Banner (Fills Void & Grounding) */}
-        <div className="w-full max-w-5xl rounded-2xl border border-white/10 bg-obsidian-950/60 p-5 sm:p-6 backdrop-blur-xl mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/5 mb-4">
-            <div className="flex items-center gap-2.5">
-              <div className="p-1.5 rounded-lg bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan">
-                <Layers className="h-4 w-4" />
-              </div>
-              <div>
-                <h4 className="font-bold text-white text-sm">Active Household Ledger (Household #842)</h4>
-                <p className="text-[11px] text-slate-400">Ground truth equipment synced with Alexa+ MCP tools</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowHouseholdDrawer(true)}
-              className="text-xs text-accent-cyan hover:underline flex items-center gap-1 self-start sm:self-auto font-medium"
-            >
-              <span>View Full Ledger ({inventory.length || 4} items)</span>
-              <ArrowRight className="h-3 w-3" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-            {/* Item 1 */}
-            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
-              <div className="text-[10px] font-mono text-accent-cyan uppercase tracking-wider mb-1">Kitchen · Machine</div>
-              <div className="text-xs font-bold text-white truncate">Breville Barista Express</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">54 mm · 3 locking ears</div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
-              <div className="text-[10px] font-mono text-accent-cyan uppercase tracking-wider mb-1">Office · Display</div>
-              <div className="text-xs font-bold text-white truncate">LG 27UP850-W 4K</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">90W USB-C cable included</div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
-              <div className="text-[10px] font-mono text-accent-amber uppercase tracking-wider mb-1">Delivered · Order #842</div>
-              <div className="text-xs font-bold text-white truncate">Cosori Gooseneck Kettle</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">28d return window active</div>
-            </div>
-
-            {/* Item 4 */}
-            <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3 hover:border-white/10 transition-colors">
-              <div className="text-[10px] font-mono text-accent-emerald uppercase tracking-wider mb-1">Delivered · Order #842</div>
-              <div className="text-xs font-bold text-white truncate">Merino Wool Sweater</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">Tags intact · 1-trip return</div>
-            </div>
-          </div>
-        </div>
-
-
 
         {/* Audit & Execution Stage Header (Visible when a scenario is active) */}
         {activeScenario && (
