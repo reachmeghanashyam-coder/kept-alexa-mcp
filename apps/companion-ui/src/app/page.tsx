@@ -460,22 +460,36 @@ export default function KeptApp() {
       {/* Top Navigation Bar with subtle border and crisp contrast */}
       <header className="w-full border-b border-white/[0.08] bg-[#06090F]/80 backdrop-blur-md">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-4">
-          {/* Left: Brand Mark */}
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-emerald-400 p-[1px] shadow-lg shadow-cyan-500/20">
-              <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-[#080D1A]">
-                <svg className="h-5 w-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 5v14" />
-                  <path d="M8 6l8 6-8 6" />
+          {/* Left: Original Clean Apple-grade Brand Mark */}
+          <div className="flex items-center gap-2.5 group cursor-default">
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-b from-white/[0.14] to-white/[0.04] p-[1px] shadow-[0_2px_10px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105">
+              <div className="flex h-full w-full items-center justify-center rounded-[11px] bg-obsidian-950/90 backdrop-blur-md">
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <defs>
+                    <linearGradient id="kept-spine-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#00F0FF" />
+                      <stop offset="100%" stopColor="#00A3FF" />
+                    </linearGradient>
+                    <linearGradient id="kept-arm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#00F0FF" />
+                      <stop offset="100%" stopColor="#00E599" />
+                    </linearGradient>
+                  </defs>
+                  {/* Anchor Pillar */}
+                  <path d="M7.5 5.5v13" stroke="url(#kept-spine-grad)" />
+                  {/* Right-Facing Forward Progress Arrow */}
+                  <path d="M8 6.5L16.5 12L8 17.5" stroke="url(#kept-arm-grad)" />
                 </svg>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold tracking-tight text-white text-lg">Kept</span>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-300 bg-cyan-950/80 border border-cyan-800/60 px-2 py-0.5 rounded-full">
-                Alexa+ MCP
-              </span>
-            </div>
+            <span className="font-semibold tracking-tight text-white text-base">Kept</span>
           </div>
 
           {/* Right: Actions */}
