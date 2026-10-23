@@ -1519,9 +1519,9 @@ export default function KeptApp() {
             className="fixed inset-0 cursor-pointer"
             onClick={() => setShowHouseholdDrawer(false)}
           />
-          <div className="relative z-10 w-full max-w-2xl h-[78vh] rounded-3xl border border-white/10 bg-[#0A0F1D] p-6 sm:p-7 shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative z-10 w-full max-w-xl rounded-3xl border border-white/10 bg-[#0A0F1D] p-6 sm:p-7 shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
             {/* Header: Title or Back Button */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
+            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
               <div className="flex items-center gap-3">
                 {showAddForm ? (
                   <button
@@ -1559,70 +1559,67 @@ export default function KeptApp() {
               </button>
             </div>
 
-            {/* Mode 1: Register New Equipment Form (Takes over modal cleanly) */}
+            {/* Mode 1: Register New Equipment Form (Compact Apple-Grade Design) */}
             {showAddForm ? (
-              <div className="flex-1 flex flex-col justify-between">
-                <form
-                  onSubmit={handleAddCustomItem}
-                  className="p-5 rounded-2xl border border-white/10 bg-[#06090F] space-y-4"
-                >
+              <form onSubmit={handleAddCustomItem} className="space-y-4">
+                <div>
+                  <label className="text-xs font-medium text-slate-300 block mb-1.5">
+                    Equipment / Appliance Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Dyson V11 Cordless Vacuum"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    required
+                    className="w-full text-xs rounded-xl border border-white/10 bg-[#06090F] px-3.5 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="text-xs font-semibold text-slate-300 block mb-1.5">
-                      Equipment / Appliance Name
+                    <label className="text-xs font-medium text-slate-300 block mb-1.5">Category</label>
+                    <select
+                      value={newCategory}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                      className="w-full text-xs rounded-xl border border-white/10 bg-[#06090F] px-3.5 py-3 text-white focus:outline-none focus:border-cyan-400 transition-colors"
+                    >
+                      <option value="Kitchen Appliances">Kitchen</option>
+                      <option value="Electronics & Office">Office</option>
+                      <option value="Living Room">Living Room</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-slate-300 block mb-1.5">
+                      Key Spec / Fitting
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Dyson V11 Cordless Vacuum"
-                      value={newTitle}
-                      onChange={(e) => setNewTitle(e.target.value)}
-                      required
-                      className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
+                      placeholder="e.g. Quick-Release Wand (32mm)"
+                      value={newSpec}
+                      onChange={(e) => setNewSpec(e.target.value)}
+                      className="w-full text-xs rounded-xl border border-white/10 bg-[#06090F] px-3.5 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-xs font-semibold text-slate-300 block mb-1.5">Category</label>
-                      <select
-                        value={newCategory}
-                        onChange={(e) => setNewCategory(e.target.value)}
-                        className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3.5 py-2.5 text-white focus:outline-none focus:border-cyan-400"
-                      >
-                        <option value="Kitchen Appliances">Kitchen</option>
-                        <option value="Electronics & Office">Office</option>
-                        <option value="Living Room">Living Room</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-xs font-semibold text-slate-300 block mb-1.5">
-                        Key Spec / Fitting
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Quick-Release Wand (32mm)"
-                        value={newSpec}
-                        onChange={(e) => setNewSpec(e.target.value)}
-                        className="w-full text-xs rounded-xl border border-white/10 bg-[#0A0F1D] px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 pt-2">
-                    <button
-                      type="button"
-                      onClick={() => setShowAddForm(false)}
-                      className="w-1/3 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] py-2.5 text-xs font-medium text-slate-300 transition-all cursor-pointer"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={loading || !newTitle.trim()}
-                      className="w-2/3 rounded-xl bg-cyan-400 py-2.5 text-xs font-bold text-slate-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
-                    >
-                      {loading ? 'Saving...' : 'Save to Ledger'}
-                    </button>
-                  </div>
-                </form>
-              </div>
+                </div>
+
+                <div className="flex items-center gap-3 pt-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddForm(false)}
+                    className="w-1/3 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={loading || !newTitle.trim()}
+                    className="w-2/3 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 py-2.5 text-xs font-bold text-slate-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
+                  >
+                    {loading ? 'Saving...' : 'Save to Ledger'}
+                  </button>
+                </div>
+              </form>
             ) : (
               /* Mode 2: Clean Ledger View */
               <>
