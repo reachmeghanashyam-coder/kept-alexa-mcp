@@ -512,43 +512,43 @@ export default function KeptApp() {
         </div>
       </header>
 
-      {/* Main Container */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-6 sm:pt-8 pb-3 flex flex-col justify-center items-center">
+      {/* Main Container — Calibrated for Majestic Full-Viewport Balance */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-10 sm:pt-14 pb-8 flex flex-col justify-center items-center">
         {/* Hero Section */}
-        <div className="text-center max-w-3xl mb-6 sm:mb-7 flex flex-col items-center">
-          {/* Category Pill matching Agentic style */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-medium text-cyan-300 tracking-wide mb-3 shadow-sm backdrop-blur-md">
+        <div className="text-center max-w-3xl mb-10 sm:mb-12 flex flex-col items-center">
+          {/* Category Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-medium text-cyan-300 tracking-wide mb-5 shadow-sm backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
             <span>Purchase Verification Protocol</span>
           </div>
 
           {/* Hero Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] mb-3 text-white">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-4 text-white">
             Buy what fits.
             <br />
             <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             Verifies proposed purchases against what you already own — stopping size mismatches, duplicate accessories, and wasted returns before checkout.
           </p>
         </div>
 
         {/* Section Eyebrow */}
-        <div className="w-full max-w-5xl mb-3 px-1 flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#00F0FF]"></span>
-          <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 font-semibold">
+        <div className="w-full max-w-5xl mb-4 px-1 flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00F0FF]"></span>
+          <span className="text-xs font-mono uppercase tracking-widest text-slate-400 font-semibold">
             RUN SHOPPING SIMULATION
           </span>
         </div>
 
-        {/* 3 Bento Boxes Matching Reference Design */}
-        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
+        {/* 3 Bento Boxes Matching Reference Design with Commanding Vertical Stature */}
+        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {/* Card 1 */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-7 sm:p-8 min-h-[290px] transition-all duration-200 flex flex-col justify-between ${
               activeScenario === 'compat'
                 ? 'border-cyan-400 bg-[#0B1220] ring-1 ring-cyan-400/50 shadow-lg shadow-cyan-500/10'
                 : 'border-white/[0.08] bg-[#0A0F1D]/80 hover:border-white/20 hover:bg-[#0E1528]'
@@ -556,33 +556,33 @@ export default function KeptApp() {
           >
             <div>
               {/* Circular numbered badge */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-400">
+              <div className="flex items-center justify-between mb-6">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono font-bold text-cyan-400">
                   01
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">
+                <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-1 rounded-md border border-white/5">
                   Breville 54 mm
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
                 Real-Time Fit Check
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed">
                 Evaluates physical dimensions and locking ears against your household appliances to catch size mismatches.
               </p>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-cyan-400">
+            <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-cyan-400">
               <span>Test 58mm Portafilter</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
           {/* Card 2 */}
           <div
             onClick={triggerScenarioDuplicate}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-7 sm:p-8 min-h-[290px] transition-all duration-200 flex flex-col justify-between ${
               activeScenario === 'duplicate'
                 ? 'border-emerald-400 bg-[#0B1220] ring-1 ring-emerald-400/50 shadow-lg shadow-emerald-500/10'
                 : 'border-white/[0.08] bg-[#0A0F1D]/80 hover:border-white/20 hover:bg-[#0E1528]'
@@ -590,33 +590,33 @@ export default function KeptApp() {
           >
             <div>
               {/* Circular numbered badge */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-950/80 border border-emerald-500/30 text-xs font-mono font-bold text-emerald-400">
+              <div className="flex items-center justify-between mb-6">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-950/80 border border-emerald-500/30 text-xs font-mono font-bold text-emerald-400">
                   02
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">
+                <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-1 rounded-md border border-white/5">
                   LG 4K Monitor
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
                 Duplicate Accessory Guard
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed">
                 Checks what cables and accessories were already included with your delivered electronics to prevent redundant spend.
               </p>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-emerald-400">
+            <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-emerald-400">
               <span>Test 100W USB-C Cable</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
           {/* Card 3 */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between ${
+            className={`group cursor-pointer rounded-2xl border p-7 sm:p-8 min-h-[290px] transition-all duration-200 flex flex-col justify-between ${
               activeScenario === 'unverified'
                 ? 'border-purple-400 bg-[#0B1220] ring-1 ring-purple-400/50 shadow-lg shadow-purple-500/10'
                 : 'border-white/[0.08] bg-[#0A0F1D]/80 hover:border-white/20 hover:bg-[#0E1528]'
@@ -624,26 +624,26 @@ export default function KeptApp() {
           >
             <div>
               {/* Circular numbered badge */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-purple-950/80 border border-purple-500/30 text-xs font-mono font-bold text-purple-400">
+              <div className="flex items-center justify-between mb-6">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-950/80 border border-purple-500/30 text-xs font-mono font-bold text-purple-400">
                   03
                 </span>
-                <span className="text-[11px] font-mono text-slate-500">
+                <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-1 rounded-md border border-white/5">
                   Third-Party Seller
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
                 Missing Spec Pause
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed">
                 Halts checkout when a marketplace seller omits essential millimeter specs rather than hallucinating compatibility.
               </p>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-purple-400">
+            <div className="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-purple-400">
               <span>Test Universal Collar</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
         </div>
