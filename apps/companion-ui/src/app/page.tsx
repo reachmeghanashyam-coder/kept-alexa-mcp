@@ -27,7 +27,7 @@ import {
 
 export default function KeptApp() {
   // Start with null so initial landing is clean, spacious, and idle (like Relayeo)
-  const [activeScenario, setActiveScenario] = useState<'compat' | 'return' | 'unverified' | null>(null);
+  const [activeScenario, setActiveScenario] = useState<'compat' | 'return' | 'unverified' | 'duplicate' | null>(null);
   const [inventory, setInventory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [mcpTrace, setMcpTrace] = useState<any>(null);
@@ -38,6 +38,11 @@ export default function KeptApp() {
   const [customQuery, setCustomQuery] = useState('');
   const [showDecisionReceipt, setShowDecisionReceipt] = useState(true);
   const [copiedQuestion, setCopiedQuestion] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newCategory, setNewCategory] = useState('Kitchen Appliances');
+  const [newSpec, setNewSpec] = useState('');
+  const [addSuccessMsg, setAddSuccessMsg] = useState('');
 
   // DOM Refs for Apple-grade smooth auto-scroll
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -229,6 +234,77 @@ export default function KeptApp() {
   }
 
 
+  // Trigger Scenario: Duplicate Accessory Owned (LG Monitor USB-C Cable)
+  async function triggerScenarioDuplicate() {
+    setActiveScenario('duplicate');
+    setLoading(true);
+    setExecutionResult(null);
+    try {
+      const candidate = {
+        title: 'Anker Powerline III USB-C to USB-C 100W Charging & 4K Display Cable (1m)',
+        brand: 'Anker',
+        category: 'Electronics & Office',
+        targetSpecs: {
+          cableType: 'USB-C to USB-C',
+          powerDeliveryWatts: 100,
+          lengthMeters: 1.0,
+        },
+        sellerPolicy: {
+          isThirdParty: false,
+          restockingFeePercent: 0,
+          returnWindowDays: 30,
+          termsExplicitlyStated: true,
+        },
+      };
+
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'check_purchase_compatibility',
+          arguments: { candidate },
+        }),
+      });
+      const data = await res.json();
+      const parsed = JSON.parse(data.content[0].text);
+      setCompatResult(parsed);
+      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Live Household Persistence: Register custom item into ledger
+  async function handleAddCustomItem(e: React.FormEvent) {
+    e.preventDefault();
+    if (!newTitle.trim()) return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'add_household_item',
+          arguments: {
+            productTitle: newTitle.trim(),
+            category: newCategory,
+            verifiedSpecs: newSpec.trim() ? { primarySpec: newSpec.trim() } : {},
+          },
+        }),
+      });
+      const data = await res.json();
+      setMcpTrace({ tool: 'add_household_item', response: data });
+      setAddSuccessMsg(`✓ Saved "${newTitle.trim()}" to Household Ledger!`);
+      setNewTitle('');
+      setNewSpec('');
+      setShowAddForm(false);
+      await fetchInventory();
+      setTimeout(() => setAddSuccessMsg(''), 4000);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Real MCP resolution: evaluate verified 54 mm candidate
   async function resolveToCompatibleAlternative() {
     setActiveScenario('compat');
@@ -354,20 +430,25 @@ export default function KeptApp() {
         {/* Category Pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-5">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-          KEPT — FOR ALEXA+
+          <span className="text-slate-300 font-bold uppercase tracking-wider text-[11px]">HOUSEHOLD PURCHASE VERIFICATION</span>
+          <span className="text-slate-500">•</span>
+          <span className="rounded bg-accent-cyan/15 text-accent-cyan px-2 py-0.5 text-[10px] font-mono font-medium">MCP POWERED</span>
         </div>
 
         {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
         <div className="text-center max-w-4xl mb-7 sm:mb-8">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-3.5 text-white">
-            Buy what belongs.
+            Buy what fits.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal mt-3">
-            Before an AI agent recommends a purchase, Kept checks whether the evidence supports it for your household—and tells it when not to guess.
+          <p className="text-slate-200 text-base sm:text-lg max-w-2xl mx-auto font-medium mt-3">
+            AI shopping that actually knows your home.
+          </p>
+          <p className="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-normal mt-1.5">
+            Kept checks proposed purchases against your household context — catching physical mismatches, stopping duplicate accessories, and refusing to guess on missing specs.
           </p>
         </div>
 
@@ -480,7 +561,39 @@ export default function KeptApp() {
             </div>
           </div>
 
-          {/* Card 2: Missing Information (Know when not to guess) */}
+          {/* Card 2: Duplicate Prevention (Household Memory) */}
+          <div
+            onClick={triggerScenarioDuplicate}
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
+              activeScenario === 'duplicate'
+                ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
+                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
+            }`}
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3.5">
+                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
+                  {activeScenario === 'duplicate' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
+                  )}
+                  2. DETECT DUPLICATES
+                </span>
+                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: LG 4K Monitor</span>
+              </div>
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
+                Buying a $29 USB-C Cable
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Checks your office ledger and warns you that your LG monitor already included a 90W USB-C cable in the box.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+              <span>Save $29 &amp; Skip</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card 3: Missing Information (Know when not to guess) */}
           <div
             onClick={triggerScenario3}
             className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
@@ -495,7 +608,7 @@ export default function KeptApp() {
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
                   )}
-                  2. REFUSE UNSUPPORTED
+                  3. REFUSE UNVERIFIED
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
               </div>
@@ -503,7 +616,7 @@ export default function KeptApp() {
                 Seller Omitted the Size
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                When a seller leaves out required millimeter dimensions, Kept refuses to guess and pauses the order.
+                When a seller leaves out required millimeter dimensions, Kept refuses to guess and pauses checkout.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
@@ -511,35 +624,37 @@ export default function KeptApp() {
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
+        </div>
 
-          {/* Card 3: After Delivery (Use evidence and order context to prepare a resolution) */}
+        {/* Post-Delivery Resolution Section Banner */}
+        <div className="w-full max-w-4xl mb-6">
           <div
             onClick={triggerScenario2}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative ${
               activeScenario === 'return'
-                ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
+                ? 'border-accent-emerald bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,229,153,0.25)] ring-2 ring-accent-emerald/80'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/70 hover:translate-y-[-1px]'
             }`}
           >
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-3.5">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="rounded-full border border-accent-emerald/30 bg-accent-emerald/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-emerald flex items-center gap-1.5">
                   {activeScenario === 'return' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
                   )}
-                  3. RESOLVE WHAT GOES WRONG
+                  AFTER DELIVERY • ORDER #842 RESOLUTION
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Order #842</span>
+                <span className="text-[11px] font-mono text-slate-400">28d Return Window Active</span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-emerald transition-colors">
-                Damaged or Wrong-Size Order
+              <h3 className="font-bold text-white text-base group-hover:text-accent-emerald transition-colors">
+                Damaged Kettle &amp; Tight Merino Sweater
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Uses photo evidence on a cracked kettle and sweater order context to prepare a combined return plan.
+              <p className="text-xs text-slate-400 leading-relaxed max-w-2xl">
+                Uses Bedrock Nova vision to inspect kettle handle damage, verifies sweater tags, and consolidates both items into a single, box-free Whole Foods return pass.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-emerald">
-              <span>Prepare Return Plan</span>
+            <div className="shrink-0 flex items-center gap-1.5 text-xs font-semibold text-accent-emerald bg-accent-emerald/10 border border-accent-emerald/20 px-4 py-2 rounded-full">
+              <span>Prepare 1-Trip Return</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
@@ -774,6 +889,138 @@ export default function KeptApp() {
               <span className="text-accent-emerald font-semibold">
                 {compatResult.status === "COMPATIBLE" ? "✓ Earned a Yes • Ready for Checkout" : "Saved $39.99 + 15% Return Penalty"}
               </span>
+            </div>
+          </div>
+        )}
+
+                {/* Scenario: Duplicate Accessory Check */}
+        {activeScenario === 'duplicate' && compatResult && (
+          <div className="w-full max-w-3xl rounded-3xl border border-accent-cyan/40 bg-obsidian-800/90 p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6">
+            <div className="flex items-center justify-between pb-6 border-b border-white/10">
+              <div className="flex items-center gap-3">
+                <span className="flex h-3 w-3 rounded-full bg-accent-cyan animate-pulse"></span>
+                <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan">
+                  ● Already Owned In Home • Save $29.00
+                </span>
+              </div>
+              <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan font-medium">
+                Duplicate Detected
+              </span>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
+                <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
+                  <p className="font-semibold text-white">
+                    You already own an identical certified accessory in your home.
+                  </p>
+                  <p className="text-slate-300 text-xs leading-relaxed">
+                    {compatResult.reason}
+                  </p>
+                </div>
+              </div>
+
+              {/* Matched Equipment Detail Card */}
+              <div className="rounded-2xl border border-white/10 bg-obsidian-950/60 p-5 space-y-2">
+                <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  Household Match Found in Office Ledger
+                </div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
+                  <div>
+                    <div className="text-white font-bold text-sm">{compatResult.matchedOwnedProductTitle}</div>
+                    <div className="text-xs text-slate-400">Packaging Contents: Includes USB-C 90W 1m Video &amp; Power Cable</div>
+                  </div>
+                  <span className="rounded-full bg-accent-emerald/20 text-accent-emerald px-3 py-1 text-xs font-mono font-semibold self-start sm:self-auto">
+                    $29 Saved
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={dismissScenario}
+                  className="rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  Save $29 &amp; Skip Purchase
+                </button>
+                <button
+                  onClick={() => setShowHouseholdDrawer(true)}
+                  className="rounded-full border border-white/20 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Layers className="h-3.5 w-3.5" />
+                  View in Household Ledger
+                </button>
+              </div>
+            </div>
+
+            {/* Kept Decision Record */}
+            <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
+              <button
+                onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
+                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
+              >
+                <span className="flex items-center gap-2">
+                  <FileText className="h-3.5 w-3.5 text-accent-cyan" />
+                  Kept Decision Record
+                </span>
+                <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
+                  {showDecisionReceipt ? "Hide Record" : "View Decision Record"}
+                  {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                </span>
+              </button>
+
+              {showDecisionReceipt && (
+                <div className="p-5 space-y-3.5 text-xs text-slate-300 border-t border-white/5 bg-black/40">
+                  <div className="pb-3 border-b border-white/5">
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      1. What Kept Checked
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-slate-400">Owned Equipment: </span>
+                        <span className="text-accent-emerald font-semibold">LG 27UP850-W 4K Monitor</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Listing Checked: </span>
+                        <span className="text-slate-200">{compatResult.candidateTitle}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pb-3 border-b border-white/5">
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      2. What Kept Concluded
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-slate-400">Inventory Status: </span>
+                        <span className="text-accent-cyan font-medium">Included high-spec cable already in home</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Financial Impact: </span>
+                        <span className="text-accent-emerald font-medium">Prevented redundant $29.00 expense</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
+                      3. Recommended Next Step
+                    </span>
+                    <div className="text-xs text-slate-200 font-medium">
+                      Check your LG monitor packaging box before ordering an unnecessary replacement cable.
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+              <span>Source: {compatResult.sourceEvidence || "LG Official Product Datasheet §Packaging Contents"}</span>
+              <span className="text-accent-emerald font-semibold">✓ Saved $29.00 • Household Grounded</span>
             </div>
           </div>
         )}
@@ -1333,6 +1580,78 @@ export default function KeptApp() {
               >
                 <X className="h-4 w-4" />
               </button>
+            </div>
+
+                        {/* Action Bar: Add Item & Notifications */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between gap-2">
+                <button
+                  onClick={() => setShowAddForm(!showAddForm)}
+                  className="rounded-full bg-accent-cyan/15 border border-accent-cyan/40 hover:bg-accent-cyan/25 text-accent-cyan text-xs font-semibold px-3 py-1.5 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                >
+                  <span>{showAddForm ? '✕ Cancel' : '+ Add Equipment to Home'}</span>
+                </button>
+                {addSuccessMsg && (
+                  <span className="text-xs text-accent-emerald font-semibold animate-in fade-in">
+                    {addSuccessMsg}
+                  </span>
+                )}
+              </div>
+
+              {/* Inline Add Item Form */}
+              {showAddForm && (
+                <form
+                  onSubmit={handleAddCustomItem}
+                  className="mt-3 p-4 rounded-2xl border border-white/10 bg-obsidian-900/95 space-y-3 animate-in fade-in slide-in-from-top-2"
+                >
+                  <div className="text-xs font-bold text-white uppercase tracking-wider">
+                    Register New Equipment
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-slate-400 block mb-1">Product Title</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Dyson V11 Cordless Vacuum"
+                      value={newTitle}
+                      onChange={(e) => setNewTitle(e.target.value)}
+                      required
+                      className="w-full text-xs rounded-xl border border-white/10 bg-obsidian-950 px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-accent-cyan"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="text-[11px] text-slate-400 block mb-1">Room / Category</label>
+                      <select
+                        value={newCategory}
+                        onChange={(e) => setNewCategory(e.target.value)}
+                        className="w-full text-xs rounded-xl border border-white/10 bg-obsidian-950 px-3 py-2 text-white focus:outline-none focus:border-accent-cyan"
+                      >
+                        <option value="Kitchen Appliances">Kitchen</option>
+                        <option value="Electronics & Office">Office</option>
+                        <option value="Living Room">Living Room</option>
+                        <option value="Wardrobe & Apparel">Wardrobe</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-[11px] text-slate-400 block mb-1">Key Spec / Fitting</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Quick-Release Wand"
+                        value={newSpec}
+                        onChange={(e) => setNewSpec(e.target.value)}
+                        className="w-full text-xs rounded-xl border border-white/10 bg-obsidian-950 px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-accent-cyan"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={loading || !newTitle.trim()}
+                    className="w-full rounded-xl bg-accent-cyan py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-50 cursor-pointer shadow-md"
+                  >
+                    {loading ? 'Saving...' : 'Save to Household Ledger'}
+                  </button>
+                </form>
+              )}
             </div>
 
             {/* Filter Tabs */}

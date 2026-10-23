@@ -46,6 +46,7 @@ export interface HouseholdRepository {
   getAllItems(): HouseholdItemRecord[];
   getItemById(id: string): HouseholdItemRecord | undefined;
   getItemsByOrderId(orderId: string): HouseholdItemRecord[];
+  addItem(item: HouseholdItemRecord): HouseholdItemRecord;
   updateItemVisualEvidence(itemId: string, evidence: VisualEvidence): HouseholdItemRecord;
   savePlan(plan: ReturnActionPlan): void;
   getPlan(planId: string): ReturnActionPlan | undefined;
@@ -88,6 +89,12 @@ export class HouseholdStore implements HouseholdRepository {
 
   public getItemsByOrderId(orderId: string): HouseholdItemRecord[] {
     return this.getAllItems().filter((item) => item.orderId === orderId);
+  }
+
+  public addItem(item: HouseholdItemRecord): HouseholdItemRecord {
+    const cloned = JSON.parse(JSON.stringify(item));
+    this.items.set(cloned.id, cloned);
+    return cloned;
   }
 
   public updateItemVisualEvidence(

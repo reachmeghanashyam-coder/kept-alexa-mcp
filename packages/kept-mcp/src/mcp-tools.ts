@@ -145,6 +145,23 @@ export const MCP_TOOL_DEFINITIONS = [
     },
   },
   {
+    name: 'add_household_item',
+    description:
+      'Register a new appliance, gadget, or device into the persistent household ledger so that future AI purchase checks verify against it.',
+    inputSchema: {
+      type: 'object',
+      required: ['productTitle', 'category'],
+      properties: {
+        productTitle: { type: 'string', description: 'Name of the device or appliance' },
+        category: { type: 'string', description: 'Room or category (e.g. Kitchen Appliances, Electronics & Office, Living Room)' },
+        brand: { type: 'string' },
+        modelNumber: { type: 'string' },
+        verifiedSpecs: { type: 'object', description: 'Key specifications (e.g. { portafilterSizeMm: 54, fittingType: "quick_release" })' },
+        includedAccessories: { type: 'array', items: { type: 'string' } },
+      },
+    },
+  },
+  {
     name: 'reset_demo_state',
     description:
       'Reset the entire household item ledger and clear all plans to the pristine seeded demo benchmark state.',
@@ -177,6 +194,54 @@ export async function handleMcpToolCall(
                   householdId: 'HOUSEHOLD-842',
                   totalItems: items.length,
                   items,
+                },
+                null,
+                2
+              ),
+            },
+          ],
+        };
+      }
+
+      case 'add_household_item': {
+        const newItem = {
+          id: `item_custom_${Date.now()}`,
+          orderId: `MANUAL-${new Date().getFullYear()}`,
+          productTitle: args.productTitle,
+          brand: args.brand || 'User Registered',
+          modelNumber: args.modelNumber || 'CUSTOM-01',
+          category: args.category || 'Household Equipment',
+          lifecycleState: 'OWNED_IN_HOME' as const,
+          purchaseDate: new Date().toISOString(),
+          deliveryDate: new Date().toISOString(),
+          verifiedSpecs: args.verifiedSpecs || {},
+          includedAccessories: args.includedAccessories || [],
+          conditionNotes: 'Added by user to household ledger',
+          policyFixture: {
+            returnWindowDays: 30,
+            restockingFeePercent: 0,
+            dropOffEligibility: {
+              wholeFoodsBoxFree: true,
+              upsDropoffBoxed: true,
+              kohlsDropoffBoxFree: false,
+            },
+            sourceCitation: 'User verified household inventory record',
+            isThirdPartySeller: false,
+            termsVerified: true,
+          },
+          originLabel: 'USER_REGISTERED_CUSTOM' as const,
+        };
+
+        const saved = globalHouseholdStore.addItem(newItem as any);
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(
+                {
+                  status: 'ITEM_ADDED_SUCCESSFULLY',
+                  item: saved,
+                  totalHouseholdItems: globalHouseholdStore.getAllItems().length,
                 },
                 null,
                 2
