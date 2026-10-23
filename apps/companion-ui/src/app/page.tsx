@@ -507,178 +507,186 @@ export default function KeptApp() {
         </div>
       </header>
 
-      {/* Main Container Naturally Filling Viewport */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pt-4 sm:pt-6 pb-4 flex flex-col justify-center items-center">
-        {/* Category Pill */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-5">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-          <span className="text-slate-300 font-bold uppercase tracking-wider text-[11px]">HOUSEHOLD PURCHASE VERIFICATION</span>
-          <span className="text-slate-500">•</span>
-          <span className="rounded bg-accent-cyan/15 text-accent-cyan px-2 py-0.5 text-[10px] font-mono font-medium">MCP POWERED</span>
-        </div>
+      {/* Main Container Naturally Filling Viewport with Generous Breathing Space */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-6 sm:pt-10 pb-10 flex flex-col items-center">
+        {/* Hero Section */}
+        <div className="text-center max-w-3xl mb-8 sm:mb-10 flex flex-col items-center">
+          {/* Category Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-6 shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
+            <span className="text-slate-300 font-bold uppercase tracking-wider text-[11px]">HOUSEHOLD PURCHASE VERIFICATION</span>
+            <span className="text-slate-500">•</span>
+            <span className="rounded bg-accent-cyan/15 text-accent-cyan px-2 py-0.5 text-[10px] font-mono font-medium">MCP POWERED</span>
+          </div>
 
-        {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
-        <div className="text-center max-w-4xl mb-7 sm:mb-8">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-3.5 text-white">
+          {/* Hero Title */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] mb-4 text-white">
             Buy what fits.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-200 text-base sm:text-lg max-w-2xl mx-auto font-medium mt-3">
+          <p className="text-slate-300 text-base sm:text-lg font-medium max-w-xl mx-auto">
             AI shopping that actually knows your home.
           </p>
+        </div>
 
-          {/* Interactive AI Verification Command Bar */}
-          <div className="w-full max-w-2xl mx-auto mt-6">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (customQuery.trim()) handleCustomQuerySubmit(customQuery);
-              }}
-              className="relative flex items-center rounded-2xl border border-white/15 bg-obsidian-950/85 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 focus-within:border-accent-cyan/80 focus-within:ring-2 focus-within:ring-accent-cyan/40 transition-all"
+        {/* Interactive AI Verification Command Bar */}
+        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-12">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (customQuery.trim()) handleCustomQuerySubmit(customQuery);
+            }}
+            className="relative flex items-center rounded-2xl border border-white/15 bg-obsidian-950/85 p-2 sm:p-2.5 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 focus-within:border-accent-cyan/80 focus-within:ring-2 focus-within:ring-accent-cyan/40 transition-all"
+          >
+            <Search className="h-5 w-5 text-slate-400 ml-3 shrink-0" />
+            <input
+              type="text"
+              value={customQuery}
+              onChange={(e) => setCustomQuery(e.target.value)}
+              placeholder="Ask Kept to verify any purchase (e.g. 58mm portafilter, 100W cable...)"
+              className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={loading || !customQuery.trim()}
+              className="rounded-xl bg-accent-cyan px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 flex items-center gap-1.5 cursor-pointer shadow-md"
             >
-              <Search className="h-5 w-5 text-slate-400 ml-3 shrink-0" />
-              <input
-                type="text"
-                value={customQuery}
-                onChange={(e) => setCustomQuery(e.target.value)}
-                placeholder="Ask Kept to verify any purchase (e.g. 58mm portafilter, 100W cable...)"
-                className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={loading || !customQuery.trim()}
-                className="rounded-xl bg-accent-cyan px-4 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 flex items-center gap-1.5 cursor-pointer shadow-md"
-              >
-                {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
-                <span>Verify</span>
-              </button>
-            </form>
+              {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+              <span>Verify</span>
+            </button>
+          </form>
 
-            {/* Quick Clickable Query Chips */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
-              <span className="text-[11px] text-slate-500 font-mono">Test queries:</span>
-              <button
-                type="button"
-                onClick={() => { setCustomQuery('58mm Bottomless Portafilter'); handleCustomQuerySubmit('58mm Bottomless Portafilter'); }}
-                className="rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
-              >
-                ⚡ 58mm Portafilter
-              </button>
-              <button
-                type="button"
-                onClick={() => { setCustomQuery('100W USB-C Monitor Cable'); handleCustomQuerySubmit('100W USB-C Monitor Cable'); }}
-                className="rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
-              >
-                ⚡ 100W USB-C Cable
-              </button>
-              <button
-                type="button"
-                onClick={() => { setCustomQuery('Universal Collar (No Dimensions)'); handleCustomQuerySubmit('Universal Collar (No Dimensions)'); }}
-                className="rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer"
-              >
-                ⚡ Universal Collar
-              </button>
-            </div>
+          {/* Quick Clickable Query Chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-4">
+            <span className="text-[11px] text-slate-400 font-mono">Test queries:</span>
+            <button
+              type="button"
+              onClick={() => { setCustomQuery('58mm Bottomless Portafilter'); handleCustomQuerySubmit('58mm Bottomless Portafilter'); }}
+              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3.5 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
+            >
+              ⚡ 58mm Portafilter
+            </button>
+            <button
+              type="button"
+              onClick={() => { setCustomQuery('100W USB-C Monitor Cable'); handleCustomQuerySubmit('100W USB-C Monitor Cable'); }}
+              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3.5 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
+            >
+              ⚡ 100W USB-C Cable
+            </button>
+            <button
+              type="button"
+              onClick={() => { setCustomQuery('Universal Collar (No Dimensions)'); handleCustomQuerySubmit('Universal Collar (No Dimensions)'); }}
+              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3.5 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-amber/40"
+            >
+              ⚡ Universal Collar
+            </button>
           </div>
         </div>
 
-        <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+        {/* 3 Core Bento Cards Showcase */}
+        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Card 1: Before Buying (Check compatibility against what you own) */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3.5">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
                   {activeScenario === 'compat' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
                   1. VERIFY BEFORE BUYING
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
+                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-400 rounded-md bg-white/[0.04] px-2 py-0.5 border border-white/5">
+                  Uses: Breville 54 mm
+                </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors leading-snug">
                 Buying a 58 mm Accessory
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Checks the listing against your 54 mm Breville and warns you about a 15% restocking fee before checkout.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Check Compatibility</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
           {/* Card 2: Duplicate Prevention (Household Memory) */}
           <div
             onClick={triggerScenarioDuplicate}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
               activeScenario === 'duplicate'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3.5">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
                   {activeScenario === 'duplicate' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
                   2. DETECT DUPLICATES
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: LG 4K Monitor</span>
+                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-400 rounded-md bg-white/[0.04] px-2 py-0.5 border border-white/5">
+                  Uses: LG 4K Monitor
+                </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors">
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors leading-snug">
                 Buying a $29 USB-C Cable
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Checks your office ledger and warns you that your LG monitor already included a 90W USB-C cable in the box.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Save $29 &amp; Skip</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
           {/* Card 3: Missing Information (Know when not to guess) */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[190px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.01]'
-                : 'border-white/10 bg-obsidian-800/50 hover:border-white/20 hover:bg-obsidian-800/80 hover:translate-y-[-1px]'
+                : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3.5">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber flex items-center gap-1.5">
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
                   )}
                   3. REFUSE UNVERIFIED
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
+                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-400 rounded-md bg-white/[0.04] px-2 py-0.5 border border-white/5">
+                  Uses: Breville 54 mm
+                </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors">
+              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors leading-snug">
                 Seller Omitted the Size
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
                 When a seller leaves out required millimeter dimensions, Kept refuses to guess and pauses checkout.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
               <span>See Safe Stop</span>
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
         </div>
