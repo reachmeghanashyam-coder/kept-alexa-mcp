@@ -524,10 +524,10 @@ export default function KeptApp() {
 
           {/* Hero Title */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-4 text-white">
-            Buy what fits.
+            Found by AI.
             <br />
             <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-              Keep what you buy.
+              Verified by Kept.
             </span>
           </h1>
           <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mt-[15px]">
