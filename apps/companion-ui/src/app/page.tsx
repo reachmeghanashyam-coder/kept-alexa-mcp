@@ -1519,7 +1519,7 @@ export default function KeptApp() {
             className="fixed inset-0 cursor-pointer"
             onClick={() => setShowHouseholdDrawer(false)}
           />
-          <div className="relative z-10 w-full max-w-2xl max-h-[88vh] rounded-3xl border border-white/10 bg-[#0A0F1D] p-6 sm:p-7 shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative z-10 w-full max-w-2xl h-[78vh] rounded-3xl border border-white/10 bg-[#0A0F1D] p-6 sm:p-7 shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
             <div className="flex items-start justify-between pb-4 border-b border-white/[0.08] mb-4">
               <div className="flex items-center gap-3">
