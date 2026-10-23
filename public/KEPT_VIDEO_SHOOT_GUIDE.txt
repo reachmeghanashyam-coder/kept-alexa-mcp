@@ -1,0 +1,67 @@
+KEPT — FAMILY MEMORY FOR ALEXA+
+90-Second Loom Shoot Teleprompter (Nidhi & Dad)
+==================================================
+Setup: Loom screen recording http://localhost:3000 with front camera bubble showing Nidhi & Dad.
+Total Time: 1 Minute 30 Seconds.
+
+--------------------------------------------------
+[0:00 - 0:06]
+NIDHI:
+"Alexa lives in over 100 million homes. But the second you ask her for help... she acts like a complete stranger."
+--> SCREEN: Showing localhost:3000 hero: "AI finds it. Kept personalizes it."
+
+[0:06 - 0:12]
+DAD:
+"She doesn't know our kitchen. She doesn't know our kids. And she doesn't know what makes them sick."
+--> SCREEN: Mouse cursor rests on screen.
+
+[0:12 - 0:18]
+NIDHI:
+"AI knows the world. Kept knows our home."
+--> SCREEN: Move cursor down toward the 3 Bento cards.
+
+[0:18 - 0:28]
+NIDHI:
+"Dad asked Alexa for dinner for my 5-year-old brother, Leo. Alexa cheerfully recommended walnut pesto. But Leo has a severe nut allergy!"
+--> CLICK 1: Click Card 01 (Meal & Allergy Shield).
+--> SCREEN: Flashes RED alert: Allergen Conflict • Tree Nut Warning.
+
+[0:28 - 0:38]
+NIDHI:
+"Kept stopped it instantly: 'Nut allergy detected.' In one tap—safe crispy chicken tenders, made for our Ninja Air Fryer."
+--> CLICK 2: Tap "Switch to Kid-Safe Recipe".
+--> SCREEN: Turns VIBRANT GREEN: Nut-Free Safe Match • Ninja Air Fryer.
+
+[0:38 - 0:45]
+NIDHI:
+"And when I asked Alexa 'Why do stars explode?', generic AI tried reading college physics about degenerate gas!"
+--> CLICK 3: Click Card 02 (Curiosity Shield).
+--> SCREEN: College physics jargon intercepted notice displays.
+
+[0:45 - 0:52]
+NIDHI:
+"Kept stepped in: 'Nidhi is in 3rd grade.' It gave me a fun balloon analogy, and suggested a space book not already on my shelf."
+--> SCREEN: Lights up GREEN: 3rd Grade Grounded • 650L Lexile Analogy.
+
+[0:52 - 1:06]
+DAD:
+"And when I went to buy an HDMI switch, Kept paused checkout: 'Your TV already has open ports, and you have an unopened 4K cable in your drawer.' Saved our family $35."
+--> CLICK 4: Click Card 03 (Duplicate Spend Guard).
+--> SCREEN: Lights up AMBER: Redundant Spend Paused • Save $34.99.
+
+[1:06 - 1:13]
+DAD:
+"Cloud AI has all the world's knowledge, but zero home context. Kept is the personal layer that connects you and your family to Alexa."
+--> CLICK 5: Click "Household Ledger (4)" in header.
+--> SCREEN: Modal opens showing Leo, Nidhi, TV & Kitchen.
+
+[1:13 - 1:20]
+NIDHI:
+"Kept trains the AI's brain on our family's safety, learning, and needs. AI finds it. Kept personalizes it."
+--> SCREEN: Gently scroll through the 4 memory cards.
+
+[1:20 - 1:30]
+NIDHI & DAD:
+"Kept turns a generic assistant into a household guardian. Thank you, Amazon!"
+--> SMILE at camera bubble. Stop Loom recording.
+==================================================
