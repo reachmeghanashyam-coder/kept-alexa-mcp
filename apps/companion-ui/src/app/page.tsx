@@ -530,7 +530,7 @@ export default function KeptApp() {
               Keep what you buy.
             </span>
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mt-[15px]">
             Verifies proposed purchases against what you already own — stopping size mismatches, duplicate accessories, and wasted returns before checkout.
           </p>
         </div>
