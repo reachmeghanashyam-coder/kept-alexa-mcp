@@ -35,7 +35,7 @@ export default function KeptApp() {
   const [showHouseholdDrawer, setShowHouseholdDrawer] = useState(false);
   const [householdFilter, setHouseholdFilter] = useState<'ALL' | 'Kitchen' | 'Office' | 'Wardrobe'>('ALL');
   const [showSigVerification, setShowSigVerification] = useState(false);
-  const [customQuery, setCustomQuery] = useState('');
+  const [customQuery, setCustomQuery] = useState('58mm Bottomless Portafilter');
   const [showDecisionReceipt, setShowDecisionReceipt] = useState(false);
   const [copiedQuestion, setCopiedQuestion] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -126,6 +126,7 @@ export default function KeptApp() {
 
   // Trigger Scenario 1: Compatibility Block
   async function triggerScenario1() {
+    setCustomQuery('58mm Bottomless Portafilter');
     setActiveScenario('compat');
     setLoading(true);
     setExecutionResult(null);
@@ -205,6 +206,7 @@ export default function KeptApp() {
 
   // Trigger Scenario 3: Epistemic Honesty Refusal
   async function triggerScenario3() {
+    setCustomQuery('Universal Collar (No Dimensions)');
     setActiveScenario('unverified');
     setLoading(true);
     setExecutionResult(null);
@@ -311,6 +313,7 @@ export default function KeptApp() {
 
   // Trigger Scenario: Duplicate Accessory Owned (LG Monitor USB-C Cable)
   async function triggerScenarioDuplicate() {
+    setCustomQuery('100W USB-C Monitor Cable');
     setActiveScenario('duplicate');
     setLoading(true);
     setExecutionResult(null);
@@ -546,7 +549,7 @@ export default function KeptApp() {
               type="text"
               value={customQuery}
               onChange={(e) => setCustomQuery(e.target.value)}
-              placeholder="Ask Kept to verify any purchase (e.g. 58mm portafilter, 100W cable...)"
+              placeholder="Select a test query below..."
               className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none"
             />
             <button
