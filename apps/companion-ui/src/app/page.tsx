@@ -575,80 +575,6 @@ export default function KeptApp() {
 
         {/* Scenario 1: Compatibility Verification (Dynamic Incompatible Block OR Verified Compatible Match) */}
         {activeScenario === "compat" && compatResult && (
-          <div className="w-full max-w-3xl space-y-6">
-            {/* Simulated Alexa+ Shopping Session • Real Kept MCP Calls • Demo Dialogue Stream */}
-            <div className="rounded-2xl border border-white/10 bg-obsidian-950/85 p-5 space-y-3.5 font-mono text-xs shadow-xl backdrop-blur-xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
-                  <span className="font-bold text-slate-200 uppercase tracking-wider text-[11px]">
-                    Simulated Alexa+ Shopping Session • Real Kept MCP Calls • Demo Dialogue
-                  </span>
-                </div>
-                <span className="text-[10px] rounded bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5">
-                  Live MCP Protocol: 2025-11-25
-                </span>
-              </div>
-
-              {/* Turn 1: Alexa+ Intention */}
-              <div className="flex items-start gap-3 text-xs font-sans">
-                <div className="h-6 w-6 rounded-full bg-accent-cyan/15 border border-accent-cyan/30 flex items-center justify-center shrink-0 text-accent-cyan font-bold text-[10px] font-mono">
-                  A+
-                </div>
-                <div className="space-y-1 flex-1">
-                  <div className="text-slate-400 text-[10px] font-mono">Alexa+ Shopping Assistant</div>
-                  <p className="text-slate-200 text-xs leading-relaxed">
-                    &ldquo;I found a candidate for your Breville espresso machine: <span className="font-semibold text-white">MATOW 58mm Bottomless Portafilter</span>. Consulting your Kept Household Ledger before recommending...&rdquo;
-                  </p>
-                  <div className="text-[10px] text-accent-cyan font-mono bg-white/[0.02] p-2 rounded-lg border border-white/5 flex items-center justify-between">
-                    <span>↳ check_purchase_compatibility(&#123; targetSpecs: &#123; portafilterSizeMm: 58, earCount: 2 &#125; &#125;)</span>
-                    <span className="text-accent-emerald text-[9px]">200 OK</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Turn 2: Kept PolicyGuard Verdict */}
-              <div className="flex items-start gap-3 text-xs font-sans pt-2 border-t border-white/5">
-                <div className="h-6 w-6 rounded-full bg-accent-coral/15 border border-accent-coral/30 flex items-center justify-center shrink-0 text-accent-coral font-bold text-[10px] font-mono">
-                  K
-                </div>
-                <div className="space-y-1 flex-1">
-                  <div className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5">
-                    <span>Kept PolicyGuard Engine</span>
-                    <span className="rounded bg-accent-coral/20 text-accent-coral px-1.5 py-0.2 text-[9px] font-bold">
-                      INCOMPATIBLE
-                    </span>
-                  </div>
-                  <p className="text-slate-300 text-xs leading-relaxed">
-                    Breville Barista Express (BES870XL) uses a proprietary 54 mm (3-ear) group head. Candidate is 58 mm (2-ear). Recommendation blocked. (Candidate fixture notes 15% merchant restocking fee).
-                  </p>
-                </div>
-              </div>
-
-              {/* Turn 3: Agent Adapts & Re-Evaluates Verified 54 mm Alternative */}
-              {compatResult.status === "COMPATIBLE" && (
-                <div className="flex items-start gap-3 text-xs font-sans pt-2 border-t border-white/5 animate-in fade-in duration-300">
-                  <div className="h-6 w-6 rounded-full bg-accent-emerald/15 border border-accent-emerald/30 flex items-center justify-center shrink-0 text-accent-emerald font-bold text-[10px] font-mono">
-                    A+
-                  </div>
-                  <div className="space-y-1 flex-1">
-                    <div className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5">
-                      <span>Alexa+ Shopping Assistant</span>
-                      <span className="rounded bg-accent-emerald/20 text-accent-emerald px-1.5 py-0.2 text-[9px] font-bold">
-                        ADAPTED
-                      </span>
-                    </div>
-                    <p className="text-slate-200 text-xs leading-relaxed">
-                      &ldquo;58 mm candidate abandoned. Kept surfaced verified alternative: <span className="font-semibold text-white">CAPMESSO 54mm 3-Ear</span>. Re-running compatibility check against Breville specs...&rdquo;
-                    </p>
-                    <div className="text-[10px] text-accent-emerald font-mono bg-white/[0.02] p-2 rounded-lg border border-white/5 flex items-center justify-between">
-                      <span>↳ check_purchase_compatibility(&#123; targetSpecs: &#123; portafilterSizeMm: 54, earCount: 3 &#125; &#125;)</span>
-                      <span className="text-accent-emerald text-[9px]">MATCH VERIFIED</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
           <div className={`w-full max-w-3xl rounded-3xl border p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6 ${
             compatResult.status === "COMPATIBLE"
               ? "border-accent-emerald/40 bg-obsidian-800/90 shadow-[0_0_40px_rgba(0,229,153,0.15)]"
@@ -793,17 +719,11 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-slate-400">Owned Equipment:</span>
-                          <span className="rounded bg-accent-emerald/15 border border-accent-emerald/30 text-accent-emerald px-1.5 py-0.5 text-[9px] font-mono font-medium">Household Ledger</span>
-                        </div>
+                        <span className="text-slate-400">Owned Equipment: </span>
                         <span className="text-accent-emerald font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
                       </div>
                       <div>
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-slate-400">Listing Checked:</span>
-                          <span className="rounded bg-accent-cyan/15 border border-accent-cyan/30 text-accent-cyan px-1.5 py-0.5 text-[9px] font-mono font-medium">Listing Claim</span>
-                        </div>
+                        <span className="text-slate-400">Listing Checked: </span>
                         <span className="text-slate-200">{compatResult.candidateTitle}</span>
                       </div>
                     </div>
@@ -824,14 +744,11 @@ export default function KeptApp() {
                         </span>
                       </div>
                       <div>
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-slate-400">Seller Policy:</span>
-                          <span className="rounded bg-accent-amber/15 border border-accent-amber/30 text-accent-amber px-1.5 py-0.5 text-[9px] font-mono font-medium">Demo Policy Fixture</span>
-                        </div>
+                        <span className="text-slate-400">Seller Policy: </span>
                         <span className={compatResult.status === "COMPATIBLE" ? "text-accent-emerald font-medium" : "text-accent-amber font-medium"}>
                           {compatResult.status === "COMPATIBLE"
-                            ? "Seeded Candidate Policy: 30-day return window (0% restocking fee)"
-                            : "Seeded Candidate Policy: 15% restocking fee on opened returns"}
+                            ? "Amazon Fulfilled • 0% restocking fee (30-day free return)"
+                            : "15% restocking fee on opened returns"}
                         </span>
                       </div>
                     </div>
@@ -855,10 +772,9 @@ export default function KeptApp() {
             <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
               <span>Source: {compatResult.sourceEvidence || "Breville BES870XL Manual Specification Table (p. 28)"}</span>
               <span className="text-accent-emerald font-semibold">
-                {compatResult.status === "COMPATIBLE" ? "✓ Earned a Yes • Ready for Checkout" : "Specification Mismatch Blocked (54 mm Required)"}
+                {compatResult.status === "COMPATIBLE" ? "✓ Earned a Yes • Ready for Checkout" : "Saved $39.99 + 15% Return Penalty"}
               </span>
             </div>
-          </div>
           </div>
         )}
 
@@ -1194,58 +1110,8 @@ export default function KeptApp() {
         )}
 
         {/* Scenario 3: Epistemic Honesty / Missing Specs Refusal */}
-        {/* Scenario 2: Missing Specs Safe Stop */}
+        {/* Scenario 3: Missing Specs Safe Stop */}
         {activeScenario === 'unverified' && compatResult && (
-          <div className="w-full max-w-3xl space-y-6">
-            {/* Simulated Alexa+ Shopping Session • Real Kept MCP Calls • Demo Dialogue Stream */}
-            <div className="rounded-2xl border border-white/10 bg-obsidian-950/85 p-5 space-y-3.5 font-mono text-xs shadow-xl backdrop-blur-xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-accent-amber animate-pulse" />
-                  <span className="font-bold text-slate-200 uppercase tracking-wider text-[11px]">
-                    Simulated Alexa+ Shopping Session • Real Kept MCP Calls • Demo Dialogue
-                  </span>
-                </div>
-                <span className="text-[10px] rounded bg-white/5 border border-white/10 text-slate-400 px-2 py-0.5">
-                  Live MCP Protocol: 2025-11-25
-                </span>
-              </div>
-
-              {/* Turn 1: Alexa+ Intention */}
-              <div className="flex items-start gap-3 text-xs font-sans">
-                <div className="h-6 w-6 rounded-full bg-accent-cyan/15 border border-accent-cyan/30 flex items-center justify-center shrink-0 text-accent-cyan font-bold text-[10px] font-mono">
-                  A+
-                </div>
-                <div className="space-y-1 flex-1">
-                  <div className="text-slate-400 text-[10px] font-mono">Alexa+ Shopping Assistant</div>
-                  <p className="text-slate-200 text-xs leading-relaxed">
-                    &ldquo;You asked for an espresso dosing ring. I found this popular &apos;Universal Custom Collar&apos; listing. Checking compatibility against your Breville...&rdquo;
-                  </p>
-                  <div className="text-[10px] text-accent-amber font-mono bg-white/[0.02] p-2 rounded-lg border border-white/5 flex items-center justify-between">
-                    <span>↳ check_purchase_compatibility(&#123; targetSpecs: &#123;&#125; /* Missing mm specs */ &#125;)</span>
-                    <span className="text-accent-amber text-[9px]">400 UNVERIFIED</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Turn 2: Kept Guardrail Verdict */}
-              <div className="flex items-start gap-3 text-xs font-sans pt-2 border-t border-white/5">
-                <div className="h-6 w-6 rounded-full bg-accent-amber/15 border border-accent-amber/30 flex items-center justify-center shrink-0 text-accent-amber font-bold text-[10px] font-mono">
-                  K
-                </div>
-                <div className="space-y-1 flex-1">
-                  <div className="text-slate-400 text-[10px] font-mono flex items-center gap-1.5">
-                    <span>Kept PolicyGuard Engine</span>
-                    <span className="rounded bg-accent-amber/20 text-accent-amber px-1.5 py-0.2 text-[9px] font-bold">
-                      UNVERIFIED_MISSING_SPECS
-                    </span>
-                  </div>
-                  <p className="text-slate-300 text-xs leading-relaxed">
-                    Epistemic Guardrail triggered: seller omitted millimeter collar measurements. Kept refuses to assume compatibility or gamble family money. Order paused.
-                  </p>
-                </div>
-              </div>
-            </div>
           <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-obsidian-800/80 p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6">
             <div className="flex items-center justify-between pb-6 border-b border-white/10">
               <div className="flex items-center gap-3">
@@ -1330,17 +1196,11 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-slate-400">Owned Equipment:</span>
-                          <span className="rounded bg-accent-emerald/15 border border-accent-emerald/30 text-accent-emerald px-1.5 py-0.5 text-[9px] font-mono font-medium">Household Ledger</span>
-                        </div>
+                        <span className="text-slate-400">Owned Equipment: </span>
                         <span className="text-white font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
                       </div>
                       <div>
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-slate-400">Listing Checked:</span>
-                          <span className="rounded bg-accent-amber/15 border border-accent-amber/30 text-accent-amber px-1.5 py-0.5 text-[9px] font-mono font-medium">Unverified Listing</span>
-                        </div>
+                        <span className="text-slate-400">Listing Checked: </span>
                         <span className="text-slate-200">Espresso Dosing Ring & Needle Collar</span>
                       </div>
                     </div>
@@ -1353,10 +1213,7 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-slate-400">Missing Information:</span>
-                          <span className="rounded bg-accent-coral/15 border border-accent-coral/30 text-accent-coral px-1.5 py-0.5 text-[9px] font-mono font-medium">Missing Listing Spec</span>
-                        </div>
+                        <span className="text-slate-400">Missing Information: </span>
                         <span className="text-accent-amber font-medium">Seller omitted millimeter collar & diameter dimensions</span>
                       </div>
                       <div>
@@ -1383,7 +1240,6 @@ export default function KeptApp() {
               <span>Source: Seller listing page lacks published millimeter dimensions</span>
               <span className="text-accent-amber font-semibold">Order Paused For Safety</span>
             </div>
-          </div>
           </div>
         )}
       </main>
