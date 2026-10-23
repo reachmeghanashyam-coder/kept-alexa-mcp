@@ -603,12 +603,12 @@ export default function KeptApp() {
                 Duplicate Spend & Cable Guard
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Checks your TV ports and spare cables already in drawers so Dad never wastes money on redundant adapters.
+                Checks what you already own so you never buy cables or adapters you don't need.
               </p>
             </div>
 
             <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-purple-400">
-              <span>Test Spare Cable Check</span>
+              <span>Test Duplicate Spend Guard</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
