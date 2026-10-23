@@ -562,7 +562,7 @@ export default function KeptApp() {
                   01
                 </span>
                 <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-0.5 rounded-md border border-white/5">
-                  Little Brother #842
+                  Leo • Age 5 (Nut Allergy)
                 </span>
               </div>
 
@@ -726,7 +726,7 @@ export default function KeptApp() {
                     </p>
                     <p className="text-xs text-accent-cyan flex items-center gap-1.5 font-medium pt-1">
                       <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
-                      <span>Protected by Household Memory Enclave • Little Brother #842</span>
+                      <span>Protected by Household Memory Enclave • Leo Health Profile</span>
                     </p>
                   </div>
                 )}
