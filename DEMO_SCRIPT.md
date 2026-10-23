@@ -6,64 +6,61 @@
 
 ---
 
-### Segment 1: The Problem & The Verification Thesis (0:00 – 0:18)
+### Segment 1: The Core Direction (0:00 – 0:18)
 * **What Father does on screen:**  
   You and your daughter are smiling in the camera bubble. Screen is centered on the clean Kept home page:  
-  **`Every purchase has to earn a yes.`**  
-  *Subtext: The verification layer for AI shopping — checking what your household needs, proving compatibility where evidence allows, and refusing to guess when it doesn't.*
+  **`Buy what belongs. Keep what you buy.`**  
+  *Subtext: Kept gives AI shopping agents a household-aware verification and resolution layer—so they can check whether a purchase fits what you own, stop when the evidence is insufficient, and help resolve problems when reality doesn't match expectations.*
 * **What Daughter says:**  
-  > *"Hi everyone! AI agents like Alexa+ are about to start shopping for our homes automatically. But when an agent buys things without knowing what's already inside your home, it's easy to waste money on the wrong size or get stuck with return fees.  
+  > *"Hi everyone! As AI agents like Alexa+ start helping families shop, they need more than just product search—they need to know what is already inside your home.  
   > 
-  > This is **Kept** — the verification layer for AI shopping. With Kept, every purchase has to earn a yes."*
+  > This is **Kept**: a household-aware verification and resolution layer designed around one promise—**buy what belongs, keep what you buy**."*
 
 ---
 
-### Segment 2: Multi-Item Household Ledger & Fit Verification (0:18 – 0:42)
+### Segment 2: Verify Before Buying & Household Ledger (0:18 – 0:45)
 * **What Father does on screen:**  
-  1. Click **`View Ledger →`** on the Household bar (`Your Household #842 • 4 synced items`).  
-  2. Slide-out drawer smoothly appears showing all 4 verified household items across **Kitchen, Office, and Wardrobe**.  
-  3. Close drawer (or click **`Test 58 mm Accessory Compatibility`**).  
-  4. Scenario 1 opens: 58 mm portafilter mismatch flagged + 15% restocking fee penalty.  
-  5. Click the cyan button: **`Verify & Switch to 54 mm Item`**.  
-  6. The card instantly turns green: `● COMPATIBLE • Exact specification match (54 mm 3-Ear)`.
+  1. Click **`View Ledger →`** on the Household bar (`Your Household #842 • 4 synced items`) to briefly show the 4 household items across **Kitchen, Office, and Wardrobe**, then click **`Test 58 mm Accessory Compatibility`** (or click Card 1).  
+  2. Show the red incompatibility card (`● Will Not Fit • Purchase Prevented`) and the Decision Record (`58 mm vs 54 mm` conflict + seller's 15% restocking fee policy).  
+  3. Click the cyan button: **`Verify & Switch to 54 mm Item`**.  
+  4. The card dynamically turns emerald green: `● COMPATIBLE • Exact Specification Match (54 mm 3-Ear)`.
 * **What Daughter says:**  
-  > *"Kept grounds the agent in a verified household ledger — from our Breville espresso machine in the kitchen to our monitor in the office.  
+  > *"First, Kept checks purchases against our household ledger. Dad wants a bottomless portafilter for our Breville espresso machine, which requires an exact 54 millimeter, 3-ear fit.  
   > 
-  > When Dad considers a new portafilter, other agents might just guess and buy a popular 58 millimeter size. But Kept catches the size mismatch, warns us of the seller's 15% restocking fee, and with one click verifies a 54 millimeter alternative against our machine's exact specifications."*
+  > When we check a 58 millimeter listing, Kept catches the specification conflict, surfaces the seller's restocking fee policy from the fixture, and lets us verify and switch to a matching 54 millimeter alternative."*
 
 ---
 
-### Segment 3: Refusing to Guess Under Uncertainty (0:42 – 1:02)
+### Segment 3: Refuse Unsupported Decisions (0:45 – 1:05)
 * **What Father does on screen:**  
-  1. Click Card 2: **`2. Missing Info: Seller Omitted the Size`**.  
+  1. Click Card 2: **`2. Refuse Unsupported: Seller Omitted the Size`**.  
   2. Amber card appears: `● Size Not Listed • Checkout Paused`.  
-  3. Click **`Copy Seller Verification Question`** (shows green checkmark `✓ Question Copied to Clipboard!`).
+  3. Click **`Copy Seller Verification Question`** (shows `✓ Question Copied to Clipboard!`).
 * **What Daughter says:**  
-  > *"And when a third-party seller omits dimensions completely, Kept doesn't hallucinate or guess blind.  
+  > *"Second, what if a third-party listing says 'Universal' but leaves out millimeter dimensions? A shopping agent could miss that uncertainty—but Kept flags it.  
   > 
-  > It enforces a safe stop, pauses checkout, and automatically drafts the exact question we need to ask the seller before buying."*
+  > Instead of guessing, Kept pauses the decision and prepares the exact verification question to ask the seller."*
 
 ---
 
-### Segment 4: Evidence-Based Returns & Cryptographic Authorization (1:02 – 1:28)
+### Segment 4: Extending to Post-Purchase Resolution (1:05 – 1:30)
 * **What Father does on screen:**  
-  1. Click Card 3: **`3. After Delivery: Damaged or Wrong-Size Order`**.  
-  2. Show Bedrock Nova photo inspection on the cracked kettle + reminder to pack the power base.  
-  3. Check the confirmation box: `[✔] Confirm Return Plan` and click **`Confirm & Generate Return Pass`**.  
-  4. Green card appears: `Return Authorized & Ready for Drop-Off`.  
-  5. Click **`Verify Cryptographic Signature`** to reveal the enclave proof: `✓ HMAC-SHA256 • ✓ SHA-256 Hash Bound • ✓ Single-Use Nonce`.
+  1. Click Card 3: **`3. Resolve What Goes Wrong: Damaged or Wrong-Size Order`**.  
+  2. Show the Bedrock Nova photo inspection on the cracked kettle + reminder to include the power base.  
+  3. Check `[✔] Confirm Return Plan` and click **`Confirm & Generate Return Pass`**.  
+  4. Click **`Verify Cryptographic Signature`** to show the HMAC-SHA256 integrity proof.
 * **What Daughter says:**  
-  > *"When something goes wrong after delivery, Kept uses Amazon Bedrock vision to inspect damage photos and combines multiple items into one single trip to Whole Foods.  
+  > *"Finally, we show how the same principles extend after delivery. When an order arrives with a cracked kettle and a tight sweater, Kept analyzes the damage photo, reminds us to pack the power base, and prepares a consolidated return plan.  
   > 
-  > Most importantly, the agent cannot execute returns without customer approval. Every pass is locked with a cryptographically signed HMAC token that prevents tampering or replayed requests."*
+  > The agent prepares the work, but the customer retains authority—issuing an HMAC-signed authorization artifact only after we explicitly approve."*
 
 ---
 
-### Segment 5: The Closing (1:28 – 1:40)
+### Segment 5: The Closing (1:30 – 1:40)
 * **What Father does on screen:**  
-  Scroll slightly back up to show the clean dashboard.
+  Click `Dismiss Result ✕` to return smoothly to the main overview.
 * **What Daughter says:**  
-  > *"Kept gives shopping agents the context they need to buy what actually fits, the restraint to pause when details are missing, and the safety to keep families in control.  
+  > *"Verify before buying, refuse unsupported decisions, and keep the customer in control.  
   > 
-  > Every purchase has to earn a yes. Thank you so much!"*
+  > **Kept: Buy what belongs. Keep what you buy.** Thank you so much!"*
 * **Both:** Smile and wave at the camera!

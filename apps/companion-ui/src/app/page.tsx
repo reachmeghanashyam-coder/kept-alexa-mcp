@@ -360,14 +360,14 @@ export default function KeptApp() {
         {/* Hero Title: Large, Commanding Display Scale Across 2 Lines */}
         <div className="text-center max-w-4xl mb-7 sm:mb-8">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] mb-3.5 text-white">
-            Every purchase has to
+            Buy what belongs.
             <br />
             <span className="bg-gradient-to-r from-accent-cyan via-accent-mint to-accent-emerald bg-clip-text text-transparent">
-              earn a yes.
+              Keep what you buy.
             </span>
           </h1>
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-normal mt-3">
-            The verification layer for AI shopping — checking what your household needs, proving compatibility where evidence allows, and refusing to guess when it doesn&apos;t.
+            Kept gives AI shopping agents a household-aware verification and resolution layer—so they can check whether a purchase fits what you own, stop when the evidence is insufficient, and help resolve problems when reality doesn&apos;t match expectations.
           </p>
         </div>
 
@@ -379,7 +379,6 @@ export default function KeptApp() {
               <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
                 Your Household (#842)
               </span>
-              <span className="text-[11px] text-slate-500 font-mono hidden md:inline">
               <button
                 onClick={() => setShowHouseholdDrawer(true)}
                 className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 hover:bg-accent-cyan/20 px-2.5 py-0.5 text-[11px] font-mono font-medium text-accent-cyan transition-all cursor-pointer shadow-sm hover:border-accent-cyan/60"
@@ -389,7 +388,6 @@ export default function KeptApp() {
                 <span>{inventory.length || 4} synced items</span>
                 <span className="text-slate-400 font-sans text-[10px] font-normal underline ml-0.5">View Ledger →</span>
               </button>
-              </span>
             </div>
 
             <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2">
@@ -465,7 +463,7 @@ export default function KeptApp() {
                   {activeScenario === 'compat' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
-                  1. BEFORE BUYING
+                  1. VERIFY BEFORE BUYING
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
               </div>
@@ -497,7 +495,7 @@ export default function KeptApp() {
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
                   )}
-                  2. MISSING INFO
+                  2. REFUSE UNSUPPORTED
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Breville 54 mm</span>
               </div>
@@ -529,7 +527,7 @@ export default function KeptApp() {
                   {activeScenario === 'return' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald animate-ping" />
                   )}
-                  3. AFTER DELIVERY
+                  3. RESOLVE WHAT GOES WRONG
                 </span>
                 <span className="whitespace-nowrap shrink-0 text-[11px] font-mono text-slate-400">Uses: Order #842</span>
               </div>
