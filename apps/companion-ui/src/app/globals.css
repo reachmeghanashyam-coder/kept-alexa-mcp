@@ -30,11 +30,3 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
-
-/* Linear-grade ambient grid overlay */
-.bg-grid-ambient {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 65% 55% at 50% 30%, black 20%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 30%, black 20%, transparent 100%);
-}

@@ -456,13 +456,10 @@ export default function KeptApp() {
   }
 
   return (
-    <div className="min-h-screen bg-obsidian-900 bg-glow-radial text-slate-100 flex flex-col font-sans pb-2 relative overflow-x-hidden">
-      {/* Linear-grade ambient grid overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-grid-ambient opacity-60 z-0"></div>
-
-      {/* Seamless Floating Top Navigation Bar */}
-      <header className="sticky top-0 z-30 w-full backdrop-blur-xl bg-obsidian-950/70 border-b border-white/[0.06] transition-all">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-3.5">
+    <div className="min-h-screen bg-obsidian-950 bg-[radial-gradient(ellipse_100%_70%_at_50%_-15%,rgba(0,212,255,0.07),transparent_75%)] text-slate-100 flex flex-col font-sans pb-2">
+      {/* 100% Seamless Transparent Top Navigation Bar */}
+      <header className="w-full bg-transparent">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pt-5 pb-2">
           {/* Left: Apple-grade Kept Brand Mark */}
           <div className="flex items-center gap-3 group cursor-default">
             <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-b from-white/[0.18] to-white/[0.04] p-[1px] shadow-[0_2px_12px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.3)] ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-105">
@@ -502,14 +499,14 @@ export default function KeptApp() {
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setShowHouseholdDrawer(true)}
-              className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm backdrop-blur-md"
+              className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
             >
               <Layers className="h-3.5 w-3.5 text-accent-cyan" />
               <span>Household Ledger ({inventory.length || 4})</span>
             </button>
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
-              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-[0_0_20px_rgba(0,229,153,0.3)] flex items-center gap-1.5"
+              className="rounded-full bg-gradient-to-r from-accent-cyan to-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-[0_0_15px_rgba(0,229,153,0.25)] flex items-center gap-1.5"
             >
               <Code2 className="h-3.5 w-3.5" />
               {showTraceDrawer ? 'Hide Trace' : 'Inspect MCP'}
