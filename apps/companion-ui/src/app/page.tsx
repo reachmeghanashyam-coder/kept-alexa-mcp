@@ -719,11 +719,17 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Owned Equipment: </span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-slate-400">Owned Equipment:</span>
+                          <span className="rounded bg-accent-emerald/15 border border-accent-emerald/30 text-accent-emerald px-1.5 py-0.5 text-[9px] font-mono font-medium">Household Ledger</span>
+                        </div>
                         <span className="text-accent-emerald font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Listing Checked: </span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-slate-400">Listing Checked:</span>
+                          <span className="rounded bg-accent-cyan/15 border border-accent-cyan/30 text-accent-cyan px-1.5 py-0.5 text-[9px] font-mono font-medium">Listing Claim</span>
+                        </div>
                         <span className="text-slate-200">{compatResult.candidateTitle}</span>
                       </div>
                     </div>
@@ -744,7 +750,10 @@ export default function KeptApp() {
                         </span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Seller Policy: </span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-slate-400">Seller Policy:</span>
+                          <span className="rounded bg-accent-amber/15 border border-accent-amber/30 text-accent-amber px-1.5 py-0.5 text-[9px] font-mono font-medium">Merchant Terms</span>
+                        </div>
                         <span className={compatResult.status === "COMPATIBLE" ? "text-accent-emerald font-medium" : "text-accent-amber font-medium"}>
                           {compatResult.status === "COMPATIBLE"
                             ? "Amazon Fulfilled • 0% restocking fee (30-day free return)"
@@ -1196,11 +1205,17 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Owned Equipment: </span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-slate-400">Owned Equipment:</span>
+                          <span className="rounded bg-accent-emerald/15 border border-accent-emerald/30 text-accent-emerald px-1.5 py-0.5 text-[9px] font-mono font-medium">Household Ledger</span>
+                        </div>
                         <span className="text-white font-semibold">Breville Barista Express (54 mm, 3 ears)</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Listing Checked: </span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-slate-400">Listing Checked:</span>
+                          <span className="rounded bg-accent-amber/15 border border-accent-amber/30 text-accent-amber px-1.5 py-0.5 text-[9px] font-mono font-medium">Unverified Listing</span>
+                        </div>
                         <span className="text-slate-200">Espresso Dosing Ring & Needle Collar</span>
                       </div>
                     </div>
@@ -1213,7 +1228,10 @@ export default function KeptApp() {
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <div>
-                        <span className="text-slate-400">Missing Information: </span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-slate-400">Missing Information:</span>
+                          <span className="rounded bg-accent-coral/15 border border-accent-coral/30 text-accent-coral px-1.5 py-0.5 text-[9px] font-mono font-medium">Missing Evidence</span>
+                        </div>
                         <span className="text-accent-amber font-medium">Seller omitted millimeter collar & diameter dimensions</span>
                       </div>
                       <div>
