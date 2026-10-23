@@ -975,8 +975,8 @@ export default function KeptApp() {
             </div>
 
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-              <span>Source: Household Memory Enclave §Nidhi Education &amp; Reading Profile</span>
-              <span className="text-accent-emerald font-semibold">✓ Grounded for 3rd Grade</span>
+              <span>Source: Household Memory</span>
+              <span className="text-accent-emerald font-semibold">✓ 3rd Grade Match</span>
             </div>
           </div>
         )}
