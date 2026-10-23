@@ -36,7 +36,7 @@ export default function KeptApp() {
   const [householdFilter, setHouseholdFilter] = useState<'ALL' | 'Kitchen' | 'Office' | 'Wardrobe'>('ALL');
   const [showSigVerification, setShowSigVerification] = useState(false);
   const [customQuery, setCustomQuery] = useState('');
-  const [showDecisionReceipt, setShowDecisionReceipt] = useState(true);
+  const [showDecisionReceipt, setShowDecisionReceipt] = useState(false);
   const [copiedQuestion, setCopiedQuestion] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -715,120 +715,109 @@ export default function KeptApp() {
 
         {/* Scenario 1: Compatibility Verification (Dynamic Incompatible Block OR Verified Compatible Match) */}
         {activeScenario === "compat" && compatResult && (
-          <div className={`w-full max-w-3xl rounded-3xl border p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6 ${
+          <div className={`w-full max-w-3xl rounded-3xl border p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4 ${
             compatResult.status === "COMPATIBLE"
-              ? "border-accent-emerald/40 bg-obsidian-800/90 shadow-[0_0_40px_rgba(0,229,153,0.15)]"
-              : "border-white/10 bg-obsidian-800/80"
+              ? "border-accent-emerald/40 bg-obsidian-800/90 shadow-[0_0_30px_rgba(0,229,153,0.12)]"
+              : "border-white/10 bg-obsidian-800/85"
           }`}>
-            <div className="flex items-center justify-between pb-6 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <span className={`flex h-3 w-3 rounded-full ${
-                  compatResult.status === "COMPATIBLE" ? "bg-accent-emerald animate-pulse" : "bg-accent-coral animate-ping"
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
+                <span className={`flex h-2.5 w-2.5 rounded-full ${
+                  compatResult.status === "COMPATIBLE" ? "bg-accent-emerald animate-pulse" : "bg-accent-coral"
                 }`}></span>
                 <span className={`text-xs font-bold uppercase tracking-wider ${
                   compatResult.status === "COMPATIBLE" ? "text-accent-emerald" : "text-accent-coral"
                 }`}>
                   {compatResult.status === "COMPATIBLE"
-                    ? "● COMPATIBLE • Exact Specification Match (54 mm 3-Ear)"
-                    : "● Will Not Fit • Purchase Prevented"}
+                    ? "Verified Compatible Match"
+                    : "Size Mismatch • Purchase Prevented"}
                 </span>
               </div>
               <span className={`rounded-full border px-3 py-1 text-xs font-medium ${
                 compatResult.status === "COMPATIBLE"
                   ? "border-accent-emerald/30 bg-accent-emerald/10 text-accent-emerald"
-                  : "border-white/10 bg-white/5 text-slate-400"
+                  : "border-accent-coral/30 bg-accent-coral/10 text-accent-coral"
               }`}>
-                {compatResult.status === "COMPATIBLE" ? "Verified Safe to Buy" : "Size Mismatch"}
+                {compatResult.status === "COMPATIBLE" ? "Exact 54 mm Match" : "58 mm vs 54 mm"}
               </span>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
-                <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
-                  <p className="font-semibold text-white">
-                    {compatResult.status === "COMPATIBLE"
-                      ? "Verified fit for your Breville Barista Express (BES870XL)."
-                      : "This accessory does not fit your Breville Barista Express."}
-                  </p>
-                  <p className="text-slate-300 text-xs">
-                    {compatResult.reason}
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
+                
+                {compatResult.status === "COMPATIBLE" ? (
+                  <div className="rounded-2xl border border-accent-emerald/25 bg-accent-emerald/5 p-4 space-y-2">
+                    <p className="text-sm font-semibold text-white">
+                      Verified fit for your Breville Barista Express (BES870XL).
+                    </p>
+                    <p className="text-xs text-slate-300">
+                      Exact 54 mm diameter and 3-ear configuration. Standard 30-day Prime returns (0% restocking fee).
+                    </p>
+                  </div>
+                ) : (
+                  <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
+                    <p className="text-sm text-slate-200">
+                      Your Breville requires <span className="text-accent-emerald font-semibold">54 mm (3 ears)</span>. This accessory is <span className="text-accent-coral font-semibold">58 mm (2 ears)</span>.
+                    </p>
+                    {compatResult.sellerRiskWarning && (
+                      <p className="text-xs text-accent-amber flex items-center gap-1.5 font-medium pt-1">
+                        <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+                        <span>3rd-party seller charges a 15% restocking fee on returns.</span>
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
-              {/* Mismatched Attributes Table (When Incompatible) */}
-              {compatResult.mismatchedAttributes && compatResult.mismatchedAttributes.length > 0 && (
-                <div className="rounded-2xl border border-white/5 bg-obsidian-950/60 p-5 space-y-3">
-                  <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    Size Comparison
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className="text-slate-400 font-medium">Feature</div>
-                    <div className="text-accent-emerald font-semibold">Your Machine (Breville)</div>
-                    <div className="text-accent-coral font-semibold">Item You Picked</div>
-                    {compatResult.mismatchedAttributes.map((m: any, idx: number) => (
-                      <React.Fragment key={idx}>
-                        <div className="text-slate-300 py-2 border-t border-white/5">{m.attribute}</div>
-                        <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">{m.ownedValue}</div>
-                        <div className="text-accent-coral py-2 border-t border-white/5 font-mono">{m.candidateValue}</div>
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Verified Match Table (When Compatible) */}
-              {compatResult.status === "COMPATIBLE" && (
-                <div className="rounded-2xl border border-accent-emerald/25 bg-accent-emerald/5 p-5 space-y-3">
-                  <div className="text-xs font-semibold text-accent-emerald uppercase tracking-wider flex items-center gap-1.5">
-                    <CheckCircle2 className="h-4 w-4" /> Verified Specification Alignment
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className="text-slate-400 font-medium">Attribute</div>
-                    <div className="text-slate-300 font-semibold">Your Breville BES870XL</div>
-                    <div className="text-accent-emerald font-semibold">Verified Candidate</div>
-                    <div className="text-slate-300 py-2 border-t border-white/5">Portafilter Diameter</div>
-                    <div className="text-slate-200 py-2 border-t border-white/5 font-mono">54 mm</div>
-                    <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">54 mm ✓</div>
-                    <div className="text-slate-300 py-2 border-t border-white/5">Locking Ear Count</div>
-                    <div className="text-slate-200 py-2 border-t border-white/5 font-mono">3 Ears</div>
-                    <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">3 Ears ✓</div>
-                    <div className="text-slate-300 py-2 border-t border-white/5">Return Policy</div>
-                    <div className="text-slate-200 py-2 border-t border-white/5 font-mono">Standard 30-Day</div>
-                    <div className="text-accent-emerald py-2 border-t border-white/5 font-mono">0% Restocking Fee ✓</div>
-                  </div>
-                </div>
-              )}
-
-              {/* Seller Restocking Warning */}
-              {compatResult.sellerRiskWarning && (
-                <div className="flex items-start gap-3 rounded-2xl border border-accent-amber/30 bg-accent-amber/10 p-5 text-xs text-accent-amber">
-                  <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
+              {/* Verified Alternative Option when Incompatible */}
+              {compatResult.status !== "COMPATIBLE" && compatResult.recommendedAlternative && (
+                <div className="rounded-2xl border border-accent-cyan/30 bg-accent-cyan/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div>
-                    <span className="font-bold">Avoid Return Fee: </span>
-                    This 3rd-party seller charges a 15% restocking fee on opened accessories. Buying this would have cost you return penalties.
-                  </div>
-                </div>
-              )}
-
-              {/* Verified Alternative */}
-              {compatResult.recommendedAlternative && (
-                <div className="rounded-2xl border border-accent-cyan/30 bg-accent-cyan/5 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div>
-                    <div className="text-xs font-bold text-accent-cyan uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                      <ShieldCheck className="h-4 w-4" /> Recommended Matching Item
+                    <div className="text-[11px] font-bold text-accent-cyan uppercase tracking-wider mb-0.5 flex items-center gap-1.5">
+                      <ShieldCheck className="h-3.5 w-3.5" /> Recommended Matching Item
                     </div>
                     <div className="font-semibold text-white text-sm">
                       {compatResult.recommendedAlternative.title}
                     </div>
-                    <div className="text-xs text-slate-400 mt-1">
-                      {compatResult.recommendedAlternative.verifiedSpec} • Free 30-Day Prime Returns
+                    <div className="text-xs text-slate-400 mt-0.5">
+                      {compatResult.recommendedAlternative.verifiedSpec} • Free Prime Returns
                     </div>
                   </div>
-                  <button onClick={resolveToCompatibleAlternative} disabled={loading} className="shrink-0 rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer">
-                    {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
-                    Verify & Switch to 54 mm Item
+                  <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                    <button
+                      onClick={resolveToCompatibleAlternative}
+                      disabled={loading}
+                      className="rounded-full bg-accent-cyan px-4 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-md"
+                    >
+                      {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
+                      Switch to 54 mm Match
+                    </button>
+                    <button
+                      onClick={dismissScenario}
+                      className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-2 text-xs text-slate-400 hover:text-white transition-all cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Action when Compatible */}
+              {compatResult.status === "COMPATIBLE" && (
+                <div className="flex items-center gap-3 pt-1">
+                  <button
+                    onClick={dismissScenario}
+                    className="rounded-full bg-accent-emerald px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer shadow-md shadow-accent-emerald/20"
+                  >
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    Verified Safe • Done
+                  </button>
+                  <button
+                    onClick={dismissScenario}
+                    className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs text-slate-400 hover:text-white transition-all cursor-pointer"
+                  >
+                    Dismiss
                   </button>
                 </div>
               )}
@@ -838,14 +827,14 @@ export default function KeptApp() {
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
               <button
                 onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
+                className="w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-slate-400 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-cyan" />
-                  Kept Decision Record
+                  Technical Verification Details (Audit Log)
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? "Hide Record" : "View Decision Record"}
+                  {showDecisionReceipt ? "Hide" : "Inspect"}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
@@ -918,62 +907,46 @@ export default function KeptApp() {
           </div>
         )}
 
-                {/* Scenario: Duplicate Accessory Check */}
+                {/* Scenario 2: Duplicate Accessory Check */}
         {activeScenario === 'duplicate' && compatResult && (
-          <div className="w-full max-w-3xl rounded-3xl border border-accent-cyan/40 bg-obsidian-800/90 p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6">
-            <div className="flex items-center justify-between pb-6 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <span className="flex h-3 w-3 rounded-full bg-accent-cyan animate-pulse"></span>
+          <div className="w-full max-w-3xl rounded-3xl border border-accent-cyan/40 bg-obsidian-800/90 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-2.5 w-2.5 rounded-full bg-accent-cyan animate-pulse"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent-cyan">
-                  ● Already Owned In Home • Save $29.00
+                  Duplicate Accessory • Save $29.00
                 </span>
               </div>
               <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan font-medium">
-                Duplicate Detected
+                Already In Home
               </span>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
-                <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
-                  <p className="font-semibold text-white">
-                    You already own an identical certified accessory in your home.
+                <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
+                <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
+                  <p className="text-sm text-slate-200">
+                    You already own this. Your <span className="text-white font-semibold">{compatResult.matchedOwnedProductTitle}</span> already came with an identical 90W+ USB-C video &amp; power cable.
                   </p>
-                  <p className="text-slate-300 text-xs leading-relaxed">
-                    {compatResult.reason}
+                  <p className="text-xs text-slate-400">
+                    Recorded in Household Ledger • Office
                   </p>
-                </div>
-              </div>
-
-              {/* Matched Equipment Detail Card */}
-              <div className="rounded-2xl border border-white/10 bg-obsidian-950/60 p-5 space-y-2">
-                <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  Household Match Found in Office Ledger
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
-                  <div>
-                    <div className="text-white font-bold text-sm">{compatResult.matchedOwnedProductTitle}</div>
-                    <div className="text-xs text-slate-400">Packaging Contents: Includes USB-C 90W 1m Video &amp; Power Cable</div>
-                  </div>
-                  <span className="rounded-full bg-accent-emerald/20 text-accent-emerald px-3 py-1 text-xs font-mono font-semibold self-start sm:self-auto">
-                    $29 Saved
-                  </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <button
                   onClick={dismissScenario}
-                  className="rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
                 >
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   Save $29 &amp; Skip Purchase
                 </button>
                 <button
                   onClick={() => setShowHouseholdDrawer(true)}
-                  className="rounded-full border border-white/20 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="rounded-full border border-white/15 bg-white/5 hover:bg-white/10 px-4 py-2.5 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <Layers className="h-3.5 w-3.5" />
                   View in Household Ledger
@@ -985,21 +958,21 @@ export default function KeptApp() {
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
               <button
                 onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
+                className="w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-slate-400 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-cyan" />
-                  Kept Decision Record
+                  Technical Verification Details (Audit Log)
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? "Hide Record" : "View Decision Record"}
+                  {showDecisionReceipt ? "Hide" : "Inspect"}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
 
               {showDecisionReceipt && (
-                <div className="p-5 space-y-3.5 text-xs text-slate-300 border-t border-white/5 bg-black/40">
-                  <div className="pb-3 border-b border-white/5">
+                <div className="p-4 space-y-3 text-xs text-slate-300 border-t border-white/5 bg-black/40">
+                  <div className="pb-2 border-b border-white/5">
                     <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
                       1. What Kept Checked
                     </span>
@@ -1015,7 +988,7 @@ export default function KeptApp() {
                     </div>
                   </div>
 
-                  <div className="pb-3 border-b border-white/5">
+                  <div className="pb-2 border-b border-white/5">
                     <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
                       2. What Kept Concluded
                     </span>
@@ -1043,7 +1016,7 @@ export default function KeptApp() {
               )}
             </div>
 
-            <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+            <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
               <span>Source: {compatResult.sourceEvidence || "LG Official Product Datasheet §Packaging Contents"}</span>
               <span className="text-accent-emerald font-semibold">✓ Saved $29.00 • Household Grounded</span>
             </div>
@@ -1238,14 +1211,14 @@ export default function KeptApp() {
               <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
                 <button
                   onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                  className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
+                  className="w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-slate-400 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
                 >
                   <span className="flex items-center gap-2">
                     <FileText className="h-3.5 w-3.5 text-accent-emerald" />
-                    Kept Decision Record
+                    Technical Verification Details (Audit Log)
                   </span>
                   <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                    {showDecisionReceipt ? 'Hide Record' : 'View Decision Record'}
+                    {showDecisionReceipt ? 'Hide' : 'Inspect'}
                     {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                   </span>
                 </button>
@@ -1384,85 +1357,84 @@ export default function KeptApp() {
         {/* Scenario 3: Epistemic Honesty / Missing Specs Refusal */}
         {/* Scenario 3: Missing Specs Safe Stop */}
         {activeScenario === 'unverified' && compatResult && (
-          <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-obsidian-800/80 p-8 sm:p-10 backdrop-blur-xl shadow-2xl transition-all space-y-6">
-            <div className="flex items-center justify-between pb-6 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <span className="h-3 w-3 rounded-full bg-accent-amber animate-pulse"></span>
+          <div className="w-full max-w-3xl rounded-3xl border border-white/10 bg-obsidian-800/85 p-6 sm:p-7 backdrop-blur-xl shadow-2xl transition-all space-y-4">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-accent-amber animate-pulse"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-accent-amber">
-                  ● Size Not Listed • Checkout Paused
+                  Missing Dimensions • Checkout Paused
                 </span>
               </div>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400 font-medium">
+              <span className="rounded-full border border-accent-amber/30 bg-accent-amber/10 px-3 py-1 text-xs text-accent-amber font-medium">
                 Unverified Listing
               </span>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2">{compatResult.candidateTitle}</h3>
-                <div className="text-sm text-slate-200 leading-relaxed bg-obsidian-950/60 p-5 rounded-2xl border border-white/5 space-y-2">
-                  <p className="font-semibold text-white">We paused this order because the seller hasn't provided dimensions.</p>
-                  <p className="text-slate-300 text-xs">
-                    Your Breville machine requires an exact 54 mm accessory with 3 locking ears. This seller didn't list any measurements, so Kept won't guess or risk ordering something that won't fit.
+                <h3 className="text-xl font-bold text-white mb-2 leading-snug">{compatResult.candidateTitle}</h3>
+                <div className="rounded-2xl bg-obsidian-950/60 p-4 border border-white/5 space-y-2">
+                  <p className="text-sm text-slate-200">
+                    Seller omitted diameter and ear specs. Your Breville requires exact <span className="text-accent-emerald font-semibold">54 mm (3 ears)</span>. Kept paused checkout so you don't receive an accessory that won't fit.
                   </p>
+                  {compatResult.sellerRiskWarning && (
+                    <p className="text-xs text-accent-amber flex items-center gap-1.5 font-medium pt-1">
+                      <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+                      <span>3rd-party seller with no published return policy.</span>
+                    </p>
+                  )}
                 </div>
               </div>
 
-              {compatResult.sellerRiskWarning && (
-                <div className="flex items-start gap-3 rounded-2xl border border-accent-coral/30 bg-accent-coral/10 p-5 text-xs text-accent-coral">
-                  <XCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold">Third-Party Seller Alert: </span>
-                    This seller has no published return policy. If this accessory doesn't fit, you may not be able to return it.
-                  </div>
-                </div>
-              )}
-            </div>
-
-
-              {/* Active Recovery Actions: Ask Seller or Check Alternative */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              {/* Active Recovery Actions */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <button
+                  onClick={resolveToCompatibleAlternative}
+                  disabled={loading}
+                  className="rounded-full bg-accent-cyan px-5 py-2.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-md"
+                >
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  Switch to Verified 54 mm
+                </button>
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText('Hi! Could you please confirm if this accessory has a 54 mm collar diameter and 3 locking ears for a Breville Barista Express?');
                     setCopiedQuestion(true);
                     setTimeout(() => setCopiedQuestion(false), 3000);
                   }}
-                  className="rounded-full border border-accent-amber/40 bg-accent-amber/10 px-4 py-2 text-xs font-semibold text-accent-amber hover:bg-accent-amber/20 transition-all flex items-center gap-1.5"
+                  className="rounded-full border border-accent-amber/40 bg-accent-amber/10 hover:bg-accent-amber/20 px-4 py-2.5 text-xs font-semibold text-accent-amber transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   <FileText className="h-3.5 w-3.5" />
-                  {copiedQuestion ? '✓ Question Copied to Clipboard!' : 'Copy Seller Verification Question'}
+                  {copiedQuestion ? '✓ Question Copied!' : 'Ask Seller for Size'}
                 </button>
                 <button
-                  onClick={resolveToCompatibleAlternative}
-                  disabled={loading}
-                  className="rounded-full bg-accent-cyan px-4 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all flex items-center gap-1.5 disabled:opacity-50"
+                  onClick={dismissScenario}
+                  className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-2.5 text-xs text-slate-400 hover:text-white transition-all cursor-pointer"
                 >
-                  <ShieldCheck className="h-3.5 w-3.5" />
-                  Check Verified 54 mm Alternative Instead
+                  Cancel
                 </button>
               </div>
+            </div>
 
-            {/* Kept Decision Record (Consistent Across All Scenarios) */}
+            {/* Kept Decision Record */}
             <div className="rounded-2xl border border-white/10 bg-obsidian-950/70 overflow-hidden">
               <button
                 onClick={() => setShowDecisionReceipt(!showDecisionReceipt)}
-                className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
+                className="w-full px-4 py-3 flex items-center justify-between text-xs font-semibold text-slate-400 hover:text-white transition-colors border-b border-white/5 bg-white/[0.02]"
               >
                 <span className="flex items-center gap-2">
                   <FileText className="h-3.5 w-3.5 text-accent-amber" />
-                  Kept Decision Record
+                  Technical Verification Details (Audit Log)
                 </span>
                 <span className="flex items-center gap-1.5 text-slate-500 font-normal text-[11px]">
-                  {showDecisionReceipt ? 'Hide Record' : 'View Decision Record'}
+                  {showDecisionReceipt ? 'Hide' : 'Inspect'}
                   {showDecisionReceipt ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
                 </span>
               </button>
 
               {showDecisionReceipt && (
-                <div className="p-5 space-y-3.5 text-xs text-slate-300 border-t border-white/5 bg-black/40">
-                  {/* 1. What Kept Checked */}
-                  <div className="pb-3 border-b border-white/5">
+                <div className="p-4 space-y-3 text-xs text-slate-300 border-t border-white/5 bg-black/40">
+                  <div className="pb-2 border-b border-white/5">
                     <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
                       1. What Kept Checked
                     </span>
@@ -1478,8 +1450,7 @@ export default function KeptApp() {
                     </div>
                   </div>
 
-                  {/* 2. What Kept Concluded */}
-                  <div className="pb-3 border-b border-white/5">
+                  <div className="pb-2 border-b border-white/5">
                     <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
                       2. What Kept Concluded
                     </span>
@@ -1490,12 +1461,11 @@ export default function KeptApp() {
                       </div>
                       <div>
                         <span className="text-slate-400">Kept Guardrail: </span>
-                        <span className="text-accent-coral font-medium">Refuse to guess or hallucinate compatibility without verified specs</span>
+                        <span className="text-accent-coral font-medium">Refuse to guess compatibility without verified specs</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* 3. Recommended Next Step */}
                   <div>
                     <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider mb-1">
                       3. Recommended Next Step
@@ -1508,7 +1478,7 @@ export default function KeptApp() {
               )}
             </div>
 
-            <div className="pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+            <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
               <span>Source: Seller listing page lacks published millimeter dimensions</span>
               <span className="text-accent-amber font-semibold">Order Paused For Safety</span>
             </div>
