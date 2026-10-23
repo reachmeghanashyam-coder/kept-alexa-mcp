@@ -311,46 +311,6 @@ export default function KeptApp() {
     }
   }
 
-  // Trigger Scenario: Duplicate Accessory Owned (LG Monitor USB-C Cable)
-  async function triggerScenarioDuplicate() {
-    setCustomQuery('100W USB-C Monitor Cable');
-    setActiveScenario('duplicate');
-    setLoading(true);
-    setExecutionResult(null);
-    try {
-      const candidate = {
-        title: 'Anker Powerline III USB-C to USB-C 100W Charging & 4K Display Cable (1m)',
-        brand: 'Anker',
-        category: 'Electronics & Office',
-        targetSpecs: {
-          cableType: 'USB-C to USB-C',
-          powerDeliveryWatts: 100,
-          lengthMeters: 1.0,
-        },
-        sellerPolicy: {
-          isThirdParty: false,
-          restockingFeePercent: 0,
-          returnWindowDays: 30,
-          termsExplicitlyStated: true,
-        },
-      };
-
-      const res = await fetch('/api/mcp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: 'check_purchase_compatibility',
-          arguments: { candidate },
-        }),
-      });
-      const data = await res.json();
-      const parsed = JSON.parse(data.content[0].text);
-      setCompatResult(parsed);
-      setMcpTrace({ tool: 'check_purchase_compatibility', input: { candidate }, output: parsed });
-    } finally {
-      setLoading(false);
-    }
-  }
 
   // Live Household Persistence: Register custom item into ledger
   async function handleAddCustomItem(e: React.FormEvent) {
