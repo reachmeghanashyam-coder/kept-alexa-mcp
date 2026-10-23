@@ -496,8 +496,8 @@ export default function KeptApp() {
               Kept personalizes it.
             </span>
           </h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mt-[15px]">
-            Because the AI living on your kitchen counter shouldn’t act like a complete stranger. Kept trains Alexa+ on what matters most—your children’s safety, their curious minds, and the home you love.
+          <p className="text-slate-300 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mt-[15px]">
+            Kept is the personal layer that connects you and your family to Alexa.
           </p>
         </div>
 

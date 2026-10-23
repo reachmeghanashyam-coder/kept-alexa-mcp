@@ -4,7 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Kept — Family Memory for Alexa+',
   description:
-    'AI knows the world. Kept knows your home. The private family memory for Alexa+ that protects children’s allergies, nurtures their learning, and guards family spend.',
+    'Kept is the personal layer that connects you and your family to Alexa.',
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.svg',
