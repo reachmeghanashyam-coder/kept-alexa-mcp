@@ -519,19 +519,19 @@ export default function KeptApp() {
           {/* Category Pill */}
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-medium text-cyan-300 tracking-wide mb-5 shadow-sm backdrop-blur-md">
             <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
-            <span>Purchase Verification Protocol</span>
+            <span>Personal Household Care Layer</span>
           </div>
 
           {/* Hero Title */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-4 text-white">
-            Found by AI.
+            AI finds it.
             <br />
             <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-              Verified by Kept.
+              Kept personalizes it.
             </span>
           </h1>
           <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mt-[15px]">
-            Verifies proposed purchases against what you already own — stopping size mismatches, duplicate accessories, and wasted returns before checkout.
+            The gentle layer of household memory for Alexa+ that protects family allergies, knows your real appliances, and prevents wasted spend before checkout.
           </p>
         </div>
 
@@ -539,7 +539,7 @@ export default function KeptApp() {
         <div className="w-full max-w-5xl mb-4 px-1 flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00F0FF]"></span>
           <span className="text-xs font-mono uppercase tracking-widest text-slate-400 font-semibold">
-            RUN SHOPPING SIMULATION
+            HOUSEHOLD CARE SIMULATION
           </span>
         </div>
 
@@ -561,20 +561,20 @@ export default function KeptApp() {
                   01
                 </span>
                 <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-0.5 rounded-md border border-white/5">
-                  Breville 54 mm
+                  Little Brother #842
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                Real-Time Fit Check
+                Family Meal & Allergy Shield
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Evaluates physical dimensions and locking ears against your household appliances to catch size mismatches.
+                When you ask for dinner recipes, Kept blocks tree-nut allergens and matches cooking steps to your actual Ninja air fryer.
               </p>
             </div>
 
             <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-cyan-400">
-              <span>Test 58mm Portafilter</span>
+              <span>Test Kid-Safe Recipe Match</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
@@ -595,20 +595,20 @@ export default function KeptApp() {
                   02
                 </span>
                 <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-0.5 rounded-md border border-white/5">
-                  LG 4K Monitor
+                  Nursery & Bedroom
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
-                Duplicate Accessory Guard
+                Automatic Supply & Filter Match
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Checks what cables and accessories were already included with your delivered electronics to prevent redundant spend.
+                Matches the exact True HEPA filter for your bedroom air purifier without asking you to memorize cryptic model codes.
               </p>
             </div>
 
             <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-emerald-400">
-              <span>Test 100W USB-C Cable</span>
+              <span>Test Nursery Filter Care</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
@@ -629,20 +629,20 @@ export default function KeptApp() {
                   03
                 </span>
                 <span className="text-xs font-mono text-slate-500 bg-white/[0.02] px-2.5 py-0.5 rounded-md border border-white/5">
-                  Third-Party Seller
+                  Family Living Room
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
-                Missing Spec Pause
+                Duplicate Spend & Cable Guard
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Halts checkout when a marketplace seller omits essential millimeter specs rather than hallucinating compatibility.
+                Checks your TV ports and spare cables already in drawers so Dad never wastes money on redundant adapters.
               </p>
             </div>
 
             <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-purple-400">
-              <span>Test Universal Collar</span>
+              <span>Test Spare Cable Check</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
@@ -1527,9 +1527,9 @@ export default function KeptApp() {
                   <Layers className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white text-lg">Household Ledger</h3>
+                  <h3 className="font-bold text-white text-lg">Household Memory Ledger</h3>
                   <p className="text-xs text-slate-400">
-                    Physical specs and accessories grounded from past deliveries
+                    What Alexa has learned and remembered about our family's home
                   </p>
                 </div>
               </div>
@@ -1554,7 +1554,7 @@ export default function KeptApp() {
                       : 'border-white/10 bg-white/[0.03] text-slate-400 hover:text-white'
                   }`}
                 >
-                  {tab === 'ALL' ? 'All Items (2)' : tab}
+                  {tab === 'ALL' ? 'All Memories (2)' : tab}
                 </button>
               ))}
             </div>
@@ -1574,14 +1574,14 @@ export default function KeptApp() {
                           VERIFIED IN HOME
                         </span>
                       </div>
-                      <h4 className="font-bold text-white text-sm">Breville Barista Express Espresso Machine</h4>
-                      <p className="text-[11px] text-slate-400">Model: BES870XL</p>
+                      <h4 className="font-bold text-white text-sm">Ninja DualZone Air Fryer & Breville Espresso</h4>
+                      <p className="text-[11px] text-slate-400">Kitchen Counter • 54mm Portafilter & Dual Baskets</p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
+                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">Nut-Allergy Guard Active</span>
                     <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">54 mm Group Head</span>
-                    <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">3 Locking Ears</span>
                   </div>
                 </div>
               )}
@@ -1593,20 +1593,20 @@ export default function KeptApp() {
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="rounded bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                          Office
+                          Living Room & Office
                         </span>
                         <span className="text-[10px] font-mono text-emerald-400 font-semibold">
                           VERIFIED IN HOME
                         </span>
                       </div>
-                      <h4 className="font-bold text-white text-sm">LG 27UP850-W 27" 4K UHD IPS Monitor</h4>
-                      <p className="text-[11px] text-slate-400">Model: 27UP850-W</p>
+                      <h4 className="font-bold text-white text-sm">LG 4K Display & Samsung OLED Living Room Hub</h4>
+                      <p className="text-[11px] text-slate-400">Family Desk & Entertainment Center</p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.05] text-[11px]">
                     <span className="rounded-md bg-white/[0.04] px-2 py-0.5 text-slate-300 font-mono">USB-C 90W PD</span>
-                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Includes 100W USB-C Video Cable</span>
+                    <span className="rounded-md bg-emerald-950/50 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 font-mono">Spare 100W Cable in Drawer</span>
                   </div>
                 </div>
               )}
@@ -1615,7 +1615,7 @@ export default function KeptApp() {
             {/* Modal Footer */}
             <div className="pt-3 border-t border-white/[0.08] mt-4 flex items-center justify-between text-xs text-slate-500">
               <span className="font-mono">Household ID: #842</span>
-              <span className="text-cyan-400 font-mono font-medium">Synced with Alexa+ MCP</span>
+              <span className="text-cyan-400 font-mono font-medium">Continuous Learning Active</span>
             </div>
           </div>
         </div>
