@@ -587,36 +587,36 @@ export default function KeptApp() {
         </div>
 
         {/* 3 Core Bento Cards Showcase */}
-        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div ref={bentoGridRef} className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-8">
           {/* Card 1: Before Buying (Check compatibility against what you own) */}
           <div
             onClick={triggerScenario1}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'compat'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
                 : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan shrink-0">
                   {activeScenario === 'compat' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
-                  1. VERIFY BEFORE BUYING
+                  1. FIT CHECK
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-400 rounded-md bg-white/[0.04] px-2 py-0.5 border border-white/5">
-                  Uses: Breville 54 mm
+                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/5 truncate max-w-[120px]">
+                  Breville 54 mm
                 </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors leading-snug">
-                Buying a 58 mm Accessory
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors leading-snug">
+                58 mm Portafilter
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Checks the listing against your 54 mm Breville and warns you about a 15% restocking fee before checkout.
+                Catches 58 mm size conflict against your 54 mm Breville and flags 15% return fee.
               </p>
             </div>
-            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Check Compatibility</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
@@ -625,32 +625,32 @@ export default function KeptApp() {
           {/* Card 2: Duplicate Prevention (Household Memory) */}
           <div
             onClick={triggerScenarioDuplicate}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'duplicate'
                 ? 'border-accent-cyan bg-obsidian-800/95 shadow-[0_0_35px_rgba(0,212,255,0.25)] ring-2 ring-accent-cyan/80 scale-[1.01]'
                 : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan flex items-center gap-1.5">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-cyan shrink-0">
                   {activeScenario === 'duplicate' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                   )}
-                  2. DETECT DUPLICATES
+                  2. DUPLICATE CHECK
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-400 rounded-md bg-white/[0.04] px-2 py-0.5 border border-white/5">
-                  Uses: LG 4K Monitor
+                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/5 truncate max-w-[120px]">
+                  LG 4K Monitor
                 </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-cyan transition-colors leading-snug">
-                Buying a $29 USB-C Cable
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-cyan transition-colors leading-snug">
+                100W USB-C Cable ($29)
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Checks your office ledger and warns you that your LG monitor already included a 90W USB-C cable in the box.
+                Flags duplicate: your LG monitor box already includes an identical 90W+ cable.
               </p>
             </div>
-            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-cyan">
               <span>Save $29 &amp; Skip</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
@@ -659,32 +659,32 @@ export default function KeptApp() {
           {/* Card 3: Missing Information (Know when not to guess) */}
           <div
             onClick={triggerScenario3}
-            className={`group cursor-pointer rounded-2xl border p-6 sm:p-7 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between min-h-[210px] relative ${
+            className={`group cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden ${
               activeScenario === 'unverified'
                 ? 'border-accent-amber bg-obsidian-800/95 shadow-[0_0_35px_rgba(245,158,11,0.25)] ring-2 ring-accent-amber/80 scale-[1.01]'
                 : 'border-white/10 bg-obsidian-800/40 hover:border-white/20 hover:bg-obsidian-800/75 hover:translate-y-[-2px] shadow-lg'
             }`}
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="whitespace-nowrap shrink-0 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber flex items-center gap-1.5">
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-amber/30 bg-accent-amber/10 px-2.5 py-0.5 text-[10px] font-semibold text-accent-amber shrink-0">
                   {activeScenario === 'unverified' && (
                     <span className="h-1.5 w-1.5 rounded-full bg-accent-amber animate-ping" />
                   )}
-                  3. REFUSE UNVERIFIED
+                  3. MISSING SPECS
                 </span>
-                <span className="whitespace-nowrap shrink-0 text-[10px] font-mono text-slate-400 rounded-md bg-white/[0.04] px-2 py-0.5 border border-white/5">
-                  Uses: Breville 54 mm
+                <span className="text-[10px] font-mono text-slate-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/5 truncate max-w-[120px]">
+                  Breville 54 mm
                 </span>
               </div>
-              <h3 className="font-bold text-white text-base mb-2 group-hover:text-accent-amber transition-colors leading-snug">
-                Seller Omitted the Size
+              <h3 className="font-bold text-white text-base mb-1.5 group-hover:text-accent-amber transition-colors leading-snug">
+                Universal Dosing Collar
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                When a seller leaves out required millimeter dimensions, Kept refuses to guess and pauses checkout.
+                Pauses checkout when a third-party seller omits required millimeter dimensions.
               </p>
             </div>
-            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-accent-amber">
               <span>See Safe Stop</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
