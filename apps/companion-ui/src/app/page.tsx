@@ -513,13 +513,13 @@ export default function KeptApp() {
       {/* Main Container Naturally Filling Viewport with Generous Breathing Space */}
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-12 sm:pt-16 pb-12 flex flex-col items-center">
         {/* Hero Section */}
-        <div className="text-center max-w-3xl mb-8 sm:mb-10 flex flex-col items-center">
-          {/* Category Pill */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-4 py-1.5 text-xs font-semibold text-accent-cyan tracking-wide mb-6 shadow-sm">
+        <div className="text-center max-w-3xl mb-8 sm:mb-9 flex flex-col items-center">
+          {/* Crisp Compact Category Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300 tracking-wide mb-6 shadow-sm backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan"></span>
-            <span className="text-slate-300 font-bold uppercase tracking-wider text-[11px]">HOUSEHOLD PURCHASE VERIFICATION</span>
+            <span className="text-[11px] font-semibold text-slate-200">Purchase Verification</span>
             <span className="text-slate-500">•</span>
-            <span className="rounded bg-accent-cyan/15 text-accent-cyan px-2 py-0.5 text-[10px] font-mono font-medium">MCP POWERED</span>
+            <span className="text-[10px] font-mono font-semibold text-accent-cyan bg-accent-cyan/10 px-1.5 py-0.5 rounded">MCP</span>
           </div>
 
           {/* Hero Title */}
@@ -535,54 +535,53 @@ export default function KeptApp() {
           </p>
         </div>
 
-        {/* Interactive AI Verification Command Bar */}
-        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-12">
+        {/* Cute Compact Command Bar */}
+        <div className="w-full max-w-md mx-auto mb-8 sm:mb-10">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               if (customQuery.trim()) handleCustomQuerySubmit(customQuery);
             }}
-            className="relative flex items-center rounded-2xl border border-white/15 bg-obsidian-950/85 p-2 sm:p-2.5 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 focus-within:border-accent-cyan/80 focus-within:ring-2 focus-within:ring-accent-cyan/40 transition-all"
+            className="relative flex items-center rounded-full border border-white/15 bg-obsidian-950/90 py-1.5 pl-3.5 pr-1.5 shadow-xl backdrop-blur-2xl ring-1 ring-white/10 focus-within:border-accent-cyan/70 focus-within:ring-2 focus-within:ring-accent-cyan/30 transition-all"
           >
-            <Search className="h-5 w-5 text-slate-400 ml-3 shrink-0" />
+            <Search className="h-4 w-4 text-slate-400 mr-2 shrink-0" />
             <input
               type="text"
               value={customQuery}
               onChange={(e) => setCustomQuery(e.target.value)}
               placeholder="Select a test query below..."
-              className="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none"
+              className="w-full bg-transparent text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none"
             />
             <button
               type="submit"
               disabled={loading || !customQuery.trim()}
-              className="rounded-xl bg-accent-cyan px-5 py-2 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 flex items-center gap-1.5 cursor-pointer shadow-md"
+              className="rounded-full bg-accent-cyan px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 flex items-center gap-1.5 cursor-pointer shadow-md"
             >
-              {loading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+              {loading ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
               <span>Verify</span>
             </button>
           </form>
 
           {/* Quick Clickable Query Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-4">
-            <span className="text-[11px] text-slate-400 font-mono">Test queries:</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-3">
             <button
               type="button"
               onClick={() => { setCustomQuery('58mm Bottomless Portafilter'); handleCustomQuerySubmit('58mm Bottomless Portafilter'); }}
-              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3.5 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
+              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
             >
               ⚡ 58mm Portafilter
             </button>
             <button
               type="button"
               onClick={() => { setCustomQuery('100W USB-C Monitor Cable'); handleCustomQuerySubmit('100W USB-C Monitor Cable'); }}
-              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3.5 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
+              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-cyan/40"
             >
-              ⚡ 100W USB-C Cable
+              ⚡ 100W Cable
             </button>
             <button
               type="button"
               onClick={() => { setCustomQuery('Universal Collar (No Dimensions)'); handleCustomQuerySubmit('Universal Collar (No Dimensions)'); }}
-              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3.5 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-amber/40"
+              className="rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/[0.1] px-3 py-1 text-[11px] font-mono text-slate-300 hover:text-white transition-all cursor-pointer shadow-sm hover:border-accent-amber/40"
             >
               ⚡ Universal Collar
             </button>
