@@ -412,8 +412,15 @@ export default function KeptApp() {
             <span className="font-semibold tracking-tight text-white text-base">Kept</span>
           </div>
 
-          {/* Right: Solid Emerald CTA */}
-          <div className="flex items-center">
+          {/* Right: Actions */}
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={() => setShowHouseholdDrawer(true)}
+              className="rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+            >
+              <Layers className="h-3.5 w-3.5 text-accent-cyan" />
+              <span>Household Ledger ({inventory.length || 4})</span>
+            </button>
             <button
               onClick={() => setShowTraceDrawer(!showTraceDrawer)}
               className="rounded-full bg-accent-emerald px-4 py-1.5 text-xs font-bold text-obsidian-950 hover:brightness-110 transition-all shadow-md shadow-accent-emerald/25 flex items-center gap-1.5"
@@ -452,82 +459,6 @@ export default function KeptApp() {
           </p>
         </div>
 
-        {/* Persistent Household Context Indicator Bar (Non-decorative status indicators) */}
-        <div className="w-full max-w-4xl mb-7 sm:mb-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl border border-white/10 bg-obsidian-800/75 px-4 py-2.5 shadow-xl backdrop-blur-xl">
-            <div className="flex items-center gap-2.5 shrink-0">
-              <span className="h-2 w-2 rounded-full bg-accent-cyan"></span>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                Your Household (#842)
-              </span>
-              <button
-                onClick={() => setShowHouseholdDrawer(true)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-accent-cyan/30 bg-accent-cyan/10 hover:bg-accent-cyan/20 px-2.5 py-0.5 text-[11px] font-mono font-medium text-accent-cyan transition-all cursor-pointer shadow-sm hover:border-accent-cyan/60"
-                title="View full household ledger (4 items)"
-              >
-                <Layers className="h-3 w-3" />
-                <span>{inventory.length || 4} synced items</span>
-                <span className="text-slate-400 font-sans text-[10px] font-normal underline ml-0.5">View Ledger →</span>
-              </button>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2">
-              {/* Indicator 1: Owned Equipment Context */}
-              <div
-                className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs transition-all duration-300 cursor-default ${
-                  activeScenario === 'compat'
-                    ? 'border-accent-cyan/70 bg-accent-cyan/15 text-white shadow-[0_0_20px_rgba(0,212,255,0.2)]'
-                    : activeScenario === 'unverified'
-                    ? 'border-accent-amber/70 bg-accent-amber/15 text-white shadow-[0_0_20px_rgba(245,158,11,0.2)]'
-                    : 'border-white/10 bg-white/[0.03] text-slate-300'
-                }`}
-              >
-                <span
-                  className={`h-1.5 w-1.5 rounded-full ${
-                    activeScenario === 'compat'
-                      ? 'bg-accent-cyan animate-ping'
-                      : activeScenario === 'unverified'
-                      ? 'bg-accent-amber animate-ping'
-                      : 'bg-slate-400'
-                  }`}
-                />
-                <span className="font-semibold text-white">Breville Barista Express</span>
-                <span className="text-[11px] text-slate-400 font-mono">Owned · 54 mm fit</span>
-              </div>
-
-              {/* Indicator 2: Recent Order Context */}
-              <div
-                className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs transition-all duration-300 cursor-default ${
-                  activeScenario === 'return'
-                    ? 'border-accent-emerald/70 bg-accent-emerald/15 text-white shadow-[0_0_20px_rgba(0,229,153,0.2)]'
-                    : 'border-white/10 bg-white/[0.03] text-slate-300'
-                }`}
-              >
-                <span
-                  className={`h-1.5 w-1.5 rounded-full ${
-                    activeScenario === 'return'
-                      ? 'bg-accent-emerald animate-ping'
-                      : 'bg-slate-400'
-                  }`}
-                />
-                <span className="font-semibold text-white">Order #842 (Kettle &amp; Sweater)</span>
-                <span className="text-[11px] text-slate-400 font-mono">Delivered · 28d return window</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Coherent Household Progression Section Label */}
-        <div className="w-full max-w-4xl mb-3.5 flex items-center justify-between px-1">
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
-            How Your Household Context Helps
-          </span>
-          <span className="text-xs text-slate-500">
-            Select a scenario to see Kept in action
-          </span>
-        </div>
-
-        {/* Coherent 3-Step Bento Grid: 1. Before Buying -> 2. Missing Info -> 3. After Delivery */}
         <div ref={bentoGridRef} className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
           {/* Card 1: Before Buying (Check compatibility against what you own) */}
           <div
