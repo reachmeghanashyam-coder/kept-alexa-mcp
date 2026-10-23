@@ -511,7 +511,7 @@ export default function KeptApp() {
       </header>
 
       {/* Main Container Naturally Filling Viewport with Generous Breathing Space */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-6 sm:pt-10 pb-10 flex flex-col items-center">
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 sm:px-6 pt-12 sm:pt-16 pb-12 flex flex-col items-center">
         {/* Hero Section */}
         <div className="text-center max-w-3xl mb-8 sm:mb-10 flex flex-col items-center">
           {/* Category Pill */}
